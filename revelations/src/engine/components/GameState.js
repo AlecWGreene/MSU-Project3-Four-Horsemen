@@ -1,4 +1,4 @@
-import Enums from "../Game_Enums.js";
+import Enums from "../GameEnums.js";
 
 export default class GameState {
     constructor(stateData){

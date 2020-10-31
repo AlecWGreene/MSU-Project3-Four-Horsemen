@@ -1,7 +1,7 @@
 // Import Game Data components
 import GameState from "../components/GameState.js";
 import RuntimeState from "../components/RuntimeState.js";
-import GameEnums from "../Game_Enums.js"; 
+import GameEnums from "../GameEnums.js"; 
 
 // Import Game Managment systems
 import processTick from "./processTick.js"; 
