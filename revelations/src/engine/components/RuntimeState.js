@@ -4,7 +4,7 @@ export default class RuntimeState {
             this.isPaused = stateData.isPaused || true;
             this.isWaveRunning = stateData.isWaveRunning || false;
             this.isGameOver = stateData.isGameOver || false;
-            this.waveTime = staeData.waveTime || 0;
+            this.waveTime = stateData.waveTime || 0;
             this.creepPaths = stateData.creepPaths || [];
         }
         else{
