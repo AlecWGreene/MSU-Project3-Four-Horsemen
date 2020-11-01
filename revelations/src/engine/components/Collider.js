@@ -1,23 +1,18 @@
-/**
- * @default
- * @class
- * @property {{x:number,y:number}[]} vertices
- * @property {x:number,y:number} center
- * @method move moves collider along a translation vector
- * @method rotate rotates collider
- * @method rotateto rotates collider to a specific offset from it's initial state
- * @method isDisjointWith returns a boolean representing if the colliders do not intersect (true = no intersection, false = intersection)
- */
-class Collider{
+export default class Collider{
     /**
-     * @param {{x:number,y:number}[]} vertices
-     * @param {{x:number,y:number}} center
+     * @param {{x:number,y:number}[]} vertices world coordinates of the collider vertices
+     * @param {{x:number,y:number}} center world coordinates to the collider pivot point
      */
     constructor(vertices, center){
+        /** @type {{x:number,y:number}[]} world coordinates of the collider vertices */
         this.vertices = vertices;
+        /** @type {{x:number,y:number}[]}  vertices of the collider with center at the origin and angle is 0 */
         this.initialVertices = Array.from(vertices);
+        /** @type {{x:number,y:number}} world coordinates to the collider pivot point */
         this.center = center;
+        /** @type {number} angle in degrees from the x axis */
         this.angle = 0;
+        /** @type {{x:number,y:number}[]} normal vectors of each side */
         this.axes = [];
 
         // Helper variables to set vertices
@@ -41,7 +36,6 @@ class Collider{
      * Calculates the normals of the collider, call this method after any update
     */
     setAxes(){        
-
         for(let i = 0; i < this.vertices.length; i++){
             // Calculate normal of edge
             const {x: x1, y: y1 } = this.vertices[i];
@@ -50,5 +44,3 @@ class Collider{
         }
     }
 }
-
-module.exports = Collider;
