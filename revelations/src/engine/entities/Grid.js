@@ -1,4 +1,4 @@
-import Tile from  "./Tile.js";
+import Tile from  "../components/Tile.js";
 
 export default class Grid{
     constructor(numRows, numCols, height, width){
