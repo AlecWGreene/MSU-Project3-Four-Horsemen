@@ -1,0 +1,1 @@
+// saveBtn component, which enables the saveGame method in (for now) "saveGame.js" via button click
