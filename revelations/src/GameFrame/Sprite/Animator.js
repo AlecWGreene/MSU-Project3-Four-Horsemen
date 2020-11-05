@@ -7,7 +7,8 @@ height: ${({height}) => height}px;
 transform: scale(${({scale}) => `${scale}, ${scale}`});
 transform-origin: top left;
 position: absolute; 
-left:100px;
+left: ${({ left }) => left}px;
+bottom: ${({ bottom }) => bottom}px;
 
 transform: rotate(0deg);
 transform: ${props => (props.rotate ? `rotate(180deg)` : "")};`
@@ -22,9 +23,9 @@ function Animator (props){
 
  const offset = props.frame * props.imgSize.width / props.numFrames;
 
- return (<Container height={props.imgSize.height}
-  width={props.imgSize.width}>
- <Image left="128"
+ return (<Container left={props.position.x} bottom={props.position.y} height={props.imgSize.height}
+  width={props.imgSize.width} scale={props.scale || 1}>
+ <Image left={offset || 0}
   src={props.src}/> 
  </Container>)
 }
