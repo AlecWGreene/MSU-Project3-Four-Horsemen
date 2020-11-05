@@ -1,20 +1,9 @@
 import React from "react";
-import loginTwo from "../assets/loginTwo.png";
-import "../styles/logIn.css"
+import "../styles/signInBox.css"
 
-const BACKGROUND = {
-  backgroundImage: `url(${loginTwo})`,
-  backgroundRepeat: 'no-repeat',
-  backgroundSize: '100% 100%',
-  position: 'fixed', 
-  height: '95%',  
-  width: '100%'
-}
-
-function LogIn() {
+function SignInBox() {
   return (
-    <div style={BACKGROUND}>
-      <h1>Current: Login page</h1>
+    <div>
       <div id="logInPosition" className="container">
         <div className="Row justify-content-center d-flex">
           <div className="col-md-6 customDivOne"> 
@@ -36,4 +25,4 @@ function LogIn() {
   );
 }
 
-export default LogIn;
+export default SignInBox;
