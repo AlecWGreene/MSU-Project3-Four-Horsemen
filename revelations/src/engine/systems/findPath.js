@@ -1,3 +1,6 @@
+import Grid from "../entities/Grid.js";
+import Tile from "../components/Tile.js";
+
 function getGridDistance(current, start){
     return Math.abs(current.index.row - start.index.row) + Math.abs(current.index.col - start.index.col);
 }
@@ -28,6 +31,70 @@ function addToOpen(tile, open){
     open.push(tile);
 }
 
+/** 
+ * @param {Tile[]} path
+ * @param {Tile} end
+ * @param {Tile[]} unwalkable
+*/
+export function simplifyPath(path, end, unwalkable){
+
+    // Form wall segments
+    const intersections = unwalkable.filter((tile, index, array) => {
+        const wallNeighbours = array.filter(nextTile => tile.neighbours.includes(nextTile));
+        switch(wallNeighbours.length){
+            case 0:
+                return false;
+            case 1: // Return penisulas
+                return true;
+            case 4:
+                return false;
+            case 2: // Return L-shaped intersections
+                return (wallNeighbours[0].index.row === wallNeighbours[1].index.row || wallNeighbours[0].index.col === wallNeighbours[1].index.col) ? false : true;
+            case 3: // Return T-shaped intersections
+                return true;
+        }
+    }).map((tile, index, array) => [tile, array.filter(nextTile => tile.neighbours.includes(nextTile))]);
+
+    // Collect segments as a pair of coordinates
+    const gates = [];
+    for(const inter of intersections){
+        const tile = inter[0];
+
+        // For each connected segment
+        for(const n of inter[1]){
+            const dir = { row: tile.index.row - n.index.row, col: tile.index.col - n.index.col };
+            let segmentEnd = n;
+            let candidate = unwalkable.find(t => t.row === segmentEnd.index.row + dir.row && t.col === segmentEnd.index.col + dir.col );
+            while(candidate){
+                segmentEnd = candidate;
+                candidate = unwalkable.find(t => t.row === segmentEnd.index.row + dir.row && t.col === segmentEnd.index.col + dir.col );
+            }
+
+            gates.push([n, segmentEnd]);
+        }
+    }
+
+    console.log(gates);
+
+    // Simplify path segments
+    // let current = path[0];
+    // while(current.isEqualTo(end)){
+    //     let index = path.findIndex(node => node.isEqualTo(current));
+    //     let tracking = path[index];
+    //     for(let i = index + 1; i < path.length; i++){
+    //         // Skip if ray follows a row/column
+    //         if(path[i].index.row === current.row || path[i].index.col === current.col){
+    //             continue;
+    //         }
+
+            
+    //     }
+    // }
+}
+
+/** 
+ * 
+*/
 export default function findPath(start, end, grid, unwalkable){
     // Setup open/closed sets and helper vars
     const open = [start];
