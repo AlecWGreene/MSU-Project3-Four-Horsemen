@@ -1,12 +1,17 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, useRouteMatch } from "react-router-dom";
 import SignUp from "./userInterface/pages/SignUp";
 import LogIn from "./userInterface/pages/LogIn";
 import Game from "./userInterface/pages/Game";
 import NoMatch from "./userInterface/pages/NoMatch";
 import Nav from "./userInterface/components/Nav";
+import Wrapper from "./userInterface/components/Wrapper";
+// import Footer from "./userInterface/components/Footer";
+import SignInBox from "./userInterface/components/SignInBox";
+
 
 function App() {
+
   return (
     <Router>
 
@@ -14,25 +19,29 @@ function App() {
 
         <Nav />
 
-        <Switch>
+        <Wrapper>
 
-          <Route exact path={["/", "/signup"]}>
-            <SignUp />
-          </Route>
+          <Switch>
 
-          <Route exact path="/login">
-            <LogIn />
-          </Route>
+            <Route exact path={["/", "/signup"]}>
+              <SignUp />
+            </Route>
 
-          <Route exact path="/game">
-            <Game />
-          </Route>
+            <Route exact path="/login">
+              <LogIn />
+            </Route>
 
-          <Route>
-            <NoMatch />
-          </Route>
+            <Route exact path="/game">
+              <Game />
+            </Route>
 
-        </Switch>
+            <Route>
+              <NoMatch />
+            </Route>
+
+          </Switch>
+
+        </Wrapper>
 
       </div>
 
