@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components"; 
 
 const Container = styled.div `
@@ -10,8 +11,7 @@ position: absolute;
 left: ${({ left }) => left}px;
 bottom: ${({ bottom }) => bottom}px;
 
-transform: rotate(0deg);
-transform: ${props => (props.rotate ? `rotate(180deg)` : "")};`
+transform: rotate(${props => (props.rotate ? `180` : "0")}deg);`
 
 const Image = styled.img`
 transform: translate(-${({left}) => left}px,0)

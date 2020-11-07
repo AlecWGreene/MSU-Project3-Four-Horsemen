@@ -1,3 +1,4 @@
+import React from "react";
 import Animator from "./Animator.js";
 
 export default function Sprite(props){
