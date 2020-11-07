@@ -1,30 +1,21 @@
-/**
- * @default
- * @class
- * @property {{x:number,y:number}[]} vertices
- * @property {x:number,y:number} center
- * @method move moves collider along a translation vector
- * @method rotate rotates collider
- * @method rotateto rotates collider to a specific offset from it's initial state
- * @method isDisjointWith returns a boolean representing if the colliders do not intersect (true = no intersection, false = intersection)
- */
-class Collider{
+export default class Collider{
     /**
-     * @param {{x:number,y:number}[]} vertices
-     * @param {{x:number,y:number}} center
+     * @param {{x:number,y:number}[]} vertices world coordinates of the collider vertices
+     * @param {{x:number,y:number}} center world coordinates to the collider pivot point
      */
     constructor(vertices, center){
+        /** @type {{x:number,y:number}[]} world coordinates of the collider vertices */
         this.vertices = vertices;
+        /** @type {{x:number,y:number}[]}  vertices of the collider with center at the origin and angle is 0 */
         this.initialVertices = Array.from(vertices);
+        /** @type {{x:number,y:number}} world coordinates to the collider pivot point */
         this.center = center;
+        /** @type {number} angle in degrees from the x axis */
         this.angle = 0;
+        /** @type {{x:number,y:number}[]} normal vectors of each side */
         this.axes = [];
 
-        this.setVertices();
-        this.setAxes()
-    }
-
-    setVertices(){
+        // Helper variables to set vertices
         const {x: x0, y: y0 } = this.center;
         const radAngle = Math.PI * this.angle / 180;
 
@@ -36,10 +27,15 @@ class Collider{
                 y: y0 + (x1*Math.sin(radAngle) + y1*Math.cos(radAngle))
             };
         }
+
+        this.setAxes()
     }
 
+    /** 
+     * @function
+     * Calculates the normals of the collider, call this method after any update
+    */
     setAxes(){        
-
         for(let i = 0; i < this.vertices.length; i++){
             // Calculate normal of edge
             const {x: x1, y: y1 } = this.vertices[i];
@@ -47,97 +43,4 @@ class Collider{
             this.axes[i] = { x: y2-y1, y: x1-x2 };
         }
     }
-
-    /**
-     * Moves the collider by adding a vector to each vertex
-     * @param {{x:number,y:number}} direction vector representing the direction and distance of translation
-     * @returns {void}
-     */
-    move(direction){
-        this.center = { x: this.center.x + direction.x, y: this.center.y + direction.y}
-
-        for(let i = 0; i < this.vertices.length; i++){
-            this.vertices[i] = { x: this.vertices[i].x + direction.x, y: this.vertices[i].y + direction.y};
-        }
-    }
-
-    /**
-     * Rotates the shape so that it is offset from it's current position
-     * @param {number} angle angle in degrees to rotate to with 0 being the positive x axis
-     * @returns {void}
-     */
-    rotate(angle){
-        this.angle += angle;
-
-        this.setVertices();
-        this.setAxes();
-    }
-
-    /**
-     * Rotates the shape so that it is offset from it's original position
-     * @param {number} angle angle in degrees to rotate to with 0 being the positive x axis
-     * @returns {void}
-     */
-    rotateTo(angle){
-        this.angle = angle;
-
-        this.setVertices();
-        this.setAxes();
-    }
-
-    /**
-     * Projects collider onto a normal vector by returning the interval containing the dot product of the axis with its vertices
-     * @param {{x:number,y:number}} axis
-     * @returns {number[]}
-     */
-    projectOnto(axis){
-        const endPoints = [];
-        for(const vertex of this.vertices){
-            const score = vertex.x * axis.x + vertex.y * axis.y;
-            if(endPoints.length < 2){
-                endPoints.splice(0,0,score, score);
-            }
-            else{
-                if(score < endPoints[0]){
-                    endPoints[0] = score;
-                }
-                else if(score > endPoints[1]){
-                    endPoints[1] = score;
-                }
-            }
-        }
-
-        return endPoints;
-    }
-
-    /**
-     * Iterates through all non-colinear axes of both colliders, and returns true if any of their projections are disjointed
-     * @param {Collider} collider object to compare to
-     * @returns {boolean}
-     */
-    isDisjointWith(collider){
-        const axes = this.axes.concat(collider.axes);
-        const visited = [];
-
-        // Project both colliders on the axis
-        for(const axis of axes){
-            // Skip axis colinear to previously computed axes
-            if(visited.filter(vAxis => vAxis.x * axis.y - vAxis.y * axis.x === 0).length > 0){
-                continue;
-            }
-
-            // Return true if projections are disjointed
-            const [thisStart, thisEnd] = this.projectOnto(axis);
-            const [colliderStart, colliderEnd] = collider.projectOnto(axis);
-            if(thisEnd < colliderStart || thisStart > colliderEnd){
-                return true;
-            }
-
-            visited.push(axis);
-        }
-
-        return false;
-    }
 }
-
-module.exports = Collider;
