@@ -6,16 +6,16 @@ const API =  {
     return axios.get("/api/guest");
   },
   // Gets the user's with the given id
-  userSignUp: function(id) {
-    return axios.get("/api/signup/" + id);
+  userSignUp: function(userData) {
+    return axios.get("/api/signup/" + userData);
   },
   // Saves a book to the database
-  userLogIn: function(bookData) {
-    return axios.post("/api/books", bookData);
+  userLogIn: function(id) {
+    return axios.post("/api/signup", id);
   },
   // Deletes user account
   deleteUser: function(id) {
-    return axios.delete("/api/login/" + id);
+    return axios.delete("/api/signup/" + id);
   },
 };
 
