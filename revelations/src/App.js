@@ -1,24 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Switch, useRouteMatch } from "react-router-dom";
+import SignUp from "./userInterface/pages/SignUp";
+import LogIn from "./userInterface/pages/LogIn";
+import Game from "./userInterface/pages/Game";
+import NoMatch from "./userInterface/pages/NoMatch";
+import Nav from "./userInterface/components/Nav";
+import Wrapper from "./userInterface/components/Wrapper";
+// import Footer from "./userInterface/components/Footer";
+import SignInBox from "./userInterface/components/SignInBox";
+
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+
+      <div>
+
+        <Nav />
+
+        <Wrapper>
+
+          <Switch>
+
+            <Route exact path={["/", "/signup"]}>
+              <SignUp />
+            </Route>
+
+            <Route exact path="/login">
+              <LogIn />
+            </Route>
+
+            <Route exact path="/game">
+              <Game />
+            </Route>
+
+            <Route>
+              <NoMatch />
+            </Route>
+
+          </Switch>
+
+        </Wrapper>
+
+      </div>
+
+    </Router>
   );
 }
 
