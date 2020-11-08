@@ -1,5 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Coda&display=swap');
 
+/* @media all and (max-width: 250px) {
+    #custom-border-lg {
+    border-style: solid;
+    border-width: 50px 100px 43px 100px;
+    -moz-border-image: url(39655b79e9c3fc29dcc8e9331bff3a69-picture02.png) 125 525 150 525 stretch stretch;
+    -webkit-border-image: url(39655b79e9c3fc29dcc8e9331bff3a69-picture02.png) 125 525 150 525 stretch stretch;
+    -o-border-image: url(39655b79e9c3fc29dcc8e9331bff3a69-picture02.png) 125 525 150 525 stretch stretch;
+    border-image: url(39655b79e9c3fc29dcc8e9331bff3a69-picture02.png) 125 525 150 525 stretch stretch;
+    }
+} */
+
+/* @media all and (max-width: 200px) {
+
+} */
+
+/* @media all and (max-width: 150px) {
+
+}  */
+
 #logInPosition {
     position: relative;
     top: 25%;
