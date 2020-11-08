@@ -14,6 +14,7 @@ export default class GameState {
         else{
             this.creepDirectory = {};
             this.towerDirectory = {};
+            this.wallGrid = [];
             this.playerLives = Enums.GAME_CONFIG.startLives;
             this.playerMoney = Enums.GAME_CONFIG.startMoney;
             this.waveIndex = 0;

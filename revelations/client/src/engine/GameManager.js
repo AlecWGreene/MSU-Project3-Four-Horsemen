@@ -64,4 +64,14 @@ export default class GameManager {
             runtimeState: this.runtimeState
         }
     }
+
+    placeWall(tile){
+        if(this.gameState.wallGrid.filter(t => tile.isEqualTo(t)).length === 0){
+            this.gameState.wallGrid.push(tile);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }

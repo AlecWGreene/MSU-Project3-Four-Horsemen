@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useReducer } from "react";
 // Engine imports
 import GameState from "../../engine/components/GameState.js";
 import RuntimeState from "../../engine/components/RuntimeState.js";
+import Tile from "../../engine/components/Tile.js";
 import GameManager from "../../engine/GameManager.js";
 
 // React component imports
@@ -22,7 +23,9 @@ function gameStateReducer(state, action){
 
 function GamePage() {
 
+  // Game manager setup
   let gameManager = new GameManager();
+  gameManager.updateCallback = () => dispatch({ type: "updateGameState", payload: { gameState: gameManager.gameState, runtimeState: gameManager.runtimeState }});
 
   useEffect(() => {
     console.log("GamePage rendered!");
@@ -34,7 +37,7 @@ function GamePage() {
   const [state, dispatch] = useReducer(gameStateReducer, gameManager.getGameState());
   return (
     <GameStateContext.Provider value={[state, dispatch]}>
-      <Game />
+      <Game manager={gameManager}/>
     </GameStateContext.Provider>
   );
 }
