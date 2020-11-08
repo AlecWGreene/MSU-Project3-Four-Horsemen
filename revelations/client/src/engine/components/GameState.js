@@ -10,6 +10,8 @@ export default class GameState {
             this.playerMoney = stateData.playerMoney || Enums.GAME_CONFIG.startMoney;
             this.waveIndex = stateData.waveIndex || 0;
             this.mapGrid = stateData.mapGrid || undefined;
+            this.sourceArray = stateData.sourceArray || [];
+            this.target = stateData.target || undefined;
         }
         else{
             this.creepDirectory = {};
@@ -19,6 +21,8 @@ export default class GameState {
             this.playerMoney = Enums.GAME_CONFIG.startMoney;
             this.waveIndex = 0;
             this.mapGrid = undefined;
+            this.sourceArray = [];
+            this.target = undefined;
         }
     }
 }
