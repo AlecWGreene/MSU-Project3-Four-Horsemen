@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SignUp from "./userInterface/pages/SignUp";
 import LogIn from "./userInterface/pages/LogIn";
-import Game from "./userInterface/pages/Game";
+import GamePage from "./userInterface/pages/GamePage";
 import NoMatch from "./userInterface/pages/NoMatch";
 import Nav from "./userInterface/components/Nav";
 import Wrapper from "./userInterface/components/Wrapper";
@@ -24,7 +24,7 @@ function App() {
               <LogIn />
             </Route>
             <Route exact path="/game">
-              <Game />
+              <GamePage />
             </Route>
             <Route>
               <NoMatch />
