@@ -5,13 +5,12 @@ import CreepEntity from "../entities/CreepEntity.js";
 import Collider from "../components/Collider.js";
 import Transform from "../components/Transform.js"
 
-export default function spawnCreep(manager, archtype, source, path){
+export default function spawnCreep(manager, id, archtype, source, path){
     // Get creep archtypes
     archtype = GameEnums.CREEP_PREFABS[archtype];
 
     // Instatiante component data
-    const newID = 1 + Object.keys(manager).length;
-    const newData = new CreepData(newID, archtype.data.spriteSheet, path);
+    const newData = new CreepData(id, archtype.data.spriteSheet, path);
     const newStats = archtype.stats;
     const newCollider = archtype.collider;
 
@@ -19,6 +18,6 @@ export default function spawnCreep(manager, archtype, source, path){
     const startAngle = (180 / Math.PI) * Math.atan2(source.position.x, source.position.y) - 90;
     const newTransform = new Transform(source.position.x, source.position.y, startAngle);
 
-    manager.gameState.creepDirectory[newID] = new CreepEntity(newData, newTransform, newStats, newCollider);
+    manager.gameState.creepDirectory[id] = new CreepEntity(newData, newTransform, newStats, newCollider);
 }
 

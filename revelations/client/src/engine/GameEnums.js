@@ -8,13 +8,13 @@ export default {
     GAME_CONFIG: {
         startLives: 100,
         startMoney: 999,
-        tickLength: 1000
+        tickLength: 250
     },
     /**
      * @type {{[key: number]: { creeps: string[], delay: number}[]}}
      */
     WAVE_CONFIG: {
-        0: [{ creeps: ["test_creep"], delay: 5000}] 
+        0: [{ creeps: ["test_creep","test_creep"], delay: 5000}] 
     },
     /**
      * @type {{name: string, archtype: {data: TowerData, stats: TowerStats, damageType: DamageData}}}

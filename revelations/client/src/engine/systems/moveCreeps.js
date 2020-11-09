@@ -71,13 +71,9 @@ export default function moveCreeps(manager){
                         x: x + dir2.x * distRemaining / distToTarget,
                         y: y + dir2.y * distRemaining / distToTarget
                     }
-                    console.log("New direction:" + dir2.x +","+dir2.y);
                 }
             }
 
         }
-
-        console.log(creep.transform.position);
-        console.log(creep.data.target)
     }
 }

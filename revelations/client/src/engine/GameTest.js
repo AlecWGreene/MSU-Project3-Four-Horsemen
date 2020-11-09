@@ -48,7 +48,6 @@ function renderGame(manager){
     }
     returnString += "+"+ "-".repeat(25) + "+";
     console.log(returnString);
-    console.log(manager.gameState.creepDirectory);
 }
 
 export default function testGame(){
@@ -56,7 +55,7 @@ export default function testGame(){
     console.log("==========Running Game Engine Test==========");
     console.log("Initial object: ");
     const grid = new Grid(15, 25, 975, 1635);
-    const sourceArray = [grid.tiles[2][12]];
+    const sourceArray = [grid.tiles[2][20], grid.tiles[13][20]];
     const target = grid.tiles[7][12];
     manager.init(grid, sourceArray, target);
     manager.updateCallback = () => renderGame(manager);
