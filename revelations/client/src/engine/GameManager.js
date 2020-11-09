@@ -1,10 +1,10 @@
 // Import Game Data components
-import GameState from "../components/GameState.js";
-import RuntimeState from "../components/RuntimeState.js";
-import GameEnums from "../GameEnums.js"; 
+import GameState from "./components/GameState.js";
+import RuntimeState from "./components/RuntimeState.js";
+import GameEnums from "./GameEnums.js"; 
 
 // Import Game Managment systems
-import processTick from "./processTick.js"; 
+import processTick from "./systems/processTick.js"; 
 
 /**
  * @class
@@ -18,19 +18,30 @@ import processTick from "./processTick.js";
 export default class GameManager {
     constructor(saveData){
         if(saveData){
-            throw new Error("Not implemented");
-        }
-        else{
             this.gameState = saveData.gameState || new GameState();
             this.runtimeState = saveData.runtimeState || new RuntimeState();
             this.tickInterval = undefined;
         }
+        else{
+            this.gameState = new GameState();
+            this.runtimeState = new RuntimeState();
+            this.tickInterval = undefined;
+        }
+
+        this.updateCallback = undefined;
     }
 
     init(){
 
     }
 
+    /**
+     * Stores a method to call upon the completion of each tick, returning the new game state
+     * @param {()=>void} callback
+     */
+    assignUdateCallback(callback){
+        this.updateCallback = callback;
+    }
 
     sendWave(){
         if(this.runtimeState.isPaused){
@@ -42,6 +53,25 @@ export default class GameManager {
             }
 
             this.tickInterval=setInterval(processTick, GameEnums.GAME_CONFIG.tickLength, this.gameState, this.runtimeState);
+        }
+    }
+
+    getGameState(){
+        return {
+            /** @type {GameState} */
+            gameState: this.gameState,
+            /** @type {RuntimeState} */
+            runtimeState: this.runtimeState
+        }
+    }
+
+    placeWall(tile){
+        if(this.gameState.wallGrid.filter(t => tile.isEqualTo(t)).length === 0){
+            this.gameState.wallGrid.push(tile);
+            return true;
+        }
+        else{
+            return false;
         }
     }
 }

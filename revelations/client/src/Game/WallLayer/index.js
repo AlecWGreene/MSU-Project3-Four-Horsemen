@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Sprite from "../Sprite";
+import Sprite from "../DEPRECATED_Sprite";
 import Tile from "../../engine/components/Tile.js";
 
 const styles = {

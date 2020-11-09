@@ -5,6 +5,7 @@ export default class GameState {
         if(stateData){
             this.creepDirectory = stateData.creepDirectory || {};
             this.towerDirectory = stateData.towerDirectory || {};
+            this.wallGrid = stateData.wallGrid || [];
             this.playerLives = stateData.playerLives || Enums.GAME_CONFIG.startLives;
             this.playerMoney = stateData.playerMoney || Enums.GAME_CONFIG.startMoney;
             this.waveIndex = stateData.waveIndex || 0;
@@ -13,6 +14,7 @@ export default class GameState {
         else{
             this.creepDirectory = {};
             this.towerDirectory = {};
+            this.wallGrid = [];
             this.playerLives = Enums.GAME_CONFIG.startLives;
             this.playerMoney = Enums.GAME_CONFIG.startMoney;
             this.waveIndex = 0;
