@@ -1,5 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Coda&display=swap');
 
+@font-face{
+    font-family: 'perfect_dark_brkregular';
+    src: url('../styles/webfontkit/pdark-webfont.woff2') format('woff2'),
+         url('../styles/webfontkit/pdark-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#customFont {
+    font-family: 'perfect_dark_brkregular';
+    font-size: 30px;
+    color: #8E979C;
+    text-shadow: 2px 2px #262f31;
+}
+
 #logInPosition {
     position: relative;
     top: 25%;
@@ -58,9 +73,3 @@ font-family: 'Coda', cursive;
     font-weight: bold;
 }
 
-#velocityFont {
-    font-family: 'Perfect Dark (BRK)';
-    font-size: 30px;
-    color: #8E979C;
-    text-shadow: 2px 2px #556064;
-}

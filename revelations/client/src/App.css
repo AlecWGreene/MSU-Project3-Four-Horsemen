@@ -1,16 +1,24 @@
-.App {
-  text-align: center;
+
+@media (min-width: 1020px) {
+  .App {
+    text-align: center;
+    height: 100vh;
+    background-color: black;
+  }
+}
+
+@media (max-width: 768px) {
+  .App {
+    position: relative;
+    text-align: center;
+    height: 100vh;
+    background-color: black;
+  }
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
 }
 
 .App-header {
