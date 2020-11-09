@@ -201,7 +201,7 @@ function findPaths(sourceArray, target, unwalkable, grid, sourceHeuristic, targe
     // Call runPathfind
     const paths = [];
     for(const source of sourceArray){
-        paths.push(straightenZigZags(runPathfind(target,source, unwalkable, grid, sourceHeuristic, targetH, loaders), unwalkable, grid.cellsize).reverse());
+        paths.push(straightenZigZags(runPathfind(target,source, unwalkable, grid, sourceHeuristic, targetH, loaders), unwalkable, grid.cellsize));
     }
 
     return paths;

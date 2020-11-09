@@ -14,7 +14,7 @@ export default {
      * @type {{[key: number]: { creeps: string[], delay: number}[]}}
      */
     WAVE_CONFIG: {
-        0: [{ creeps: ["test_creep"], delay: 100}] 
+        0: [{ creeps: ["test_creep"], delay: 5000}] 
     },
     /**
      * @type {{name: string, archtype: {data: TowerData, stats: TowerStats, damageType: DamageData}}}
@@ -30,7 +30,7 @@ export default {
     CREEP_PREFABS: {
         "test_creep": {
             data: new CreepData(0,"placeholder.png", []),
-            stats: new CreepStats(100,0.15,90,true,50),
+            stats: new CreepStats(100,55,90,true,50),
             collider: new Collider([{x: -30, y: -30}, {x: -30, y: 30}, {x: 30, y: 30}, {x: 30, y: -30}], {x: 0, y: 0})
         }
     }

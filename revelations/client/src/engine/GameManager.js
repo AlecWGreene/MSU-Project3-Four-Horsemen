@@ -56,8 +56,7 @@ export default class GameManager {
                 this.runtimeState.isWaveRunning = true;
                 this.runtimeState.isPaused = false;
 
-                const paths = findPaths(this.gameState.sourceArray, this.gameState.target, this.gameState.wallGrid, this.gameState.mapGrid, getEuclideanDistance);
-                console.log(paths);
+                this.gameState.pathDirectory = findPaths(this.gameState.sourceArray, this.gameState.target, this.gameState.wallGrid, this.gameState.mapGrid, getEuclideanDistance);
             }
 
             this.tickInterval=setInterval(processTick.bind(arguments[0]), GameEnums.GAME_CONFIG.tickLength, this);

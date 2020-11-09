@@ -4,7 +4,7 @@ export default class CreepStats{
         this.health = health;
         /** @type {number} current health */
         this.hitPoints = health;
-        /** @type {number} linear speed */
+        /** @type {number} linear speed in units per tick*/
         this.speed = speed;
         /** @type {number} rotational speed */
         this.turnSpeed = turnSpeed;

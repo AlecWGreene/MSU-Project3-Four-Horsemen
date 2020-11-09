@@ -28,7 +28,9 @@ export default class Collider{
             };
         }
 
-        this.setAxes()
+        this.setAxes();
+        /** @type {number}  */
+        this.circumference = this.calcCircumference();
     }
 
     /** 
@@ -42,5 +44,21 @@ export default class Collider{
             const {x: x2, y: y2 } = this.vertices[(i+1)%(this.vertices.length)];
             this.axes[i] = { x: y2-y1, y: x1-x2 };
         }
+    }
+
+    /**
+     * @function
+     * Calculates the circumference of the collider for rotation calculation purposes
+     * @returns {number}
+     */
+    calcCircumference(){
+        let circ = 0;
+        for(let i = 0; i < this.vertices.length; i++){
+            // Add side length
+            const {x: x1, y: y1 } = this.vertices[i];
+            const {x: x2, y: y2 } = this.vertices[(i+1)%(this.vertices.length)];
+            circ += Math.sqrt((x1 - x2)**2+(y1 - y2)**2);
+        }
+        return circ;
     }
 }

@@ -34,11 +34,11 @@ function renderGame(manager){
             else if(currentTile.isEqualTo(manager.gameState.target)){
                 row += "T";
             }
-            else if(manager.gameState.sourceArray.filter(t => t.isEqualTo(currentTile)).length > 0){
-                row += "S";
-            }
             else if(creepTiles.filter(t => t.isEqualTo(currentTile)).length > 0){
                 row += "c"
+            }
+            else if(manager.gameState.sourceArray.filter(t => t.isEqualTo(currentTile)).length > 0){
+                row += "S";
             }
             else{
                 row += " ";
@@ -48,6 +48,7 @@ function renderGame(manager){
     }
     returnString += "+"+ "-".repeat(25) + "+";
     console.log(returnString);
+    console.log(manager.gameState.creepDirectory);
 }
 
 export default function testGame(){
@@ -55,7 +56,7 @@ export default function testGame(){
     console.log("==========Running Game Engine Test==========");
     console.log("Initial object: ");
     const grid = new Grid(15, 25, 975, 1635);
-    const sourceArray = [grid.tiles[7][0]];
+    const sourceArray = [grid.tiles[2][12]];
     const target = grid.tiles[7][12];
     manager.init(grid, sourceArray, target);
     manager.updateCallback = () => renderGame(manager);
