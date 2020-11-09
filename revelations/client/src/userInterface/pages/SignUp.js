@@ -1,16 +1,6 @@
 import React,{ useState } from "react";
 import API from "../../utils/API";
 import "../styles/signUp.css"
-import loginTwo from "../assets/loginTwo.png";
-
-const BACKGROUND = {
-  backgroundImage: `url(${loginTwo})`,
-  backgroundRepeat: 'no-repeat',
-  backgroundSize: '100% 100%',
-  position: 'fixed', 
-  height: '95%',  
-  width: '100%'
-}
 
 function SignUp() {
 
@@ -49,30 +39,28 @@ function SignUp() {
   };
 
   return (
-    <div style={BACKGROUND}>
-      
-      <h1>Current: Sign-up page</h1>
+    <div className="custom-border-lg" >
 
-      <div className="container">
+      <div className="container test">
 
         <div id="signUpPosition" className="Row justify-content-center d-flex">
 
-          <div className="col-md-6 customDivOne"> 
+          <div className="col-sm-10 customDivOne"> 
 
             <div className="customDivTwo">
 
               <div id="codaFont" className="form-group">
-                <label id="velocityFont" for="username">Username</label>
+                <label id="customFont" for="username">Username</label>
                 <input type="username" className="form-control" id="username" value={formState.username} onChange={handleInputChange} placeholder="user123" />
               </div>
 
               <div id="codaFont" className="form-group">
-                <label id="velocityFont" for="email">Email address</label>
+                <label id="customFont" for="email">Email address</label>
                 <input type="email" className="form-control" id="email" value={formState.email} onChange={handleInputChange} placeholder="name@email.com" />
               </div>
 
               <div className="form-group">
-                <label id="velocityFont" for="password">Password</label>
+                <label id="customFont" for="password">Password</label>
                 <input type="password" className="form-control" value={formState.password} onChange={handleInputChange} id="password" />
               </div>
 

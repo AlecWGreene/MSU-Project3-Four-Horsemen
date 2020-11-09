@@ -1,4 +1,85 @@
-.wrapper {
-    min-height: 100%;
-    padding-bottom: 100px;
+@media (min-width: 767px) {
+  .wrapper {
+  height: 100%;
+  border-color: black;
+  border-style: solid;
+  border-width: 10px;
+  background-image: url("../../assets/stars.gif");
+  background-repeat: repeat;
   }
+}
+
+@media (max-width: 426px) {
+  .wrapper {
+  height: 100%;
+  border-color: black;
+  border-style: solid;
+  border-width: 20px;
+  background-image: url("../../assets/phoneRocks.gif");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  }
+}
+
+
+@media (max-width: 426px) and (max-width:766) {
+  .wrapper {
+  height: 100%;
+  border-color: rgb(8, 247, 68);
+  border-style: solid;
+  border-width: 20px;
+  background-image: url("../../assets/stars.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  }
+}
+
+
+@media (min-width: 768px) and (max-width:1023px) {
+  .content-wrapper {
+      border-style: solid;
+      border-width: 50px 150px ;
+      -moz-border-image: url("../../assets/f22hud-blue.png") 100 600 50 600 stretch stretch;
+      -webkit-border-image: url("../../assets/f22hud-blue.png") 100 50 100 600 stretch stretch;
+      -o-border-image: url("../../assets/f22hud-blue.png") 100 600 50 600 stretch stretch;
+      border-image: url("../../assets/f22hud-blue.png") 100 600 50 600 stretch stretch;
+      height: 100%  
+    }
+}
+
+@media (min-width: 1024px) and (max-width:1439px) {
+  .content-wrapper {
+      border-style: solid;
+      border-width: 50px 250px 100px;
+      -moz-border-image: url("../../assets/f22hud-blue.png") 100 600 50 600 stretch stretch;
+      -webkit-border-image: url("../../assets/f22hud-blue.png") 100 50 100 600 stretch stretch;
+      -o-border-image: url("../../assets/f22hud-blue.png") 100 600 50 600 stretch stretch;
+      border-image: url("../../assets/f22hud-blue.png") 100 600 50 600 stretch stretch;
+      height: 100%  
+    }
+}
+
+@media (min-width: 1440px) {
+  .content-wrapper {
+      border-style: solid;
+      border-width: 50px 400px;
+      -moz-border-image: url("../../assets/f22hud-blue.png") 100 600 50 600 stretch stretch;
+      -webkit-border-image: url("../../assets/f22hud-blue.png") 100 50 100 600 stretch stretch;
+      -o-border-image: url("../../assets/f22hud-blue.png") 100 600 50 600 stretch stretch;
+      border-image: url("../../assets/f22hud-blue.png") 100 600 50 600 stretch stretch;
+      height: 100%  
+    }
+}
+
+@media (min-width: 1441px) {
+  .content-wrapper {
+      border-style: solid;
+      border-width: 100px 400px 100px;
+      -moz-border-image: url("../../assets/f22hud-blue.png") 100 600 50 600 stretch stretch;
+      -webkit-border-image: url("../../assets/f22hud-blue.png") 100 50 100 600 stretch stretch;
+      -o-border-image: url("../../assets/f22hud-blue.png") 100 600 50 600 stretch stretch;
+      border-image: url("../../assets/f22hud-blue.png") 100 600 50 600 stretch stretch;
+      height: 100%  
+    }
+}
