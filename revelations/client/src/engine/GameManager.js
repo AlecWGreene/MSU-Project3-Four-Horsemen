@@ -5,6 +5,7 @@ import GameEnums from "./GameEnums.js";
 
 // Import Game Managment systems
 import processTick from "./systems/processTick.js"; 
+import findPaths, {getEuclideanDistance} from "./systems/findPaths";
 
 /**
  * @class
@@ -18,7 +19,9 @@ import processTick from "./systems/processTick.js";
 export default class GameManager {
     constructor(saveData){
         if(saveData){
+            /** @type {GameState} */
             this.gameState = saveData.gameState || new GameState();
+            /** @type {RuntimeState} */
             this.runtimeState = saveData.runtimeState || new RuntimeState();
             this.tickInterval = undefined;
         }
@@ -31,8 +34,10 @@ export default class GameManager {
         this.updateCallback = undefined;
     }
 
-    init(){
-
+    init(grid, sourceArray, target){
+        this.gameState.mapGrid = grid;
+        this.gameState.sourceArray = sourceArray;
+        this.gameState.target = target;
     }
 
     /**
@@ -43,17 +48,21 @@ export default class GameManager {
         this.updateCallback = callback;
     }
 
-    sendWave(){
+    sendWave(waveConfig){
         if(this.runtimeState.isPaused){
             if(!this.runtimeState.isWaveRunning){
                 // Set up to next 
                 this.gameState.waveIndex++;
                 this.runtimeState.isWaveRunning = true;
                 this.runtimeState.isPaused = false;
+
+                this.gameState.pathDirectory = findPaths(this.gameState.sourceArray, this.gameState.target, this.gameState.wallGrid, this.gameState.mapGrid, getEuclideanDistance);
             }
 
-            this.tickInterval=setInterval(processTick, GameEnums.GAME_CONFIG.tickLength, this.gameState, this.runtimeState);
+            this.tickInterval=setInterval(processTick.bind(arguments[0]), GameEnums.GAME_CONFIG.tickLength, this);
         }
+
+        
     }
 
     getGameState(){

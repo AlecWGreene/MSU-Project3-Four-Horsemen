@@ -5,6 +5,7 @@ import GameState from "../../engine/components/GameState.js";
 import RuntimeState from "../../engine/components/RuntimeState.js";
 import Tile from "../../engine/components/Tile.js";
 import GameManager from "../../engine/GameManager.js";
+import testGame from "../../engine/GameTest.js";
 
 // React component imports
 import Game from "../../Game"
@@ -29,6 +30,7 @@ function GamePage() {
 
   useEffect(() => {
     console.log("GamePage rendered!");
+    testGame();
   });
 
   /**
