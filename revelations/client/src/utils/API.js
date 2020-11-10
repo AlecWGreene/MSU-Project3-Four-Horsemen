@@ -1,17 +1,17 @@
 import axios from "axios";
 
 const API =  {
-  // Gets all books
+  // continue as guest
   guestUser: function() {
     return axios.get("/api/guest");
   },
-  // Gets the user's with the given id
-  userSignUp: function(userData) {
-    return axios.get("/api/signup/" + userData);
+  // hash password and register user in database
+  userSignUp: function(userData) { 
+    return axios.post("/api/signup", userData);
   },
-  // Saves a book to the database
-  userLogIn: function(id) {
-    return axios.post("/api/signup", id);
+  // aves a book to the database
+  userLogIn: function(userData) {
+    return axios.post("/api/login", userData);
   },
   // Deletes user account
   deleteUser: function(id) {

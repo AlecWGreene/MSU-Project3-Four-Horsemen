@@ -1,10 +1,8 @@
-import React,{ useState } from "react";
+import React, { useState } from "react";
 import API from "../../utils/API";
 import "../styles/signUp.css"
 
 function SignUp() {
-
-
   const [formState, setFormState] = useState({
     username: "",
     email: "",
@@ -22,20 +20,36 @@ function SignUp() {
 
   const handleSubmit = event => {
     event.preventDefault();
-    if (formState.username && formState.email && formState.password) {
+    if (formState.username !== "" && formState.email !== "" && formState.password !== "") {
       API.userSignUp({
         username: formState.username,
         email: formState.email,
         password: formState.password
       })
+        .then((res) => {
+          console.log(res)
+          loginUser(res.data);
+          // window.location.replace("/login")
+        })
         .then(() => setFormState({
           username: "",
           email: "",
           password: ""
         }))
-        .then(() => window.location.replace("/login"))
         .catch(err => console.log(err));
     }
+  };
+
+  const loginUser = (data) => {
+    API.userLogIn({
+      username: data.username,
+      password: data.password
+    })
+      .then((res) => {
+        console.log(res.data)
+        const route = res.data ? "/game" : "/login";
+        window.location.replace(route)
+      })
   };
 
   return (
