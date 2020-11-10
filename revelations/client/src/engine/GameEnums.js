@@ -4,6 +4,9 @@ import CreepStats from "./components/CreepStats.js";
 import CreepEntity from "./entities/CreepEntity.js";
 import Collider from "./components/Collider.js";
 
+// Sprite references
+import SpriteEnums from "../Game/SpriteEnums.js";
+
 export default {
     GAME_CONFIG: {
         startLives: 100,
