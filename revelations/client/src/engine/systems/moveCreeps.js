@@ -1,4 +1,5 @@
 import { getEuclideanDistance } from "./findPaths.js";
+import removeCreep from "./removeCreep.js";
 
 function rotateCreep(creep, angle){
     creep.transform.rotation += angle;
@@ -38,6 +39,12 @@ export default function moveCreeps(manager){
             if(distToTarget > 0){
                 creep.transform.position = creep.data.target.position;
                 distRemaining -= distToTarget;
+            }
+
+            // Return out if creep is at the target
+            if(creep.data.targetIndex === creep.data.path.length - 1){  
+                removeCreep(manager, id);
+                return;
             }
 
             // Update creep target
