@@ -33,7 +33,7 @@ export default function WallLayer(props){
         <Animator imgData={SpriteEnum["Creep_1_RED"]} height={120} width={120} position={{x: 80, y: 80}} rotation={0} scale={1}/>
         {
             (!props.wallGrid) ? undefined : props.wallGrid.map(wallTile => {
-                return <Sprite src={prefabs.wall_connection_NESW.src} height={128} width={128} imgSize={prefabs.wall_connection_NESW.imgSize} position={wallTile.position} />;
+                return <Animator imgData={SpriteEnum["Wall_Connection_NESW"]} height={128} width={128} position={wallTile.position} rotation={0} scale={1} />;
             })
         }
         </div>

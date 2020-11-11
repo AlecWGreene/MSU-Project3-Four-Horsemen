@@ -44,7 +44,7 @@ const SPRITE_ENUM = {
      * @description HOVER ME => "../../public/Assets/Buildings/Walls/Wall_Connection_NESW.png"
     */
     "Wall_Connection_NESW": {
-        src: "./Assets/Buildings/Walls/Wall_Connection_NESW_Island.png",
+        src: "./Assets/Buildings/Walls/Wall_Connection_NESW.png",
         height: 128,
         width: 128,
         numFrames: 1,
