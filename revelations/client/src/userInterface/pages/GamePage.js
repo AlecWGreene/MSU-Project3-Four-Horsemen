@@ -3,7 +3,6 @@ import React, { useContext, useEffect, useReducer } from "react";
 // Engine imports
 import GameState from "../../engine/components/GameState.js";
 import RuntimeState from "../../engine/components/RuntimeState.js";
-import Tile from "../../engine/components/Tile.js";
 import GameManager from "../../engine/GameManager.js";
 import testGame from "../../engine/GameTest.js";
 

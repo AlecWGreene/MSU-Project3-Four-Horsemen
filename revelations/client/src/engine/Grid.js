@@ -1,6 +1,26 @@
-import Tile from  "../components/Tile.js";
+import Tile from  "./Tile.js";
 
-export default class Grid{
+/**
+* @module Grid
+*/
+
+/**
+ * @class
+ * 
+ * @memberof module:Grid
+ * 
+ * @classdesc
+ * 
+ * @property {Array<Grid.Tile>} tiles 2D array of tiles organized in rows
+ * @property {number} cellsize size of a cell in game units
+ */
+class Grid{
+    /**
+     * @param {number} numRows Number of rows for the grid
+     * @param {number} numCols Number of columns for the grid
+     * @param {number} height Height of the grid in game units
+     * @param {number} width Width of the grid in game units
+     */
     constructor(numRows, numCols, height, width){
         // Calculate this.cellsize
         this.cellsize = Math.min(height/numRows, width/numCols);
@@ -37,3 +57,5 @@ export default class Grid{
         }
     }
 }
+
+export default Grid;

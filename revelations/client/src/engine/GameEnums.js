@@ -7,28 +7,42 @@ import Collider from "./components/Collider.js";
 // Sprite references
 import SpriteEnums from "../Game/SpriteEnums.js";
 
+/**
+ * @module GameEnums
+ */
 export default {
+    /**
+     * @description
+     * Stores values to be used as initial game values
+     * 
+     * @type {Object.<string, number>}
+     */
     GAME_CONFIG: {
         startLives: 100,
         startMoney: 999,
         tickLength: 250
     },
     /**
-     * @type {{[key: number]: { creeps: string[], delay: number}[]}}
+     * @typedef {Object} creepBatch
+     * @property {Array.<string>} creeps list of creep archtypes to spawn organized in numerical order by the source to spawn them at
+     * @property {number} delay time in ms from start of the wave until the batch is spawned
+     */
+    /** 
+     * @type {Object.<number, Array.<creepBatch>>}
      */
     WAVE_CONFIG: {
         0: [{ creeps: ["test_creep","test_creep"], delay: 5000}] 
     },
-    /**
-     * @type {{name: string, archtype: {data: TowerData, stats: TowerStats, damageType: DamageData}}}
-     */
     TOWER_PREFABS: {},
-    /**
-     * @type {{name: string, archtype: {data: ProjectileData, stats: ProjectileStats, damageType: DamageData}}}
-     */
     PROJECTILE_PREFABS: {},
     /**
-     * @type {{[key: string]:{data: CreepData, stats: CreepStats, collider: Collider}}}
+     * @typedef {Object} creepPrefab
+     * @property {} data
+     * @property {} stats
+     * @property {} collider
+     */
+    /**
+     * 
      */
     CREEP_PREFABS: {
         "test_creep": {

@@ -4,7 +4,6 @@ import GameFrame from "./GameFrame";
 import WallLayer from "./WallLayer";
 
 import { GameStateContext } from "../userInterface/pages/GamePage.js"
-import Tile from "../engine/components/Tile";
 
 function Game(props){
     /**

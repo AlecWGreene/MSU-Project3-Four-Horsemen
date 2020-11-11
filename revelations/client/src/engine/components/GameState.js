@@ -1,6 +1,18 @@
+import Game from "../../Game/index.js";
 import Enums from "../GameEnums.js";
 
-export default class GameState {
+/**
+ * @template T
+ * @typedef {Object.<string, T>} Directory<T>
+ */
+
+/**
+ * @class
+ * @memberof module:Components
+ * 
+ * @property {Directory<module:Components~CreepData>} creepDirectory directory of active creeps in the game state
+ */
+class GameState {
     constructor(stateData){
         if(stateData){
             this.creepDirectory = stateData.creepDirectory || {};
@@ -28,3 +40,5 @@ export default class GameState {
         }
     }
 }
+
+export default GameState;

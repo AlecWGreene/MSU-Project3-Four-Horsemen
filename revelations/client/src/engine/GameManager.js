@@ -8,10 +8,23 @@ import processTick from "./systems/processTick.js";
 import findPaths, {getEuclideanDistance} from "./systems/findPaths";
 
 /**
+ * @module GameManager
+ */
+
+/**
+ * @callback updateCallback
+ * @returns {void}  
+ */
+
+/**
  * @class
+ * 
+ * @description
+ * Manages the game logic by calling systems and centralizing the game state storage
  * 
  * @property {GameState} gameState current state info for entities
  * @property {RuntimeState} runtimeState current runtime info such as paused, wave running, etc
+ * @property {updateCallback} updateCallback
  * 
  * @method init Sets up the game systems to launch a wave or resume a save
  * @method sendWave Sends the next wave using the GameEnums.WAVE_CONFIGS settings
@@ -31,6 +44,7 @@ export default class GameManager {
             this.tickInterval = undefined;
         }
 
+        /** @type {updateCallback} Method to be called upon the completion of a game tick */
         this.updateCallback = undefined;
     }
 
@@ -42,12 +56,15 @@ export default class GameManager {
 
     /**
      * Stores a method to call upon the completion of each tick, returning the new game state
-     * @param {()=>void} callback
+     * @param {updateCallback} callback
      */
     assignUdateCallback(callback){
         this.updateCallback = callback;
     }
 
+    /**
+     * 
+     */
     sendWave(waveConfig){
         if(this.runtimeState.isPaused){
             if(!this.runtimeState.isWaveRunning){

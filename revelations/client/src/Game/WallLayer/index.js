@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Sprite from "../DEPRECATED_Sprite";
-import Tile from "../../engine/components/Tile.js";
+import Tile from "../../engine/Tile.js";
 
 const styles = {
     container: {
