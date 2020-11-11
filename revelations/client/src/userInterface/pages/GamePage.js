@@ -30,7 +30,7 @@ function GamePage() {
 
   useEffect(() => {
     console.log("GamePage rendered!");
-    testGame();
+    //testGame();
   });
 
   /**
@@ -39,7 +39,7 @@ function GamePage() {
   const [state, dispatch] = useReducer(gameStateReducer, gameManager.getGameState());
   return (
     <GameStateContext.Provider value={[state, dispatch]}>
-      <Game manager={gameManager}/>
+      <Game />
     </GameStateContext.Provider>
   );
 }

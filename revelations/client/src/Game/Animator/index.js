@@ -11,7 +11,13 @@ import styled from "styled-components";
  *      ...
  * </Container>
  */
-const Container = styled.div``;
+const Container = styled.div`
+    position: absolute;
+    height: ${({height})=>height}px;
+    width: ${({width})=>width}px;
+    left: ${({position})=>position.x}px;
+    bottom: ${({position})=>position.y}px;
+`;
 
 /** 
  * @description
