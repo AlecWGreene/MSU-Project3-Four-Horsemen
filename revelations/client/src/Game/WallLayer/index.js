@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Animator from "../Animator";
 import SpriteEnums from "../SpriteEnums.js";
 
+
 const styles = {
     container: {
         position: "absolute",
