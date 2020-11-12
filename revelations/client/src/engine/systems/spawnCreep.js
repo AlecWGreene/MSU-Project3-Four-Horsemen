@@ -6,11 +6,11 @@ import Collider from "../components/Collider.js";
 import Transform from "../components/Transform.js"
 
 export default function spawnCreep(manager, id, archtype, source, path){
-    // Get creep archtypes
+    // Get creep archtype
     archtype = GameEnums.CREEP_PREFABS[archtype];
 
     // Instatiante component data
-    const newData = new CreepData(id, archtype.data.spriteSheet, path);
+    const newData = new CreepData(id, archtype.name, archtype.data.spriteSheet, path);
     const newStats = archtype.stats;
     const newCollider = archtype.collider;
 

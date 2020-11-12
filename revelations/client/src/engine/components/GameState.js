@@ -1,5 +1,3 @@
-import Enums from "../GameEnums.js";
-
 export default class GameState {
     constructor(stateData){
         if(stateData){
@@ -13,6 +11,7 @@ export default class GameState {
             this.sourceArray = stateData.sourceArray || [];
             this.target = stateData.target || undefined;
             this.pathDirectory = stateData.pathDirectory || [];
+            this.baseGrid = stateData.baseGrid || [];
         }
         else{
             this.creepDirectory = {};
@@ -25,6 +24,7 @@ export default class GameState {
             this.sourceArray = [];
             this.target = undefined;
             this.pathDirectory = [];
+            this.baseGrid = [];
         }
     }
 }

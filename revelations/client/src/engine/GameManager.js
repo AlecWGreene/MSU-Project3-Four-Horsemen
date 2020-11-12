@@ -83,4 +83,19 @@ export default class GameManager {
             return false;
         }
     }
+
+    convertWorldPointToTile(x, y){
+        const row = Math.floor(x / this.gameState.mapGrid.cellsize);
+        const col = Math.floor(y / this.gameState.mapGrid.cellsize);
+
+        if(row < 0 || row >= this.gameState.mapGrid.tiles.length){
+            throw new Error(`GameManager.convertWorldPointToTile: ${row} is not a valid row value`);
+        }
+        else if(col < 0 || col >= this.gameState.mapGrid.tiles[0].length){
+            throw new Error(`GameManager.convertWorldPointToTile: ${col} is not a valid col value`);
+        }
+        else{
+            return this.gameState.mapGrid.tiles[row][col];
+        }
+    }
 }
