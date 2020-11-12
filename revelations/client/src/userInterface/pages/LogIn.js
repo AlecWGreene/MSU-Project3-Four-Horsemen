@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from "react";
+import { useAuth } from "../../App";
 import API from "../../utils/API";
+import { BrowserRouter as Router, Route, withRouter, Switch, Link, Redirect, useHistory, useLocation} from "react-router-dom";
 import "../styles/logIn.css"
 
-function LogIn() {
+function LogIn(props) {
   // useEffect(() => {
   //   setEmployeesState(props.apiData);
   // }, [props.apiData]);
+  let auth = useAuth();
+
+  // if user is logged in, do not let them come back to landing page routes unless they log out
+  useEffect(() => {
+    if(auth.user === "guest" || auth.user === "user"){
+      props.history.push("/game");
+    }
+  },[])
 
   const [formState, setFormState] = useState({
     username: "",
@@ -72,4 +82,4 @@ function LogIn() {
   );
 }
 
-export default LogIn;
+export default withRouter(LogIn);

@@ -27,27 +27,27 @@ function App() {
           <Nav />
           <Wrapper>
             <Switch>
-              <Route exact path={["/","/rules"]}>
+              <LandingRoute exact path={["/","/rules"]}>
                 <ContentWrapper>
                   <Rules />
                 </ContentWrapper>
-              </Route>
-              <Route exact path="/signup">
+              </LandingRoute>
+              <LandingRoute exact path="/signup">
                 <ContentWrapper>
                   <SignUp />
                 </ContentWrapper>
-              </Route>
-              <Route exact path="/login">
+              </LandingRoute>
+              <LandingRoute exact path="/login">
                 <ContentWrapper>
-                  <LogIn />  
+                  <LogIn />
                 </ContentWrapper>
-              </Route>
-              <GuestRoute exact path="/game">
+              </LandingRoute>
+              {/* <GuestRoute exact path="/game">
                 <GameContainer>
                   <GamePage />
                 </GameContainer>
-              </GuestRoute>
-              <PrivateRoute exact path="/game/protected">
+              </GuestRoute> */}
+              <PrivateRoute exact path="/game">
                 <GameContainer>
                   <GamePage />
                 </GameContainer>
@@ -94,7 +94,6 @@ function ProvideAuth({ children }) {
 
 // access context provider state and methods
 export function useAuth() {
-
   return useContext(authContext);
 }
 
@@ -102,23 +101,23 @@ export function useAuth() {
 function useProvideAuth() {
   const [user, setUser] = useState(null);
 
- useEffect(() => {
-  // let auth = useAuth();
+//  useEffect(() => {
+//   // let auth = useAuth();
 
-  // make an api call that will request the active user
-  // if the user is not found, set state to guest.
+//   // make an api call that will request the active user
+//   // if the user is not found, set state to guest.
 
-  API.userLogIn({
-    username: "",
-    password: ""
-  })
-    .then((req) => {
-      console.log(req.data)
-      const userStatus = req.data ? setUser("user") : setUser("guest");
-      setUser(userStatus);
-    })
+//   API.userLogIn({
+//     username: "",
+//     password: ""
+//   })
+//     .then((req) => {
+//       console.log(req.data)
+//       const userStatus = req.data ? setUser("user") : setUser("guest");
+//       setUser(userStatus);
+//     })
 
- },[])
+//  },[])
 
   // log the user in and set user state to "user" as method of authentication
   const login = cb => {
@@ -256,21 +255,21 @@ function PrivateRoute({ children, ...rest }) {
   );
 }
 
-function GuestRoute({ children, ...rest }) {
+function LandingRoute({ children, ...rest }) {
   let auth = useAuth();
   return (
     <Route
       {...rest}
       render={({ location }) =>
         auth.user ? (
-          children
-        ) : (
           <Redirect
             to={{
-              pathname: "/",
+              pathname: "/game",
               state: { from: location }
             }}
           />
+        ) : (
+          children
         )
       }
     />
