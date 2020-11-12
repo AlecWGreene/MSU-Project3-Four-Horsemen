@@ -10,7 +10,7 @@ const styles = {
     }
 }
 
-export default function WallLayer(props){
+function WallLayer(props){
     return (
         <div style={styles.container}>
         {
@@ -26,11 +26,11 @@ export default function WallLayer(props){
                         }
 
                         // Insert the compass direction of the connection into the string, maintain NESW order
-                        if(diff.row === 0){
-                            if(diff.col === 1){
+                        if(diff.col === 0){
+                            if(diff.row === 1){
                                 connections = "N" + connections;
                             }
-                            else if(diff.col === -1){
+                            else if(diff.row === -1){
                                 if(connections.endsWith("W")){
                                     connections = connections.replace("W", "SW");
                                 }
@@ -39,8 +39,8 @@ export default function WallLayer(props){
                                 }
                             }
                         }
-                        else if(diff.col === 0){
-                            if(diff.row === 1){
+                        else if(diff.row === 0){
+                            if(diff.col === 1){
                                 if(connections.charAt(0) === "N"){
                                     connections = connections.replace("N", "NE");
                                 }
@@ -48,7 +48,7 @@ export default function WallLayer(props){
                                     connections = "E" + connections;
                                 }
                             }
-                            else if(diff.row === -1){
+                            else if(diff.col === -1){
                                 connections += "W";
                             }
                         }
@@ -63,3 +63,9 @@ export default function WallLayer(props){
         </div>
     );
 }
+
+function shouldRun(prevProps, nextProps){
+    return !(prevProps.length === nextProps.length);
+}
+
+export default React.memo(WallLayer, shouldRun);
