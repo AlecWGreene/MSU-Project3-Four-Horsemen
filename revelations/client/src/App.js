@@ -22,7 +22,7 @@ function App() {
   return (
     <ProvideAuth>
 
-      <Router>
+      <Router history={history}>
         <div>
           <Nav />
           <Wrapper>
