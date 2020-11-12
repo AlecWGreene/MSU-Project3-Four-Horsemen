@@ -5,6 +5,9 @@ import WallLayer from "./WallLayer";
 
 import { GameStateContext } from "../userInterface/pages/GamePage.js"
 import Tile from "../engine/components/Tile";
+import Animator from "./Animator";
+import SPRITE_ENUM from "../Game/SpriteEnums.js";
+import CreepLayer from "../Game/CreepLayer/creep.js";
 
 function Game(props){
     /**
@@ -21,9 +24,9 @@ function Game(props){
         <div>
             <GameFrame>
                 <WallLayer wallGrid={state.gameState ? state.gameState.wallGrid : []} />
+                <CreepLayer creep={state.gameState.creepDirectory}/>
             </GameFrame>
         </div>
     );
 }
 
-export default Game;
