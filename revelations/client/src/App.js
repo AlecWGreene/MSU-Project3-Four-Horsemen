@@ -6,8 +6,8 @@ import GamePage from "./userInterface/pages/GamePage";
 import NoMatch from "./userInterface/pages/NoMatch";
 import Nav from "./userInterface/components/Nav";
 import Wrapper from "./userInterface/components/Wrapper";
-// import Footer from "./userInterface/components/Footer";
-// import SignInBox from "./userInterface/components/SignInBox";
+import ContentWrapper from "./userInterface/components/Wrapper/ContentWrapper";
+import GameContainer from "./userInterface/components/GameContainer/index"
 
 
 function App() {
@@ -18,13 +18,17 @@ function App() {
         <Wrapper>
           <Switch>
             <Route exact path={["/", "/signup"]}>
-              <SignUp />
+              <ContentWrapper>
+                <SignUp />
+              </ContentWrapper>
             </Route>
             <Route exact path="/login">
-              <LogIn />
+              <ContentWrapper>
+                <LogIn />  
+              </ContentWrapper>
             </Route>
             <Route exact path="/game">
-              <GamePage />
+                <GamePage />
             </Route>
             <Route>
               <NoMatch />

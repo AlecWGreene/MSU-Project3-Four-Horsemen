@@ -20,7 +20,7 @@ const Container = styled.div``;
  * @example
  * <Animator imgData={SPRITE_ENUMS["spaceship_red"]} scale={0.2} key={20095} />
  * 
- * @param {{imgData: {src: string, height: number, width: number, numFrames: number, scale: number}, scale: number, key: number }} props
+ * @param {{imgData: {src: string, height: number, width: number, numFrames: number, scale: number}, position: {x: number, y: number}, scale: number, key: number }} props
  */
 function Animator(props){
     // Setup component states
@@ -33,7 +33,7 @@ function Animator(props){
         offset = frame * props.imgData.width / props.imgData.numFrames;
     }, [frame]);
 
-    return <Container height={props.height * props.scale} width={props.width * props.scale}>
+    return <Container height={props.height * props.scale} width={props.width * props.scale} position={props.position}>
         <Sprite 
          src={props.imgData.src}
          height={props.imgData.height}

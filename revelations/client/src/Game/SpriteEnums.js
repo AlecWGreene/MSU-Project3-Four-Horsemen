@@ -6,16 +6,12 @@ const creepScale = 1;
 const svgSize = 128;
 
 /**
- * @type {{src: string, height: number, width: number, rotation: number, scale: number, offset: number}[]}
+ * @description 
+ * Holds the image information used to render sprites
+ * 
+ * @enum {{src: string, height: number, width: number, rotation: number, scale: number, offset: number}}
  */
 const SPRITE_ENUM = {
-    "placeholder": {
-        src: "",
-        height: 0,
-        width: 0,
-        numFrames: 0,
-        scale: 1
-    },
 
     // ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
     // ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||

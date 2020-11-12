@@ -1,0 +1,16 @@
+.test-font {
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+
+}
+
+.test-borderOne
+{
+    border-style: solid;
+    border-width: 200px 0px 200px 100px;
+    -moz-border-image: url("./testAssets/LoadingScreen.png") 200 150 200 150 stretch stretch;
+    -webkit-border-image: url("./testAssets/LoadingScreen.png") 200 150 200 150 stretch stretch;
+    -o-border-image: url("./testAssets/LoadingScreen.png") 200 150 200 150 stretch stretch;
+    border-image: url("./testAssets/LoadingScreen.png") 200 150 200 150 stretch stretch;
+    }
