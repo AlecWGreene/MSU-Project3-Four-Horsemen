@@ -57,9 +57,9 @@ export default function moveCreeps(manager){
                 let targetAngle = creep.transform.rotation - Math.atan2(dir.x, dir.y);
                 if(targetAngle !== 0){
                     let angleToRotate = Math.sign(targetAngle) * Math.min(Math.abs(targetAngle), Math.abs(creep.stats.turnSpeed)); 
-                    targetAngle -= angleToRotate;
+                    targetAngle = angleToRotate;
                     rotateCreep(creep, angleToRotate);
-                    distRemaining -= Math.abs(angleToRotate) * (Math.PI / 180) * creep.collider.circumference;
+                    distRemaining -= Math.abs(angleToRotate) * creep.collider.circumference;
                 }
                 
                 // If creep is pointing to target, move towards new target
