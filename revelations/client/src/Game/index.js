@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef, useState, useLayoutEffect } from "react";
 
 import GameFrame from "./GameFrame";
 import WallLayer from "./WallLayer";
@@ -12,11 +12,16 @@ function Game(props){
     /**
    * @type {[{gameState: GameState, runtimeState: RuntimeState}, (action, state)=>{gameState: GameState, runtimeState: RuntimeState}]}
    */
-    const [state, dispatch] = useContext(GameStateContext);
+    const [state, dispatch] = useContext(GameStateContext);  
 
+    // Called on first render 
     useEffect(() => {
-        console.log("Game component Rendered!");
-        console.log(state);
+        
+    }, []);
+
+    // Called on every render
+    useEffect(() => {
+
     });
 
     return (

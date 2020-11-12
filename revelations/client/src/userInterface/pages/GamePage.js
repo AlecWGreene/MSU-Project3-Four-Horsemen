@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer } from "react";
+import React, { useContext, useEffect, useReducer, useRef } from "react";
 
 // Engine imports
 import GameState from "../../engine/components/GameState.js";
@@ -18,7 +18,10 @@ export const GameStateContext = React.createContext({});
 function gameStateReducer(state, action){
   switch(action.type){
     case "updateGameState":
-      return action.payload;
+      return { windowSize: state.windowSize, gameState: action.payload.gameState, runtimeState: action.payload.runtimeState };
+    case "resizeWindow":
+      console.log(action);
+      return { windowSize: action.payload, gameState: action.payload.gameState, runtimeState: action.payload.runtimeState };
     default: throw new Error(`Action type (${action.type}) for GameState dispatch is not valid`);
   }
 }
@@ -26,8 +29,8 @@ function gameStateReducer(state, action){
 function GamePage() {
 
   // Game manager setup
-  console.log("Did this run?");
   let gameManager = new GameManager();
+  
   useEffect(()=>{
     gameManager.updateCallback = () => dispatch({ type: "updateGameState", payload: gameManager.getGameState()});
     const grid = new Grid(15, 25, 975, 1635);
@@ -49,7 +52,6 @@ function GamePage() {
   }, []);
 
   useEffect(() => {
-    console.log("GamePage rendered!");
     //testGame();
   });
 
@@ -59,13 +61,9 @@ function GamePage() {
   const [state, dispatch] = useReducer(gameStateReducer, gameManager.getGameState());
   return (
     <GameStateContext.Provider value={[state, dispatch]}>
-<<<<<<< HEAD
-      <Game />
-=======
       <GameContainer>
         <Game />
       </GameContainer>
->>>>>>> main
     </GameStateContext.Provider>
   );
 }
