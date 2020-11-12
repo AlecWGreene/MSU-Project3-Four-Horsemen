@@ -3,12 +3,12 @@ import React, { useContext, useEffect, useReducer } from "react";
 // Engine imports
 import GameState from "../../engine/components/GameState.js";
 import RuntimeState from "../../engine/components/RuntimeState.js";
-import Tile from "../../engine/components/Tile.js";
 import GameManager from "../../engine/GameManager.js";
 import testGame from "../../engine/GameTest.js";
 
 // React component imports
 import Game from "../../Game"
+import GameContainer from "../components/GameContainer/index.js";
 
 /**
  * @type {React.Context} Context containing the last passed version of the game state
@@ -39,7 +39,9 @@ function GamePage() {
   const [state, dispatch] = useReducer(gameStateReducer, gameManager.getGameState());
   return (
     <GameStateContext.Provider value={[state, dispatch]}>
-      <Game manager={gameManager}/>
+      <GameContainer>
+        <Game />
+      </GameContainer>
     </GameStateContext.Provider>
   );
 }
