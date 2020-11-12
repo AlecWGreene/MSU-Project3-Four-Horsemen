@@ -7,6 +7,7 @@ import { GameStateContext } from "../userInterface/pages/GamePage.js"
 import Tile from "../engine/components/Tile";
 import Animator from "./Animator";
 import SPRITE_ENUM from "./SpriteEnums";
+import CreepLayer from "../Game/Creeplayer/creeps.js"; 
 
 function Game(props){
     /**
@@ -23,10 +24,10 @@ function Game(props){
         <div>
             <GameFrame>
                 <WallLayer wallGrid={state.gameState ? state.gameState.wallGrid : []} />
-                {
-                    !state.gameState ? undefined : Object.values(state.gameState.creepDirectory).map(creep => <Animator imgData={SPRITE_ENUM["Creep_1_RED"]} position={creep.transform.position} rotation={creep.transform.rotation * 180 / Math.PI} scale={1} />)
-                }
+               <CreepLayer directory={state.gameState.creepDirectory} /> 
             </GameFrame>
         </div>
     );
 }
+
+export default Game ;
