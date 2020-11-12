@@ -1,4 +1,4 @@
-.game-bar {
+/* .game-bar {
     border-style: solid;
     border-width: 75px 100px 100px 100px;
     -moz-border-image: url("../../assets/f22hud-red.png") 5 250 150 225 stretch stretch;
@@ -6,7 +6,7 @@
     -o-border-image: url("../../assets/f22hud-red.png") 5 250 150 225 stretch stretch;
     border-image: url("../../assets/f22hud-red.png") 5 250 150 225 stretch stretch;
     height: 100%;
-    }
+    } */
 
 .game-btn {
     background-color: rgb(219, 60, 219);
