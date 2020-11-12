@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useReducer } from "react";
 // Engine imports
 import GameState from "../../engine/components/GameState.js";
 import RuntimeState from "../../engine/components/RuntimeState.js";
+import Grid from "../../engine/entities/Grid.js";
 import GameManager from "../../engine/GameManager.js";
 import testGame from "../../engine/GameTest.js";
 
@@ -26,7 +27,14 @@ function GamePage() {
 
   // Game manager setup
   let gameManager = new GameManager();
-  gameManager.updateCallback = () => dispatch({ type: "updateGameState", payload: { gameState: gameManager.gameState, runtimeState: gameManager.runtimeState }});
+
+  useEffect(()=>{
+    gameManager.updateCallback = () => dispatch({ type: "updateGameState", payload: { gameState: gameManager.gameState, runtimeState: gameManager.runtimeState }});
+    const grid = new Grid(20,20,100,100);
+    const sourceArray = [grid.tiles[0][0], grid.tiles[0][1]];
+    const target = grid.tiles[18][18];
+    gameManager.init(grid, sourceArray, target);
+  },[]);
 
   useEffect(() => {
     console.log("GamePage rendered!");
