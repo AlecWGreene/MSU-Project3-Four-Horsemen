@@ -28,9 +28,7 @@ function App() {
               </ContentWrapper>
             </Route>
             <Route exact path="/game">
-              <GameContainer>
                 <GamePage />
-              </GameContainer>
             </Route>
             <Route>
               <NoMatch />

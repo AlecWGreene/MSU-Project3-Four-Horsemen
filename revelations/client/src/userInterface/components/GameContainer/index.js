@@ -12,7 +12,7 @@ export default function GameContainer(props) {
         <div className="row">
             <div className="col-sm-10 border-temp1">
                 <div>
-                    { props .children }
+                    {props.children}
                 </div>
             </div>
             <div className="col-sm-2 border-temp2">
@@ -25,9 +25,6 @@ export default function GameContainer(props) {
             </div>
         </div>
       </Container>
-        
-    
-   
         
     </main> 
    

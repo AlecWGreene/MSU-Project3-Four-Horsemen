@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/Collider.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/Collider.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @typedef {Object} Vector
+ * @property {number} Vector.x X coordinate
+ * @property {number} Vector.y Y coordinate
+ */
+
+ /**
+  * @class
+  * 
+  * @memberof module:Components
+  * 
+  * @classdesc Geometry data for collision detection
+  * 
+  * @property {Array&lt;Vector>} vertices vertices of the collider in world space
+  * @property {Array&lt;Vector>} initialVertices vertices of the collider with center at the origin and angle is 0
+  * @property {Vector} center world coordinates to the collider pivot point
+  * @property {number} circumference sum of line segments formed by the vertices
+  * @property {number} angle rotation of the collider in degrees counter-clockwise from the positive x-axis
+  * @property {Array&lt;Vector>} axes collection of unit vectors representing the normals to the collider's line segments
+  */
+class Collider{
+    /**
+     * @constructor
+     * @param {Array.&lt;Vector>} vertices world coordinates of the collider vertices
+     * @param {Vector} center world coordinates to the collider pivot point
+     */
+    constructor(vertices, center){
+        this.vertices = vertices;
+        this.initialVertices = Array.from(vertices);
+        this.center = center;
+        this.angle = 0;
+        this.axes = [];
+
+        // Helper variables to set vertices
+        const {x: x0, y: y0 } = this.center;
+        const radAngle = Math.PI * this.angle / 180;
+
+        // Rotate each vertex and move it towards the collider center
+        for(let i = 0; i &lt; this.vertices.length; i++){
+            const {x: x1, y: y1 } = this.initialVertices[i];
+            this.vertices[i] = {
+                x: x0 + (x1*Math.cos(radAngle) - y1*Math.sin(radAngle)),
+                y: y0 + (x1*Math.sin(radAngle) + y1*Math.cos(radAngle))
+            };
+        }
+
+        this.setAxes();
+        this.circumference = this.calcCircumference();
+    }
+
+    /** 
+     * @function setAxes
+     * 
+     * @description
+     * Calculates the normals of the collider, call this method after any update
+     * 
+     * @augments vertices
+     * 
+     * @returns {void}
+    */
+    setAxes(){        
+        for(let i = 0; i &lt; this.vertices.length; i++){
+            // Calculate normal of edge
+            const {x: x1, y: y1 } = this.vertices[i];
+            const {x: x2, y: y2 } = this.vertices[(i+1)%(this.vertices.length)];
+            this.axes[i] = { x: y2-y1, y: x1-x2 };
+        }
+    }
+
+    /**
+     * @function calcCircumference
+     * 
+     * @description
+     * Calculates the circumference of the collider for rotation calculation purposes
+     * 
+     * @returns {number}
+     */
+    calcCircumference(){
+        let circ = 0;
+        for(let i = 0; i &lt; this.vertices.length; i++){
+            // Add side length
+            const {x: x1, y: y1 } = this.vertices[i];
+            const {x: x2, y: y2 } = this.vertices[(i+1)%(this.vertices.length)];
+            circ += Math.sqrt((x1 - x2)**2+(y1 - y2)**2);
+        }
+        return circ;
+    }
+}
+
+export default Collider;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Components.html">Components</a></li><li><a href="module-Entities.html">Entities</a></li><li><a href="module-GameEnums.html">GameEnums</a></li><li><a href="module-GameManager.html">GameManager</a></li><li><a href="module-Grid.html">Grid</a></li><li><a href="module-Systems.html">Systems</a></li></ul><h3>Classes</h3><ul><li><a href="module.exports_module.exports.html">exports</a></li><li><a href="module-Components.Collider.html">Collider</a></li><li><a href="module-Components.CreepData.html">CreepData</a></li><li><a href="module-Components.CreepStats.html">CreepStats</a></li><li><a href="module-Components.GameState.html">GameState</a></li><li><a href="module-Grid.Grid.html">Grid</a></li><li><a href="module-Grid.Tile.html">Tile</a></li></ul><h3>Global</h3><ul><li><a href="global.html#calcCircumference">calcCircumference</a></li><li><a href="global.html#collidersAreDisjoint">collidersAreDisjoint</a></li><li><a href="global.html#projectOnto">projectOnto</a></li><li><a href="global.html#replaceCreepEntity">replaceCreepEntity</a></li><li><a href="global.html#setAxes">setAxes</a></li><li><a href="global.html#Takesanentitydirectoryandstringifiesitbyremovingextraneousdata">Takes an entity directory and stringifies it by removing extraneous data</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.5</a> on Tue Nov 10 2020 15:54:44 GMT-0500 (Eastern Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
