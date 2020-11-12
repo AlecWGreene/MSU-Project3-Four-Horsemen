@@ -24,8 +24,9 @@ function Game(props){
         <div>
             <GameFrame>
                 <WallLayer wallGrid={state.gameState ? state.gameState.wallGrid : []} />
-                <CreepLayer />
+                <CreepLayer creep={state.gameState.creepDirectory}/>
             </GameFrame>
         </div>
     );
 }
+

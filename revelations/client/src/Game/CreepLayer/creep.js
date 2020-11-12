@@ -1,6 +1,6 @@
 import React from "react"; 
 import Animator from "../Animator/index.js"; 
-
+import SPRITE_ENUM from "../Game/SpriteEnums.js";
 
 export default function CreepLayer(props){
 
