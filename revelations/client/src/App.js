@@ -9,7 +9,6 @@ import NoMatch from "./userInterface/pages/NoMatch";
 import Nav from "./userInterface/components/Nav";
 import Wrapper from "./userInterface/components/Wrapper";
 import ContentWrapper from "./userInterface/components/Wrapper/ContentWrapper";
-import GameContainer from "./userInterface/components/GameContainer/index";
 import Toast from 'react-bootstrap/Toast';
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col';
@@ -22,7 +21,7 @@ function App() {
   return (
     <ProvideAuth>
 
-      <Router history={history}>
+      <Router>
         <div>
           <Nav />
           <Wrapper>
@@ -48,9 +47,7 @@ function App() {
                 </GameContainer>
               </GuestRoute> */}
               <PrivateRoute exact path="/game">
-                <GameContainer>
                   <GamePage />
-                </GameContainer>
               </PrivateRoute>
               <Route>
                 <NoMatch />
