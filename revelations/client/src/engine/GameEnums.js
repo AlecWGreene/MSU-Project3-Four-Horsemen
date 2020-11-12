@@ -11,7 +11,7 @@ export default {
     GAME_CONFIG: {
         startLives: 100,
         startMoney: 999,
-        tickLength: 1000
+        tickLength: 100
     },
     /**
      * @type {{[key: number]: { creeps: string[], delay: number}[]}}
