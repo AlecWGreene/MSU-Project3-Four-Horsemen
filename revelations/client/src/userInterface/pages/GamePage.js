@@ -8,7 +8,7 @@ import GameManager from "../../engine/GameManager.js";
 import testGame from "../../engine/GameTest.js";
 
 // React component imports
-import Game from "../../Game"; 
+import Game from "../../Game"
 
 /**
  * @type {React.Context} Context containing the last passed version of the game state
@@ -39,7 +39,7 @@ function GamePage() {
   const [state, dispatch] = useReducer(gameStateReducer, gameManager.getGameState());
   return (
     <GameStateContext.Provider value={[state, dispatch]}>
-      <Game />
+      <Game manager={gameManager}/>
     </GameStateContext.Provider>
   );
 }

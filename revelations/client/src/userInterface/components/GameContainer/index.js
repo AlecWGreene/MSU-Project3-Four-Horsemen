@@ -9,13 +9,13 @@ import "./style.css";
 export default function GameContainer(props) {
     return <main {...props}> 
       <Container fluid>
-        <div className="row">
-            <div className="col-sm-10 border-temp1">
+        <div class="row">
+            <div class="col-sm-10 border-temp1">
                 <div>
                     
                 </div>
             </div>
-            <div className="col-sm-2 border-temp2">
+            <div class="col-sm-2 border-temp2">
                 <div>
                     <img src={logo} width="100" height="100" />
                 </div>
