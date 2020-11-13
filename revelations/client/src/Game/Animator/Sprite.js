@@ -8,6 +8,7 @@ import styled from "styled-components";
 const Frame = styled.div`
     height: ${({height})=>height}px;
     width: ${({width})=>width}px;
+    transform-origin: center; 
     transform: scale(${({scale})=>`${scale}, ${scale}`}) rotate(${({rotation})=>rotation}deg);
 `;
 
@@ -24,7 +25,7 @@ const Image = styled.img`
  */
 function Sprite(props){
     return <Frame height={props.height} width={props.width} scale={props.scale} rotation={props.rotation}>
-        <Image src={props.src} offset={props.offset}/>
+        <Image src={props.src} offset={props.offset || 0}/>
     </Frame>
 }
 

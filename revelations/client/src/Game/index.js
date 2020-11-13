@@ -6,8 +6,8 @@ import WallLayer from "./WallLayer";
 import { GameStateContext } from "../userInterface/pages/GamePage.js"
 import Tile from "../engine/components/Tile";
 import Animator from "./Animator";
-import SPRITE_ENUM from "../Game/SpriteEnums.js";
-import CreepLayer from "../Game/CreepLayer/creep.js";
+import SPRITE_ENUM from "../game/SpriteEnums.js";
+import CreepLayer from "../game/CreepLayer/creep.js";
 
 function Game(props){
     /**

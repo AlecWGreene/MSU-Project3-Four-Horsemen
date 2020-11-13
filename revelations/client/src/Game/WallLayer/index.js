@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { GameStateContext } from "../../userInterface/pages/GamePage";
 import Animator from "../Animator";
 import SpriteEnums from "../SpriteEnums.js";
+import convertWorldPointToScreenPoint from "../../userInterface/pages/GameUtils/convertWorldPointToScreenPoint.js";
 
 
 const styles = {
@@ -12,6 +14,7 @@ const styles = {
 }
 
 function WallLayer(props){
+    const [state, dispatch] = useContext(GameStateContext);
     return (
         <div style={styles.container}>
         {
@@ -58,7 +61,13 @@ function WallLayer(props){
 
                 // Retrieve sprite
                 const imgData = SpriteEnums[connections === "" ? "Wall_Island" : `Wall_Connection_${connections}`];
-                return <Animator height={128} width={128} imgData={imgData} position={wallTile.position} rotation={0} scale={1} />
+                return <Animator 
+                          height={128} 
+                          width={128} 
+                          imgData={imgData} 
+                          position={convertWorldPointToScreenPoint(wallTile.position, state.frameSize)} 
+                          rotation={0} 
+                          scale={0.295} />
             })
         }
         </div>
