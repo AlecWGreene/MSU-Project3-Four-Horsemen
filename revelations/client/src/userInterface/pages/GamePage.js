@@ -27,14 +27,16 @@ function gameStateReducer(state, action){
     case "updateGameState":
       return {
         frameSize: state.frameSize,
-        tileSize: state.tileSize,
+        scaleRatio: state.scaleRatio,
+        origin: state.origin,
         gameState: action.payload.gameState,
         runtimeState: action.payload.runtimeState
       };
     case "updateFrameSize":
       return {
         frameSize: action.payload.frameSize,
-        tileSize: action.payload.tileSize,
+        scaleRatio: action.payload.scaleRatio,
+        origin: action.payload.origin,
         gameState: state.gameState,
         runtimeState: state.runtimeState
       };
@@ -56,6 +58,7 @@ function GamePage() {
   function initializeGameSize(){
     console.log("layout renderedx");
       const divBox = document.getElementById("gameFrame").getClientRects()[0];
+      const grid = gameManager.gameState.mapGrid;
       dispatch({
           type: "updateFrameSize",
           payload: {
@@ -63,11 +66,12 @@ function GamePage() {
                   height: divBox.height,
                   width: divBox.width
               },
-              tileSize: Math.min(divBox.width / GameEnums.GAME_CONFIG.mapSize.cols, divBox.height / GameEnums.GAME_CONFIG.mapSize.rows)
+              scaleRatio: Math.min(divBox.height / (grid.cellsize * grid.tiles.length), divBox.width / (grid.cellsize * grid.tiles[0].length)),
+              origin: {x: 0, y: 0}
           }
       });
       console.log(state);
-      console.log("tat was state")
+      console.log("that was state")
 }
 
   // Called on initial render
@@ -76,9 +80,9 @@ function GamePage() {
     setupGame(gameManager, GameEnums.GAME_CONFIG);
     loadTestScenario(gameManager);
     gameManager.updateCallback();
-    console.log("initial setup")
+    console.log("initial setup"); console.log(divBox);  
     const divBox = document.getElementById("gameFrame").getBoundingClientRect();
-      console.log(divBox);
+    const grid = gameManager.gameState.mapGrid;
     dispatch({
       type: "initialize",
       payload: { 
@@ -86,7 +90,8 @@ function GamePage() {
           height: divBox.height,
           width: divBox.width
         }, 
-        tileSize: Math.min(divBox.height / gameManager.gameState.mapGrid.tiles.length,divBox.width / gameManager.gameState.mapGrid.tiles[0].length),
+        scaleRatio: Math.min(divBox.height / (grid.cellsize * grid.tiles.length), divBox.width / (grid.cellsize * grid.tiles[0].length)),
+        origin: {x: 0, y: 0},
         gameState: gameManager.getGameState().gameState, 
         runtimeState: gameManager.getGameState().runtimeState
       }

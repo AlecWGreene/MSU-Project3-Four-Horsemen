@@ -6,8 +6,6 @@ import styled from "styled-components";
  * <Frame height={120} width={120} rotation={45} scale={0.75}> ... </Frame>
  */
 const Frame = styled.div`
-    height: ${({height})=>height}px;
-    width: ${({width})=>width}px;
     transform-origin: center; 
     transform: scale(${({scale})=>`${scale}, ${scale}`}) rotate(${({rotation})=>rotation}deg);
 `;
