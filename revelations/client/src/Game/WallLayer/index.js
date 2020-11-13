@@ -3,6 +3,7 @@ import { GameStateContext } from "../../userInterface/pages/GamePage";
 import Animator from "../Animator";
 import SpriteEnums from "../SpriteEnums.js";
 import convertWorldPointToScreenPoint from "../../userInterface/pages/GameUtils/convertWorldPointToScreenPoint.js";
+import SPRITE_ENUM from "../SpriteEnums.js"
 
 
 const styles = {
@@ -17,6 +18,11 @@ function WallLayer(props){
     const [state, dispatch] = useContext(GameStateContext);
     return (
         <div style={styles.container}>
+
+            {
+                (!state.gameState.mapGrid) ? undefined : <Animator height={state.gameState.mapGrid.cellsize} width={state.gameState.mapGrid.cellsize} imgData={SPRITE_ENUM["Tower_1Barrel"]} position={{x:0,y:0}} rotation={0} scale={state.scaleRatio}/>
+            }
+
         {
             (!props.wallGrid) ? undefined : props.wallGrid.map(wallTile => {
                 let connections = ""
@@ -62,12 +68,12 @@ function WallLayer(props){
                 // Retrieve sprite
                 const imgData = SpriteEnums[connections === "" ? "Wall_Island" : `Wall_Connection_${connections}`];
                 return <Animator 
-                          height={128} 
-                          width={128} 
+                          height={state.gameState.mapGrid.cellsize} 
+                          width={state.gameState.mapGrid.cellsize} 
                           imgData={imgData} 
                           position={convertWorldPointToScreenPoint(wallTile.position, state.scaleRatio, state.origin)} 
                           rotation={0} 
-                          scale={0.295} />
+                          scale={state.scaleRatio} />
             })
         }
         </div>

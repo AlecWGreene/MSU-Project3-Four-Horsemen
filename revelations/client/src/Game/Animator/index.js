@@ -13,8 +13,8 @@ import styled from "styled-components";
  */
 const Container = styled.div`
     position: absolute;
-    height: ${({height})=>height}px;
-    width: ${({width})=>width}px;
+    height: 0px;
+    width: 0px;
     left: ${({position})=>position.x}px; 
     bottom: ${({position})=> position.y}px;
 `;
@@ -43,9 +43,10 @@ function Animator(props){
         <Sprite 
          src={props.imgData.src}
          height={props.imgData.height}
-         width={props.imgData.width}
+         width={props.imgData.width / props.imgData.numFrames}
          rotation={props.rotation}
          scale={props.scale * props.imgData.scale}
+         imgScale={props.width * props.scale / (props.imgData.width / props.imgData.numFrames)}
          offset={offset || 0}
         />
     </Container>

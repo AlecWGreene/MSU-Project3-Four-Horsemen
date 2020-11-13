@@ -6,7 +6,11 @@ import styled from "styled-components";
  * <Frame height={120} width={120} rotation={45} scale={0.75}> ... </Frame>
  */
 const Frame = styled.div`
-    transform-origin: center; 
+    transform-origin: left; 
+    position: absolute;
+    overflow: hidden;
+    height: ${({height}) => height}px;
+    width: ${({width}) => width}px;
     transform: scale(${({scale})=>`${scale}, ${scale}`}) rotate(${({rotation})=>rotation}deg);
 `;
 
@@ -22,7 +26,7 @@ const Image = styled.img`
  * @param {{src: string, height: number, width: number, rotation: number, scale: number, offset: number}} props
  */
 function Sprite(props){
-    return <Frame height={props.height} width={props.width} scale={props.scale} rotation={props.rotation}>
+    return <Frame height={props.height} width={props.width} scale={props.imgScale * props.scale} rotation={props.rotation}>
         <Image src={props.src} offset={props.offset || 0}/>
     </Frame>
 }
