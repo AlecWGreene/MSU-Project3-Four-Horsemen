@@ -13,7 +13,6 @@ export default function GameContainer(props) {
     return <main {...props}> 
       <Container fluid>
         <div className="row">
-<<<<<<< HEAD
             <div className="col-sm-10 test-gameDiv">
                 {props.children}
             </div>
@@ -25,14 +24,6 @@ export default function GameContainer(props) {
                            <img src={Tower_Base} width="100" height="100" />
                        </button>
                     </div> 
-=======
-            <div className="col-sm-10 border-temp1">
-                    {props.children}
-            </div>
-            <div className="col-sm-2 border-temp2">
-                <div>
-                    <img src={logo} width="100" height="100" />
->>>>>>> main
                 </div>
                 <div className="row">
                    <div class="col-sm-2 ">
@@ -64,10 +55,7 @@ export default function GameContainer(props) {
             </div>
         </div>        
       </Container>
-<<<<<<< HEAD
-=======
         
->>>>>>> main
     </main> 
    
     ;
