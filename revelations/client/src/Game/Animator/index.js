@@ -13,10 +13,12 @@ import styled from "styled-components";
  */
 const Container = styled.div`
     position: absolute;
-    height: 0px;
-    width: 0px;
-    left: ${({position})=>position.x}px; 
-    bottom: ${({position})=> position.y}px;
+    height: ${(props) => props.height}px;
+    width: ${(props) => props.width}px;
+    left: ${({position}) => position.x}px; 
+    bottom: ${({position}) => position.y}px;
+    transform-origin: center;
+    transform: rotate(${({rotation}) => rotation}deg);
 `;
 
 /** 
@@ -31,15 +33,12 @@ const Container = styled.div`
 function Animator(props){
     // Setup component states
     const [ isAnimating, toggleAnimation ] = useState(false);
-    const [ frame, setFrame ] = useState(0);
+    const [ frame, setFrame ] = useState(3);
 
     // When object is rendered, update Sprite offset
-    let offset = 0;
-    useEffect(() => {
-        offset = frame * props.imgData.width / props.imgData.numFrames;
-    }, [frame]);
+    let offset = frame * props.imgData.width / props.imgData.numFrames;
 
-    return <Container height={props.height * props.scale} width={props.width * props.scale} position={props.position}>
+    return <Container height={props.height * props.scale} width={props.width * props.scale} position={props.position} rotation={props.rotation}>
         <Sprite 
          src={props.imgData.src}
          height={props.imgData.height}
@@ -47,7 +46,7 @@ function Animator(props){
          rotation={props.rotation}
          scale={props.scale * props.imgData.scale}
          imgScale={props.width  / (props.imgData.width / props.imgData.numFrames)}
-         offset={offset || 0}
+         offset={offset}
         />
     </Container>
 }
