@@ -40,11 +40,11 @@ export default function GameContainer(props) {
 
     return <Container fluid className="h-100">
             <div className="row h-100">
-                <div className="col-sm-10 test-gameDiv">
+                <div className="col-sm-10 h-100 test-gameDiv">
                     {props.children}
                 </div>
 
-                <div className="redscreen">
+                <div className="col-sm-2 redscreen">
 
                     <div className="row">
                         <div className="col-sm-2 ">
