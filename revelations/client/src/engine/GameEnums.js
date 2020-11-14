@@ -5,13 +5,23 @@ import CreepEntity from "./entities/CreepEntity.js";
 import Collider from "./components/Collider.js";
 
 // Sprite references
-import SpriteEnums from "../Game/SpriteEnums.js";
+import SpriteEnums from "../game/SpriteEnums.js";
 
 export default {
     GAME_CONFIG: {
         startLives: 100,
         startMoney: 999,
-        tickLength: 250
+        tickLength: 250,
+        mapSize: {
+            rows: 13,
+            cols: 19,
+            height: 450,
+            width: 800 
+        },
+        sourceArray: [
+            [0,0], [12, 18]
+        ],
+        target: [7, 10]
     },
     /**
      * @type {{[key: number]: { creeps: string[], delay: number}[]}}

@@ -28,9 +28,7 @@ export default function processTick(manager) {
     }
 
     manager.runtimeState.waveTime += GameEnums.GAME_CONFIG.tickLength;
-    console.log("Tick happened, wave time at " + manager.runtimeState.waveTime);
     const end = new Date().getTime();
-    console.log("Tick required computing time of " + (end - end));
     manager.updateCallback();
     const x = 0;
 }

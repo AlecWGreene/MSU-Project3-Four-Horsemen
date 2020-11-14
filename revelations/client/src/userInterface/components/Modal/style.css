@@ -1,0 +1,28 @@
+@media (min-width: 767px) {
+    .modal-content {
+        height: 65vh;
+        background-color:transparent!important;
+        border-color: transparent!important;
+        background-image: url("../../assets/redLoadingScreen.png");
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        color: white;
+        padding: 50px;
+    }
+}
+
+.form-control {
+    color: whitesmoke!important;
+    border-color: #FF7737!important;
+    box-shadow: 3px 4px rgba(9, 5, 255, 0.274), -0.15em 0 1em rgb(255, 255, 255);
+    background: rgb(20,62,89);
+    background: linear-gradient(90deg, rgba(20,62,89,1) 0%, rgba(0,0,255,0.75) 50%, rgba(5,21,45,0.7) 100%);
+}
+
+:placeholder-shown {
+color:whitesmoke;
+}
+
+.custom-padding {
+    padding: 50px;
+}
