@@ -1,4 +1,4 @@
-const wallScale = 1;
+const wallScale = 1.1;
 const towerBaseScale = 1;
 const towerBarrelScale = 1;
 const towerLaserScale = 1;
