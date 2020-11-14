@@ -11,9 +11,7 @@ export default function GameContainer(props) {
       <Container fluid>
         <div className="row">
             <div className="col-sm-10 border-temp1">
-                <div>
                     {props.children}
-                </div>
             </div>
             <div className="col-sm-2 border-temp2">
                 <div>

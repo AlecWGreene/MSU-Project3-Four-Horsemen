@@ -12,6 +12,9 @@ import testGame from "../../engine/GameTest.js";
 import Game from "../../game"
 import GameContainer from "../components/GameContainer/index.js";
 import setupGame from "./GameUtils/setupGame.js";
+import WallLayer from "../../game/WallLayer";
+import CreepLayer from "../../game/CreepLayer/creep.js";
+import GameFrame from "../../game/GameFrame";
 
 // Testing imports
 import loadTestScenario from "./GameUtils/loadTestScenario.js"
@@ -80,9 +83,10 @@ function GamePage() {
     setupGame(gameManager, GameEnums.GAME_CONFIG);
     loadTestScenario(gameManager);
     gameManager.updateCallback();
-    console.log("initial setup"); console.log(divBox);  
+    console.log("initial setup"); 
     const divBox = document.getElementById("gameFrame").getBoundingClientRect();
     const grid = gameManager.gameState.mapGrid;
+    console.log(divBox);  
     dispatch({
       type: "initialize",
       payload: { 
@@ -109,7 +113,12 @@ function GamePage() {
   return (
     <GameStateContext.Provider value={[state, dispatch]}>
       <GameContainer>
-        <Game />
+      <div style={{ height: "100%", width: "100%"}}>
+            <GameFrame>
+                <WallLayer wallGrid={state.gameState ? state.gameState.wallGrid : []} />
+                <CreepLayer creep={state.gameState.creepDirectory} />
+            </GameFrame>
+        </div>
       </GameContainer>
     </GameStateContext.Provider>
   );
