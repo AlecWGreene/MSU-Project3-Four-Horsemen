@@ -9,8 +9,8 @@ const Frame = styled.div`
     transform-origin: bottom left; 
     position: absolute;
     overflow: hidden;
-    bottom: 0px;
-    left: 0px;
+    bottom: ${props => 0}px;
+    left: ${props => 0}px;
     height: ${({height}) => height}px;
     width: ${({width}) => width}px;
     transform: scale(${({scale})=>`${scale}, ${scale}`});

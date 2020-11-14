@@ -43,6 +43,18 @@ function gameStateReducer(state, action){
         gameState: state.gameState,
         runtimeState: state.runtimeState
       };
+    case "addWall":
+      console.log("Performed " + action.type);
+      console.log(action.payload);
+      return state;
+    case "addTowerBase":
+      console.log("Performed " + action.type);
+      console.log(action.payload);
+      return state;
+    case "addTower":
+      console.log("Performed " + action.type);
+      console.log(action.payload);
+      return state;
     default: throw new Error(`Action type (${action.type}) for GameState dispatch is not valid`);
   }
 }
