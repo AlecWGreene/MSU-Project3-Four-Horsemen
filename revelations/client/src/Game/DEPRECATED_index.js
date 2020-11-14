@@ -26,9 +26,6 @@ export default function GameFrame(props){
         else{
             const row = Math.floor((400 - event.clientY) / grid.cellsize);
             const col = Math.floor(event.clientX / grid.cellsize);
-            console.log("click at: "+ event.clientX+","+event.clientY);
-            console.log("grid tile at: "+ row+","+col);
-            console.log("grid position at: "+grid.tiles[row][col].position.x+","+grid.tiles[row][col].position.y);
         }
     }
 
