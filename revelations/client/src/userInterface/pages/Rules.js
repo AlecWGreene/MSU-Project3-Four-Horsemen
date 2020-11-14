@@ -1,64 +1,8 @@
-// import React, { useState, useEffect} from "react";
-// import { BrowserRouter as Router, Route, withRouter, Switch, Link, Redirect, useHistory, useLocation} from "react-router-dom";
-// import { useAuth } from "../../App";
 import React from "react";
 import { useAuth } from "../components/UserAuth";
 import history from "../../utils/history";
-
 // import "../styles/logIn.css"
 
-// function Rules() {
-    // console.log(props);
-    // // access context provider state and methods
-    // let auth = useAuth()
-
-    // // if user is logged in, do not let them come back to landing page unless they log out
-    //  useEffect(() => {
-    //   if(auth.user === "guest" || auth.user === "user"){
-    //     props.history.push("/game");
-    //   }
-    // },[])
-
-    // function handleGuest(event) {
-    //     event.preventDefault()
-    //     auth.signinGuest(() => {
-    //         // return(
-    //         //   // auth.redirect("/game")
-    //         //   <Route>
-    //         //     <Redirect from='/rules' to={{ pathname: "/game" }} />
-    //         //   </Route>
-    //         // )
-    //       // return(
-    //       //   <Route
-    //       //     render={({ location }) => (
-    //       //         <Redirect
-    //       //           to={{
-    //       //             pathname: "/game",
-    //       //             state: { from: location }
-    //       //           }}
-    //       //         />
-    //       //       )}
-    //       //   />
-    //       // ) 
-    //         props.history.push("/game");
-    //     })
-    //     // auth.signinGuest().then(window.location.replace("/game"))
-    //     // window.location.replace("/game")
-    // }
-
-    // function handleLogin(event) {
-    //   event.preventDefault()
-    //   props.history.push("/login");
-    //   // return(
-    //   //   <Redirect from='/rules' to={{ pathname: "/login" }} />
-    //   // );
-    //   // loginRoute();
-    // }
-
-    // function handleSignUp(event) {
-    //     event.preventDefault()
-    //     props.history.push("/signup");
-    // }
 function Rules() {
 
   let auth = useAuth()
@@ -125,4 +69,3 @@ function Rules() {
 }
 
 export default Rules
-// export default withRouter(Rules);

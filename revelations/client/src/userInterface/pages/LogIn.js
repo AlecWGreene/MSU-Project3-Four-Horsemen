@@ -2,56 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useAuth } from "../components/UserAuth";
 import API from "../../utils/API";
 import history from "../../utils/history";
-// import { BrowserRouter as Router, Route, withRouter, Switch, Link, Redirect, useHistory, useLocation} from "react-router-dom";
-import "../styles/logIn.css"
-
-// function LogIn(props) {
-//   // useEffect(() => {
-//   //   setEmployeesState(props.apiData);
-//   // }, [props.apiData]);
-//   let auth = useAuth();
-
-//   // if user is logged in, do not let them come back to landing page routes unless they log out
-//   useEffect(() => {
-//     if(auth.user === "guest" || auth.user === "user"){
-//       props.history.push("/game");
-//     }
-//   },[])
-  
-//   const [formState, setFormState] = useState({
-//     username: "",
-//     email: "",
-//     password: ""
-//   });
-
-//   const handleInputChange = event => {
-//     event.preventDefault();
-//     const id = event.currentTarget.id;
-//     const value = event.target.value.trim();
-//     setFormState((prevState) => {
-//       return { ...prevState, [id] : value}
-//     });
-//   };
-
-//   const handleSubmit = event => {
-//     event.preventDefault();
-//     if (formState.username !== "" && formState.password !== "") {
-//       API.userLogIn({
-//         username: formState.username,
-//         password: formState.password
-//       })
-//         .then((req) => {
-//           console.log(req.data)
-//           const route = req.data ? "/game" : "/login";
-//           window.location.replace(route)
-//         })
-//         .then(() => setFormState({
-//           username: "",
-//           password: ""
-//         }))
-//         .catch(err => console.log(err));
-//     }
-//   };
+import "../styles/logIn.css";
 
 function LogIn() {
   let auth = useAuth();
@@ -146,4 +97,3 @@ function LogIn() {
 }
 
 export default LogIn;
-// export default withRouter(LogIn);

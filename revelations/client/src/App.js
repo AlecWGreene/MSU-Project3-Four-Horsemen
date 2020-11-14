@@ -11,7 +11,7 @@ import SignUp from "./userInterface/pages/SignUp";
 import LogIn from "./userInterface/pages/LogIn";
 import GamePage from "./userInterface/pages/GamePage";
 // import NoMatch from "./userInterface/pages/NoMatch";
-// import ContentWrapper from "./userInterface/components/Wrapper/ContentWrapper";
+import ContentWrapper from "./userInterface/components/Wrapper/ContentWrapper";
 // import Toast from 'react-bootstrap/Toast';
 // import Button from 'react-bootstrap/Button'
 // import Col from 'react-bootstrap/Col';
@@ -26,28 +26,33 @@ function App() {
             <Router history={history}>
 
               <div>
-              <Nav />
               <Wrapper>
 
-              <Switch>
+                <Switch>
 
-                <PreventReverse path="/" exact>
-                  <Rules />
-                </PreventReverse>
+                  <PreventReverse path="/" exact>
+                    <ContentWrapper>
+                      <Rules />
+                    </ContentWrapper>
+                  </PreventReverse>
 
-                <PreventReverse path="/login">
-                  <LogIn />
-                </PreventReverse>
+                  <PreventReverse path="/login">
+                    <ContentWrapper>
+                      <LogIn /> 
+                    </ContentWrapper>
+                  </PreventReverse>
 
-                <PreventReverse path="/signup">
-                  <SignUp />
-                </PreventReverse>
+                  <PreventReverse path="/signup">
+                    <ContentWrapper>
+                      <SignUp />
+                    </ContentWrapper>
+                  </PreventReverse>
 
-                <PrivateRoute path="/game">
-                  <GamePage />
-                </PrivateRoute>
+                  <PrivateRoute path="/game">
+                    <GamePage />
+                  </PrivateRoute>
 
-              </Switch>
+                </Switch>
 
               </Wrapper>
               </div>

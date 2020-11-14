@@ -76,6 +76,5 @@ export default function GameContainer(props) {
       </Container>
         
     </main> 
-   
     ;
 }
