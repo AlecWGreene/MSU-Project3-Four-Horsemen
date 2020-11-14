@@ -15,9 +15,8 @@ import addWall from "../../pages/GameUtils/addWall.js";
 import "./style.css";
 
 export default function GameContainer(props) {
-    return <main {...props}> 
-      <Container fluid>
-        <div className="row">
+    return <Container fluid className="h-100">
+        <div className="row h-100">
             <div className="col-sm-10 test-gameDiv">
                 {props.children}
             </div>
@@ -59,9 +58,5 @@ export default function GameContainer(props) {
                 </div> 
             </div>
         </div>        
-      </Container>
-        
-    </main> 
-   
-    ;
+      </Container>;
 }

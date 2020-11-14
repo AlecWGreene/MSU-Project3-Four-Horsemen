@@ -38,6 +38,26 @@ function Animator(props){
     // When object is rendered, update Sprite offset
     let offset = frame * props.imgData.width / props.imgData.numFrames;
 
+    // Call when isAnimating is changed
+    useEffect(() => {
+        if(!isAnimating){
+            setFrame(0);
+        }
+    }, [isAnimating]);
+
+    // Call when frame is changed
+    useEffect(() => {
+        if(isAnimating){
+            if(frame === props.imgData.numFrames){
+                requestAnimationFrame(setFrame(0));
+                toggleAnimation(false);
+            }
+            else {
+                requestAnimationFrame(setFrame(frame++));
+            }
+        }
+    }, [frame])
+
     return <Container height={props.height * props.scale} width={props.width * props.scale} position={props.position} rotation={props.rotation}>
         <Sprite 
          src={props.imgData.src}
