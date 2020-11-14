@@ -7,6 +7,11 @@ import Tower_Barrel from '../../assets/Tower_Barrel.png';
 import Wall_Connection from '../../assets/Wall_Connection.png';
 import Tower_Laser from '../../assets/Tower_Laser4.png';
 
+// Import button handlers
+import addTower from "../../pages/GameUtils/addTower.js";
+import addTowerBase from "../../pages/GameUtils/addTowerBase.js";
+import addWall from "../../pages/GameUtils/addWall.js";
+
 import "./style.css";
 
 export default function GameContainer(props) {
@@ -20,14 +25,14 @@ export default function GameContainer(props) {
             <div className="redscreen">
                <div className="row">
                    <div class="col-sm-2 ">
-                       <button>
+                       <button onMouseDownCapture={()=>{}} onMouseUpCapture={addTowerBase}>
                            <img src={Tower_Base} width="100" height="100" />
                        </button>
                     </div> 
                 </div>
                 <div className="row">
                    <div class="col-sm-2 ">
-                       <button>
+                       <button onMouseDownCapture={()=>{}} onMouseUpCapture={addTower}>
                            <img src={Tower_Barrel} width="100" height="100" />
                        </button>
                         
@@ -35,14 +40,14 @@ export default function GameContainer(props) {
                 </div>
                 <div className="row">
                    <div class="col-sm-2 ">
-                       <button>
+                       <button onMouseDownCapture={()=>{}} onMouseUpCapture={addTower}>
                            <img src={Tower_Laser} width="100" height="100" />
                        </button>
                     </div> 
                 </div>
                 <div className="row">
                    <div class="col-sm-2 ">
-                       <button>
+                       <button onMouseDownCapture={()=>{}} onMouseUpCapture={addWall}>
                           <img src={Wall_Connection} width="100" height="100" /> 
                        </button>
                     </div> 
