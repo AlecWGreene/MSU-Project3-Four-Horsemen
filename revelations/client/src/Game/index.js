@@ -16,8 +16,7 @@ function Game(props){
     const [state, dispatch] = useContext(GameStateContext);
 
     useEffect(() => {
-        console.log("Game component Rendered!");
-        console.log(state);
+       
     });
 
     return (
