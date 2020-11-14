@@ -16,7 +16,7 @@ function LogIn(props) {
       props.history.push("/game");
     }
   },[])
-
+  
   const [formState, setFormState] = useState({
     username: "",
     email: "",
