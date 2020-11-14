@@ -1,102 +1,149 @@
-import React, { useContext, createContext, useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch, Link, Redirect, useHistory, useLocation} from "react-router-dom";
-import API from "./utils/API";
+import React from "react";
+import { Router, Route, Switch} from "react-router-dom";
+import UserAuth from "./userInterface/components/UserAuth/index"
+import PrivateRoute from "./userInterface/components/PrivateRoute/index"
+import PreventReverse from "./userInterface/components/PreventReverse/index";
+import history from "./utils/history";
+import Nav from "./userInterface/components/Nav";
+import Wrapper from "./userInterface/components/Wrapper";
 import Rules from "./userInterface/pages/Rules";
 import SignUp from "./userInterface/pages/SignUp";
 import LogIn from "./userInterface/pages/LogIn";
 import GamePage from "./userInterface/pages/GamePage";
-import NoMatch from "./userInterface/pages/NoMatch";
-import Nav from "./userInterface/components/Nav";
-import Wrapper from "./userInterface/components/Wrapper";
-import ContentWrapper from "./userInterface/components/Wrapper/ContentWrapper";
-import Toast from 'react-bootstrap/Toast';
-import Button from 'react-bootstrap/Button'
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-
-
-
+// import NoMatch from "./userInterface/pages/NoMatch";
+// import ContentWrapper from "./userInterface/components/Wrapper/ContentWrapper";
+// import Toast from 'react-bootstrap/Toast';
+// import Button from 'react-bootstrap/Button'
+// import Col from 'react-bootstrap/Col';
+// import Row from 'react-bootstrap/Row';
 
 function App() {
-  return (
-    <ProvideAuth>
 
-      <Router>
-        <div>
-          <Nav />
-          <Wrapper>
-            <Switch>
-              <LandingRoute exact path={["/","/rules"]}>
-                <ContentWrapper>
+  return (
+    <UserAuth>
+      <div className="container h-100 d-flex justify-content-center">
+        <div className="jumbotron my-auto">
+            <Router history={history}>
+
+              <div>
+              <Nav />
+              <Wrapper>
+
+              <Switch>
+
+                <PreventReverse path="/" exact>
                   <Rules />
-                </ContentWrapper>
-              </LandingRoute>
-              <LandingRoute exact path="/signup">
-                <ContentWrapper>
-                  <SignUp />
-                </ContentWrapper>
-              </LandingRoute>
-              <LandingRoute exact path="/login">
-                <ContentWrapper>
+                </PreventReverse>
+
+                <PreventReverse path="/login">
                   <LogIn />
-                </ContentWrapper>
-              </LandingRoute>
-              {/* <GuestRoute exact path="/game">
-                <GameContainer>
+                </PreventReverse>
+
+                <PreventReverse path="/signup">
+                  <SignUp />
+                </PreventReverse>
+
+                <PrivateRoute path="/game">
                   <GamePage />
-                </GameContainer>
-              </GuestRoute> */}
-              <PrivateRoute exact path="/game">
-                  <GamePage />
-              </PrivateRoute>
-              <Route>
-                <NoMatch />
-              </Route>
-            </Switch>
-          </Wrapper>
+                </PrivateRoute>
+
+              </Switch>
+
+              </Wrapper>
+              </div>
+
+            </Router>
         </div>
-      </Router>
-
-    </ProvideAuth>
+      </div>
+    </UserAuth>
   );
 }
 
-const fakeAuth = {
-  isAuthenticated: false,
-  login(cb) {
-    fakeAuth.isAuthenticated = true;
-    setTimeout(cb, 100); // fake async
-  },
-  signout(cb) {
-    fakeAuth.isAuthenticated = false;
-    setTimeout(cb, 100);
-  },
-  signinGuest(cb) {
-    fakeAuth.isAuthenticated = true;
-    setTimeout(cb, 100); // fake async
-  },
-};
+export default App;
 
-// create new context instance of authContext to keep track of user login status
-const authContext = createContext();
+// function App() {
+//   return (
+//     <ProvideAuth>
 
-function ProvideAuth({ children }) {
-  const auth = useProvideAuth();
-  return (
-    <authContext.Provider value={auth}>
-      {children}
-    </authContext.Provider>
-  );
-}
+//       <Router>
 
-// access context provider state and methods
-export function useAuth() {
-  return useContext(authContext);
-}
+//         <div>
+//           <Nav />
+//           <Wrapper>
 
-// context provider state and methods
-function useProvideAuth() {
-  const [user, setUser] = useState(null);
+//             <Switch>
+//               <LandingRoute exact path={["/","/rules"]}>
+//                 <ContentWrapper>
+//                   <Rules />
+//                 </ContentWrapper>
+//               </LandingRoute>
+//               <LandingRoute exact path="/signup">
+//                 <ContentWrapper>
+//                   <SignUp />
+//                 </ContentWrapper>
+//               </LandingRoute>
+//               <LandingRoute exact path="/login">
+//                 <ContentWrapper>
+//                   <LogIn />
+//                 </ContentWrapper>
+//               </LandingRoute>
+//               {/* <GuestRoute exact path="/game">
+//                 <GameContainer>
+//                   <GamePage />
+//                 </GameContainer>
+//               </GuestRoute> */}
+//               <PrivateRoute exact path="/game">
+//                   <GamePage />
+//               </PrivateRoute>
+//               <Route>
+//                 <NoMatch />
+//               </Route>
+//             </Switch>
+
+//           </Wrapper>
+//         </div>
+//       </Router>
+
+//     </ProvideAuth>
+//   );
+// }
+
+// const fakeAuth = {
+//   isAuthenticated: false,
+//   login(cb) {
+//     fakeAuth.isAuthenticated = true;
+//     setTimeout(cb, 100); // fake async
+//   },
+//   signout(cb) {
+//     fakeAuth.isAuthenticated = false;
+//     setTimeout(cb, 100);
+//   },
+//   signinGuest(cb) {
+//     fakeAuth.isAuthenticated = true;
+//     setTimeout(cb, 100); // fake async
+//   },
+// };
+
+// // create new context instance of authContext to keep track of user login status
+// const authContext = createContext();
+
+// function ProvideAuth({ children }) {
+//   const auth = useProvideAuth();
+//   return (
+//     <authContext.Provider value={auth}>
+//       {children}
+//     </authContext.Provider>
+//   );
+// }
+
+// // access context provider state and methods
+// export function useAuth() {
+//   return useContext(authContext);
+// }
+
+// // context provider state and methods
+// function useProvideAuth() {
+//   const [user, setUser] = useState(null);
 
 //  useEffect(() => {
 //   // let auth = useAuth();
@@ -116,32 +163,32 @@ function useProvideAuth() {
 
 //  },[])
 
-  // log the user in and set user state to "user" as method of authentication
-  const login = cb => {
-    return fakeAuth.login(() => {
-      setUser("user");
-      cb();
-    });
-  };
+//   // log the user in and set user state to "user" as method of authentication
+//   const login = cb => {
+//     return fakeAuth.login(() => {
+//       setUser("user");
+//       cb();
+//     });
+//   };
 
-  // log the user out and set user state to null indicating lack of authentication
-  const signout = cb => {
-    return fakeAuth.signout(() => {
-      setUser(null);
-      cb();
-    });
-  };
+//   // log the user out and set user state to null indicating lack of authentication
+//   const signout = cb => {
+//     return fakeAuth.signout(() => {
+//       setUser(null);
+//       cb();
+//     });
+//   };
 
-  // log the user in as a guest and set user state to guest
-  const signinGuest = cb => {
-    return fakeAuth.signinGuest(() => {
-      setUser("guest");
-      cb();
-    });
-  };
+//   // log the user in as a guest and set user state to guest
+//   const signinGuest = cb => {
+//     return fakeAuth.signinGuest(() => {
+//       setUser("guest");
+//       cb();
+//     });
+//   };
 
-  return { user, login, signout, signinGuest };
-};
+//   return { user, login, signout, signinGuest };
+// };
 
 // function AuthButton() {
 //   let history = useHistory();
@@ -231,47 +278,47 @@ function useProvideAuth() {
 //   );
 // }
 
-function PrivateRoute({ children, ...rest }) {
-  let auth = useAuth();
-  return (
-    <Route
-      {...rest}
-      render={({ location }) =>
-        auth.user ? (
-          children
-        ) : (
-          <Redirect
-            to={{
-              pathname: "/",
-              state: { from: location }
-            }}
-          />
-        )
-      }
-    />
-  );
-}
+// function PrivateRoute({ children, ...rest }) {
+//   let auth = useAuth();
+//   return (
+//     <Route
+//       {...rest}
+//       render={({ location }) =>
+//         auth.user ? (
+//           children
+//         ) : (
+//           <Redirect
+//             to={{
+//               pathname: "/",
+//               state: { from: location }
+//             }}
+//           />
+//         )
+//       }
+//     />
+//   );
+// }
 
-function LandingRoute({ children, ...rest }) {
-  let auth = useAuth();
-  return (
-    <Route
-      {...rest}
-      render={({ location }) =>
-        auth.user ? (
-          <Redirect
-            to={{
-              pathname: "/game",
-              state: { from: location }
-            }}
-          />
-        ) : (
-          children
-        )
-      }
-    />
-  );
-}
+// function LandingRoute({ children, ...rest }) {
+//   let auth = useAuth();
+//   return (
+//     <Route
+//       {...rest}
+//       render={({ location }) =>
+//         auth.user ? (
+//           <Redirect
+//             to={{
+//               pathname: "/game",
+//               state: { from: location }
+//             }}
+//           />
+//         ) : (
+//           children
+//         )
+//       }
+//     />
+//   );
+// }
 
 // function Rules() {
 //   let history = useHistory();
@@ -315,4 +362,4 @@ function LandingRoute({ children, ...rest }) {
 
 // }
 
-export default App;
+// export default App;
