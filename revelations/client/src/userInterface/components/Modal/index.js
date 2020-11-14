@@ -9,9 +9,9 @@ function Modal() {
   
     return (
       <>
-        <Button variant="primary" onClick={() => setModalShow(true)}>
-          Launch vertically centered modal
-        </Button>
+        <div variant="primary" onClick={() => setModalShow(true)}>
+          LOGIN
+        </div>
   
         <Settings
           show={modalShow}

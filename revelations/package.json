@@ -4,11 +4,13 @@
   "private": true,
   "main": "server.js",
   "dependencies": {
+    "bootstrap": "^4.5.3",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "if-env": "^1.0.4",
     "mongoose": "^5.10.13",
-    "passport": "^0.4.1"
+    "passport": "^0.4.1",
+    "react-bootstrap": "^1.4.0"
   },
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",

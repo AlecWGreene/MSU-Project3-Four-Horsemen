@@ -8,6 +8,7 @@ import Nav from "./userInterface/components/Nav";
 import Wrapper from "./userInterface/components/Wrapper";
 import ContentWrapper from "./userInterface/components/Wrapper/ContentWrapper";
 import GameContainer from "./userInterface/components/GameContainer/index"
+import TestPage from "./userInterface/pages/TestPage";
 
 
 function App() {
@@ -29,6 +30,11 @@ function App() {
             </Route>
             <Route exact path="/game">
                 <GamePage />
+            </Route>
+            <Route>
+            <ContentWrapper>
+              <TestPage />
+            </ContentWrapper>
             </Route>
             <Route>
               <NoMatch />
