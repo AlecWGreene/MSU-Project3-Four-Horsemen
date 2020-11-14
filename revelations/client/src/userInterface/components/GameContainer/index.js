@@ -2,33 +2,59 @@
 
 import React from 'react';
 import Container from 'react-bootstrap/Container';
-import logo from '../../assets/Tower_Base.png';
+import Tower_Base from '../../assets/Tower_Base.png';
+import Tower_Barrel from '../../assets/Tower_Barrel.png';
+import Wall_Connection from '../../assets/Wall_Connection.png';
+import Tower_Laser from '../../assets/Tower_Laser4.png';
 
 import "./style.css";
 
 export default function GameContainer(props) {
     return <main {...props}> 
       <Container fluid>
-        <div class="row">
-            <div class="col-sm-10 border-temp1">
-                <div>
-                    
-                </div>
+        <div className="row">
+            <div className="col-sm-10 test-gameDiv">
+                {props.children}
             </div>
-            <div class="col-sm-2 border-temp2">
-                <div>
-                    <img src={logo} width="100" height="100" />
+
+            <div className="redscreen">
+               <div className="row">
+                   <div class="col-sm-2 ">
+                       <button>
+                           <img src={Tower_Base} width="100" height="100" />
+                       </button>
+                    </div> 
+                </div>
+                <div className="row">
+                   <div class="col-sm-2 ">
+                       <button>
+                           <img src={Tower_Barrel} width="100" height="100" />
+                       </button>
+                        
+                    </div> 
+                </div>
+                <div className="row">
+                   <div class="col-sm-2 ">
+                       <button>
+                           <img src={Tower_Laser} width="100" height="100" />
+                       </button>
+                    </div> 
+                </div>
+                <div className="row">
+                   <div class="col-sm-2 ">
+                       <button>
+                          <img src={Wall_Connection} width="100" height="100" /> 
+                       </button>
+                    </div> 
                 </div>
                 <div>
-                    <button type="" className="button">Settings</button>
-                </div>
+                    <button type="button" className="button">
+                    Settings
+                    </button>
+                </div> 
             </div>
-        </div>
+        </div>        
       </Container>
-        
-    
-   
-        
     </main> 
    
     ;
