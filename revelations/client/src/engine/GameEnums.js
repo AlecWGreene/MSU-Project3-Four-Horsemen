@@ -13,15 +13,15 @@ export default {
         startMoney: 999,
         tickLength: 250,
         mapSize: {
-            rows: 25,
-            cols: 39,
+            rows: 13,
+            cols: 19,
             height: 450,
             width: 800 
         },
         sourceArray: [
-            [0,0], [15, 14]
+            [0,0], [12, 18]
         ],
-        target: [13, 18]
+        target: [7, 10]
     },
     /**
      * @type {{[key: number]: { creeps: string[], delay: number}[]}}

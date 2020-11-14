@@ -74,7 +74,7 @@ function WallLayer(props){
 
         
         {
-            (!state.gameState.mapGrid) ? undefined : <Animator height={state.gameState.mapGrid.cellsize} width={state.gameState.mapGrid.cellsize} imgData={SPRITE_ENUM["Tower_1Barrel"]} position={{x:100,y:90}} rotation={30} scale={state.scaleRatio}/>
+            (!state.gameState.mapGrid) ? undefined : <Animator height={state.gameState.mapGrid.cellsize} width={state.gameState.mapGrid.cellsize} imgData={SPRITE_ENUM["Tower_Laser1"]} position={state.gameState.mapGrid.tiles[5][5].position} rotation={30} scale={state.scaleRatio}/>
         }
         </div>
     );

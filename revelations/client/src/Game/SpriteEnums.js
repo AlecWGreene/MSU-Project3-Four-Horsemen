@@ -1,7 +1,7 @@
 const wallScale = 1.1;
 const towerBaseScale = 1;
 const towerBarrelScale = 1;
-const towerLaserScale = 1;
+const towerLaserScale = 1.5;
 const creepScale = 1;
 const svgSize = 128;
 
@@ -420,7 +420,7 @@ const SPRITE_ENUM = {
      * @description HOVER ME => "../../public/Assets/Towers/Tower_2Barrel2.png"
      */
     "Tower_2Barrel2": {
-        src: "./Assets/Towers/Tower_",
+        src: "./Assets/Towers/Tower_2Barrel2.png",
         height: 128,
         width: 1024,
         numFrames: 8,
@@ -436,7 +436,7 @@ const SPRITE_ENUM = {
      * @description HOVER ME => "../../public/Assets/Towers/Tower_Laser1.png"
      */
     "Tower_Laser1": {
-        src: "./Assets/Towers/Tower_Laser1",
+        src: "./Assets/Towers/Tower_Laser1.png",
         height: 128,
         width: 1408,
         numFrames: 11,
@@ -446,7 +446,7 @@ const SPRITE_ENUM = {
      * @description HOVER ME => "../../public/Assets/Towers/Tower_Laser2.png"
      */
     "Tower_Laser2": {
-        src: "./Assets/Towers/Tower_Laser2",
+        src: "./Assets/Towers/Tower_Laser2.png",
         height: 128,
         width: 1408,
         numFrames: 11,
@@ -456,7 +456,7 @@ const SPRITE_ENUM = {
      * @description HOVER ME => "../../public/Assets/Towers/Tower_Laser3.png"
      */
     "Tower_Laser3": {
-        src: "./Assets/Towers/Tower_Laser3",
+        src: "./Assets/Towers/Tower_Laser3.png",
         height: 128,
         width: 1408,
         numFrames: 11,
