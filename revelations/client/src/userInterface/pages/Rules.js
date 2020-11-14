@@ -12,14 +12,13 @@ function Rules() {
   };
   return (
     <div className="custom-border-lg">
-      <h1>Current: Rules page</h1>
       <div id="logInPosition" className="container">
         <div className="Row justify-content-center d-flex">
           <div className="col-md-6 customDivOne"> 
             <div className="customDivTwo">
               
               <div className="form-group">
-                    <label id="customFont" for="password">Rules</label>
+                    <label id="customFont" htmlFor="password">Rules</label>
                     <div id="lipsum">
                         <ul>
                             <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>

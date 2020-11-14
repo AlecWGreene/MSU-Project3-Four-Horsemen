@@ -47,7 +47,7 @@ export default function GameContainer(props) {
                 <div className="redscreen">
 
                     <div className="row">
-                        <div class="col-sm-2 ">
+                        <div className="col-sm-2 ">
                             <button onMouseDownCapture={()=>{}} onMouseUpCapture={addTowerBase}>
                                 <img src={Tower_Base} width="100" height="100" />
                             </button>
@@ -55,7 +55,7 @@ export default function GameContainer(props) {
                     </div>
 
                     <div className="row">
-                        <div class="col-sm-2 ">
+                        <div className="col-sm-2 ">
                             <button onMouseDownCapture={()=>{}} onMouseUpCapture={addTower}>
                                 <img src={Tower_Barrel} width="100" height="100" />
                             </button>
@@ -63,7 +63,7 @@ export default function GameContainer(props) {
                     </div>
 
                     <div className="row">
-                        <div class="col-sm-2 ">
+                        <div className="col-sm-2 ">
                             <button onMouseDownCapture={()=>{}} onMouseUpCapture={addTower}>
                                 <img src={Tower_Laser} width="100" height="100" />
                             </button>
@@ -71,46 +71,62 @@ export default function GameContainer(props) {
                     </div>
 
                     <div className="row">
-                        <div class="col-sm-2 ">
+                        <div className="col-sm-2 ">
                             <button onMouseDownCapture={()=>{}} onMouseUpCapture={addWall}>
                                 <img src={Wall_Connection} width="100" height="100" /> 
                             </button>
                         </div> 
                     </div>
 
-                    <div>
-                        <button type="button" className="button">
-                            Settings
-                        </button>
+                    <div className="row">
+                        <div className="col-sm-2 ">
+                            <button type="button" className="button">
+                                Settings
+                            </button>
+                        </div>
                     </div>
 
-                    <div className="display-4 mb-1">
+                    <div className="row">
+                        <div className="col-sm-2 ">
+                            <button
+                            className="button"
+                            type="button"
+                            onClick={userLogout}
+                            >
+                                {auth.user.auth === "user" ? "Exit" : "Exit without Save" }
+                            </button>
+                        </div>
+                    
+                    </div> 
+                    
+                    <div className="row">
+                        <div className="col-sm-2 ">
+                            <button
+                            className="button"
+                            type="button"
+                            >
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div className="row">
+                        <div className="col-sm-2 ">
+                            <button
+                                className="button"
+                                type="button"
+                                onClick={handleDelete}
+                                disabled={isGuest}
+                            >
+                                Delete Account
+                            </button>
+                        </div>
+                    </div>
+                    
+
+                    <div className="mb-1">
                         Game Page: { username }
                     </div>
-
-                    <button
-                        className="btn btn-info btn-block"
-                        type="button"
-                        onClick={userLogout}
-                    >
-                        {auth.user.auth === "user" ? "Exit" : "Exit without Save" }
-                    </button>
-
-                    <button
-                        className="btn btn-info btn-block"
-                        type="button"
-                    >
-                        Save
-                    </button>
-
-                    <button
-                        className="btn btn-info btn-block"
-                        type="button"
-                        onClick={handleDelete}
-                        disabled={isGuest}
-                    >
-                        Delete Account
-                    </button>
 
                 </div>
 

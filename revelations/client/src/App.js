@@ -12,7 +12,7 @@ import LogIn from "./userInterface/pages/LogIn";
 import GamePage from "./userInterface/pages/GamePage";
 // import NoMatch from "./userInterface/pages/NoMatch";
 import ContentWrapper from "./userInterface/components/Wrapper/ContentWrapper";
-// import GameContainer from "./userInterface/components/GameContainer/index"
+import GameContainer from "./userInterface/components/GameContainer/index"
 import TestPage from "./userInterface/pages/TestPage";
 
 
@@ -28,7 +28,7 @@ function App() {
 
             <Switch>
 
-              <PreventReverse path="/" exact>
+              <PreventReverse path={["/","/rules"]} exact>
                 <ContentWrapper>
                   <Rules />
                 </ContentWrapper>
@@ -50,11 +50,11 @@ function App() {
                 <GamePage />
               </PrivateRoute>
 
-              <Route>
+              <PreventReverse>
                 <ContentWrapper path="/test">
                   <TestPage />
                 </ContentWrapper>
-              </Route>
+              </PreventReverse>
 
               {/* <Route>
                 <NoMatch />

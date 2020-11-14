@@ -19,12 +19,12 @@ function LogIn() {
     });
   };
 
-  const handleKeyDown = event => {
-    event.preventDefault();
-    if (event.key === 'Enter') {
-      handleSubmit(event);
-    };
-  };
+  // const handleKeyDown = event => {
+  //   event.preventDefault();
+  //   if (event.key === 'Enter') {
+  //     handleSubmit(event);
+  //   };
+  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -56,12 +56,12 @@ function LogIn() {
           <div className="col-md-6 customDivOne"> 
             <div className="customDivTwo">
               <div id="codaFont" className="form-group">
-                <label id="customFont" for="username">Username</label>
-                <input type="username" className="form-control" id="username" value={formState.username} onChange={handleInputChange} onKeyDown={handleKeyDown} placeholder="user123" />
+                <label id="customFont" htmlFor="username">Username</label>
+                <input type="username" className="form-control" id="username" value={formState.username} onChange={handleInputChange} placeholder="user123" />
               </div>
               <div className="form-group">
-                <label id="customFont" for="password">Password</label>
-                <input type="password" className="form-control" id="password" value={formState.password} onChange={handleInputChange} onKeyDown={handleKeyDown} />
+                <label id="customFont" htmlFor="password">Password</label>
+                <input type="password" className="form-control" id="password" value={formState.password} onChange={handleInputChange} />
               </div>
               <button
                 className="btn btn-info btn-block"
