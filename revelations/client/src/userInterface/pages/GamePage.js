@@ -37,7 +37,6 @@ function GamePage() {
   },[]);
 
   useEffect(() => {
-    console.log("GamePage rendered!");
     testGame();
   });
 
