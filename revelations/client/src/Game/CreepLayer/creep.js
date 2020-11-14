@@ -1,6 +1,6 @@
 import React from "react"; 
 import Animator from "../Animator/index.js"; 
-import SPRITE_ENUM from "../../Game/SpriteEnums.js";
+import SPRITE_ENUM from "../../game/SpriteEnums.js";
 
 const styles = {
     container: {
