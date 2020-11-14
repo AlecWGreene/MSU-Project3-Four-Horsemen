@@ -21,10 +21,12 @@ function Game(props){
     });
 
     return (
+        <div style={{ height: "100%", width: "100%"}}>
             <GameFrame>
                 <WallLayer wallGrid={state.gameState ? state.gameState.wallGrid : []} />
-                <CreepLayer creep={state.gameState.creepDirectory}/>
+                <CreepLayer creep={state.gameState.creepDirectory} />
             </GameFrame>
+        </div>
     );
 }
 
