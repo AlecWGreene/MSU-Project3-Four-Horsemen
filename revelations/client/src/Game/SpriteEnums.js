@@ -1,4 +1,4 @@
-const wallScale = 1;
+const wallScale = 1.1;
 const towerBaseScale = 1;
 const towerBarrelScale = 1;
 const towerLaserScale = 1;
@@ -40,7 +40,7 @@ const SPRITE_ENUM = {
      * @description HOVER ME => "../../public/Assets/Buildings/Walls/Wall_Connection_NESW.png"
     */
     "Wall_Connection_NESW": {
-        src: "./Assets/Buildings/Walls/Wall_Connection_NESW_Island.png",
+        src: "./Assets/Buildings/Walls/Wall_Connection_NESW.png",
         height: 128,
         width: 128,
         numFrames: 1,
@@ -50,7 +50,7 @@ const SPRITE_ENUM = {
      * @description HOVER ME => "../../public/Assets/Buildings/Walls/Wall_Penisula_S.png"
     */
     "Wall_Connection_N": {
-        src: "./Assets/Buildings/Walls/Wall_Connection_S.png",
+        src: "./Assets/Buildings/Walls/Wall_Penisula_S.png",
         height: 128,
         width: 128,
         numFrames: 1,
@@ -93,6 +93,26 @@ const SPRITE_ENUM = {
     // ====================================================================================================================================================================================
     /* #region   */
 
+    /**
+     * @description HOVER ME => "../../public/Assets/Buildings/Walls/Wall_Connection_NS.png"
+    */
+    "Wall_Connection_NS": {
+        src: "./Assets/Buildings/Walls/Wall_Connection_NS.png",
+        height: 128,
+        width: 128,
+        numFrames: 1,
+        scale: wallScale
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/Buildings/Walls/Wall_Connection_EW.png"
+    */
+    "Wall_Connection_EW": {
+        src: "./Assets/Buildings/Walls/Wall_Connection_EW.png",
+        height: 128,
+        width: 128,
+        numFrames: 1,
+        scale: wallScale
+    },
     /**
      * @description HOVER ME => "../../public/Assets/Buildings/Walls/Wall_Connection_NE.png"
     */

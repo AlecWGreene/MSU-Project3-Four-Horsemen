@@ -47,19 +47,16 @@ function renderGame(manager){
         returnString += row+"|\n";
     }
     returnString += "+"+ "-".repeat(25) + "+";
-    console.log(returnString);
+   
 }
 
 export default function testGame(){
     const manager = new GameManager();
-    console.log("==========Running Game Engine Test==========");
-    console.log("Initial object: ");
     const grid = new Grid(15, 25, 975, 1635);
     const sourceArray = [grid.tiles[2][20], grid.tiles[13][20]];
     const target = grid.tiles[7][12];
     manager.init(grid, sourceArray, target);
     manager.updateCallback = () => renderGame(manager);
-    console.log(manager);
     setTimeout(() => {
         setupWalls(manager, 0);
         manager.updateCallback();
