@@ -33,7 +33,7 @@ const Container = styled.div`
 function Animator(props){
     // Setup component states
     const [ isAnimating, toggleAnimation ] = useState(false);
-    const [ frame, setFrame ] = useState(3);
+    const [ frame, setFrame ] = useState(0);
 
     // When object is rendered, update Sprite offset
     let offset = frame * props.imgData.width / props.imgData.numFrames;

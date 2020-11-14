@@ -18,11 +18,6 @@ function WallLayer(props){
     const [state, dispatch] = useContext(GameStateContext);
     return (
         <div style={styles.container}>
-
-            {
-                (!state.gameState.mapGrid) ? undefined : <Animator height={state.gameState.mapGrid.cellsize} width={state.gameState.mapGrid.cellsize} imgData={SPRITE_ENUM["Tower_1Barrel"]} position={{x:100,y:90}} rotation={30} scale={state.scaleRatio}/>
-            }
-
         {
             (!props.wallGrid) ? undefined : props.wallGrid.map(wallTile => {
                 let connections = ""
@@ -75,6 +70,11 @@ function WallLayer(props){
                           rotation={0} 
                           scale={state.scaleRatio} />
             })
+        }
+
+        
+        {
+            (!state.gameState.mapGrid) ? undefined : <Animator height={state.gameState.mapGrid.cellsize} width={state.gameState.mapGrid.cellsize} imgData={SPRITE_ENUM["Tower_1Barrel"]} position={{x:100,y:90}} rotation={30} scale={state.scaleRatio}/>
         }
         </div>
     );

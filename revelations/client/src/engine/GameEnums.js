@@ -13,8 +13,8 @@ export default {
         startMoney: 999,
         tickLength: 250,
         mapSize: {
-            rows: 23,
-            cols: 35,
+            rows: 25,
+            cols: 39,
             height: 450,
             width: 800 
         },
