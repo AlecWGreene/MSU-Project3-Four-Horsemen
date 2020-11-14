@@ -46,7 +46,7 @@ function Animator(props){
          width={props.imgData.width / props.imgData.numFrames}
          rotation={props.rotation}
          scale={props.scale * props.imgData.scale}
-         imgScale={props.width * props.scale / (props.imgData.width / props.imgData.numFrames)}
+         imgScale={props.width  / (props.imgData.width / props.imgData.numFrames)}
          offset={offset || 0}
         />
     </Container>
