@@ -12,6 +12,12 @@ const svgSize = 128;
  * @enum {{src: string, height: number, width: number, rotation: number, scale: number, offset: number}}
  */
 const SPRITE_ENUM = {
+    wallScale: wallScale,
+    towerBaseScale: towerBaseScale,
+    towerBarrelScale: towerBarrelScale,
+    towerLaserScale: towerLaserScale,
+    creepScale: creepScale,
+    svgSize: svgSize,
 
     // ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
     // ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||

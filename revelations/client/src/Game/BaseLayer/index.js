@@ -14,20 +14,20 @@ const styles = {
     }
 }
 
-function WallLayer(props){
+function BaseLayer(props){
     const [state, dispatch] = useContext(GameStateContext);
     return (
         <div style={styles.container}>
         {
-            (!props.wallGrid) ? undefined : props.wallGrid.map(wallTile => {
+            (!props.baseGrid) ? undefined : props.baseGrid.map(baseTile => {
                 let connections = ""
 
                 // Check which walls the wall must connect to
-                for(const neighbour of wallTile.getNeighbours()){
-                    if(props.wallGrid.filter(t => t.isEqualTo(neighbour)).length > 0){
+                for(const neighbour of baseTile.getNeighbours()){
+                    if(props.baseGrid.filter(t => t.isEqualTo(neighbour)).length > 0){
                         const diff = {
-                            row: neighbour.index.row - wallTile.index.row,
-                            col: neighbour.index.col - wallTile.index.col
+                            row: neighbour.index.row - baseTile.index.row,
+                            col: neighbour.index.col - baseTile.index.col
                         }
 
                         // Insert the compass direction of the connection into the string, maintain NESW order
@@ -61,12 +61,12 @@ function WallLayer(props){
                 }
 
                 // Retrieve sprite
-                const imgData = SpriteEnums[connections === "" ? "Wall_Island" : `Wall_Connection_${connections}`];
+                const imgData = SpriteEnums[connections === "" ? "Tower_Base_" : `Tower_Base_Connection_${connections}`];
                 return <Animator 
                           height={state.gameState.mapGrid.cellsize} 
                           width={state.gameState.mapGrid.cellsize} 
                           imgData={imgData} 
-                          position={convertWorldPointToScreenPoint(wallTile.position, state.scaleRatio, state.origin)} 
+                          position={convertWorldPointToScreenPoint(baseTile.position, state.scaleRatio, state.origin)} 
                           rotation={0} 
                           scale={state.scaleRatio} />
             })
@@ -79,4 +79,4 @@ function shouldRun(prevProps, nextProps){
     return !(prevProps.length === nextProps.length);
 }
 
-export default React.memo(WallLayer, shouldRun);
+export default React.memo(BaseLayer, shouldRun);
