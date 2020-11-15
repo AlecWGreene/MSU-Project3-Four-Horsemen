@@ -74,7 +74,19 @@ function WallLayer(props){
 
         
         {
-            (!state.gameState.mapGrid) ? undefined : <Animator height={state.gameState.mapGrid.cellsize} width={state.gameState.mapGrid.cellsize} imgData={SPRITE_ENUM["Tower_Laser1"]} position={convertWorldPointToScreenPoint(state.gameState.mapGrid.tiles[5][5].position, state.scaleRatio, {x:0,y:0})} rotation={30} scale={state.scaleRatio}/>
+            (!state.gameState.mapGrid) ? undefined : <Animator height={state.gameState.mapGrid.cellsize} width={state.gameState.mapGrid.cellsize} imgData={SPRITE_ENUM["Tower_Laser1"]} position={convertWorldPointToScreenPoint(state.gameState.mapGrid.tiles[5][7].position, state.scaleRatio, {x:0,y:0})} rotation={0} scale={state.scaleRatio}/>
+        }
+        {
+            (!state.gameState.mapGrid) ? undefined : <Animator height={state.gameState.mapGrid.cellsize} width={state.gameState.mapGrid.cellsize} imgData={SPRITE_ENUM["Tower_Laser1"]} position={convertWorldPointToScreenPoint(state.gameState.mapGrid.tiles[5][7].position, state.scaleRatio, {x:0,y:0})} rotation={60} scale={state.scaleRatio}/>
+        }
+        {
+            (!state.gameState.mapGrid) ? undefined : <Animator height={state.gameState.mapGrid.cellsize} width={state.gameState.mapGrid.cellsize} imgData={SPRITE_ENUM["Tower_Laser1"]} position={convertWorldPointToScreenPoint(state.gameState.mapGrid.tiles[5][7].position, state.scaleRatio, {x:0,y:0})} rotation={120} scale={state.scaleRatio}/>
+        }
+        {
+            (!state.gameState.mapGrid) ? undefined : <Animator height={state.gameState.mapGrid.cellsize} width={state.gameState.mapGrid.cellsize} imgData={SPRITE_ENUM["Tower_Laser1"]} position={convertWorldPointToScreenPoint(state.gameState.mapGrid.tiles[5][7].position, state.scaleRatio, {x:0,y:0})} rotation={180} scale={state.scaleRatio}/>
+        }
+        {
+            (!state.gameState.mapGrid) ? undefined : <Animator height={state.gameState.mapGrid.cellsize} width={state.gameState.mapGrid.cellsize} imgData={SPRITE_ENUM["Tower_Laser1"]} position={convertWorldPointToScreenPoint(state.gameState.mapGrid.tiles[5][7].position, state.scaleRatio, {x:0,y:0})} rotation={270} scale={state.scaleRatio}/>
         }
         </div>
     );
