@@ -58,14 +58,14 @@ footer {
     border-image: url("../../assets/redscreen4.png") 46 30 61 27 stretch stretch;
     }
 
-.test-gameDiv {
+/* .test-gameDiv {
     border-color: white;
     border-width: 5px;
     border-style: solid;
     color: white;
     font-weight: bold;
     padding: 0px!important;
-}
+} */
 
 img {
     border-color: white;
