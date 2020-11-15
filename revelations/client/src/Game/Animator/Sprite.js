@@ -9,11 +9,11 @@ const Frame = styled.div`
     transform-origin: bottom left; 
     position: absolute;
     overflow: hidden;
-    bottom: ${props => 0}px;
-    left: ${props => 0}px;
+    bottom: ${props => 0.5 * props.width * props.imgScale * (1 - props.scale)}px;
+    left: ${props => 0.5 * props.width * props.imgScale * (1 - props.scale)}px;
     height: ${({height}) => height}px;
     width: ${({width}) => width}px;
-    transform: scale(${({scale})=>`${scale}, ${scale}`});
+    transform: scale(${({scale, imgScale})=>`${scale * imgScale}, ${scale * imgScale}`});
 `;
 
 /**
@@ -28,7 +28,7 @@ const Image = styled.img`
  * @param {{src: string, height: number, width: number, rotation: number, scale: number, offset: number}} props
  */
 function Sprite(props){
-    return <Frame height={props.height} width={props.width} scale={props.imgScale * props.scale} rotation={props.rotation}>
+    return <Frame height={props.height} width={props.width} scale={props.scale} rotation={props.rotation} imgScale={props.imgScale}>
         <Image src={props.src} offset={props.offset || 0} rotation={props.rotation}/>
     </Frame>
 }

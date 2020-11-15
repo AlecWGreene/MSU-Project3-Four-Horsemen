@@ -17,6 +17,7 @@ import addWall from "../../pages/GameUtils/addWall.js";
 import "./style.css";
 
 export default function GameContainer(props) {
+
     let auth = useAuth()
 
     const username = auth.user.data === null ? auth.user.auth : auth.user.data.username;
@@ -37,14 +38,13 @@ export default function GameContainer(props) {
             })
     };
 
-    return <main {...props}> 
-        <Container fluid>
-            <div className="row">
-                <div className="col-sm-10 test-gameDiv">
+    return <Container fluid className="h-100">
+            <div className="row h-100">
+                <div className="col-sm-10 h-100 test-gameDiv">
                     {props.children}
                 </div>
 
-                <div className="redscreen">
+                <div className="col-sm-2 redscreen">
 
                     <div className="row">
                         <div className="col-sm-2 ">
@@ -129,11 +129,11 @@ export default function GameContainer(props) {
                     </div>
 
                 </div>
-
-            </div>  
-
-        </Container>
-        
-    </main> 
-    ;
+                <div>
+                    <button type="button" className="button">
+                    Settings
+                    </button>
+                </div> 
+            </div>      
+      </Container>;
 }
