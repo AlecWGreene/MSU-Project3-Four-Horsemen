@@ -10,7 +10,7 @@ import Rules from "./userInterface/pages/Rules";
 import SignUp from "./userInterface/pages/SignUp";
 import LogIn from "./userInterface/pages/LogIn";
 import GamePage from "./userInterface/pages/GamePage";
-// import NoMatch from "./userInterface/pages/NoMatch";
+import NoMatch from "./userInterface/pages/NoMatch";
 import ContentWrapper from "./userInterface/components/Wrapper/ContentWrapper";
 import GameContainer from "./userInterface/components/GameContainer/index"
 import TestPage from "./userInterface/pages/TestPage";
@@ -34,24 +34,24 @@ function App() {
                 </ContentWrapper>
               </PreventReverse>
 
-              <PreventReverse path="/login">
+              <PreventReverse path="/login" exact>
                 <ContentWrapper>
                   <LogIn /> 
                 </ContentWrapper>
               </PreventReverse>
 
-              <PreventReverse path="/signup">
+              <PreventReverse path="/signup" exact>
                 <ContentWrapper>
                   <SignUp />
                 </ContentWrapper>
               </PreventReverse>
 
-              <PrivateRoute path="/game">
+              <PrivateRoute path="/game" exact>
                 <GamePage />
               </PrivateRoute>
 
               <PreventReverse>
-                <ContentWrapper path="/test">
+                <ContentWrapper path="/test" exact>
                   <TestPage />
                 </ContentWrapper>
               </PreventReverse>
