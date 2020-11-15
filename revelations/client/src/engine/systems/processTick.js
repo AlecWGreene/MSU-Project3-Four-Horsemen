@@ -3,9 +3,6 @@ import moveCreeps from "./moveCreeps.js";
 import spawnCreep from "./spawnCreep.js";
 
 export default function processTick(manager) {
-    console.clear();
-    const start = new Date().getTime();
-
     // Move creeps
     moveCreeps(manager)
 
@@ -28,7 +25,6 @@ export default function processTick(manager) {
     }
 
     manager.runtimeState.waveTime += GameEnums.GAME_CONFIG.tickLength;
-    const end = new Date().getTime();
-    manager.updateCallback();
+    requestAnimationFrame(manager.updateCallback);
     const x = 0;
 }
