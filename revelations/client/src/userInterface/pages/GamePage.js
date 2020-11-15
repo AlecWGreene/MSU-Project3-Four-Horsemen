@@ -15,6 +15,8 @@ import setupGame from "./GameUtils/setupGame.js";
 import WallLayer from "../../game/WallLayer";
 import CreepLayer from "../../game/CreepLayer/creep.js";
 import GameFrame from "../../game/GameFrame";
+import Planet from "../../game/Planet";
+import BaseLayer from "../../game/BaseLayer";
 
 // Testing imports
 import loadTestScenario from "./GameUtils/loadTestScenario.js"
@@ -115,6 +117,7 @@ function GamePage() {
     console.log(state);
     initializeGameSize();
     setTimeout(gameManager.updateCallback, 5000);
+    setTimeout(gameManager.sendWave(), 1000)
   },[]);
 
   // Called on every render
@@ -127,7 +130,10 @@ function GamePage() {
       <GameContainer>
       <div style={{ height: "100%", width: "100%"}}>
             <GameFrame>
+               <Planet />
                 <WallLayer wallGrid={state.gameState ? state.gameState.wallGrid : []} />
+                <BaseLayer baseGrid={state.gameState ? state.gameState.baseGrid : []}/>
+                {/**<TowerLayer directory={state.gameState ? state.gameState.towerDirectory : []} />*/}
                 <CreepLayer creep={state.gameState.creepDirectory} />
             </GameFrame>
         </div>
