@@ -1,6 +1,5 @@
 import React, {render} from "react";
-import Button from 'react-bootstrap/Button';
-import Settings from './settingsModal';
+import LogIn from "../../pages/LogIn";
 import './style.css';
 
 function Modal() {
@@ -9,17 +8,22 @@ function Modal() {
   
     return (
       <>
-        <div variant="primary" onClick={() => setModalShow(true)}>
+        <div
+        className="homepage-btns" 
+        onClick={() => setModalShow(true)}>
           LOGIN
+        
         </div>
-  
-        <Settings
+        <LogIn
           show={modalShow}
           onHide={() => setModalShow(false)}
         />
       </>
     );
   }
+
+
+
 
   export default Modal;
   

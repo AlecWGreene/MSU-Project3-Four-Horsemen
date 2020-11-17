@@ -1,9 +1,24 @@
-.test-font {
-    color: white;
-    font-weight: bold;
-    font-size: 20px;
-    background-color: #02141A
+@font-face{
+    font-family: 'perfect_dark_brkregular';
+    src: url('../styles/webfontkit/pdark-webfont.woff2') format('woff2'),
+         url('../styles/webfontkit/pdark-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
+#customFont {
+    font-family: 'perfect_dark_brkregular';
+    font-size: 30px;
+    color: #8E979C;
+    text-shadow: 2px 2px #262f31;
+}
+
+
+.aldrich-font, ::placeholder {
+    font-family: 'Aldrich', sans-serif;
+    color: rgb(255, 255, 255)!important;
+    font-size: 15px;
+    font-weight: lighter;
 }
 
 .test-borderOne {
@@ -15,14 +30,6 @@
     border-image: url("./testAssets/LoadingScreen.png") 200 150 200 150 stretch stretch;
     }
 
-/* .test-borderTwo {
-    border-style: solid;
-    border-width: 100px 100px 100px 100px;
-    -moz-border-image: url("../assets/redscreen.png") 100 100 100 100 stretch stretch;
-    -webkit-border-image: url("../assets/redscreen.png") 100 100 100 100 stretch stretch;
-    -o-border-image: url("../assets/redscreen.png") 100 100 100 100 stretch stretch;
-    border-image: url("../assets/redscreen.png") 100 100 100 100 stretch stretch;
-} */
 
 .burger-menu {
 	display: block;
@@ -80,10 +87,25 @@
     background-image: url("../assets/blueButton.png");
     background-size: cover;
     width: 100%;
-    height: 11.5vh;
+    height: 9vh;
     background-repeat: no-repeat;
     align-items: center;
-    margin: 10px;
+    margin: 5px;
+}
+
+.custom-modal-btn {
+    color: white;
+    background-color:transparent!important;
+    border: none;
+    outline:none!important;
+    background-image: url("../assets/blueButton.png");
+    background-size: cover;
+    width: 100%;
+    height: 10vh;
+    background-repeat: no-repeat;
+    align-items: center;
+    margin: 0px;
+    
 }
 
 /* Homepage welcome board */

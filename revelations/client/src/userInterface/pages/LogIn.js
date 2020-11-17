@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useAuth } from "../components/UserAuth";
 import API from "../../utils/API";
 import history from "../../utils/history";
+import Modal from 'react-bootstrap/Modal';
 import "../styles/logIn.css";
 
-function LogIn() {
+function LogIn(props) {
   let auth = useAuth();
   const [formState, setFormState] = useState({
     username: "",
@@ -49,50 +50,33 @@ function LogIn() {
   }
 
   return (
-    <div className="custom-border-lg">
-      <h1>Current: Login page</h1>
-      <div id="logInPosition" className="container">
-        <div className="Row justify-content-center d-flex">
-          <div className="col-md-6 customDivOne"> 
-            <div className="customDivTwo">
-              <div id="codaFont" className="form-group">
-                <label id="customFont" htmlFor="username">Username</label>
-                <input type="username" className="form-control" id="username" value={formState.username} onChange={handleInputChange} placeholder="user123" />
-              </div>
-              <div className="form-group">
-                <label id="customFont" htmlFor="password">Password</label>
-                <input type="password" className="form-control" id="password" value={formState.password} onChange={handleInputChange} />
-              </div>
-              <button
-                className="btn btn-info btn-block"
-                type="button"
-                onClick={() => {
-                  history.push("/");
-                }}
-              >
-                Rules
-              </button>
-              <button 
-                type="submit" 
-                className="btn btn-info btn-block"
-                onClick={handleSubmit}
-                >
-                  Login
-              </button>
-              <button
-                className="btn btn-info btn-block"
-                type="button"
-                onClick={() => {
-                  history.push("/signup");
-                }}
-              >
-                Sign Up
-              </button>
-            </div>
+    <Modal
+    {...props}
+    size="lg"
+    aria-labelledby="contained-modal-title-vcenter"
+    centered
+    >
+      <Modal.Body>
+        <div className="custom-padding">
+          <div id="codaFont" className="form-group">
+            <label id="customFont" htmlFor="username">Username</label>
+            <input type="username" className="form-control" id="username" value={formState.username} onChange={handleInputChange} placeholder="user123" />
           </div>
+          <div className="form-group">
+            <label id="customFont" htmlFor="password">Password</label>
+            <input type="password" className="form-control" id="password" value={formState.password} onChange={handleInputChange} />
+          </div>
+          <button 
+            type="submit" 
+            className="custom-modal-btn aldrich-font" 
+            onClick={handleSubmit}
+            >
+              LOGIN
+          </button>
         </div>
-      </div>
-    </div>
+      </Modal.Body>
+    </Modal>
+    
   );
 }
 
