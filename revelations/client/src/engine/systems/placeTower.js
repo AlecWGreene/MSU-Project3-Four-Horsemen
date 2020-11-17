@@ -1,4 +1,4 @@
-export default function placeTower(manager, archtype, tile){
+function placeTower(manager, archtype, tile){
     if(manager.gameState.baseGrid.filter(t => t.isEqualTo(tile)).length === 0){
         throw new Error("Systems~placeTower: tile does not contain a base");
     }
@@ -6,8 +6,8 @@ export default function placeTower(manager, archtype, tile){
         throw new Error("Systems~placeTower: tile already has a tower");
     }
     else{
-        if(){
-
-        }
+        
     }
 }
+
+export default placeTower;

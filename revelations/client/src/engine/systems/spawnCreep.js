@@ -4,8 +4,29 @@ import CreepStats from "../components/CreepStats.js";
 import CreepEntity from "../entities/CreepEntity.js";
 import Collider from "../components/Collider.js";
 import Transform from "../components/Transform.js"
+import GameManager from "../GameManager.js";
+import Tile from "../Tile.js";
 
-export default function spawnCreep(manager, id, archtype, source, path){
+/**
+ * @namespace spawnCreep
+ * @memberof module:Systems
+ */
+
+/**
+ * @function spawnCreep
+ * @memberof module:Systems.spawnCreep
+ * 
+ * @description Instantiate a creep prefab into a game manager
+ * 
+ * @param {GameManager} manager GameManager instance to mutate
+ * @param {number} id Id to assign to the new creep
+ * @param {string} archtype Prefab key used to instantiate component data
+ * @param {Tile} source Source tile which the creep will be spawned at
+ * @param {Tile[]} path Array of tiles for the creep to travel through
+ * 
+ * @returns {Void}
+ */
+function spawnCreep(manager, id, archtype, source, path){
     // Get creep archtype
     archtype = GameEnums.CREEP_PREFABS[archtype];
 
@@ -21,3 +42,4 @@ export default function spawnCreep(manager, id, archtype, source, path){
     manager.gameState.creepDirectory[id] = new CreepEntity(newData, newTransform, newStats, newCollider);
 }
 
+export default spawnCreep;

@@ -6,26 +6,20 @@
  * @classdesc
  * Data container for combat stats of a creep
  * 
- * @property {number} maximum starting health
- * @property {number} current current health remaining
- * @property {number} linear speed in game units per tick
- * @property {number} rotational speed in degrees per tick
- * @property {boolean} should camo detection be required
- * @property {number} reduction applied to all incoming dmg 
+ * @property {number} health Starting health
+ * @property {number} hitPoints Current health remaining
+ * @property {number} speed Speed in game units per tick
+ * @property {number} turnSpeed Speed in degrees per tick
+ * @property {boolean} visible Is camo detection be required
+ * @property {number} armor Damage reduction applied to all incoming dmg 
 */
 class CreepStats{
     constructor(health, speed, turnSpeed, visible, armor){
-        /** @type {number} maximum health */
         this.health = health;
-        /** @type {number} current health */
         this.hitPoints = health;
-        /** @type {number} linear speed in units per tick*/
         this.speed = speed;
-        /** @type {number} rotational speed */
         this.turnSpeed = turnSpeed;
-        /** @type {boolean} should camo detection be required */
         this.visible = visible;
-        /** @type {number} reduction applied to all incoming dmg */
         this.armor = armor;
     }
 }

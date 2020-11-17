@@ -17,6 +17,9 @@
   * @property {number} circumference sum of line segments formed by the vertices
   * @property {number} angle rotation of the collider in degrees counter-clockwise from the positive x-axis
   * @property {Array<Vector>} axes collection of unit vectors representing the normals to the collider's line segments
+  * 
+  * @method setAxes Calculate the normals of all collider line segments, use after transform mutations of the parent entity and/or collider 
+  * @method calcCircumference Calculate the sum of the collider line segments, and store it in this.circumference
   */
 class Collider{
     /**
@@ -48,16 +51,6 @@ class Collider{
         this.circumference = this.calcCircumference();
     }
 
-    /** 
-     * @function setAxes
-     * 
-     * @description
-     * Calculates the normals of the collider, call this method after any update
-     * 
-     * @augments vertices
-     * 
-     * @returns {void}
-    */
     setAxes(){        
         for(let i = 0; i < this.vertices.length; i++){
             // Calculate normal of edge
@@ -67,14 +60,6 @@ class Collider{
         }
     }
 
-    /**
-     * @function calcCircumference
-     * 
-     * @description
-     * Calculates the circumference of the collider for rotation calculation purposes
-     * 
-     * @returns {number}
-     */
     calcCircumference(){
         let circ = 0;
         for(let i = 0; i < this.vertices.length; i++){

@@ -32,9 +32,7 @@ import findPaths, {getEuclideanDistance} from "./systems/findPaths";
 export default class GameManager {
     constructor(saveData){
         if(saveData){
-            /** @type {GameState} */
             this.gameState = saveData.gameState || new GameState();
-            /** @type {RuntimeState} */
             this.runtimeState = saveData.runtimeState || new RuntimeState();
             this.tickInterval = undefined;
         }
@@ -44,7 +42,6 @@ export default class GameManager {
             this.tickInterval = undefined;
         }
 
-        /** @type {updateCallback} Method to be called upon the completion of a game tick */
         this.updateCallback = undefined;
     }
 

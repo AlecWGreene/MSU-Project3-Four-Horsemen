@@ -1,3 +1,5 @@
-export default class UpgradeTree{
+class UpgradeTree{
 
 }
+
+export default UpgradeTree;
