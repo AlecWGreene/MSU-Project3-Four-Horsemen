@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Coda&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Aldrich&display=swap');
 
 @font-face{
     font-family: 'perfect_dark_brkregular';
@@ -8,11 +8,16 @@
     font-style: normal;
 }
 
-#customFont {
+
+
+.perfect-dark {
     font-family: 'perfect_dark_brkregular';
     font-size: 30px;
     color: #8E979C;
-    text-shadow: 2px 2px #262f31;
+    text-shadow: -1px 2px rgba(128, 128, 128, 0.5); 
+    background: -webkit-linear-gradient(whitesmoke, #1e2425);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 #logInPosition {
@@ -61,15 +66,10 @@ font-family: 'Coda', cursive;
     font-family: 'Coda', cursive;
 }
 
-.button-lg {
+/* .button-lg {
     margin: 5px;
     padding: 5px;
-}
+} */
 
-#codaFont {
-    font-family: 'Coda', cursive;
-    color: black;
-    font-size: 12px;
-    font-weight: bold;
-}
+
 

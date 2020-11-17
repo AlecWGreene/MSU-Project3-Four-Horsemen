@@ -1,0 +1,162 @@
+@font-face{
+    font-family: 'perfect_dark_brkregular';
+    src: url('../styles/webfontkit/pdark-webfont.woff2') format('woff2'),
+         url('../styles/webfontkit/pdark-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#customFont {
+    font-family: 'perfect_dark_brkregular';
+    font-size: 30px;
+    color: #8E979C;
+    text-shadow: 2px 2px #262f31;
+}
+
+
+.aldrich-font, ::placeholder {
+    font-family: 'Aldrich', sans-serif;
+    color: rgb(255, 255, 255)!important;
+    font-size: 15px;
+    font-weight: lighter;
+}
+
+.test-borderOne {
+    border-style: solid;
+    border-width: 200px 100px 200px 100px;
+    -moz-border-image: url("./testAssets/LoadingScreen.png") 200 150 200 150 stretch stretch;
+    -webkit-border-image: url("./testAssets/LoadingScreen.png") 200 150 200 150 stretch stretch;
+    -o-border-image: url("./testAssets/LoadingScreen.png") 200 150 200 150 stretch stretch;
+    border-image: url("./testAssets/LoadingScreen.png") 200 150 200 150 stretch stretch;
+    }
+
+
+.burger-menu {
+	display: block;
+	margin-left: 100px;
+	margin-right: auto;
+	margin-bottom: auto;
+	margin-top: 1px;
+	cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ff0000;
+    min-width: 250px;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 30px 16px;
+	text-align: center;
+    text-decoration: none;
+    display: block;
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+	font-size: 24px;
+	font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, "sans-serif";
+}
+
+.dropdown-content a:hover {
+	background-color: #ffffff;
+	color: black;
+}
+
+.dropdown .dropdown-content.show {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #ffffff;
+}
+
+
+/* Custom Blue Button */
+.custom-btn {
+    color: white;
+    background-color:transparent!important;
+    border: none;
+    outline:none!important;
+    background-image: url("../assets/blueButton.png");
+    background-size: cover;
+    width: 100%;
+    height: 9vh;
+    background-repeat: no-repeat;
+    align-items: center;
+    margin: 5px;
+}
+
+.custom-modal-btn {
+    color: white;
+    background-color:transparent!important;
+    border: none;
+    outline:none!important;
+    background-image: url("../assets/blueButton.png");
+    background-size: cover;
+    width: 100%;
+    height: 10vh;
+    background-repeat: no-repeat;
+    align-items: center;
+    margin: 0px;
+    
+}
+
+/* Homepage welcome board */
+#welcome-position {
+    top: 15%;
+    position: relative;
+}
+.welcome-container {
+    height:50vh;
+    width:30vw;
+    border-style: solid;
+    border-width: 50px 75px 50px 65px;
+    -moz-border-image: url("../assets/Lore.png") 100  100  stretch stretch;
+    -webkit-border-image: url("../assets/Lore.png") 100  100  stretch stretch;
+    -o-border-image: url("../assets/Lore.png") 100  100  stretch stretch;
+    border-image: url("../assets/Lore.png") 100  100  stretch stretch;
+    padding: 0px!important;
+}
+
+.welcome-content {
+    background-color: #16080C;
+    color: whitesmoke;
+}
+
+/* Neon effect */
+.neon {
+    animation: neon 2s ease-in-out infinite alternate;
+}
+
+@keyframes neon {
+    from {
+      box-shadow:
+      0 0 6px rgba(202,228,225,0.92),
+      0 0 30px rgba(0, 162, 255, 0.34),
+      0 0 12px rgba(37, 49, 224, 0.52),
+      0 0 21px rgba(37, 49, 224,0.8),
+      0 0 34px rgba(37, 49, 224,0.78),
+      0 0 54px rgba(37, 49, 224,0.85);
+    }
+    to {
+      box-shadow:
+      0 0 6px rgba(202,228,225,0.98),
+      0 0 50px rgba(202,228,225,0.42),
+      0 0 12px rgba(37, 49, 224, 0.58),
+      0 0 22px rgba(37, 49, 224, 0.84),
+      0 0 38px rgba(37, 49, 224, 0.88),
+      0 0 60px rgba(37, 49, 224, 1);
+    }
+  }
+  
+
+
+
+

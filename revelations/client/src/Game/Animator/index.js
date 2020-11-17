@@ -11,7 +11,15 @@ import styled from "styled-components";
  *      ...
  * </Container>
  */
-const Container = styled.div``;
+const Container = styled.div`
+    position: absolute;
+    height: ${(props) => props.height}px;
+    width: ${(props) => props.width}px;
+    left: ${({position}) => position.x}px; 
+    bottom: ${({position}) => position.y}px;
+    transform-origin: center;
+    transform: rotate(${({rotation}) => rotation}deg);
+`;
 
 /** 
  * @description
@@ -28,19 +36,38 @@ function Animator(props){
     const [ frame, setFrame ] = useState(0);
 
     // When object is rendered, update Sprite offset
-    let offset = 0;
-    useEffect(() => {
-        offset = frame * props.imgData.width / props.imgData.numFrames;
-    }, [frame]);
+    let offset = frame * props.imgData.width / props.imgData.numFrames;
 
-    return <Container height={props.height * props.scale} width={props.width * props.scale} position={props.position}>
+    // Call when isAnimating is changed
+    useEffect(() => {
+        if(!isAnimating){
+            setFrame(0);
+        }
+    }, [isAnimating]);
+
+    // Call when frame is changed
+    useEffect(() => {
+        if(isAnimating){
+            if(frame === props.imgData.numFrames){
+                requestAnimationFrame(setFrame(0));
+                toggleAnimation(false);
+            }
+            else {
+                requestAnimationFrame(setFrame(frame++));
+            }
+        }
+    }, [frame])
+
+    return <Container height={props.height * props.scale} width={props.width * props.scale} position={props.position} rotation={props.rotation}>
         <Sprite 
          src={props.imgData.src}
          height={props.imgData.height}
-         width={props.imgData.width}
+         width={props.imgData.width / props.imgData.numFrames}
          rotation={props.rotation}
          scale={props.scale * props.imgData.scale}
-         offset={offset || 0}
+         imgScale={props.width  / (props.imgData.width / props.imgData.numFrames)}
+         parentSize={props.width * props.scale}
+         offset={offset}
         />
     </Container>
 }

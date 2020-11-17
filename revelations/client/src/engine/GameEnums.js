@@ -10,13 +10,23 @@ import DamageData from "./components/DamageData.js";
 import UpgradeTree from "./components/UpgradeTree.js";
 
 // Sprite references
-import SpriteEnums from "../Game/SpriteEnums.js";
+import SpriteEnums from "../game/SpriteEnums.js";
 
 export default {
     GAME_CONFIG: {
         startLives: 100,
         startMoney: 999,
-        tickLength: 250
+        tickLength: 100,
+        mapSize: {
+            rows: 13,
+            cols: 19,
+            height: 450,
+            width: 800 
+        },
+        sourceArray: [
+            [0,0], [12, 18]
+        ],
+        target: [7, 10]
     },
     /**
      * @type {{[key: number]: { creeps: string[], delay: number}[]}}
@@ -45,9 +55,8 @@ export default {
      */
     CREEP_PREFABS: {
         "test_creep": {
-            name: "test_creep",
-            data: new CreepData(0,"test_creep", "Creep_1_RED", []),
-            stats: new CreepStats(100,55,90,true,50),
+            data: new CreepData(0,"placeholder.png", []),
+            stats: new CreepStats(100,10,90,true,50),
             collider: new Collider([{x: -30, y: -30}, {x: -30, y: 30}, {x: 30, y: 30}, {x: 30, y: -30}], {x: 0, y: 0})
         }
     }

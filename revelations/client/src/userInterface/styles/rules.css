@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Coda&display=swap');
+
+
+
+#routeButtons {
+    position: absolute;
+    top: 200%;
+}
+
+
+label {
+    color: whitesmoke;
+}
+
+h1 {
+color: whitesmoke;
+font-family: 'Coda', cursive;
+}
+
+.button{
+    border-color: #384042;
+    border-radius: 7px;
+    border-style: solid;
+    border-width: 3px;
+    background-color: #53BDE3;
+    font-weight: bold;
+    font-family: 'Coda', cursive;
+}
+
+.button-lg {
+    margin: 5px;
+    padding: 5px;
+}
+
+#codaFont {
+    font-family: 'Coda', cursive;
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+}
