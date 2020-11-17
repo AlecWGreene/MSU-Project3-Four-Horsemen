@@ -16,7 +16,7 @@ export default {
     GAME_CONFIG: {
         startLives: 100,
         startMoney: 999,
-        tickLength: 100,
+        tickLength: 10,
         mapSize: {
             rows: 13,
             cols: 19,
@@ -56,7 +56,11 @@ export default {
     CREEP_PREFABS: {
         "test_creep": {
             data: new CreepData(0,"placeholder.png", []),
+<<<<<<< HEAD
             stats: new CreepStats(100,10,90,true,50),
+=======
+            stats: new CreepStats(100,2,270,true,50),
+>>>>>>> AG_GameManager
             collider: new Collider([{x: -30, y: -30}, {x: -30, y: 30}, {x: 30, y: 30}, {x: 30, y: -30}], {x: 0, y: 0})
         }
     }

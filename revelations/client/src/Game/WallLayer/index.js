@@ -68,7 +68,8 @@ function WallLayer(props){
                           imgData={imgData} 
                           position={convertWorldPointToScreenPoint(wallTile.position, state.scaleRatio, state.origin)} 
                           rotation={0} 
-                          scale={state.scaleRatio} />
+                          scale={state.scaleRatio}
+                          key={wallTile.index.row+","+wallTile.index.col} />
             })
         }
         </div>
