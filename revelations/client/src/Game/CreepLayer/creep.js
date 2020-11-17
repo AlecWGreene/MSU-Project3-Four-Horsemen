@@ -15,9 +15,6 @@ const styles = {
 export default function CreepLayer(props){
     const [state, dispatch] = useContext(GameStateContext)
 
-    useEffect(()=>{
-        console.log(Object.values(props.creep).map(c => c.data.id + ": " + (180 / Math.PI * c.transform.rotation)).join(","));
-    });
     return (
         <div style={styles.container}>
         {

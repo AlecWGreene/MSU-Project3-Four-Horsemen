@@ -24,6 +24,7 @@ class Grid{
     constructor(numRows, numCols, height, width){
         // Calculate this.cellsize
         this.cellsize = Math.min(height/(numRows - 1), width/(numCols - 1));
+        
         // Initialize the tiles array
         this.tiles = [];
         for(let i = 0; i < numRows; i++){

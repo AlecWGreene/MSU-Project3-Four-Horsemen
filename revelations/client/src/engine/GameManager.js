@@ -6,6 +6,7 @@ import GameEnums from "./GameEnums.js";
 // Import Game Managment systems
 import processTick from "./systems/processTick.js"; 
 import findPaths, {getEuclideanDistance} from "./systems/findPaths";
+import spawnTower from "./systems/spawnTower.js";
 
 /**
  * @module GameManager
@@ -96,6 +97,10 @@ export default class GameManager {
         else{
             return false;
         }
+    }
+
+    placeTower(archtype, tile){
+        spawnTower(this,30000 + Object.keys(this.gameState.towerDirectory).length, archtype, tile);
     }
 
     convertWorldPointToTile(x, y){

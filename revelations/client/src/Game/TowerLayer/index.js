@@ -14,21 +14,22 @@ const styles = {
     }
 }
 
-function BaseLayer(props){
+function TowerLayer(props){
     const [state, dispatch] = useContext(GameStateContext);
     return (
         <div style={styles.container}>
         {
-            (!props.baseGrid) ? undefined : Object.entries(props.directory).map(entry => {
+            (!props.directory) ? undefined : Object.entries(props.directory).map(entry => {
                 // Retrieve sprite
-                const imgData = SpriteEnums[entry[1]];
+                const imgData = SpriteEnums[entry[1].data.spriteSheet];
                 return <Animator 
                           height={state.gameState.mapGrid.cellsize} 
                           width={state.gameState.mapGrid.cellsize} 
                           imgData={imgData} 
-                          position={convertWorldPointToScreenPoint(baseTile.position, state.scaleRatio, state.origin)} 
+                          position={convertWorldPointToScreenPoint(entry[1].transform.position, state.scaleRatio, state.origin)} 
                           rotation={0} 
-                          scale={state.scaleRatio} />
+                          scale={state.scaleRatio} 
+                          key={entry[0]} />
             })
         }
         </div>
@@ -36,7 +37,7 @@ function BaseLayer(props){
 }
 
 function shouldRun(prevProps, nextProps){
-    return !(prevProps.length === nextProps.length);
+    return !(prevProps.directory.length === nextProps.directory.length);
 }
 
-export default React.memo(BaseLayer, shouldRun);
+export default React.memo(TowerLayer, shouldRun);

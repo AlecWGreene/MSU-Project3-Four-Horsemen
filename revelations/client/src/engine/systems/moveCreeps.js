@@ -61,7 +61,6 @@ function moveCreeps(manager){
             targetAngle -= angleToRotate;
             rotateCreep(creep, angleToRotate);
             distRemaining -= Math.abs(angleToRotate / creep.stats.turnSpeed) * distToTarget;
-            console.log("Dist1: " + distRemaining);
         }
 
         // If target is farther than remaining speed, move towards target
@@ -102,7 +101,6 @@ function moveCreeps(manager){
                     targetAngle -= angleToRotate;
                     rotateCreep(creep, angleToRotate);
                     distRemaining -= Math.abs(angleToRotate) * (Math.PI / 180) * creep.collider.circumference;
-                    console.log("Dist2: " + distRemaining);
                 }
                 
                 // If creep is pointing to target, move towards new target

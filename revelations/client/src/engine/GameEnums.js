@@ -12,6 +12,8 @@ import UpgradeTree from "./components/UpgradeTree.js";
 // Sprite references
 import SpriteEnums from "../game/SpriteEnums.js";
 
+const tickLength = 10;
+
 /**
  * @module GameEnums
  */
@@ -25,7 +27,7 @@ export default {
     GAME_CONFIG: {
         startLives: 100,
         startMoney: 999,
-        tickLength: 10,
+        tickLength: tickLength,
         mapSize: {
             rows: 13,
             cols: 19,
@@ -52,10 +54,10 @@ export default {
      * @type {{name: string, archtype: {data: TowerData, stats: TowerStats, damageType: DamageData}}}
      */
     TOWER_PREFABS: {
-        "test_tower": {
-            name: "test_tower",
-            data: new TowerData(0, "test_Tower", [], 0),
-            stats: new TowerStats(),
+        "test_tower1": {
+            name: "test_tower1",
+            data: new TowerData(0, "test_tower1", "Tower_1Barrel", [{x: 15, y: 30}], 0),
+            stats: new TowerStats(1, 45 * (Math.PI / 180), 2, false, tickLength),
             damageData: new DamageData(1, 0, []),
             upgradeTree: new UpgradeTree()
         }
@@ -65,9 +67,6 @@ export default {
      * @property {} data
      * @property {} stats
      * @property {} collider
-     */
-    /**
-     * 
      */
     CREEP_PREFABS: {
         "test_creep": {
