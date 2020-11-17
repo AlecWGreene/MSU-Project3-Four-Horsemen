@@ -68,7 +68,8 @@ function BaseLayer(props){
                           imgData={imgData} 
                           position={convertWorldPointToScreenPoint(baseTile.position, state.scaleRatio, state.origin)} 
                           rotation={0} 
-                          scale={state.scaleRatio} />
+                          scale={state.scaleRatio}
+                          key={baseTile.index.row+","+baseTile.index.col} />
             })
         }
         </div>

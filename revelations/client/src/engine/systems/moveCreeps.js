@@ -24,6 +24,16 @@ export default function moveCreeps(manager){
             y: creep.data.target.position.y - creep.transform.position.y
         }
 
+        // If creep starts by not pointing to target, rotate towards target
+        let targetAngle = Math.atan2(dir.y, dir.x) - creep.transform.rotation;
+        if(targetAngle !== 0){
+            let angleToRotate = Math.sign(targetAngle) * Math.min(Math.abs(targetAngle), Math.abs(creep.stats.turnSpeed)); 
+            targetAngle -= angleToRotate;
+            rotateCreep(creep, angleToRotate);
+            distRemaining -= Math.abs(angleToRotate / creep.stats.turnSpeed) * distToTarget;
+            console.log("Dist1: " + distRemaining);
+        }
+
         // If target is farther than remaining speed, move towards target
         if(distRemaining < distToTarget){
             const { x: x0, y: y0 } = creep.transform.position;
@@ -50,16 +60,19 @@ export default function moveCreeps(manager){
             // Update creep target
             creep.data.target = creep.data.path[++creep.data.targetIndex];
             distToTarget = getEuclideanDistance(creep.transform,creep.data.target);
+            dir.x = creep.data.target.position.x - creep.transform.position.x;
+            dir.y = creep.data.target.position.y - creep.transform.position.y;
 
             // If movement points are still left
             if(distRemaining > 0){
                 // If creep not pointing to target, rotate towards target
-                let targetAngle = creep.transform.rotation - Math.atan2(dir.x, dir.y);
+                let targetAngle = Math.atan2(dir.y, dir.x) - creep.transform.rotation;
                 if(targetAngle !== 0){
                     let angleToRotate = Math.sign(targetAngle) * Math.min(Math.abs(targetAngle), Math.abs(creep.stats.turnSpeed)); 
                     targetAngle -= angleToRotate;
                     rotateCreep(creep, angleToRotate);
                     distRemaining -= Math.abs(angleToRotate) * (Math.PI / 180) * creep.collider.circumference;
+                    console.log("Dist2: " + distRemaining);
                 }
                 
                 // If creep is pointing to target, move towards new target

@@ -16,8 +16,7 @@ export default function CreepLayer(props){
     const [state, dispatch] = useContext(GameStateContext)
 
     useEffect(()=>{
-        console.log(props);
-        console.log(state);
+        console.log(Object.values(props.creep).map(c => c.data.id + ": " + (180 / Math.PI * c.transform.rotation)).join(","));
     });
     return (
         <div style={styles.container}>
@@ -26,7 +25,7 @@ export default function CreepLayer(props){
                 width={state.gameState.mapGrid.cellsize} 
                 imgData={SPRITE_ENUM["Creep_1_RED"]} 
                 position={convertWorldPointToScreenPoint(creep[1].transform.position,state.scaleRatio,state.origin)} 
-                rotation={creep[1].transform.rotation * 180 / Math.PI} 
+                rotation={90 - creep[1].transform.rotation * 180 / Math.PI} 
                 scale={state.scaleRatio} 
                 key={creep[0]}
                 />)

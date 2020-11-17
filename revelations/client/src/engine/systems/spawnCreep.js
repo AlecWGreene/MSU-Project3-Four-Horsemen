@@ -15,7 +15,7 @@ export default function spawnCreep(manager, id, archtype, source, path){
     const newCollider = archtype.collider;
 
     // Calculate the starting rotation
-    const startAngle = (180 / Math.PI) * Math.atan2(source.position.x, source.position.y) - 90;
+    const startAngle = Math.atan2(path[0].position.y - source.position.y, path[0].position.x - source.position.x);
     const newTransform = new Transform(source.position.x, source.position.y, startAngle);
 
     manager.gameState.creepDirectory[id] = new CreepEntity(newData, newTransform, newStats, newCollider);
