@@ -8,8 +8,9 @@ export default class CreepData{
      */
     constructor(id, archtype, spritesheet, path){
         this.id = id;
-        /** @type {string} string representing the path to the spritesheet from the public/Assets/ folder */
+        /** @type {string} string representing the prefab archtype being instantiated */
         this.archtype = archtype;
+        /** @type {string} string representing the path to the spritesheet from the public/Assets/ folder */
         this.spriteSheet = spritesheet;
         /** @type {Tile[]} waypoints in world space for the creep to travel to */
         this.path = Array.from(path);
