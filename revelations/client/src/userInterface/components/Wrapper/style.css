@@ -1,6 +1,6 @@
 @media (max-width: 426px) {
   .wrapper {
-  height: 91vh;
+  height: 100vh;
   border-color: black;
   border-style: solid;
   border-width: 20px;
@@ -9,39 +9,26 @@
   }
 }
 
-@media (min-width: 426px) and (max-width:765px) {
-  .wrapper {
-    height: 92vh;
-    border-color: black;
-    border-style: solid;
-    border-width: 20px;
-    background-image: url("../../assets/stars.gif");
-    background-repeat: repeat;
-    }
-}
-
-@media (min-width: 767px) {
-  .wrapper {
-  height: 92vh;
-  border-color: black;
-  border-style: solid;
-  border-width: 10px;
-  background-image: url("../../assets/stars.gif");
-  background-repeat: repeat;
-  }
-}
-
-
 @media (max-width: 426px) and (max-width:766) {
   .wrapper {
   height: 100vh;
-  border-color: rgb(8, 247, 68);
   border-style: solid;
   border-width: 20px;
   background-image: url("../../assets/stars.gif");
   background-repeat: no-repeat;
   background-size: cover;
   overflow: hidden;
+  }
+}
+
+@media (min-width: 767px) {
+  .wrapper {
+  height: 100vh;
+  border-color: black;
+  border-style: solid;
+  border-width: 10px;
+  background-image: url("../../assets/stars.gif");
+  background-repeat: repeat;
   }
 }
 
@@ -93,24 +80,5 @@
       height: 100%
     }
 }
-
-
-/* @keyframes travelerSky {
-  0% {
-    @include transform(scale(1.5) rotate(0deg));
-  }
-  50% {
-    @include transform(scale(2) rotate(-360deg));
-  }
-  100% {
-    @include transform(scale(1.5) rotate(0deg));
-  }
-}
-
-.traveler-sky{
-  animation: travelerSky $sky_rotation_speed infinite;
-  animation-timing-function: linear;
-} */
-
 
 

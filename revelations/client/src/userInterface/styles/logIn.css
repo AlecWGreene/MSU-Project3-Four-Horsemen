@@ -8,12 +8,7 @@
     font-style: normal;
 }
 
-.aldrich-font, ::placeholder {
-    font-family: 'Aldrich', sans-serif;
-    color: rgb(255, 255, 255)!important;
-    font-size: 15px;
-    font-weight: lighter;
-}
+
 
 .perfect-dark {
     font-family: 'perfect_dark_brkregular';

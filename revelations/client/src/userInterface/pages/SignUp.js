@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useAuth } from "../components/UserAuth";
 import API from "../../utils/API";
 import history from "../../utils/history";
+import Modal from "react-bootstrap/esm/Modal";
 
-function SignUp() {
+function SignUp(props) {
   let auth = useAuth();
   const [formState, setFormState] = useState({
     username: "",
     password: ""
   });
+
   const handleInputChange = event => {
     event.preventDefault();
     const id = event.currentTarget.id;
@@ -40,7 +42,7 @@ function SignUp() {
           if(err.response.data === 'Inuse') {
             let username = JSON.parse(err.config.data).username;
             console.log(`${err.message} - invalid Credentials: "${username}" already in use`);
-            console.log(err.toJSON());
+            // console.log(err.toJSON());
             setFormState((prevState) => {
               return { ...prevState, ['password'] : ''}
             });
@@ -62,60 +64,34 @@ function SignUp() {
   };
 
   return (
-    <div className="custom-border-lg" >
-
-      <div className="container test">
-
-        <div id="signUpPosition" className="Row justify-content-center d-flex">
-
-          <div className="col-sm-10 customDivOne"> 
-
-            <div className="customDivTwo">
-
-              <div id="codaFont" className="form-group">
-                <label id="customFont" htmlFor="username">Username</label>
-                <input type="username" className="form-control" id="username" value={formState.username} onChange={handleInputChange} placeholder="user123" />
-              </div>
-
-              <div className="form-group">
-                <label id="customFont" htmlFor="password">Password</label>
-                <input type="password" className="form-control" value={formState.password} onChange={handleInputChange} id="password" />
-              </div>
-              <button
-                className="btn btn-info btn-block"
-                type="button"
-                onClick={() => {
-                  history.push("/");
-                }}
-              >
-                Rules
-              </button>
-              <button 
-                type="submit" 
-                className="btn btn-info btn-block"
-                onClick={handleSubmit}
-                >
-                  Register
-              </button>
-              <button
-                className="btn btn-info btn-block"
-                type="button"
-                onClick={() => {
-                  history.push("/login");
-                }}
-              >
-                Login
-              </button>
-
-            </div>
-
+    <Modal
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+      <Modal.Body>
+        <div className="custom-padding text-center">
+          <div id="codaFont" className="form-group">
+            <label id="customFont" htmlFor="username">USERNAME</label>
+            <input type="username" className="form-control" id="username" value={formState.username} onChange={handleInputChange} placeholder="user123" />
           </div>
-
+          <div className="form-group text-center">
+            <label id="customFont" htmlFor="password">PASSWORD</label>
+            <input type="password" className="form-control" value={formState.password} onChange={handleInputChange} id="password" />
+          </div>
+          <button 
+            type="submit" 
+            className="custom-modal-btn aldrich-font" 
+            onClick={handleSubmit}
+            >
+              REGISTER
+          </button>
         </div>
-
-      </div>
-
-    </div>
+      </Modal.Body>
+    </Modal>
+    
+    
   );
 
 }

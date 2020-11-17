@@ -95,10 +95,3 @@ font-family: 'Coda', cursive;
     font-size: 12px;
     font-weight: bold;
 }
-
-#customFont {
-    font-family: 'perfect_dark_brkregular';
-    font-size: 30px;
-    color: #8E979C;
-    text-shadow: 2px 2px #262f31;
-}
