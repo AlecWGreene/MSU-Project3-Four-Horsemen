@@ -1,4 +1,4 @@
-import Grid from "./entities/Grid.js";
+import Grid from "./Grid.js";
 import GameManager from "./GameManager.js";
 import GameEnums from "./GameEnums.js";
 import CreepEntity from "./entities/CreepEntity.js";

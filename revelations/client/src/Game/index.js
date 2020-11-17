@@ -4,10 +4,13 @@ import GameFrame from "./GameFrame";
 import WallLayer from "./WallLayer";
 
 import { GameStateContext } from "../userInterface/pages/GamePage.js"
+<<<<<<< HEAD
 import Tile from "../engine/components/Tile";
 import Animator from "./Animator";
 import SPRITE_ENUM from "../game/SpriteEnums.js";
 import CreepLayer from "../game/CreepLayer/creep.js";
+=======
+>>>>>>> AG_Documentation
 
 function Game(props){
     /**

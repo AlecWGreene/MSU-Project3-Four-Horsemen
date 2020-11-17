@@ -24,7 +24,8 @@
     "seed": "node scripts/seedDB.js",
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "doc-build:engine": "jsDoc -r ./client/src/engine"
   },
   "devDependencies": {
     "concurrently": "^5.3.0",
