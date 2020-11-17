@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-export default class GameState {
-=======
-import Game from "../../Game/index.js";
+import Game from "../../game/index.js";
 import Enums from "../GameEnums.js";
 
 /**
@@ -16,7 +13,6 @@ import Enums from "../GameEnums.js";
  * @property {Directory<module:Components~CreepData>} creepDirectory directory of active creeps in the game state
  */
 class GameState {
->>>>>>> AG_Documentation
     constructor(stateData){
         if(stateData){
             this.creepDirectory = stateData.creepDirectory || {};

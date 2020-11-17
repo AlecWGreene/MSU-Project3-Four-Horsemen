@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useReducer, useLayoutEffect } from "react
 // Engine imports
 import GameState from "../../engine/components/GameState.js";
 import RuntimeState from "../../engine/components/RuntimeState.js";
-import Grid from "../../engine/entities/Grid.js";
+import Grid from "../../engine/Grid.js";
 import GameEnums from "../../engine/GameEnums.js";
 import GameManager from "../../engine/GameManager.js";
 import testGame from "../../engine/GameTest.js";

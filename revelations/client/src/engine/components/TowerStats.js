@@ -3,6 +3,6 @@ export default class TowerStats{
         this.attackSpeed = attackSpeed;
         this.rotateSpeed = rotateSpeed;
         this.projectileSpeed = projectileSpeed;
-        this.detectsCamo = deteectsCamo;
+        this.detectsCamo = detectsCamo;
     }
 }
