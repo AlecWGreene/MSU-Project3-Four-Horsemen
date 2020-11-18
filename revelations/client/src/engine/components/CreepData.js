@@ -20,6 +20,7 @@
  */
 class CreepData{
     /**
+     * @constructor
      * @param {number} id
      * @param {string} spriteSheet 
      * @param {Array<Vector>} path array of delays in ms for each frame in the spritesheet
