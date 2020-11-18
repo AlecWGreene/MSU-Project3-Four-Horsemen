@@ -1,5 +1,6 @@
 import GameEnums from "../GameEnums.js";
 import GameManager from "../GameManager.js";
+import controlTowers from "./controlTowers.js";
 import moveCreeps from "./moveCreeps.js";
 import spawnCreep from "./spawnCreep.js";
 
@@ -43,6 +44,9 @@ function processTick(manager) {
             break checkTime;
         }
     }
+
+    // Control towers
+    controlTowers(manager);
 
     manager.runtimeState.waveTime += GameEnums.GAME_CONFIG.tickLength;
     requestAnimationFrame(manager.updateCallback);

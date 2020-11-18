@@ -1,3 +1,5 @@
+import CreepEntity from "../entities/CreepEntity.js";
+
 /**
  * @typedef {Object} Vector
  * @property {number} x x coordinate
@@ -14,6 +16,9 @@
  * @property {string} projectileArchtype Prefab key used to instantiate projectiles
  * @property {Vector[]} barrels Coordinates representing the spawn points for projectiles if the tower was of default size and no rotation
  * @property {number} kills Number of creeps this tower has destroyed
+ * @property {("First"|"Last"|"Strongest")} priority The targeting priority scheme
+ * @property {CreepEntity} target Creep that the tower is targeting
+ * @property {number} cooldown Time in ms that the tower must wait before firing
  */
 class TowerData{
     constructor(id, archtype, spriteSheet, projectileArchtype, barrels, kills){
@@ -23,6 +28,9 @@ class TowerData{
         this.projectileArchtype = projectileArchtype;
         this.barrels = barrels;
         this.kills = kills;
+        this.priority = "First";
+        this.target = undefined;
+        this.cooldown = 0;
     }
 }
 

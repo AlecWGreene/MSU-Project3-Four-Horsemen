@@ -12,7 +12,7 @@ import UpgradeTree from "./components/UpgradeTree.js";
 // Sprite references
 import SpriteEnums from "../game/SpriteEnums.js";
 
-const tickLength = 10;
+const tickLength = 20;
 
 /**
  * @module GameEnums
@@ -57,7 +57,7 @@ export default {
         "test_tower1": {
             name: "test_tower1",
             data: new TowerData(0, "test_tower1", "Tower_1Barrel", [{x: 15, y: 30}], 0),
-            stats: new TowerStats(1, 45 * (Math.PI / 180), 2, false, tickLength),
+            stats: new TowerStats(150, 70, 1800 * (Math.PI / 180), 2, false, tickLength),
             damageData: new DamageData(1, 0, []),
             upgradeTree: new UpgradeTree()
         }
@@ -71,7 +71,7 @@ export default {
     CREEP_PREFABS: {
         "test_creep": {
             data: new CreepData(0,"test_creep", "Creep_1_RED", []),
-            stats: new CreepStats(100,2,270,true,50),
+            stats: new CreepStats(100,120,270,true,50,tickLength),
             collider: new Collider([{x: -30, y: -30}, {x: -30, y: 30}, {x: 30, y: 30}, {x: 30, y: -30}], {x: 0, y: 0})
         }
     }

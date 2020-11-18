@@ -36,7 +36,8 @@ function gameStateReducer(state, action){
         scaleRatio: state.scaleRatio,
         origin: state.origin,
         gameState: action.payload.gameState,
-        runtimeState: action.payload.runtimeState
+        runtimeState: action.payload.runtimeState,
+        animationState: action.payload.animationState
       };
     case "updateFrameSize":
       return {
@@ -44,7 +45,8 @@ function gameStateReducer(state, action){
         scaleRatio: action.payload.scaleRatio,
         origin: action.payload.origin,
         gameState: state.gameState,
-        runtimeState: state.runtimeState
+        runtimeState: state.runtimeState,
+        animationState: state.animationState
       };
     case "addWall":
       console.log("Performed " + action.type);
@@ -91,7 +93,7 @@ function GamePage() {
 
   // Called on initial render
   useLayoutEffect(()=>{
-    gameManager.updateCallback = () => dispatch({ type: "updateGameState", payload: { gameState: gameManager.gameState, runtimeState: gameManager.runtimeState }});
+    gameManager.updateCallback = () => dispatch({ type: "updateGameState", payload: { gameState: gameManager.gameState, runtimeState: gameManager.runtimeState, animationState: gameManager.animationState }});
     setupGame(gameManager, GameEnums.GAME_CONFIG);
     loadTestScenario(gameManager);
     gameManager.updateCallback();
@@ -108,13 +110,16 @@ function GamePage() {
         scaleRatio: Math.min(divBox.height / (grid.cellsize * grid.tiles.length), divBox.width / (grid.cellsize * grid.tiles[0].length)),
         origin: {x: 0, y: 0},
         gameState: gameManager.getGameState().gameState, 
-        runtimeState: gameManager.getGameState().runtimeState
+        runtimeState: gameManager.getGameState().runtimeState,
+        animationState: {
+          towers: []
+        }
       }
     });
 
     initializeGameSize();
-    setTimeout(gameManager.updateCallback, 5000);
-    setTimeout(gameManager.sendWave(), 1000)
+    setTimeout(() => gameManager.sendWave(), 3000)
+    
   },[]);
 
   // Called on every render

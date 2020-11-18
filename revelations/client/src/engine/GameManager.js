@@ -44,6 +44,9 @@ export default class GameManager {
         }
 
         this.updateCallback = undefined;
+        this.animationState = {
+            towers: []
+        }
     }
 
     init(grid, sourceArray, target){
@@ -71,7 +74,8 @@ export default class GameManager {
                 this.runtimeState.isWaveRunning = true;
                 this.runtimeState.isPaused = false;
 
-                this.gameState.pathDirectory = findPaths(this.gameState.sourceArray, this.gameState.target, this.gameState.wallGrid, this.gameState.mapGrid, getEuclideanDistance);
+                this.gameState.pathDirectory = findPaths(this.gameState.sourceArray, this.gameState.target, this.gameState.wallGrid, this.gameState.mapGrid, getEuclideanDistance, undefined, undefined, this.gameState?.pathData);
+
             }
 
             this.tickInterval=setInterval(processTick.bind(arguments[0]), GameEnums.GAME_CONFIG.tickLength, this);
@@ -85,7 +89,8 @@ export default class GameManager {
             /** @type {GameState} */
             gameState: this.gameState,
             /** @type {RuntimeState} */
-            runtimeState: this.runtimeState
+            runtimeState: this.runtimeState,
+            animationState: this.animationState
         }
     }
 

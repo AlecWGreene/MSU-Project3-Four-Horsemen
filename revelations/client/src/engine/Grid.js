@@ -42,10 +42,14 @@ class Grid{
 
                 // Check compass directions
                 const indices = [
-                    { row: row, col: col + 1},
-                    { row: row + 1, col: col},
-                    { row: row - 1, col: col},
-                    { row: row, col: col - 1}
+                    { row: row, col: col + 1 }, // Compass directions
+                    { row: row + 1, col: col },
+                    { row: row - 1, col: col },
+                    { row: row, col: col - 1 },
+                    { row: row - 1, col: col - 1 }, // Diagonals
+                    { row: row + 1, col: col - 1 },
+                    { row: row - 1, col: col + 1 },
+                    { row: row + 1, col: col + 1 }
                 ]
 
                 for(const index of indices){

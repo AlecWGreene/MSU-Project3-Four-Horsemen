@@ -128,6 +128,15 @@ function straightenZigZags(path, unwalkable, cellWidth){
                 
                 // If raycast hits, then return last visited tile as next pivot
                 if(pointInBox(closest, wall, cellWidth)){
+                    // If the target is the next tile in the path, push it to the new path anyways
+                    if(targetIndex === index + 1){
+                        newPath.push(path[targetIndex]);
+                        index = targetIndex ;
+                        break raycast;
+                    }
+
+
+                    // Move the pivot to the current target
                     newPath.push(path[targetIndex - 1]);
                     index = targetIndex - 1;
                     break raycast;
@@ -312,7 +321,7 @@ function runPathfind(source, target, unwalkable, grid, sourceHeuristic, targetHe
  * 
  * @returns {Tile[][]}
  */
-function findPaths(sourceArray, target, unwalkable, grid, sourceHeuristic, targetHeuristic, dataLoaders){
+function findPaths(sourceArray, target, unwalkable, grid, sourceHeuristic, targetHeuristic, dataLoaders, data){
     // Set default targetHeuristic and loaders
     let targetH, loaders;
     if(!targetHeuristic && !dataLoaders){
@@ -327,7 +336,7 @@ function findPaths(sourceArray, target, unwalkable, grid, sourceHeuristic, targe
     // Call runPathfind
     const paths = [];
     for(const source of sourceArray){
-        paths.push(straightenZigZags(runPathfind(target,source, unwalkable, grid, sourceHeuristic, targetH, loaders), unwalkable, grid.cellsize));
+        paths.push(straightenZigZags(runPathfind(target,source, unwalkable, grid, sourceHeuristic, targetH, loaders, data), unwalkable, grid.cellsize));
     }
 
     return paths;
