@@ -108,6 +108,25 @@
     
 }
 
+.custom-options-btn {
+    background-color:transparent!important;
+    border: none;
+    outline:none!important;
+    background-image: url("../assets/blueButton.png");
+    background-size: 100% 100%;
+    width: auto;
+    height: 10vh;
+    background-repeat: no-repeat;
+    align-items: center;
+    margin: 0px!important;
+}
+
+button {
+    background-color: transparent;
+    color: whitesmoke;
+    border: none;
+}
+
 /* Homepage welcome board */
 #welcome-position {
     top: 15%;
@@ -128,7 +147,8 @@
 .welcome-content {
     background-color: #16080C;
     color: whitesmoke;
-}
+    height:auto;
+    } 
 
 /* Neon effect */
 .neon {

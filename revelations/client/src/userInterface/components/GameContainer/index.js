@@ -40,7 +40,7 @@ export default function GameContainer(props) {
 
     return <Container fluid className="h-100">
             <div className="row h-100">
-                <div className="col-sm-10 h-100 test-gameDiv">
+                <div className="col-sm-10 h-100 test-gameDiv glow">
                     {props.children}
                 </div>
 
@@ -78,18 +78,17 @@ export default function GameContainer(props) {
                         </div> 
                     </div>
 
-                    <div className="row">
+                    <div className="row custom-options-btn">
                         <div className="col-sm-2 ">
-                            <button type="button" className="button">
+                            <button type="button">
                                 Settings
                             </button>
                         </div>
                     </div>
 
-                    <div className="row">
+                    <div className="row custom-options-btn">
                         <div className="col-sm-2 ">
                             <button
-                            className="button"
                             type="button"
                             onClick={userLogout}
                             >
@@ -99,10 +98,9 @@ export default function GameContainer(props) {
                     
                     </div> 
                     
-                    <div className="row">
+                    <div className="row custom-options-btn">
                         <div className="col-sm-2 ">
                             <button
-                            className="button"
                             type="button"
                             >
                                 Save
@@ -110,10 +108,9 @@ export default function GameContainer(props) {
                         </div>
                     </div>
                     
-                    <div className="row">
+                    <div className="row custom-options-btn">
                         <div className="col-sm-2 ">
                             <button
-                                className="button"
                                 type="button"
                                 onClick={handleDelete}
                                 disabled={isGuest}
@@ -129,11 +126,6 @@ export default function GameContainer(props) {
                     </div>
 
                 </div>
-                <div>
-                    <button type="button" className="button">
-                    Settings
-                    </button>
-                </div> 
             </div>      
       </Container>;
 }

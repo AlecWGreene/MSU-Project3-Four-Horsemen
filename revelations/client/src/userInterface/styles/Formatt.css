@@ -18,46 +18,17 @@
     -webkit-text-fill-color: transparent;
 }
 
-#routeButtons {
-    position: absolute;
-    top: 200%;
-}
-
-.customDivOne {
-    border-color: black;
-    border-style: solid;
-    border-width: 5px;
-    background-color: #540001ef;
-    border-radius: 5px;
-    padding: 10px;
-
-}
-
-.customDivTwo {
-    background-color: #a60000e0;
-    border-radius: 2px;
-    padding: 10px;
-
-}
-
-label {
-    color: whitesmoke;
-}
-
 h1 {
-color: whitesmoke;
-font-family: 'Coda', cursive;
-}
-
-.button{
-    border-color: #384042;
-    border-radius: 7px;
-    border-style: solid;
-    border-width: 3px;
-    background-color: #53BDE3;
-    font-weight: bold;
+    color: whitesmoke;
     font-family: 'Coda', cursive;
-}
+    }
 
+    
+#codaFont {
+    font-family: 'Coda', cursive;
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+}
 
 
