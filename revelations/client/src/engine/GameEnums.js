@@ -11,6 +11,8 @@ import UpgradeTree from "./components/UpgradeTree.js";
 
 // Sprite references
 import SpriteEnums from "../game/SpriteEnums.js";
+import ProjectileData from "./components/ProjectileData.js";
+import ProjectileStats from "./components/ProjectileStats.js";
 
 const tickLength = 20;
 
@@ -18,12 +20,6 @@ const tickLength = 20;
  * @module GameEnums
  */
 export default {
-    /**
-     * @description
-     * Stores values to be used as initial game values
-     * 
-     * @type {Object.<string, number>}
-     */
     GAME_CONFIG: {
         startLives: 100,
         startMoney: 999,
@@ -39,14 +35,6 @@ export default {
         ],
         target: [7, 10]
     },
-    /**
-     * @typedef {Object} creepBatch
-     * @property {Array.<string>} creeps list of creep archtypes to spawn organized in numerical order by the source to spawn them at
-     * @property {number} delay time in ms from start of the wave until the batch is spawned
-     */
-    /** 
-     * @type {Object.<number, Array.<creepBatch>>}
-     */
     WAVE_CONFIG: {
         0: [
             { creeps: ["test_creep","test_creep"], delay: 1000},
@@ -61,24 +49,28 @@ export default {
             { creeps: ["test_creep","test_creep"], delay: 100}
            ] 
     },
-    /**
-     * @type {{name: string, archtype: {data: TowerData, stats: TowerStats, damageType: DamageData}}}
-     */
     TOWER_PREFABS: {
         "test_tower1": {
             name: "test_tower1",
-            data: new TowerData(0, "test_tower1", "Tower_1Barrel", [{x: 15, y: 30}], 0),
+            data: new TowerData(0, "test_tower1", "Tower_1Barrel", "Laser_Bolt_Yellow", [{x: 15, y: 30}], 0),
             stats: new TowerStats(150, 30, 1800 * (Math.PI / 180), 2, false, tickLength),
             damageData: new DamageData(1, 0, []),
             upgradeTree: new UpgradeTree()
         }
     },
-    /**
-     * @typedef {Object} creepPrefab
-     * @property {} data
-     * @property {} stats
-     * @property {} collider
-     */
+    PROJECTILE_PREFABS: {
+        "Laser_Bolt_Yellow": {
+            name: "Laser_Bolt_Yellow",
+            data: new ProjectileData(0, "Laser_Bolt_Yellow", 0, 0, 0),
+            stats: new ProjectileStats({x:-1,y:-1}, 175, 1, 10, tickLength),
+            collider: new Collider([{x:-10,y:-7},
+                                    {x:-10,y:7},
+                                    {x:0,y:12},
+                                    {x:10,y:7},
+                                    {x:10,y:-7},
+                                    {x:0,y:-9}],{ x:0, y:0}),
+        }
+    },
     CREEP_PREFABS: {
         "test_creep": {
             data: new CreepData(0,"test_creep", "Creep_1_RED", []),

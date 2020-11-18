@@ -4,6 +4,7 @@ const towerBarrelScale = 1.5;
 const towerLaserScale = 1.5;
 const creepScale = 1;
 const svgSize = 128;
+const laserBoltScale = 1;
 
 /**
  * @description 
@@ -951,7 +952,55 @@ const SPRITE_ENUM = {
         width: svgSize,
         numFrames: 1,
         scale: creepScale
+    },
+    /* #endregion */
+
+    // ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+    // ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+    //
+    //                                                                       PROJECTILE SPRITES (Projectile_(type)_(color))
+    //
+    // ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+    // ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+    /* #region  */
+    
+    // ====================================================================================================================================================================================
+    // LASER BOLTS
+    // ====================================================================================================================================================================================
+    /* #region */
+
+    /**
+     * @description HOVER ME => "../../public/Assets/Projectiles/Laser_Yellow.png"
+     */
+    "Projectile_Laser_Yellow": {
+        src: "./Assets/Assets/Projectiles/Laser_Yellow.png",
+        height: 95,
+        width: 68,
+        numFrames: 1,
+        scale: laserBoltScale
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/Projectiles/Laser_Red.png"
+     */
+    "Projectile_Laser_Red": {
+        src: "./Assets/Assets/Projectiles/Laser_Red.png",
+        height: 95,
+        width: 68,
+        numFrames: 1,
+        scale: laserBoltScale
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/Projectiles/Laser_Orange.png"
+     */
+    "Projectile_Laser_Orange": {
+        src: "./Assets/Assets/Projectiles/Laser_Oraange.png",
+        height: 95,
+        width: 68,
+        numFrames: 1,
+        scale: laserBoltScale
     }
+    /* #endregion */
+
     /* #endregion */
 
     /* #endregion */
