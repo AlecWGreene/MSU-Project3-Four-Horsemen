@@ -4,7 +4,7 @@ import GameFrame from "./GameFrame";
 import WallLayer from "./WallLayer";
 
 import { GameStateContext } from "../userInterface/pages/GamePage.js"
-import Tile from "../engine/components/Tile";
+import Tile from "../engine/Tile";
 import Animator from "./Animator";
 import SPRITE_ENUM from "../game/SpriteEnums.js";
 import CreepLayer from "../game/CreepLayer/creep.js";

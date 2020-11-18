@@ -1,6 +1,24 @@
 import { getEuclideanDistance } from "./findPaths.js";
 import removeCreep from "./removeCreep.js";
+import CreepEntity from "../entities/CreepEntity.js"
+import GameManager from "../GameManager.js";
 
+/**
+ * @namespace moveCreeps
+ * @memberof module:Systems
+ */
+
+ /**
+  * @function rotateCreep
+  * @memberof module:Systems.moveCreeps
+  * 
+  * @description Rotates the components of a creep
+  * 
+  * @param {CreepEntity} creep Entity to move
+  * @param {number} angle Angle in radians to rotate the creep by
+  * 
+  * @returns {Void}
+  */
 function rotateCreep(creep, angle){
     creep.transform.rotation += angle;
     const {x: x0, y: y0} = creep.collider.center;
@@ -14,7 +32,19 @@ function rotateCreep(creep, angle){
     }
 }
 
-export default function moveCreeps(manager){
+/**
+ * @function moveCreeps
+ * @memberof module:Systems.moveCreeps
+ * 
+ * @description Itertaes through the creep directory of a game manager and translates/rotates creep along their paths
+ * 
+ * @param {GameManager} manager The game manager instance to move the creeps on
+ * 
+ * @fires module:Systems.removeCreep
+ * 
+ * @returns {Void}
+ */
+function moveCreeps(manager){
     for(const id in manager.gameState.creepDirectory){
         const creep = manager.gameState.creepDirectory[id];
         let distRemaining = creep.stats.speed;
@@ -31,7 +61,6 @@ export default function moveCreeps(manager){
             targetAngle -= angleToRotate;
             rotateCreep(creep, angleToRotate);
             distRemaining -= Math.abs(angleToRotate / creep.stats.turnSpeed) * distToTarget;
-            console.log("Dist1: " + distRemaining);
         }
 
         // If target is farther than remaining speed, move towards target
@@ -72,7 +101,6 @@ export default function moveCreeps(manager){
                     targetAngle -= angleToRotate;
                     rotateCreep(creep, angleToRotate);
                     distRemaining -= Math.abs(angleToRotate) * (Math.PI / 180) * creep.collider.circumference;
-                    console.log("Dist2: " + distRemaining);
                 }
                 
                 // If creep is pointing to target, move towards new target
@@ -97,3 +125,5 @@ export default function moveCreeps(manager){
         }
     }
 }
+
+export default moveCreeps;

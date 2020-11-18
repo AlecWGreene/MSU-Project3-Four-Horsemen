@@ -1,20 +1,37 @@
-import Tile from "./Tile.js";
+/**
+ * @typedef Vector
+ * @type {Object}
+ * @property {number} x x coordinate
+ * @property {number} y y coordinate
+ */
 
-export default class CreepData{
+/**
+ * @class
+ * 
+ * @memberof module:Components
+ * 
+ * @classdesc Non-generic information pertaining to a specific creep
+ * 
+ * @property {number} id Unique id for the entity
+ * @property {string} spriteSheet string representing the path to the spritesheet from the public/Assets/ folder
+ * @property {Array.<Tile>} path waypoints in world space for the creep to travel to
+ * @property {number} targetIndex integer representing the path index of the current target tile
+ * @property {Tile} target current target tile for movement
+ */
+class CreepData{
     /**
      * @param {number} id
      * @param {string} spriteSheet 
-     * @param {{x:number, y:number}[]} path array of delays in ms for each frame in the spritesheet
+     * @param {Array<Vector>} path array of delays in ms for each frame in the spritesheet
      */
-    constructor(id, spriteSheet, path){
+    constructor(id, archtype, spriteSheet, path){
         this.id = id;
-        /** @type {string} string representing the path to the spritesheet from the public/Assets/ folder */
+        this.archtype = archtype;
         this.spriteSheet = spriteSheet;
-        /** @type {Tile[]} waypoints in world space for the creep to travel to */
         this.path = Array.from(path);
-        /** @type {number} integer representing the path index of the current target tile */
         this.targetIndex = 0;
-        /** @type {Tile} current target tile for movement*/
         this.target = this.path[0];
     }
 }
+
+export default CreepData;

@@ -17,6 +17,7 @@ const Container = styled.div`
     width: ${(props) => props.width}px;
     left: ${({position}) => position.x}px; 
     bottom: ${({position}) => position.y}px;
+    transition: offset transform 100ms;
     transform-origin: center;
     transform: rotate(${({rotation}) => rotation}deg);
 `;
@@ -38,22 +39,37 @@ function Animator(props){
     // When object is rendered, update Sprite offset
     let offset = frame * props.imgData.width / props.imgData.numFrames;
 
+    // Call when props.fireCount is changed
+    useEffect(() => {
+        if(props.startAnimation && !isAnimating){
+            console.log("starting animation");
+            requestAnimationFrame(() => toggleAnimation(true));
+        }
+    });
+
     // Call when isAnimating is changed
     useEffect(() => {
         if(!isAnimating){
-            setFrame(0);
+            requestAnimationFrame(() =>setFrame(0));
+        }
+        else{
+            requestAnimationFrame(() => setFrame(1));
         }
     }, [isAnimating]);
 
     // Call when frame is changed
     useEffect(() => {
         if(isAnimating){
-            if(frame === props.imgData.numFrames){
-                requestAnimationFrame(setFrame(0));
+            if(frame === props.imgData.numFrames - 1){
+                requestAnimationFrame(() => { 
+                    setFrame(0)
+                });
                 toggleAnimation(false);
             }
             else {
-                requestAnimationFrame(setFrame(frame++));
+                requestAnimationFrame( () => {
+                    setFrame(frame+1)
+                });
             }
         }
     }, [frame])

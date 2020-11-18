@@ -1,16 +1,27 @@
-export default class CreepStats{
-    constructor(health, speed, turnSpeed, visible, armor){
-        /** @type {number} maximum health */
+/** 
+ * @class 
+ * 
+ * @memberof module:Components
+ * 
+ * @classdesc
+ * Data container for combat stats of a creep
+ * 
+ * @property {number} health Starting health
+ * @property {number} hitPoints Current health remaining
+ * @property {number} speed Speed in game units per second
+ * @property {number} turnSpeed Speed in degrees per second
+ * @property {boolean} visible Is camo detection be required
+ * @property {number} armor Damage reduction applied to all incoming dmg 
+*/
+class CreepStats{
+    constructor(health, speed, turnSpeed, visible, armor, tickLength){
         this.health = health;
-        /** @type {number} current health */
         this.hitPoints = health;
-        /** @type {number} linear speed in units per tick*/
-        this.speed = speed;
-        /** @type {number} rotational speed */
-        this.turnSpeed = turnSpeed;
-        /** @type {boolean} should camo detection be required */
+        this.speed = speed / tickLength;
+        this.turnSpeed = turnSpeed / tickLength;
         this.visible = visible;
-        /** @type {number} reduction applied to all incoming dmg */
         this.armor = armor;
     }
 }
+
+export default CreepStats;

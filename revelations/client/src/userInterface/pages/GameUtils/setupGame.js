@@ -1,4 +1,4 @@
-import Grid from "../../../engine/entities/Grid";
+import Grid from "../../../engine/Grid";
 
 export default function setupGame(gameManager, config){
     const grid = new Grid(config.mapSize.rows, config.mapSize.cols, config.mapSize.height, config.mapSize.width);

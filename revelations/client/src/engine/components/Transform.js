@@ -1,18 +1,30 @@
-export default class Transform{
+/**
+ * @typedef Vector
+ * @type {Object}
+ * @property {number} x x coordinate
+ * @property {number} y y coordinate
+ */
+
+/**
+ * @class
+ * @memberof module:Components
+ * 
+ * @property {Vector} position World position of the transform
+ * @property {number} rotation Angle in radians counter-clockwise from the positive x-axis
+ * @property {Vector} momentum Vector representing the current velocity of the transform, @todo use for motion dampening
+ */
+class Transform{
     constructor(xCoordinate, yCoordinate, rotation){
-        /** @type {{x:number,y:number}} x and y world coordinates of the transform */
         this.position = {
             x: xCoordinate,
             y: yCoordinate
         }
-
-        /** @type {number} rotation in degrees counter-clockwise from the x-axis*/
         this.rotation = rotation;
-
-        /** @type {{x:number,y:number}} the current momentum of the transform */
         this.momentum = {
             x: 0,
             y: 0
         }
     }
 }
+
+export default Transform;

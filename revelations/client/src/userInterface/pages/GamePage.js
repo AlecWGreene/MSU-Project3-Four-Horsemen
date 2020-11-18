@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useReducer, useLayoutEffect } from "react";
+import React, { useEffect, useReducer, useLayoutEffect } from "react";
 
 // Engine imports
 import GameState from "../../engine/components/GameState.js";
 import RuntimeState from "../../engine/components/RuntimeState.js";
-import Grid from "../../engine/entities/Grid.js";
+import Grid from "../../engine/Grid.js";
 import GameEnums from "../../engine/GameEnums.js";
 import GameManager from "../../engine/GameManager.js";
 import testGame from "../../engine/GameTest.js";
@@ -17,6 +17,7 @@ import CreepLayer from "../../game/CreepLayer/creep.js";
 import GameFrame from "../../game/GameFrame";
 import Planet from "../../game/Planet";
 import BaseLayer from "../../game/BaseLayer";
+import TowerLayer from "../../game/TowerLayer";
 
 // Testing imports
 import loadTestScenario from "./GameUtils/loadTestScenario.js"
@@ -35,7 +36,8 @@ function gameStateReducer(state, action){
         scaleRatio: state.scaleRatio,
         origin: state.origin,
         gameState: action.payload.gameState,
-        runtimeState: action.payload.runtimeState
+        runtimeState: action.payload.runtimeState,
+        animationState: action.payload.animationState
       };
     case "updateFrameSize":
       return {
@@ -43,7 +45,8 @@ function gameStateReducer(state, action){
         scaleRatio: action.payload.scaleRatio,
         origin: action.payload.origin,
         gameState: state.gameState,
-        runtimeState: state.runtimeState
+        runtimeState: state.runtimeState,
+        animationState: state.animationState
       };
     case "addWall":
       console.log("Performed " + action.type);
@@ -73,7 +76,6 @@ function GamePage() {
   const [state, dispatch] = useReducer(gameStateReducer, gameManager);
 
   function initializeGameSize(){
-    console.log("layout renderedx");
       const divBox = document.getElementById("gameFrame").getClientRects()[0];
       const grid = gameManager.gameState.mapGrid;
       dispatch({
@@ -87,20 +89,17 @@ function GamePage() {
               origin: {x: 0, y: 0}
           }
       });
-      console.log(state);
-      console.log("that was state")
 }
 
   // Called on initial render
   useLayoutEffect(()=>{
-    gameManager.updateCallback = () => dispatch({ type: "updateGameState", payload: { gameState: gameManager.gameState, runtimeState: gameManager.runtimeState }});
+    gameManager.updateCallback = () => dispatch({ type: "updateGameState", payload: { gameState: gameManager.gameState, runtimeState: gameManager.runtimeState, animationState: gameManager.animationState }});
     setupGame(gameManager, GameEnums.GAME_CONFIG);
     loadTestScenario(gameManager);
     gameManager.updateCallback();
-    console.log("initial setup"); 
+
     const divBox = document.getElementById("gameFrame").getBoundingClientRect();
-    const grid = gameManager.gameState.mapGrid;
-    console.log(divBox);  
+    const grid = gameManager.gameState.mapGrid; 
     dispatch({
       type: "initialize",
       payload: { 
@@ -111,13 +110,16 @@ function GamePage() {
         scaleRatio: Math.min(divBox.height / (grid.cellsize * grid.tiles.length), divBox.width / (grid.cellsize * grid.tiles[0].length)),
         origin: {x: 0, y: 0},
         gameState: gameManager.getGameState().gameState, 
-        runtimeState: gameManager.getGameState().runtimeState
+        runtimeState: gameManager.getGameState().runtimeState,
+        animationState: {
+          towers: []
+        }
       }
     });
-    console.log(state);
+
     initializeGameSize();
-    setTimeout(gameManager.updateCallback, 5000);
-    setTimeout(gameManager.sendWave(), 1000)
+    setTimeout(() => gameManager.sendWave(), 3000)
+    
   },[]);
 
   // Called on every render
@@ -133,7 +135,7 @@ function GamePage() {
                <Planet />
                 <WallLayer wallGrid={state.gameState ? state.gameState.wallGrid : []} />
                 <BaseLayer baseGrid={state.gameState ? state.gameState.baseGrid : []}/>
-                {/**<TowerLayer directory={state.gameState ? state.gameState.towerDirectory : []} />*/}
+                <TowerLayer directory={state?.gameState ? state.gameState.towerDirectory : {}} />
                 <CreepLayer creep={state.gameState.creepDirectory} />
             </GameFrame>
         </div>

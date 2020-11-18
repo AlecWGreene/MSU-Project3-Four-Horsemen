@@ -1,8 +1,29 @@
 import GameEnums from "../GameEnums.js";
+import GameManager from "../GameManager.js";
+import controlTowers from "./controlTowers.js";
 import moveCreeps from "./moveCreeps.js";
 import spawnCreep from "./spawnCreep.js";
 
-export default function processTick(manager) {
+/**
+ * @namespace processTick
+ * @memberof module:Systems
+ */
+
+ /**
+  * @function processTick
+  * @memberof module:Systems.processTick
+  * 
+  * @description Organizes the system calls into a universal method which is called on a certain interval
+  * 
+  * @param {GameManager} manager GameManager instance to mutate
+  * 
+  * @fires module:Systems.moveCreeps.moveCreeps
+  * @fires module:Systems.spawnCreep.spawnCreep
+  * @fires module:GameManager.updateCallback
+  * 
+  * @returns {Void}
+  */
+function processTick(manager) {
     // Move creeps
     moveCreeps(manager)
 
@@ -24,7 +45,12 @@ export default function processTick(manager) {
         }
     }
 
+    // Control towers
+    controlTowers(manager);
+
     manager.runtimeState.waveTime += GameEnums.GAME_CONFIG.tickLength;
     requestAnimationFrame(manager.updateCallback);
     const x = 0;
 }
+
+export default processTick;

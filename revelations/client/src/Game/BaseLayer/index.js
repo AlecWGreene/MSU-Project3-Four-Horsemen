@@ -3,8 +3,7 @@ import { GameStateContext } from "../../userInterface/pages/GamePage";
 import Animator from "../Animator";
 import SpriteEnums from "../SpriteEnums.js";
 import convertWorldPointToScreenPoint from "../../userInterface/pages/GameUtils/convertWorldPointToScreenPoint.js";
-import SPRITE_ENUM from "../SpriteEnums.js"
-
+import SPRITE_ENUM from "../SpriteEnums.js";
 
 const styles = {
     container: {

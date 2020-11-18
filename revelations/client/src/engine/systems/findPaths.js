@@ -1,3 +1,25 @@
+import Grid from "../Grid";
+import Tile from "../Tile";
+
+/**
+ * @typedef Vector
+ * @type {Object}
+ * @property {number} x x coordinate
+ * @property {number} y y coordinate
+ */
+
+/**
+ * @function getClosestPointToLine
+ * @memberof module:Systems.findPaths
+ * 
+ * @description Projects a point onto a line segment
+ * 
+ * @param {Vector} lineStart Start of the line segment
+ * @param {Vector} lineEnd End of the line segment
+ * @param {Vector} point Point to project onto the line segment
+ * 
+ * @returns {Vector}
+ */
 function getClosestPointToLine(lineStart, lineEnd, point) {
     // Vector representing the connection from the start of the line to the point
     const startToPoint = {
@@ -31,6 +53,18 @@ function getClosestPointToLine(lineStart, lineEnd, point) {
     return closest;
 }
 
+/**
+ * @function pointInBox
+ * @memberof module:Systems.findPaths
+ * 
+ * @description Detects if a point is within a bounding box
+ * 
+ * @param {Vector} point Point to compare
+ * @param {Vector} center Center of the box
+ * @param {Vector} cellWidth Width of the box
+ * 
+ * @returns {boolean}
+ */
 function pointInBox(point, center, cellWidth){
     // Calculate box vertices
     const padding = cellWidth * Math.sqrt(2) / 2;
@@ -46,14 +80,38 @@ function pointInBox(point, center, cellWidth){
     }
 }
 
-function getDijkstraMapValue(current, source, target, unwalkable, grid, data){
+/**
+ * @const getDijkstraMapValue
+ * @memberof module:Systems.findPaths
+ * 
+ * @type {Heuristic}
+ */
+const getDijkstraMapValue = (current, source, target, unwalkable, grid, data) => {
     return data.dijkstraMap[current.index.row+","+current.index.col]
 }
 
-function getEuclideanDistance(current, source, target, unwalkable, grid, data){
+/**
+ * @const getEuclideanDistance
+ * @memberof module:Systems.findPaths
+ * 
+ * @type {Heuristic}
+ */
+const getEuclideanDistance = (current, source, target, unwalkable, grid, data) => {
     return Math.sqrt((current.position.x - source.position.x)**2+(current.position.y - source.position.y)**2);
 }
 
+/**
+ * @function straightenZigZags
+ * @memberof module:Systems.findPaths
+ * 
+ * @description Takes a path of tiles, and removes tiles which can be skipped by directly traveling to a further tile
+ * 
+ * @param {Tile[]} path Array of tiles forming the path
+ * @param {Tile[]} unwalkable Unwalkable tiles
+ * @param {number} cellWidth Width of map grid cells
+ * 
+ * @returns {Tile[]}
+ */
 function straightenZigZags(path, unwalkable, cellWidth){
     const newPath = [];
     let index = 0;
@@ -70,6 +128,15 @@ function straightenZigZags(path, unwalkable, cellWidth){
                 
                 // If raycast hits, then return last visited tile as next pivot
                 if(pointInBox(closest, wall, cellWidth)){
+                    // If the target is the next tile in the path, push it to the new path anyways
+                    if(targetIndex === index + 1){
+                        newPath.push(path[targetIndex]);
+                        index = targetIndex ;
+                        break raycast;
+                    }
+
+
+                    // Move the pivot to the current target
                     newPath.push(path[targetIndex - 1]);
                     index = targetIndex - 1;
                     break raycast;
@@ -90,6 +157,12 @@ function straightenZigZags(path, unwalkable, cellWidth){
     return newPath;
 }
 
+/**
+ * @const computeDijkstraMap
+ * @memberof module:Systems.findPaths
+ * 
+ * @type {DataLoader}
+ */
 const computeDijkstraMap = (data, source, target, unwalkable, grid) => {
     const frontier = [];
     frontier.push(target);
@@ -110,6 +183,23 @@ const computeDijkstraMap = (data, source, target, unwalkable, grid) => {
     data.dijkstraMap = distance;
 }
 
+/**
+ * @function runPathFind
+ * @memberof module:Systems.findPaths
+ * 
+ * @description Uses a modified A* pathfind algorithm with the passed heuristics to generate a path from source to target
+ * 
+ * @param {Tile[]} source Source tiles
+ * @param {Tile} target Target tile
+ * @param {Tile[]} unwalkable Unwalkable tiles
+ * @param {Grid} grid Map grid
+ * @param {Heuristic} sourceHeuristic Heuristic used to score the weight of a tile from its source
+ * @param {Heuristic} targetHeuristic Heuristic used to score the weight of a tile from its target
+ * @param {DataLoader[]} dataLoaders Array of callbacks used to preload data to avoid expensive recomputations
+ * @param {Object.<string, any>} data Preloaded data called by previous calls to runPathFind or findPaths
+ * 
+ * @returns {Tile[][]}
+ */
 function runPathfind(source, target, unwalkable, grid, sourceHeuristic, targetHeuristic, dataLoaders, data){
     // Setup helper variables
     const pathData = data ? data : {};
@@ -186,7 +276,52 @@ function runPathfind(source, target, unwalkable, grid, sourceHeuristic, targetHe
     return undefined;
 }
 
-function findPaths(sourceArray, target, unwalkable, grid, sourceHeuristic, targetHeuristic, dataLoaders){
+/**
+ * @callback Heuristic
+ * 
+ * @param {Tile} current Current tile being evaluated
+ * @param {Tile} source Source tile the path is coming from
+ * @param {Tile} target Target tile the path is going towards
+ * @param {Tile[]} unwalkable Unwalkable tiles
+ * @param {Grid} grid Map grid
+ * @param {Object.<string, any>} data Loaded data object
+ * 
+ * @returns {number}
+ */
+
+/**
+ * @callback DataLoader
+ * 
+ * @param {Object.<string,any>} data  Data object to mutate
+ * @param {Tile} source  Source tile
+ * @param {Tile} target  Target tile
+ * @param {Tile[]} unwalkable  Unwalkable tiles
+ * @param {Grid} grid Map grid
+ * 
+ * @augments data
+ * 
+ * @returns {Void}
+ */
+
+/**
+ * @namespace findPaths
+ * @memberof module:Systems
+ */
+
+ /**
+  * @function findPaths
+  * @memberof module:Systems.findPaths
+ * @param {Tile[]} sourceArray  Collection of source tiles
+ * @param {Tile} target  Target tile
+ * @param {Tile[]} unwalkable  Unwalkable tiles
+ * @param {Grid} grid Map grid
+ * @param {Heuristic} sourceHeuristic Heuristic used to score the weight of a tile from its source
+ * @param {Heuristic} targetHeuristic  Heuristic used to score the weight of a tile from its target
+ * @param {DataLoader[]} dataLoaders  Array of callbacks used to preload data to avoid expensive recomputations
+ * 
+ * @returns {Tile[][]}
+ */
+function findPaths(sourceArray, target, unwalkable, grid, sourceHeuristic, targetHeuristic, dataLoaders, data){
     // Set default targetHeuristic and loaders
     let targetH, loaders;
     if(!targetHeuristic && !dataLoaders){
@@ -201,7 +336,7 @@ function findPaths(sourceArray, target, unwalkable, grid, sourceHeuristic, targe
     // Call runPathfind
     const paths = [];
     for(const source of sourceArray){
-        paths.push(straightenZigZags(runPathfind(target,source, unwalkable, grid, sourceHeuristic, targetH, loaders), unwalkable, grid.cellsize));
+        paths.push(straightenZigZags(runPathfind(target,source, unwalkable, grid, sourceHeuristic, targetH, loaders, data), unwalkable, grid.cellsize));
     }
 
     return paths;

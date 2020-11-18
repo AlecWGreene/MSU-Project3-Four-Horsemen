@@ -3,21 +3,22 @@ import CreepStats from "../components/CreepStats.js";
 import CreepData from "../components/CreepData.js";
 import Transform from "../components/Transform.js";
 
-export default class CreepEntity{
-    /**
-     * @param {CreepData} data
-     * @param {Transform} transform
-     * @param {CreepStats} stats
-     * @param {Collider} collider
-     */
+/**
+ * @class
+ * @memberof module:Entities
+ * 
+ * @property {CreepData} data Instance data of the creep
+ * @property {CreepStats} stats Archtype stats of the creep, which also contains the current hitpoints
+ * @property {Transform} transform World transform of the creep
+ * @property {Collider} collider Collider information of the creep
+ */
+class CreepEntity{
     constructor(data, transform, stats, collider){
-        /** @type {CreepData} data */
         this.data = data;
-        /** @type {Transform} transform */
         this.transform = transform;
-        /** @type {CreepStats} stats */
         this.stats = stats;
-        /** @type {Collider} collider */
         this.collider = collider;
     }
 }
+
+export default CreepEntity;

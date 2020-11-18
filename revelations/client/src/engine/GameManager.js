@@ -6,12 +6,26 @@ import GameEnums from "./GameEnums.js";
 // Import Game Managment systems
 import processTick from "./systems/processTick.js"; 
 import findPaths, {getEuclideanDistance} from "./systems/findPaths";
+import spawnTower from "./systems/spawnTower.js";
+
+/**
+ * @module GameManager
+ */
+
+/**
+ * @callback updateCallback
+ * @returns {void}  
+ */
 
 /**
  * @class
  * 
+ * @description
+ * Manages the game logic by calling systems and centralizing the game state storage
+ * 
  * @property {GameState} gameState current state info for entities
  * @property {RuntimeState} runtimeState current runtime info such as paused, wave running, etc
+ * @property {updateCallback} updateCallback
  * 
  * @method init Sets up the game systems to launch a wave or resume a save
  * @method sendWave Sends the next wave using the GameEnums.WAVE_CONFIGS settings
@@ -19,9 +33,7 @@ import findPaths, {getEuclideanDistance} from "./systems/findPaths";
 export default class GameManager {
     constructor(saveData){
         if(saveData){
-            /** @type {GameState} */
             this.gameState = saveData.gameState || new GameState();
-            /** @type {RuntimeState} */
             this.runtimeState = saveData.runtimeState || new RuntimeState();
             this.tickInterval = undefined;
         }
@@ -32,6 +44,9 @@ export default class GameManager {
         }
 
         this.updateCallback = undefined;
+        this.animationState = {
+            towers: []
+        }
     }
 
     init(grid, sourceArray, target){
@@ -42,12 +57,15 @@ export default class GameManager {
 
     /**
      * Stores a method to call upon the completion of each tick, returning the new game state
-     * @param {()=>void} callback
+     * @param {updateCallback} callback
      */
     assignUdateCallback(callback){
         this.updateCallback = callback;
     }
 
+    /**
+     * 
+     */
     sendWave(waveConfig){
         if(this.runtimeState.isPaused){
             if(!this.runtimeState.isWaveRunning){
@@ -56,7 +74,8 @@ export default class GameManager {
                 this.runtimeState.isWaveRunning = true;
                 this.runtimeState.isPaused = false;
 
-                this.gameState.pathDirectory = findPaths(this.gameState.sourceArray, this.gameState.target, this.gameState.wallGrid, this.gameState.mapGrid, getEuclideanDistance);
+                this.gameState.pathDirectory = findPaths(this.gameState.sourceArray, this.gameState.target, this.gameState.wallGrid, this.gameState.mapGrid, getEuclideanDistance, undefined, undefined, this.gameState?.pathData);
+
             }
 
             this.tickInterval=setInterval(processTick.bind(arguments[0]), GameEnums.GAME_CONFIG.tickLength, this);
@@ -70,7 +89,8 @@ export default class GameManager {
             /** @type {GameState} */
             gameState: this.gameState,
             /** @type {RuntimeState} */
-            runtimeState: this.runtimeState
+            runtimeState: this.runtimeState,
+            animationState: this.animationState
         }
     }
 
@@ -81,6 +101,25 @@ export default class GameManager {
         }
         else{
             return false;
+        }
+    }
+
+    placeTower(archtype, tile){
+        spawnTower(this,30000 + Object.keys(this.gameState.towerDirectory).length, archtype, tile);
+    }
+
+    convertWorldPointToTile(x, y){
+        const row = Math.floor(x / this.gameState.mapGrid.cellsize);
+        const col = Math.floor(y / this.gameState.mapGrid.cellsize);
+
+        if(row < 0 || row >= this.gameState.mapGrid.tiles.length){
+            throw new Error(`GameManager.convertWorldPointToTile: ${row} is not a valid row value`);
+        }
+        else if(col < 0 || col >= this.gameState.mapGrid.tiles[0].length){
+            throw new Error(`GameManager.convertWorldPointToTile: ${col} is not a valid col value`);
+        }
+        else{
+            return this.gameState.mapGrid.tiles[row][col];
         }
     }
 }

@@ -1,6 +1,6 @@
 const wallScale = 1.1;
 const towerBaseScale = 1;
-const towerBarrelScale = 1;
+const towerBarrelScale = 1.5;
 const towerLaserScale = 1.5;
 const creepScale = 1;
 const svgSize = 128;
