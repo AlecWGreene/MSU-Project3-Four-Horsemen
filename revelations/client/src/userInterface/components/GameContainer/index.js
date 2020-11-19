@@ -1,5 +1,5 @@
 // Game container holds the game screen and buttons/ features for user control.
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { useAuth } from "../../components/UserAuth";
 import API from "../../../utils/API"
 import history from "../../../utils/history";
@@ -8,6 +8,8 @@ import Tower_Base from '../../assets/Tower_Base.png';
 import Tower_Barrel from '../../assets/Tower_Barrel.png';
 import Wall_Connection from '../../assets/Wall_Connection.png';
 import Tower_Laser from '../../assets/Tower_Laser4.png';
+import Draggable from 'react-draggable';
+import { GameStateContext } from '../../pages/GamePage.js'; 
 
 // Import button handlers
 import addTower from "../../pages/GameUtils/addTower.js";
@@ -19,6 +21,7 @@ import "./style.css";
 export default function GameContainer(props) {
 
     let auth = useAuth()
+    const [state, dispatch] = useContext(GameStateContext); 
 
     const username = auth.user.data === null ? auth.user.auth : auth.user.data.username;
     const isGuest = auth.user.data === null ? true : false;
@@ -38,6 +41,9 @@ export default function GameContainer(props) {
             })
     };
 
+   const [basePosition, setBasePosition] = useState(null)
+
+
     return <Container fluid className="h-100">
             <div className="row h-100">
                 <div className="col-sm-10 h-100 test-gameDiv glow">
@@ -48,33 +54,42 @@ export default function GameContainer(props) {
 
                     <div className="row">
                         <div className="col-sm-2 ">
-                            <button onMouseDownCapture={()=>{}} onMouseUpCapture={addTowerBase}>
-                                <img src={Tower_Base} width="100" height="100" />
+                            <Draggable position={basePosition} onStop={(event,ui)=>{setBasePosition({x:0,y:0})}} onStart={(event,ui)=>{setBasePosition(null)}}>
+                            <button >
+                                <img src={Tower_Base} width="100" height="100" /> 
                             </button>
+                            </Draggable>
                         </div> 
                     </div>
+                    
 
                     <div className="row">
                         <div className="col-sm-2 ">
-                            <button onMouseDownCapture={()=>{}} onMouseUpCapture={addTower}>
+                        <Draggable position={basePosition} onStop={(event,ui)=>{setBasePosition({x:0,y:0})}} onStart={()=>{setBasePosition(null)}}>
+                            <button >
                                 <img src={Tower_Barrel} width="100" height="100" />
                             </button>
+                            </Draggable>
                         </div> 
                     </div>
 
                     <div className="row">
                         <div className="col-sm-2 ">
-                            <button onMouseDownCapture={()=>{}} onMouseUpCapture={addTower}>
+                        <Draggable position={basePosition} onStop={(event,ui)=>{setBasePosition({x:0,y:0})}} onStart={()=>{setBasePosition(null)}}>
+                            <button >
                                 <img src={Tower_Laser} width="100" height="100" />
                             </button>
+                            </Draggable>
                         </div> 
                     </div>
 
                     <div className="row">
                         <div className="col-sm-2 ">
-                            <button onMouseDownCapture={()=>{}} onMouseUpCapture={addWall}>
+                        <Draggable position={basePosition} onStop={(event,ui)=>{setBasePosition({x:0,y:0})}} onStart={()=>{setBasePosition(null)}}>
+                            <button >
                                 <img src={Wall_Connection} width="100" height="100" /> 
                             </button>
+                            </Draggable>
                         </div> 
                     </div>
 

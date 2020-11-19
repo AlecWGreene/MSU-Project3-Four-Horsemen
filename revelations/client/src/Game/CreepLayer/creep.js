@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react"; 
 import Animator from "../Animator/index.js"; 
-import SPRITE_ENUM from "../../game/SpriteEnums.js";
+import SPRITE_ENUM from "../SpriteEnums.js";
 import convertWorldPointToScreenPoint from "../../userInterface/pages/GameUtils/convertWorldPointToScreenPoint.js";
 import { GameStateContext } from "../../userInterface/pages/GamePage.js";
 
