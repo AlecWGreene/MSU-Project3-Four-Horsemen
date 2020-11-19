@@ -1,7 +1,6 @@
 import React from 'react'; 
 
 
-
 function addWall(event, dispatch) {
     dispatch({
       type: "addWall",

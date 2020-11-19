@@ -82,11 +82,11 @@ export default function GameContainer(props) {
                             </Draggable>
                         </div> 
                     </div>
-
+                
                     <div className="row">
                         <div className="col-sm-2 ">
                         <Draggable position={basePosition} onStop={(event,ui)=>{setBasePosition({x:0,y:0})}} onStart={()=>{setBasePosition(null)}}>
-                            <button >
+                            <button>
                                 <img src={Wall_Connection} width="100" height="100" /> 
                             </button>
                             </Draggable>
