@@ -24,7 +24,6 @@ function TowerLayer(props){
                 // Retrieve sprite
                 const imgData = SpriteEnums[entry[1].data.spriteSheet];
                 const animFlag = state.animationState.towers.includes(parseInt(entry[0]));
-                if(animFlag) console.log("Animating!");
                 return <Animator 
                           height={state.gameState.mapGrid.cellsize} 
                           width={state.gameState.mapGrid.cellsize} 

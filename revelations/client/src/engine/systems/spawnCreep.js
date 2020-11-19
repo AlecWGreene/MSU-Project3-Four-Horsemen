@@ -27,6 +27,7 @@ import Tile from "../Tile.js";
  * @returns {Void}
  */
 function spawnCreep(manager, id, archtype, source, path){
+
     // Get creep archtype
     archtype = GameEnums.CREEP_PREFABS[archtype];
 

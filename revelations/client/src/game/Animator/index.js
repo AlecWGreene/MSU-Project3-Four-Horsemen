@@ -42,7 +42,6 @@ function Animator(props){
     // Call when props.fireCount is changed
     useEffect(() => {
         if(props.startAnimation && !isAnimating){
-            console.log("starting animation");
             requestAnimationFrame(() => toggleAnimation(true));
         }
     });
