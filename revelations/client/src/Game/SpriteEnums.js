@@ -632,7 +632,8 @@ const SPRITE_ENUM = {
      * @description HOVER ME => "../../public/Assets/Creeps/Spaceships/01/Spaceship_01_GREEN.svg"
      */
     "Creep_1_GREEN": {
-        src: "./Assets/Creeps/Spaceships/01/Spaceship_01_GREEN.svg",
+        // src: "./Assets/Creeps/Spaceships/01/Spaceship_01_GREEN.svg",
+        src: "./Assets/planet.svg",
         height: svgSize,
         width: svgSize,
         numFrames: 1,
