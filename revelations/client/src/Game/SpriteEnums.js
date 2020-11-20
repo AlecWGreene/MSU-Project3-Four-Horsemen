@@ -4,7 +4,7 @@ const towerBarrelScale = 1.5;
 const towerLaserScale = 1.5;
 const creepScale = 1;
 const svgSize = 128;
-const laserBoltScale = 1;
+const laserBoltScale = 0.6;
 
 /**
  * @description 
@@ -973,9 +973,9 @@ const SPRITE_ENUM = {
      * @description HOVER ME => "../../public/Assets/Projectiles/Laser_Yellow.png"
      */
     "Projectile_Laser_Yellow": {
-        src: "./Assets/Assets/Projectiles/Laser_Yellow.png",
-        height: 95,
-        width: 68,
+        src: "./Assets/Projectiles/Laser_Yellow.png",
+        height: 68,
+        width: 95,
         numFrames: 1,
         scale: laserBoltScale
     },
@@ -983,9 +983,9 @@ const SPRITE_ENUM = {
      * @description HOVER ME => "../../public/Assets/Projectiles/Laser_Red.png"
      */
     "Projectile_Laser_Red": {
-        src: "./Assets/Assets/Projectiles/Laser_Red.png",
-        height: 95,
-        width: 68,
+        src: "./Assets/Projectiles/Laser_Red.png",
+        height: 68,
+        width: 95,
         numFrames: 1,
         scale: laserBoltScale
     },
@@ -993,9 +993,9 @@ const SPRITE_ENUM = {
      * @description HOVER ME => "../../public/Assets/Projectiles/Laser_Orange.png"
      */
     "Projectile_Laser_Orange": {
-        src: "./Assets/Assets/Projectiles/Laser_Oraange.png",
-        height: 95,
-        width: 68,
+        src: "./Assets/Projectiles/Laser_Orange.png",
+        height: 68,
+        width: 95,
         numFrames: 1,
         scale: laserBoltScale
     }

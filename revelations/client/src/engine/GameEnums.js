@@ -52,7 +52,7 @@ export default {
     TOWER_PREFABS: {
         "test_tower1": {
             name: "test_tower1",
-            data: new TowerData(0, "test_tower1", "Tower_1Barrel", "Laser_Bolt_Yellow", [{x: 15, y: 30}], 0),
+            data: new TowerData(0, "test_tower1", "Tower_1Barrel", "Laser_Bolt_Yellow", [{x: 0, y: 1}], 0),
             stats: new TowerStats(150, 30, 1800 * (Math.PI / 180), 2, false, tickLength),
             damageData: new DamageData(1, 0, []),
             upgradeTree: new UpgradeTree()
@@ -61,7 +61,7 @@ export default {
     PROJECTILE_PREFABS: {
         "Laser_Bolt_Yellow": {
             name: "Laser_Bolt_Yellow",
-            data: new ProjectileData(0, "Laser_Bolt_Yellow", 0, 0, 0),
+            data: new ProjectileData(0, "Laser_Bolt_Yellow", "Projectile_Laser_Yellow", 0, 0, 0),
             stats: new ProjectileStats({x:-1,y:-1}, 175, 1, 10, tickLength),
             collider: new Collider([{x:-10,y:-7},
                                     {x:-10,y:7},

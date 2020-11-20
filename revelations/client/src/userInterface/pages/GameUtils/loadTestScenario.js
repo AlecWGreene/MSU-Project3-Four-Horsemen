@@ -1,3 +1,5 @@
+import spawnProjectile from "../../../engine/systems/spawnProjectile";
+
 export default function loadTestScenario(manager){
     
     manager.gameState.wallGrid = [
@@ -15,5 +17,10 @@ export default function loadTestScenario(manager){
     ];
 
     manager.placeTower("test_tower1", manager.gameState.mapGrid.tiles[8][9]);
-   
+    const tower = manager.gameState.towerDirectory[30000]
+    const pos = {
+        x: tower.transform.position.x + tower.data.barrels[0].x * manager.gameState.mapGrid.cellsize / 2,
+        y: tower.transform.position.y + tower.data.barrels[0].y * manager.gameState.mapGrid.cellsize / 2
+    }
+    spawnProjectile(tower.data.id, pos, manager);
 }

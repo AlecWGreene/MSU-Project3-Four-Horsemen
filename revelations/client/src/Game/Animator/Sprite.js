@@ -9,8 +9,8 @@ const Frame = styled.div`
     transform-origin: center; 
     position: absolute;
     overflow: hidden;
-    bottom: -${props => 0.5 * Math.abs(props.width - props.parentSize)}px;
-    left: -${props => 0.5 * Math.abs(props.width - props.parentSize)}px;
+    bottom: -${props => (props.bottomOffsetRatio || 0.5) * Math.abs(props.width - props.parentSize)}px;
+    left: -${props => (props.leftOffsetRatio || 0.5) * Math.abs(props.width - props.parentSize)}px;
     height: ${({height}) => height}px;
     width: ${({width}) => width}px;
     transform: scale(${({scale, imgScale})=>`${scale * imgScale}, ${scale * imgScale}`});
@@ -28,7 +28,14 @@ const Image = styled.img`
  * @param {{src: string, height: number, width: number, rotation: number, scale: number, offset: number}} props
  */
 function Sprite(props){
-    return <Frame height={props.height} width={props.width} scale={props.scale} rotation={props.rotation} imgScale={props.imgScale} parentSize={props.parentSize}>
+    return <Frame height={props.height} 
+                  width={props.width} 
+                  scale={props.scale} 
+                  rotation={props.rotation} 
+                  bottomOffsetRatio={props.bottomOffsetRatio} 
+                  leftOffsetRatio={props.leftOffsetRatio}  
+                  imgScale={props.imgScale} 
+                  parentSize={props.parentSize}>
         <Image src={props.src} offset={props.offset || 0} rotation={props.rotation}/>
     </Frame>
 }
