@@ -49,12 +49,44 @@ const priorityHeuristics = {
     First: (creepA, creepB, manager) => {
         const distA = getDistanceToTarget(creepA, manager);
         const distB = getDistanceToTarget(creepB, manager);
-        return distA < distB ? creepA : creepB;
+    
+        if(distA < distB){
+            return creepA;
+        }
+        else if(distA > distB){
+            return creepB;
+        }
+        else{
+            const euclidA = Math.sqrt((creepA.transform.position.x - creepA.data.target.position.x)**2+(creepA.transform.position.y - creepA.data.target.position.y)**2)
+            const euclidB = Math.sqrt((creepB.transform.position.x - creepB.data.target.position.x)**2+(creepB.transform.position.y - creepB.data.target.position.y)**2)
+            if(euclidA > euclidB){
+                return creepB
+            }
+            else{
+                return creepA;
+            }
+        }
     },
     Last: (creepA, creepB, manager) => {
         const distA = getDistanceToTarget(creepA, manager);
         const distB = getDistanceToTarget(creepB, manager);
-        return distA > distB ? creepA : creepB;
+        
+        if(distA > distB){
+            return creepA;
+        }
+        else if(distA < distB){
+            return creepB;
+        }
+        else{
+            const euclidA = Math.sqrt((creepA.transform.position.x - creepA.data.target.position.x)**2+(creepA.transform.position.y - creepA.data.target.position.y)**2)
+            const euclidB = Math.sqrt((creepB.transform.position.x - creepB.data.target.position.x)**2+(creepB.transform.position.y - creepB.data.target.position.y)**2)
+            if(euclidA < euclidB){
+                return creepB
+            }
+            else{
+                return creepA;
+            }
+        }
     },
     
 }
@@ -115,8 +147,9 @@ function getCreepsInRange(tower, manager){
  */
 function selectNewTarget(tower, creepArray, manager){
     let current = creepArray[0];
+    const heuristic = priorityHeuristics[tower.data.priority];
     for(const creep of creepArray){
-        current = priorityHeuristics[tower.data.priority](current, creep, manager);
+        current = heuristic(current, creep, manager);
     }
 
     tower.data.target = current;
@@ -152,11 +185,14 @@ function controlTowers(manager){
     const towerDirectory = manager.gameState.towerDirectory;
     for(const id of Object.keys(towerDirectory)){
         const tower = towerDirectory[id];
-        // If tower has no target
-        if(tower.data.target === undefined){
+        // If tower has no target or target is destroyed
+        if(tower.data.target === undefined || !Object.keys(manager.gameState.creepDirectory).includes(tower.data.target.data.id.toString())){
             const c = getCreepsInRange(tower, manager);
             if(c.length > 0){
                 selectNewTarget(tower, c, manager);
+            }
+            else{
+                tower.data.target = undefined;
             }
         }
         else{

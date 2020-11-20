@@ -48,7 +48,18 @@ export default {
      * @type {Object.<number, Array.<creepBatch>>}
      */
     WAVE_CONFIG: {
-        0: [{ creeps: ["test_creep","test_creep"], delay: 5000}] 
+        0: [
+            { creeps: ["test_creep","test_creep"], delay: 1000},
+            { creeps: ["test_creep","test_creep"], delay: 1300},
+            { creeps: ["test_creep","test_creep"], delay: 500},
+            { creeps: ["test_creep","test_creep"], delay: 100},
+            { creeps: ["test_creep","test_creep"], delay: 100},
+            { creeps: ["test_creep","test_creep"], delay: 100},
+            { creeps: ["test_creep","test_creep"], delay: 100},
+            { creeps: ["test_creep","test_creep"], delay: 100},
+            { creeps: ["test_creep","test_creep"], delay: 100},
+            { creeps: ["test_creep","test_creep"], delay: 100}
+           ] 
     },
     /**
      * @type {{name: string, archtype: {data: TowerData, stats: TowerStats, damageType: DamageData}}}
@@ -57,7 +68,7 @@ export default {
         "test_tower1": {
             name: "test_tower1",
             data: new TowerData(0, "test_tower1", "Tower_1Barrel", [{x: 15, y: 30}], 0),
-            stats: new TowerStats(150, 70, 1800 * (Math.PI / 180), 2, false, tickLength),
+            stats: new TowerStats(150, 30, 1800 * (Math.PI / 180), 2, false, tickLength),
             damageData: new DamageData(1, 0, []),
             upgradeTree: new UpgradeTree()
         }
@@ -71,7 +82,7 @@ export default {
     CREEP_PREFABS: {
         "test_creep": {
             data: new CreepData(0,"test_creep", "Creep_1_RED", []),
-            stats: new CreepStats(100,120,270,true,50,tickLength),
+            stats: new CreepStats(100,50,270,true,50,tickLength),
             collider: new Collider([{x: -30, y: -30}, {x: -30, y: 30}, {x: 30, y: 30}, {x: 30, y: -30}], {x: 0, y: 0})
         }
     }

@@ -34,7 +34,7 @@ function processTick(manager) {
         totalTime += waveData[i].delay;
 
         // Check the anticipated time vs wave time
-        if(manager.runtimeState.waveTime === totalTime){
+        if(Math.abs(manager.runtimeState.waveTime - totalTime) < 10){
             for(let sourceIndex = 0; sourceIndex < waveData[i].creeps.length; sourceIndex++){
                 if(waveData[i].creeps[sourceIndex] !== undefined){
                     const newId = 10000 + Object.keys(manager.gameState.creepDirectory).length;

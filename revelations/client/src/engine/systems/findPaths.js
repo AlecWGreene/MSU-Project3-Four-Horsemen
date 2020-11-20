@@ -205,7 +205,7 @@ function runPathfind(source, target, unwalkable, grid, sourceHeuristic, targetHe
     const pathData = data ? data : {};
     for(const loader of Object.entries(dataLoaders)){
         if(!pathData[loader[0]]){
-            loader[1](pathData, source, target, unwalkable, grid);
+            loader[1](pathData, target, source, unwalkable, grid);
         }
     }
     const open = [];
