@@ -9,6 +9,7 @@ import Tile from "../Tile.js";
  * @property {boolean} isGameOver Does the player have lives left?
  * @property {number} waveTime Time in ms that the wave has been running
  * @property {Tile[][]} creepPaths Paths to assign to the path directory
+ * @property {number} totalWaveTime The total time needed to spawn every creep
  */
 class RuntimeState {
     constructor(stateData){
@@ -18,6 +19,7 @@ class RuntimeState {
             this.isGameOver = stateData.isGameOver || false;
             this.waveTime = stateData.waveTime || 0;
             this.creepPaths = stateData.creepPaths || [];
+            this.totalWaveTime = stateData.totalWaveTime || 0;
         }
         else{
             this.isPaused = true;
@@ -25,6 +27,7 @@ class RuntimeState {
             this.isGameOver = false;
             this.waveTime = 0;
             this.creepPaths = [];
+            this.totalWaveTime = 0;
         }
     }
 }
