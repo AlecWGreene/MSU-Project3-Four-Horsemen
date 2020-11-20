@@ -83,7 +83,7 @@ export default class GameManager {
                 }
 
                 this.gameState.pathDirectory = findPaths(this.gameState.sourceArray, this.gameState.target, this.gameState.wallGrid, this.gameState.mapGrid, getEuclideanDistance, undefined, undefined, this.gameState?.pathData);
-                this.runtimeState.totalWaveTime = GameEnums.WAVE_CONFIG[this.runtimeState.waveIndex].reduce((aggregate, current) => aggregate + current.delay, 0);
+                this.runtimeState.totalWaveTime = GameEnums.WAVE_CONFIG[this.gameState.waveIndex].reduce((aggregate, current) => aggregate + current.delay, 0);
             }
 
             this.tickInterval=setInterval(processTick.bind(arguments[0]), GameEnums.GAME_CONFIG.tickLength, this);

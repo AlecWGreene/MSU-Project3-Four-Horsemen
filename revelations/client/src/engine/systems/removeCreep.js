@@ -25,13 +25,11 @@ function removeCreep(manager, id){
         clearInterval(manager.tickInterval = undefined);
         manager.runtimeState.waveTime = 0;
         manager.runtimeState.isGameOver = true;
-        console.log("No lives left");
     }
     else if(manager.runtimeState.waveTime > manager.runtimeState.totalWaveTime && Object.keys(manager.gameState.creepDirectory).length === 0){
         clearInterval(manager.tickInterval);
         manager.runtimeState.isWaveRunning = false;
         manager.runtimeState.waveTime = 0;
-        console.log("No creeps left");
     }
 }
 

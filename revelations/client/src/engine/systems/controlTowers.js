@@ -26,7 +26,7 @@ import GameEnums from "../GameEnums.js";
   */
 const getDistanceToTarget = (creep, manager) => {
     const dijkstraMap = manager.gameState.pathData.dijkstraMap;
-    const nearestTile = manager.gameState.mapGrid.tiles[Math.floor(creep.transform.position.y / manager.gameState.mapGrid.cellsize)][Math.floor(creep.transform.position.x / manager.gameState.mapGrid.cellsize)];
+    const nearestTile = manager.gameState.mapGrid.tiles[creep.data.target.index.row][creep.data.target.index.col];
     return dijkstraMap[nearestTile.index.row + "," + nearestTile.index.col];
 }
 
