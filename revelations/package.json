@@ -14,7 +14,8 @@
     "mongoose": "^5.10.13",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "react-bootstrap": "^1.4.0"
+    "react-bootstrap": "^1.4.0",
+    "react-draggable": "^4.4.3"
   },
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
