@@ -76,13 +76,28 @@ and (max-device-width: 736px) {
 
 @media (min-width: 767px) {
   .wrapper {
-  height: 100vh;
-  border-color: black;
-  border-style: solid;
-  border-width: 10px;
-  background-image: url("../../assets/stars.gif");
-  background-repeat: repeat;
+    height: 100vh;
+    border-color: black;
+    border-style: solid;
+    border-width: 10px;
+    background-image: url("../../assets/stars.gif");
+    background-repeat: repeat;
+    display: block!important;
+    cursor:default; 
   }
+
+  .wrapper:hover {
+    height: 100vh;
+    border-color: black;
+    border-style: solid;
+    border-width: 10px;
+    background-image: url("../../assets/stars.gif");
+    background-repeat: repeat;
+    visibility:visible;
+    }
+
+
+ 
 }
 
 
