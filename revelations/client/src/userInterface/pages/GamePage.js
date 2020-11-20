@@ -93,7 +93,7 @@ function GamePage() {
               origin: {x: 0, y: 0}
           }
       });
-}
+  }
 
   // Called on initial render
   useLayoutEffect(()=>{
@@ -122,7 +122,7 @@ function GamePage() {
     });
 
     initializeGameSize();
-    //setTimeout(() => gameManager.sendWave(), 3000)
+    setTimeout(() => gameManager.sendWave(), 3000)
     
   },[]);
 

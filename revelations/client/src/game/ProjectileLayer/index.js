@@ -29,8 +29,8 @@ function ProjectileLayer(props){
                             imgData={imgData}
                             position={convertWorldPointToScreenPoint(entry[1].transform.position, state.scaleRatio, origin)}
                             rotation={180 / Math.PI  * entry[1].transform.rotation}
-                            leftOffsetRatio={0.5}
-                            bottomOffsetRatio={-0.5}    
+                            leftOffsetRatio={-0.5}
+                            bottomOffsetRatio={0}    
                             scale={state.scaleRatio}
                             key={entry[0]}
                             />
