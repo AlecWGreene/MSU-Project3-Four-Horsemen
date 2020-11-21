@@ -26,7 +26,7 @@ import Transform from "../components/Transform";
      
      // Return false if no base is on the tile or if there is already a tower in place
     if(manager.gameState.baseGrid.filter(t => t.isEqualTo(tile)).length === 0
-    && Object.values(manager.gameState.towerDirectory).filter(tow => tow.transform.position.x === tile.position.x && tow.transform.position.y === tile.position.y ).length === 0){
+    && manager.gameState.towerGrid.filter(t => t.isEqualTo(tile)).length > 0){
         return false;
     }
 

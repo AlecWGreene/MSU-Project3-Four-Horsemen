@@ -134,9 +134,21 @@ function GamePage() {
           animationState: s.animationState
         };
       case "addTowerLaser":
-        console.log("Performed " + action.type);
-        console.log(action.payload);
-        return state;
+        tile = convertScreenPointToMapTile(action.payload, state.frameSize, state.scaleRatio, state.gameState);
+        if(tile === false) return state;
+        success = manager.current.placeTower("test_tower2",tile);
+        if(success === false) return state;
+
+        s = manager.current.getGameState();
+        manager.current.updateCallback();
+        return {
+          frameSize: state.frameSize,
+          scaleRatio: state.scaleRatio,
+          origin: state.origin,
+          gameState: s.gameState,
+          runtimeState: s.runtimeState,
+          animationState: s.animationState
+        };
       case "selectTower":
         console.log("Performed " + action.type);
         return state;
