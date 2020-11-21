@@ -58,13 +58,13 @@ function LogIn(props) {
     >
       <Modal.Body>
         <div className="custom-padding">
-          <div id="codaFont" className="form-group">
+          <div id="codaFont" className="form-group text-center">
             <label id="customFont" htmlFor="username">Username</label>
-            <input type="username" className="form-control" id="username" value={formState.username} onChange={handleInputChange} placeholder="user123" />
+            <input type="username" className="form-control text-center" id="username" value={formState.username} onChange={handleInputChange} placeholder="user123" />
           </div>
-          <div className="form-group">
+          <div className="form-group text-center ">
             <label id="customFont" htmlFor="password">Password</label>
-            <input type="password" className="form-control" id="password" value={formState.password} onChange={handleInputChange} />
+            <input type="password" className="form-control text-center" id="password" value={formState.password} onChange={handleInputChange} />
           </div>
           <button 
             type="submit" 

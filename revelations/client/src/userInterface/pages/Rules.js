@@ -12,14 +12,12 @@ function Rules() {
   };
   return (
     <div className="custom-border-lg">
-      <div id="logInPosition" className="container">
+      <div  className="container">
         <div className="Row justify-content-center d-flex">
-          <div className="col-md-6 customDivOne"> 
-            <div className="customDivTwo">
-              
-              <div className="form-group">
-                    <label id="customFont" htmlFor="password">Rules</label>
-                    <div id="lipsum">
+          <div className="col-md-6"> 
+            <div className="form-group">
+                    <label id="customFont" htmlFor="rules">Rules</label>
+                    <div id="lipsum" className="text-center">
                         <ul>
                             <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
                             <li>Nulla nec elit ac orci finibus porta.</li>
@@ -29,7 +27,7 @@ function Rules() {
                             <li>Ut dignissim ligula sed leo finibus, a volutpat sapien pellentesque.</li>
                         </ul>
                     </div>
-              </div>
+            </div>
 
               <button
                 className="btn btn-info btn-block"
@@ -58,8 +56,6 @@ function Rules() {
               >
                   Guest
               </button>
-              
-            </div>
           </div>
         </div>
       </div>

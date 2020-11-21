@@ -29,8 +29,6 @@ const Container = styled.div`
  * 
  * @example
  * <Animator imgData={SPRITE_ENUMS["spaceship_red"]} scale={0.2} key={20095} />
- * 
- * @param {{imgData: {src: string, height: number, width: number, numFrames: number, scale: number}, position: {x: number, y: number}, scale: number, key: number }} props
  */
 function Animator(props){
     // Setup component states
@@ -85,6 +83,7 @@ function Animator(props){
          parentSize={props.width * props.scale}
          bottomOffsetRatio={props.bottomOffsetRatio}
          leftOffsetRatio={props.leftOffsetRatio}
+         clickHandler={props.clickHandler}
          offset={offset}
         />
     </Container>

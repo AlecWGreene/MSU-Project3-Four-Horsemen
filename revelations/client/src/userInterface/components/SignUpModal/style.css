@@ -1,6 +1,6 @@
 @media (min-width: 767px) {
     .modal-content {
-        height: 65vh;
+        height: 75vh;
         background-color:transparent!important;
         border-color: transparent!important;
         background-image: url("../../assets/redLoadingScreen.png");
@@ -25,4 +25,8 @@ color:whitesmoke;
 
 .custom-padding {
     padding: 15vh;
+}
+
+.form-group {
+    padding-bottom: 25px;
 }
