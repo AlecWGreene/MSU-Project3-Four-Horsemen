@@ -24,6 +24,7 @@ import ProjectileLayer from "../../game/ProjectileLayer/index.js";
 import loadTestScenario from "./GameUtils/loadTestScenario.js"
 
 function convertScreenPointToMapTile(point, frame, ratio, gameState){
+  const cellsize = gameState.mapGrid.cellsize;
   // Return false if we are not inside of the gameFrame
   if((point.x < frame.bottomLeft.x || point.x > frame.bottomLeft.x + frame.width )  || (point.y < frame.bottomLeft.y || point.y > frame.bottomLeft.y + frame.height)){
     return false;
@@ -34,11 +35,12 @@ function convertScreenPointToMapTile(point, frame, ratio, gameState){
   point.y = (point.y - frame.bottomLeft.y) / ratio;
 
   // Calculate the closest grid point to out mouse
-  const row = Math.floor(point.y / gameState.mapGrid.cellsize);
-  const col = Math.floor(point.x / gameState.mapGrid.cellsize);
+  const row = GameEnums.GAME_CONFIG.mapSize.rows - Math.floor(point.y / cellsize);
+  const col = Math.floor(point.x / cellsize);
 
+  // Check if a grid point is close
   try{
-    return gameState.mapGrid.tiles[GameEnums.GAME_CONFIG.mapSize.rows - row][col];
+    return gameState.mapGrid.tiles[row][col];
   }
   catch{
     return false;
@@ -85,6 +87,9 @@ function GamePage() {
         };
       case "addWall":
         tile = convertScreenPointToMapTile(action.payload, state.frameSize, state.scaleRatio, state.gameState);
+        if(!tile){
+          return state;
+        }
         success = manager.current.placeWall(tile);
         s = manager.current.getGameState();
         return success ? state : {
@@ -97,9 +102,10 @@ function GamePage() {
         };
       case "addTowerBase":
         tile = convertScreenPointToMapTile(action.payload, state.frameSize, state.scaleRatio, state.gameState);
+        if(tile === false) return state;
         success = manager.current.placeBase(tile);
         s = manager.current.getGameState();
-        return success ? state : {
+        return {
           frameSize: state.frameSize,
           scaleRatio: state.scaleRatio,
           origin: state.origin,
@@ -108,9 +114,18 @@ function GamePage() {
           animationState: s.animationState
         };
       case "addTowerBarrel":
-        console.log("Performed " + action.type);
-        console.log(action.payload);
-        return state;
+        tile = convertScreenPointToMapTile(action.payload, state.frameSize, state.scaleRatio, state.gameState);
+        if(tile === false) return state;
+        success = manager.current.placeTower("test_tower1",tile);
+        s = manager.current.getGameState();
+        return {
+          frameSize: state.frameSize,
+          scaleRatio: state.scaleRatio,
+          origin: state.origin,
+          gameState: s.gameState,
+          runtimeState: s.runtimeState,
+          animationState: s.animationState
+        };
       case "addTowerLaser":
         console.log("Performed " + action.type);
         console.log(action.payload);

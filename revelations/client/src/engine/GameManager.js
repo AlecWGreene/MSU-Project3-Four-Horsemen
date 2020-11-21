@@ -110,7 +110,7 @@ export default class GameManager {
         }
     }
 
-    placeWall(tile){
+    placeBase(tile){
         if(this.gameState.wallGrid.filter(t => tile.isEqualTo(t)).length > 0
         && this.gameState.baseGrid.filter(t => tile.isEqualTo(t)).length === 0){
             this.gameState.baseGrid.push(tile);
