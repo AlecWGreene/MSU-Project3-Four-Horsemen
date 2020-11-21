@@ -12,9 +12,6 @@ import CreepLayer from "../game/CreepLayer/creep.js";
 
 
 function Game(props){
-    /**
-   * @type {[{gameState: GameState, runtimeState: RuntimeState}, (action, state)=>{gameState: GameState, runtimeState: RuntimeState}]}
-   */
     const [state, dispatch] = useContext(GameStateContext);
 
     useEffect(() => {

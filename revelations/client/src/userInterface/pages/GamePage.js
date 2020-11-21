@@ -18,6 +18,7 @@ import GameFrame from "../../game/GameFrame";
 import Planet from "../../game/Planet";
 import BaseLayer from "../../game/BaseLayer";
 import TowerLayer from "../../game/TowerLayer";
+import ProjectileLayer from "../../game/ProjectileLayer/index.js";
 
 // Testing imports
 import loadTestScenario from "./GameUtils/loadTestScenario.js"
@@ -60,6 +61,9 @@ function gameStateReducer(state, action){
       console.log("Performed " + action.type);
       console.log(action.payload);
       return state;
+    case "selectTower":
+      console.log("Performed " + action.type);
+      return state;
     default: throw new Error(`Action type (${action.type}) for GameState dispatch is not valid`);
   }
 }
@@ -89,7 +93,7 @@ function GamePage() {
               origin: {x: 0, y: 0}
           }
       });
-}
+  }
 
   // Called on initial render
   useLayoutEffect(()=>{
@@ -135,8 +139,9 @@ function GamePage() {
                <Planet />
                 <WallLayer wallGrid={state.gameState ? state.gameState.wallGrid : []} />
                 <BaseLayer baseGrid={state.gameState ? state.gameState.baseGrid : []}/>
-                <TowerLayer directory={state?.gameState ? state.gameState.towerDirectory : {}} />
                 <CreepLayer creep={state.gameState.creepDirectory} />
+                <ProjectileLayer directory={state?.gameState ? state.gameState.projectileDirectory : {}}/>
+                <TowerLayer directory={state?.gameState ? state.gameState.towerDirectory : {}} />
             </GameFrame>
         </div>
       </GameContainer>

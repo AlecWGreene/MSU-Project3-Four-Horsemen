@@ -16,7 +16,10 @@ const styles = {
 
 function TowerLayer(props){
     const [state, dispatch] = useContext(GameStateContext);
-
+    function handleClickTower(event,dispatch,towerId){
+        console.log(event.target.id)
+        console.log("tower click")
+    }
     return (
         <div style={styles.container}>
         {
@@ -32,7 +35,9 @@ function TowerLayer(props){
                           rotation={90 - entry[1].transform.rotation * (180 / Math.PI) } 
                           scale={state.scaleRatio} 
                           key={entry[0]}
-                          startAnimation={animFlag} />
+                          startAnimation={animFlag}
+                          clickHandler={(event)=>{handleClickTower(event,dispatch,entry[0])}}
+                          />
             })
         }
         </div>

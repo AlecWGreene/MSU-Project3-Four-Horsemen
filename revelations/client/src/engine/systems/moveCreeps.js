@@ -98,7 +98,6 @@ function moveCreeps(manager){
                 let targetAngle = Math.atan2(dir.y, dir.x) - creep.transform.rotation;
                 if(targetAngle !== 0){
                     let angleToRotate = Math.sign(targetAngle) * Math.min(Math.abs(targetAngle), Math.abs(creep.stats.turnSpeed)); 
-                    targetAngle -= angleToRotate;
                     rotateCreep(creep, angleToRotate);
                     distRemaining -= Math.abs(angleToRotate) * (Math.PI / 180) * creep.collider.circumference;
                 }

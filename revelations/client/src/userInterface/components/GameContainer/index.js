@@ -1,5 +1,5 @@
 // Game container holds the game screen and buttons/ features for user control.
-import React, {useState, useContext} from 'react';
+import React, { useContext, useState } from 'react';
 import { useAuth } from "../../components/UserAuth";
 import API from "../../../utils/API"
 import history from "../../../utils/history";
@@ -45,7 +45,13 @@ export default function GameContainer(props) {
     };
 
    const [basePosition, setBasePosition] = useState(null)
-
+    const dispatchHandler = (event,ui,type)=>{dispatch({
+        type: type, 
+        payload: { 
+            x: event.screenX,
+            y: event.screenY
+        }
+    })}
 
     return <Container fluid className="h-100">
             <div className="row h-100">
@@ -58,10 +64,8 @@ export default function GameContainer(props) {
 
                         <div className="row">
                         <div className="col-sm-2 ">
-                            <Draggable position={basePosition} onStop={(event,ui)=>{setBasePosition({x:0,y:0})}} onStart={(event,ui)=>{setBasePosition(null)}}>
-                            <button >
-                                <img src={Tower_Base} width="100" height="100" /> 
-                            </button>
+                            <Draggable position={basePosition} onStop={(event,ui)=>{setBasePosition({x:0,y:0}); dispatchHandler(event,ui,"addTowerBase")}} onStart={(event,ui)=>{setBasePosition(null)}}>
+                                <img src={Tower_Base} width="100" height="100" draggable="false"/> 
                             </Draggable>
                         </div> 
                     </div>
@@ -69,30 +73,24 @@ export default function GameContainer(props) {
 
                         <div className="row">
                         <div className="col-sm-2 ">
-                        <Draggable position={basePosition} onStop={(event,ui)=>{setBasePosition({x:0,y:0})}} onStart={()=>{setBasePosition(null)}}>
-                            <button >
-                                <img src={Tower_Barrel} width="100" height="100" />
-                            </button>
+                        <Draggable position={basePosition} onStop={(event,ui)=>{setBasePosition({x:0,y:0}); dispatchHandler(event,ui,"addTowerBarrel")}} onStart={()=>{setBasePosition(null)}}>
+                                <img src={Tower_Barrel} width="100" height="100" draggable="false"/>
                             </Draggable>
                         </div> 
                     </div>
 
                         <div className="row">
                         <div className="col-sm-2 ">
-                        <Draggable position={basePosition} onStop={(event,ui)=>{setBasePosition({x:0,y:0})}} onStart={()=>{setBasePosition(null)}}>
-                            <button >
-                                <img src={Tower_Laser} width="100" height="100" />
-                            </button>
+                        <Draggable position={basePosition} onStop={(event,ui)=>{setBasePosition({x:0,y:0}); dispatchHandler(event,ui,"addTowerLaser")}} onStart={()=>{setBasePosition(null)}}>
+                                <img src={Tower_Laser} width="100" height="100" draggable="false"/>
                             </Draggable>
                         </div> 
                     </div>
                 
                         <div className="row">
                         <div className="col-sm-2 ">
-                        <Draggable position={basePosition} onStop={(event,ui)=>{setBasePosition({x:0,y:0})}} onStart={()=>{setBasePosition(null)}}>
-                            <button>
-                                <img src={Wall_Connection} width="100" height="100" /> 
-                            </button>
+                        <Draggable position={basePosition} onStop={(event,ui)=>{setBasePosition({x:0,y:0}); dispatchHandler(event,ui,"addWall")}} onStart={()=>{setBasePosition(null)}}>
+                                <img src={Wall_Connection} width="100" height="100" draggable="false"/> 
                             </Draggable>
                         </div> 
                     </div>
