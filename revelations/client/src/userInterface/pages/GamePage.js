@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useLayoutEffect } from "react";
+import React, { useEffect, useReducer, useLayoutEffect, useRef } from "react";
 
 // Engine imports
 import GameState from "../../engine/components/GameState.js";
@@ -23,61 +23,105 @@ import ProjectileLayer from "../../game/ProjectileLayer/index.js";
 // Testing imports
 import loadTestScenario from "./GameUtils/loadTestScenario.js"
 
+function convertScreenPointToMapTile(point, frame, ratio, gameState){
+  // Return false if we are not inside of the gameFrame
+  if((point.x < frame.bottomLeft.x || point.x > frame.bottomLeft.x + frame.width )  || (point.y < frame.bottomLeft.y || point.y > frame.bottomLeft.y + frame.height)){
+    return false;
+  }
+
+  // Adjust position for framesize
+  point.x = (point.x - frame.bottomLeft.x) / ratio;
+  point.y = (point.y - frame.bottomLeft.y) / ratio;
+
+  // Calculate the closest grid point to out mouse
+  const row = Math.floor(point.y / gameState.mapGrid.cellsize);
+  const col = Math.floor(point.x / gameState.mapGrid.cellsize);
+
+  try{
+    return gameState.mapGrid.tiles[GameEnums.GAME_CONFIG.mapSize.rows - row][col];
+  }
+  catch{
+    return false;
+  }
+}
+
 /**
  * @type {React.Context} Context containing the last passed version of the game state
  */
 export const GameStateContext = React.createContext({});
-function gameStateReducer(state, action){
-  switch(action.type){
-    case "initialize":
-      return action.payload;
-    case "updateGameState":
-      return {
-        frameSize: state.frameSize,
-        scaleRatio: state.scaleRatio,
-        origin: state.origin,
-        gameState: action.payload.gameState,
-        runtimeState: action.payload.runtimeState,
-        animationState: action.payload.animationState
-      };
-    case "updateFrameSize":
-      return {
-        frameSize: action.payload.frameSize,
-        scaleRatio: action.payload.scaleRatio,
-        origin: action.payload.origin,
-        gameState: state.gameState,
-        runtimeState: state.runtimeState,
-        animationState: state.animationState
-      };
-    case "addWall":
-      console.log("Performed " + action.type);
-      console.log(action.payload);
-      return state;
-    case "addTowerBase":
-      console.log("Performed " + action.type);
-      console.log(action.payload);
-      return state;
-    case "addTower":
-      console.log("Performed " + action.type);
-      console.log(action.payload);
-      return state;
-    case "selectTower":
-      console.log("Performed " + action.type);
-      return state;
-    default: throw new Error(`Action type (${action.type}) for GameState dispatch is not valid`);
-  }
-}
-
 
 function GamePage() {
 
   // Game manager setup
   let gameManager = new GameManager();
+  const manager = useRef(gameManager);
 
   /**
    * @type {[{gameState: GameState, runtimeState: RuntimeState}, (action, state)=>{gameState: GameState, runtimeState: RuntimeState}]}
    */
   const [state, dispatch] = useReducer(gameStateReducer, gameManager);
+  function gameStateReducer(state, action){
+    let tile, success, s;
+    switch(action.type){
+      case "initialize":
+        return action.payload;
+      case "updateGameState":
+        return {
+          frameSize: state.frameSize,
+          scaleRatio: state.scaleRatio,
+          origin: state.origin,
+          gameState: action.payload.gameState,
+          runtimeState: action.payload.runtimeState,
+          animationState: action.payload.animationState
+        };
+      case "updateFrameSize":
+        return {
+          frameSize: action.payload.frameSize,
+          scaleRatio: action.payload.scaleRatio,
+          origin: action.payload.origin,
+          gameState: state.gameState,
+          runtimeState: state.runtimeState,
+          animationState: state.animationState
+        };
+      case "addWall":
+        tile = convertScreenPointToMapTile(action.payload, state.frameSize, state.scaleRatio, state.gameState);
+        success = manager.current.placeWall(tile);
+        s = manager.current.getGameState();
+        return success ? state : {
+          frameSize: state.frameSize,
+          scaleRatio: state.scaleRatio,
+          origin: state.origin,
+          gameState: s.gameState,
+          runtimeState: s.runtimeState,
+          animationState: s.animationState
+        };
+      case "addTowerBase":
+        tile = convertScreenPointToMapTile(action.payload, state.frameSize, state.scaleRatio, state.gameState);
+        success = manager.current.placeBase(tile);
+        s = manager.current.getGameState();
+        return success ? state : {
+          frameSize: state.frameSize,
+          scaleRatio: state.scaleRatio,
+          origin: state.origin,
+          gameState: s.gameState,
+          runtimeState: s.runtimeState,
+          animationState: s.animationState
+        };
+      case "addTowerBarrel":
+        console.log("Performed " + action.type);
+        console.log(action.payload);
+        return state;
+      case "addTowerLaser":
+        console.log("Performed " + action.type);
+        console.log(action.payload);
+        return state;
+      case "selectTower":
+        console.log("Performed " + action.type);
+        return state;
+      default: throw new Error(`Action type (${action.type}) for GameState dispatch is not valid`);
+    }
+  }
+  
 
   function initializeGameSize(){
       const divBox = document.getElementById("gameFrame").getClientRects()[0];
@@ -87,7 +131,11 @@ function GamePage() {
           payload: {
               frameSize: {
                   height: divBox.height,
-                  width: divBox.width
+                  width: divBox.width,
+                  bottomLeft: {
+                    x: divBox.x,
+                    y: divBox.y
+                  }
               },
               scaleRatio: Math.min(divBox.height / (grid.cellsize * grid.tiles.length), divBox.width / (grid.cellsize * grid.tiles[0].length)),
               origin: {x: 0, y: 0}
@@ -109,7 +157,11 @@ function GamePage() {
       payload: { 
         frameSize: {
           height: divBox.height,
-          width: divBox.width
+          width: divBox.width,
+          bottomLeft: {
+            x: divBox.x,
+            y: divBox.y
+          }
         }, 
         scaleRatio: Math.min(divBox.height / (grid.cellsize * grid.tiles.length), divBox.width / (grid.cellsize * grid.tiles[0].length)),
         origin: {x: 0, y: 0},

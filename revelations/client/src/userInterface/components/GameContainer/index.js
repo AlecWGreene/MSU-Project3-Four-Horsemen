@@ -45,13 +45,16 @@ export default function GameContainer(props) {
     };
 
    const [basePosition, setBasePosition] = useState(null)
-    const dispatchHandler = (event,ui,type)=>{dispatch({
-        type: type, 
-        payload: { 
-            x: event.screenX,
-            y: event.screenY
-        }
-    })}
+    const dispatchHandler = (event,ui,type)=>{
+        event.stopPropagation();
+        dispatch({
+            type: type, 
+            payload: { 
+                x: event.screenX,
+                y: event.screenY
+            }
+        })
+    }
 
     return <Container fluid className="h-100">
             <div className="row h-100">

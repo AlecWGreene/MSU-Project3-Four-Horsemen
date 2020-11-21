@@ -110,6 +110,17 @@ export default class GameManager {
         }
     }
 
+    placeWall(tile){
+        if(this.gameState.wallGrid.filter(t => tile.isEqualTo(t)).length > 0
+        && this.gameState.baseGrid.filter(t => tile.isEqualTo(t)).length === 0){
+            this.gameState.baseGrid.push(tile);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     placeTower(archtype, tile){
         spawnTower(this,30000 + Object.keys(this.gameState.towerDirectory).length, archtype, tile);
     }
