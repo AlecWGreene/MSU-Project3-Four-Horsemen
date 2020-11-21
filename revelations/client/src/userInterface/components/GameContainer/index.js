@@ -10,9 +10,11 @@ import Wall_Connection from '../../assets/Wall_Connection.png';
 import Tower_Laser from '../../assets/Tower_Laser4.png';
 import Draggable from 'react-draggable';
 import { GameStateContext } from '../../pages/GamePage.js'; 
+import GameSettingsModal from '../GameSettingsModal/index';
+import LogInModal from '../LogInModal/index'
 
 // Button images
-import bigButton from "../../assets/big-red-btn.png"
+import redButton from "../../assets/red-btn.png"
 
 import "./style.css";
 
@@ -100,6 +102,8 @@ export default function GameContainer(props) {
                             </Draggable>
                         </div> 
                     </div>
+                </div> 
+                </div>
                 
                         <div className="row">
                         <div className="col-sm-2 ">
@@ -109,65 +113,35 @@ export default function GameContainer(props) {
                         </div> 
                     </div>
 
-                        <div className="row ">
-                            <div className="col">
-                                <button>
-                                <img className="bg-red-btn" src={bigButton} />
-                                </button>
+                <div className="side-bar">
+                    <div className="side-bar-container">
+                        <div className="row justify-content-center">
+                            <div className="col-sm-5">
+                                <Draggable position={basePosition} onStop={(event,ui)=>{setBasePosition({x:0,y:0}); dispatchHandler(event,ui,"addTowerBase")}} onStart={(event,ui)=>{setBasePosition(null)}}>
+                                    <img src={Tower_Base} width="75" height="75" draggable="false"/> 
+                                </Draggable>
+                            </div> 
+                            <div className="col-sm-5">
+                                <Draggable position={basePosition} onStop={(event,ui)=>{setBasePosition({x:0,y:0}); dispatchHandler(event,ui,"addTowerBarrel")}} onStart={()=>{setBasePosition(null)}}>
+                                        <img src={Tower_Barrel} width="75" height="75" draggable="false"/>
+                                </Draggable>
                             </div>
                         </div>
 
-                        <div className="row">
-                            <div className="col-sm-2 ">
-                                <button 
-                                className="custom-options-btn aldrich-font"
-                                type="button"
-                                style={{width: '15vw'}}
-                                type="button">
-                                    Settings
-                                </button>
-                            </div>
+                        <div className="row justify-content-center">
+                            <div className="col-sm-5">
+                                <Draggable position={basePosition} onStop={(event,ui)=>{setBasePosition({x:0,y:0}); dispatchHandler(event,ui,"addWall")}} onStart={()=>{setBasePosition(null)}}>
+                                    <img src={Wall_Connection} width="75" height="75" draggable="false"/> 
+                                </Draggable>
+                            </div> 
+                            <div className="col-sm-5">
+                                <Draggable position={basePosition} onStop={(event,ui)=>{setBasePosition({x:0,y:0}); dispatchHandler(event,ui,"addTowerLaser")}} onStart={()=>{setBasePosition(null)}}>
+                                    <img src={Tower_Laser} width="75" height="75" draggable="false"/>
+                                </Draggable>
+                            </div> 
                         </div>
-
-                        <div className="row ">
-                            <div className="col-sm-2 ">
-                                <button
-                                className="custom-options-btn aldrich-font"
-                                type="button"
-                                style={{width: '15vw'}}
-                                onClick={userLogout}
-                                >
-                                    {auth.user.auth === "user" ? "Quit" : "Abdandon Game" }
-                                </button>
-                            </div>
-                        </div>
-
-                        <div className="row">
-                            <div className="col-sm-2">
-                                <button
-                                className="custom-options-btn aldrich-font"
-                                type="button"
-                                style={{width: '15vw'}}
-                                type="button"
-                                >
-                                    Save
-                                </button> 
-                            </div>
-                        </div>
-                        
-                        <div className="row">
-                            <div className="col-sm-2 ">
-                                <button
-                                className="custom-options-btn aldrich-font"
-                                type="button"
-                                style={{width: '15vw'}}
-                                onClick={handleDelete}
-                                disabled={isGuest}
-                                >
-                                    Delete Account
-                                </button>
-                            </div>
-                        </div>
+                    </div>
+                </div>
 
                       
 
@@ -193,15 +167,43 @@ export default function GameContainer(props) {
                             </div>
                         </div>
 
-                          {/* User Info */}
+               
 
-                        <div className="row">
-                            <div id="customFont" className="col-sm-12 username text-center">
-                                { username }
-                            </div>
-                        </div>
-                    </div>                  
-                </div> 
-            </div> 
-      </Container>
+                {/* Play|Pause buttons */}
+                <div className="row">
+                    <div className="col-sm-4">
+                        <button 
+                        class="playpause-btn aldrich-font"
+                        type="button"
+                        >
+                        PLAY
+                        </button>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-sm-4">
+                        <button 
+                        class="playpause-btn aldrich-font"
+                        type="button"
+                        >
+                            PAUSE
+                        </button>
+                    </div>
+                </div>
+
+                <div className="row">
+                    <div className="col-sm-2 ">
+                        <button 
+                        // className="custom-options-btn aldrich-font"
+                        type="button"
+                        style={{width: '15vw'}}
+                        type="button">
+                            <GameSettingsModal />
+                        </button>
+                    </div>
+                </div>
+                
+            </div>             
+        </div> 
+    </Container>
 }
