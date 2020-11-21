@@ -1,4 +1,4 @@
-import React, {render} from "react";
+import React from "react";
 import LogIn from "../../pages/LogIn";
 import './style.css';
 
@@ -23,8 +23,5 @@ function Modal() {
   }
 
 
-
-
   export default Modal;
   
-//   render(<App />);
