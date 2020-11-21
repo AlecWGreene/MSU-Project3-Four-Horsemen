@@ -1,5 +1,5 @@
 // Game container holds the game screen and buttons/ features for user control.
-import React from 'react';
+import React, {useState, useContext} from 'react';
 import { useAuth } from "../../components/UserAuth";
 import API from "../../../utils/API"
 import history from "../../../utils/history";
