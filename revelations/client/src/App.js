@@ -14,6 +14,7 @@ import GamePage from "./userInterface/pages/GamePage";
 import ContentWrapper from "./userInterface/components/Wrapper/ContentWrapper";
 import GameContainer from "./userInterface/components/GameContainer/index"
 import HomePage from "./userInterface/pages/HomePage";
+import LoadingPage from "./userInterface/pages/LoadingPage"
 
 
 function App() {
@@ -56,9 +57,9 @@ function App() {
                 <GamePage />
               </PrivateRoute>
 
-              {/* <Route>
-                <NoMatch />
-              </Route> */}
+              <PreventReverse path="/loading">
+                <LoadingPage />
+              </PreventReverse>
 
             </Switch>
 

@@ -71,14 +71,14 @@ function SignUp(props) {
         centered
       >
       <Modal.Body>
-        <div className="custom-padding text-center">
-          <div id="codaFont" className="form-group">
+        <div className="custom-padding">
+          <div id="codaFont" className="form-group text-center">
             <label id="customFont" htmlFor="username">USERNAME</label>
-            <input type="username" className="form-control" id="username" value={formState.username} onChange={handleInputChange} placeholder="user123" />
+            <input type="username" className="form-control text-center" id="username" value={formState.username} onChange={handleInputChange} placeholder="user123" />
           </div>
           <div className="form-group text-center">
             <label id="customFont" htmlFor="password">PASSWORD</label>
-            <input type="password" className="form-control" value={formState.password} onChange={handleInputChange} id="password" />
+            <input type="password" className="form-control text-center" value={formState.password} onChange={handleInputChange} id="password" />
           </div>
           <button 
             type="submit" 
