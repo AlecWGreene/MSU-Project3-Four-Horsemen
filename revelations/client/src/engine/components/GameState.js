@@ -25,6 +25,7 @@ import CreepEntity from "../entities/CreepEntity.js";
  * @property {Tile[][]} pathDirectory Collection of paths for creeps corresponding to the sources
  * @property {Tile[]} baseGrid Array of tiles which have tower bases on them
  * @property {Tile[]} wallGrid Array of tiles which have walls on them
+ * @property {Tile[]} towerGrid Array of tiles which have towers on them
  * @property {Object.<string, any>} pathData Path data for pathfinding and other such algorithms
  */
 class GameState {
@@ -43,6 +44,7 @@ class GameState {
             this.pathDirectory = stateData.pathDirectory || [];
             this.baseGrid = stateData.baseGrid || [];
             this.pathData = stateData.pathData || {};
+            this.towerGrid = stateData.towerGrid || [];
         }
         else{
             this.creepDirectory = {};
@@ -58,6 +60,7 @@ class GameState {
             this.pathDirectory = [];
             this.baseGrid = [];
             this.pathData = {};
+            this.towerGrid = [];
         }
     }
 }

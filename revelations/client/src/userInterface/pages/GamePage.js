@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useLayoutEffect } from "react";
+import React, { useEffect, useReducer, useLayoutEffect, useRef } from "react";
 
 // Engine imports
 import GameState from "../../engine/components/GameState.js";
@@ -23,11 +23,9 @@ import ProjectileLayer from "../../game/ProjectileLayer/index.js";
 // Testing imports
 import loadTestScenario from "./GameUtils/loadTestScenario.js"
 
-/**
- * @type {React.Context} Context containing the last passed version of the game state
- */
-export const GameStateContext = React.createContext({});
 function gameStateReducer(state, action){
+  let tile, success, s;
+  const manager = action.manager;
   switch(action.type){
     case "initialize":
       return action.payload;
@@ -50,17 +48,66 @@ function gameStateReducer(state, action){
         animationState: state.animationState
       };
     case "addWall":
-      console.log("Performed " + action.type);
-      console.log(action.payload);
-      return state;
+      console.log("Dispatched");
+      tile = convertScreenPointToMapTile(action.payload, state.frameSize, state.scaleRatio, state.gameState);
+      if(tile === false) return state;
+      success = manager.current.placeWall(tile);
+      if(success === false) return state;
+      
+      s = manager.current.getGameState();
+      return {
+        frameSize: state.frameSize,
+        scaleRatio: state.scaleRatio,
+        origin: state.origin,
+        gameState: s.gameState,
+        runtimeState: s.runtimeState,
+        animationState: s.animationState
+      };
     case "addTowerBase":
-      console.log("Performed " + action.type);
-      console.log(action.payload);
-      return state;
-    case "addTower":
-      console.log("Performed " + action.type);
-      console.log(action.payload);
-      return state;
+      tile = convertScreenPointToMapTile(action.payload, state.frameSize, state.scaleRatio, state.gameState);
+      if(tile === false) return state;
+      success = manager.current.placeBase(tile);
+      if(success === false) return state;
+      
+      s = manager.current.getGameState();
+      return {
+        frameSize: state.frameSize,
+        scaleRatio: state.scaleRatio,
+        origin: state.origin,
+        gameState: s.gameState,
+        runtimeState: s.runtimeState,
+        animationState: s.animationState
+      };
+    case "addTowerBarrel":
+      tile = convertScreenPointToMapTile(action.payload, state.frameSize, state.scaleRatio, state.gameState);
+      if(tile === false) return state;
+      success = manager.current.placeTower("test_tower1",tile);
+      if(success === false) return state;
+
+      s = manager.current.getGameState();
+      return {
+        frameSize: state.frameSize,
+        scaleRatio: state.scaleRatio,
+        origin: state.origin,
+        gameState: s.gameState,
+        runtimeState: s.runtimeState,
+        animationState: s.animationState
+      };
+    case "addTowerLaser":
+      tile = convertScreenPointToMapTile(action.payload, state.frameSize, state.scaleRatio, state.gameState);
+      if(tile === false) return state;
+      success = manager.current.placeTower("test_tower2",tile);
+      if(success === false) return state;
+
+      s = manager.current.getGameState();
+      return {
+        frameSize: state.frameSize,
+        scaleRatio: state.scaleRatio,
+        origin: state.origin,
+        gameState: s.gameState,
+        runtimeState: s.runtimeState,
+        animationState: s.animationState
+      };
     case "selectTower":
       console.log("Performed " + action.type);
       return state;
@@ -68,26 +115,62 @@ function gameStateReducer(state, action){
   }
 }
 
+function convertScreenPointToMapTile(point, frame, ratio, gameState){
+  const cellsize = gameState.mapGrid.cellsize;
+  // Return false if we are not inside of the gameFrame
+  if((point.x < frame.bottomLeft.x || point.x > frame.bottomLeft.x + frame.width )  || (point.y < frame.bottomLeft.y || point.y > frame.bottomLeft.y + frame.height)){
+    return false;
+  }
+
+  // Adjust position for framesize
+  point.x = (point.x - frame.bottomLeft.x) / ratio;
+  point.y = (point.y - frame.bottomLeft.y) / ratio;
+
+  // Calculate the closest grid point to out mouse
+  const row = GameEnums.GAME_CONFIG.mapSize.rows - Math.floor(point.y / cellsize);
+  const col = Math.floor(point.x / cellsize);
+
+  // Check if a grid point is close
+  try{
+    return gameState.mapGrid.tiles[row][col];
+  }
+  catch{
+    return false;
+  }
+}
+
+/**
+ * @type {React.Context} Context containing the last passed version of the game state
+ */
+export const GameStateContext = React.createContext({});
 
 function GamePage() {
 
   // Game manager setup
   let gameManager = new GameManager();
+  const manager = useRef(gameManager);
 
   /**
    * @type {[{gameState: GameState, runtimeState: RuntimeState}, (action, state)=>{gameState: GameState, runtimeState: RuntimeState}]}
    */
   const [state, dispatch] = useReducer(gameStateReducer, gameManager);
+  
+  
 
   function initializeGameSize(){
       const divBox = document.getElementById("gameFrame").getClientRects()[0];
       const grid = gameManager.gameState.mapGrid;
       dispatch({
           type: "updateFrameSize",
+          manager: manager,
           payload: {
               frameSize: {
                   height: divBox.height,
-                  width: divBox.width
+                  width: divBox.width,
+                  bottomLeft: {
+                    x: divBox.x,
+                    y: divBox.y
+                  }
               },
               scaleRatio: Math.min(divBox.height / (grid.cellsize * grid.tiles.length), divBox.width / (grid.cellsize * grid.tiles[0].length)),
               origin: {x: 0, y: 0}
@@ -106,10 +189,15 @@ function GamePage() {
     const grid = gameManager.gameState.mapGrid; 
     dispatch({
       type: "initialize",
+      manager: manager,
       payload: { 
         frameSize: {
           height: divBox.height,
-          width: divBox.width
+          width: divBox.width,
+          bottomLeft: {
+            x: divBox.x,
+            y: divBox.y
+          }
         }, 
         scaleRatio: Math.min(divBox.height / (grid.cellsize * grid.tiles.length), divBox.width / (grid.cellsize * grid.tiles[0].length)),
         origin: {x: 0, y: 0},
@@ -122,8 +210,17 @@ function GamePage() {
     });
 
     initializeGameSize();
-    setTimeout(() => gameManager.sendWave(), 3000)
-    
+    setTimeout(() => gameManager.sendWave(), 3000);
+    setTimeout(() => {
+      dispatch({
+        type: "addWall",
+        manager: manager,
+        payload: {
+          x: 200,
+          y: 200
+        }
+      });
+    },1200)
   },[]);
 
   // Called on every render

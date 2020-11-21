@@ -110,8 +110,27 @@ export default class GameManager {
         }
     }
 
+    placeBase(tile){
+        if(this.gameState.wallGrid.filter(t => tile.isEqualTo(t)).length > 0
+        && this.gameState.baseGrid.filter(t => tile.isEqualTo(t)).length === 0){
+            this.gameState.baseGrid.push(tile);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     placeTower(archtype, tile){
-        spawnTower(this,30000 + Object.keys(this.gameState.towerDirectory).length, archtype, tile);
+        const id = 30000 + Object.keys(this.gameState.towerDirectory).length;
+        const success = spawnTower(this, id, archtype, tile);
+        if(success){
+            this.gameState.towerGrid.push(tile);
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     convertWorldPointToTile(x, y){
