@@ -36,7 +36,7 @@ function Sprite(props){
                   leftOffsetRatio={props.leftOffsetRatio}  
                   imgScale={props.imgScale} 
                   parentSize={props.parentSize}
-                  onClickCapture={}>
+                  onClickCapture={props.clickHandler}>
         <Image src={props.src} offset={props.offset || 0} rotation={props.rotation} onClickCapture={props.clickHandler}/>
     </Frame>
 }
