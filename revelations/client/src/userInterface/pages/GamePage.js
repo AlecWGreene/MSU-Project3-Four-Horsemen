@@ -122,7 +122,7 @@ function GamePage() {
     });
 
     initializeGameSize();
-    setTimeout(() => gameManager.sendWave(), 3000)
+    //setTimeout(() => gameManager.sendWave(), 3000)
     
   },[]);
 

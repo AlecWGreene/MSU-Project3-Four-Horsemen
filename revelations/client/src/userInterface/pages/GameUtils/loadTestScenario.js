@@ -18,9 +18,6 @@ export default function loadTestScenario(manager){
 
     manager.placeTower("test_tower1", manager.gameState.mapGrid.tiles[8][9]);
     const tower = manager.gameState.towerDirectory[30000]
-    const pos = {
-        x: tower.transform.position.x + tower.data.barrels[0].x * manager.gameState.mapGrid.cellsize,
-        y: tower.transform.position.y + tower.data.barrels[0].y * manager.gameState.mapGrid.cellsize
-    }
-    //spawnProjectile(tower.data.id, pos, manager);
+    tower.transform.rotation =  4 * Math.PI / 3;
+    spawnProjectile(tower.data.id, 0, manager);
 }

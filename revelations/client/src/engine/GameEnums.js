@@ -52,7 +52,7 @@ export default {
     TOWER_PREFABS: {
         "test_tower1": {
             name: "test_tower1",
-            data: new TowerData(0, "test_tower1", "Tower_1Barrel", "Laser_Bolt_Yellow", [{x: 0, y: 1}], 0),
+            data: new TowerData(0, "test_tower1", "Tower_1Barrel", "Laser_Bolt_Yellow", [{x: 1, y: 0}], 0),
             stats: new TowerStats(150, 30, 180 * (Math.PI / 180), 2, false, tickLength),
             damageData: new DamageData(1, 0, []),
             upgradeTree: new UpgradeTree()

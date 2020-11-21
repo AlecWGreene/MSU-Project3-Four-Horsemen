@@ -24,14 +24,14 @@ function ProjectileLayer(props){
                         y: state.origin.y
                     }
                     return <Animator 
-                            height={state.gameState.mapGrid.cellsize}
-                            width={state.gameState.mapGrid.cellsize}
+                            height={imgData.height}
+                            width={imgData.width}
                             imgData={imgData}
                             position={convertWorldPointToScreenPoint(entry[1].transform.position, state.scaleRatio, origin)}
-                            rotation={180 / Math.PI  * entry[1].transform.rotation}
-                            leftOffsetRatio={-0.5}
-                            bottomOffsetRatio={0}    
-                            scale={state.scaleRatio}
+                            rotation={-180 / Math.PI  * entry[1].transform.rotation}
+                            leftOffsetRatio={0}
+                            bottomOffsetRatio={-0.5}    
+                            scale={state.scaleRatio * imgData.scale}
                             key={entry[0]}
                             />
                 }) 
