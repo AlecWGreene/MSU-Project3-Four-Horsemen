@@ -86,13 +86,13 @@ function GamePage() {
           animationState: state.animationState
         };
       case "addWall":
+        console.log("Dispatched");
         tile = convertScreenPointToMapTile(action.payload, state.frameSize, state.scaleRatio, state.gameState);
         if(tile === false) return state;
         success = manager.current.placeWall(tile);
         if(success === false) return state;
         
         s = manager.current.getGameState();
-        manager.current.updateCallback();
         return {
           frameSize: state.frameSize,
           scaleRatio: state.scaleRatio,
@@ -108,7 +108,6 @@ function GamePage() {
         if(success === false) return state;
         
         s = manager.current.getGameState();
-        manager.current.updateCallback();
         return {
           frameSize: state.frameSize,
           scaleRatio: state.scaleRatio,
@@ -124,7 +123,7 @@ function GamePage() {
         if(success === false) return state;
 
         s = manager.current.getGameState();
-        manager.current.updateCallback();
+        requestAnimationFrame(manager.current.updateCallback);
         return {
           frameSize: state.frameSize,
           scaleRatio: state.scaleRatio,
@@ -208,8 +207,7 @@ function GamePage() {
     });
 
     initializeGameSize();
-    setTimeout(() => gameManager.sendWave(), 3000)
-    
+    setTimeout(() => gameManager.sendWave(), 3000);
   },[]);
 
   // Called on every render

@@ -1,5 +1,5 @@
 // Game container holds the game screen and buttons/ features for user control.
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import { useAuth } from "../../components/UserAuth";
 import API from "../../../utils/API"
 import history from "../../../utils/history";
@@ -13,11 +13,6 @@ import { GameStateContext } from '../../pages/GamePage.js';
 
 // Button images
 import bigButton from "../../assets/big-red-btn.png"
-
-// Import button handlers
-import addTower from "../../pages/GameUtils/addTower.js";
-import addTowerBase from "../../pages/GameUtils/addTowerBase.js";
-import addWall from "../../pages/GameUtils/addWall.js";
 
 import "./style.css";
 
@@ -44,17 +39,33 @@ export default function GameContainer(props) {
             })
     };
 
-   const [basePosition, setBasePosition] = useState(null)
-    const dispatchHandler = (event,ui,type)=>{
-        event.stopPropagation();
-        dispatch({
-            type: type, 
-            payload: { 
-                x: event.screenX,
-                y: event.screenY
-            }
-        })
-    }
+    const dispatchHandler = useRef(null);
+
+    useEffect(() => {
+        dispatchHandler.current = (event,ui,type)=>{
+            event.stopPropagation();
+            event.cancelBubbles = true;
+            dispatch({
+                type: type, 
+                payload: { 
+                    x: event.screenX,
+                    y: event.screenY,
+                    data: {
+                        event: event,
+                        instance: this,
+                        ui: ui,
+                        args: arguments
+                    }
+                }
+            })
+        }
+    }, []);
+    
+
+    const [basePosition, setBasePosition] = useState(null);
+    const [wallPosition, setWallPosition] = useState(null);
+    const [barrelPosition, setBarrelPosition] = useState(null);
+    const [laserPosition, setLaserPosition] = useState(null);
 
     return <Container fluid className="h-100">
             <div className="row h-100">
@@ -67,7 +78,7 @@ export default function GameContainer(props) {
 
                         <div className="row">
                         <div className="col-sm-2 ">
-                            <Draggable position={basePosition} onStop={(event,ui)=>{setBasePosition({x:0,y:0}); dispatchHandler(event,ui,"addTowerBase")}} onStart={(event,ui)=>{setBasePosition(null)}}>
+                            <Draggable position={basePosition} onStop={(event,ui)=>{setBasePosition({x:0,y:0}); dispatchHandler.current(event,ui,"addTowerBase");}} onStart={(event,ui)=>{setBasePosition(null)}}>
                                 <img src={Tower_Base} width="100" height="100" draggable="false"/> 
                             </Draggable>
                         </div> 
@@ -76,7 +87,7 @@ export default function GameContainer(props) {
 
                         <div className="row">
                         <div className="col-sm-2 ">
-                        <Draggable position={basePosition} onStop={(event,ui)=>{setBasePosition({x:0,y:0}); dispatchHandler(event,ui,"addTowerBarrel")}} onStart={()=>{setBasePosition(null)}}>
+                        <Draggable position={barrelPosition} onStop={(event,ui)=>{setBarrelPosition({x:0,y:0}); dispatchHandler.current(event,ui,"addTowerBarrel")}} onStart={()=>{setBarrelPosition(null)}}>
                                 <img src={Tower_Barrel} width="100" height="100" draggable="false"/>
                             </Draggable>
                         </div> 
@@ -84,7 +95,7 @@ export default function GameContainer(props) {
 
                         <div className="row">
                         <div className="col-sm-2 ">
-                        <Draggable position={basePosition} onStop={(event,ui)=>{setBasePosition({x:0,y:0}); dispatchHandler(event,ui,"addTowerLaser")}} onStart={()=>{setBasePosition(null)}}>
+                        <Draggable position={laserPosition} onStop={(event,ui)=>{setLaserPosition({x:0,y:0}); dispatchHandler.current(event,ui,"addTowerLaser")}} onStart={()=>{setLaserPosition(null)}}>
                                 <img src={Tower_Laser} width="100" height="100" draggable="false"/>
                             </Draggable>
                         </div> 
@@ -92,7 +103,7 @@ export default function GameContainer(props) {
                 
                         <div className="row">
                         <div className="col-sm-2 ">
-                        <Draggable position={basePosition} onStop={(event,ui)=>{setBasePosition({x:0,y:0}); dispatchHandler(event,ui,"addWall")}} onStart={()=>{setBasePosition(null)}}>
+                        <Draggable position={wallPosition} onStop={(event,ui)=>{setWallPosition({x:0,y:0});  dispatchHandler.current(event,ui,"addWall");}} onStart={()=>{setWallPosition(null)}}>
                                 <img src={Wall_Connection} width="100" height="100" draggable="false"/> 
                             </Draggable>
                         </div> 
@@ -164,7 +175,7 @@ export default function GameContainer(props) {
                         <div className="row">
                             <div className="col-sm-4">
                                 <button 
-                                class="playpause-btn aldrich-font"
+                                className="playpause-btn aldrich-font"
                                 type="button"
                                 >
                                 PLAY
@@ -174,7 +185,7 @@ export default function GameContainer(props) {
                         <div className="row">
                             <div className="col-sm-4">
                                 <button 
-                                class="playpause-btn aldrich-font"
+                                className="playpause-btn aldrich-font"
                                 type="button"
                                 >
                                     PAUSE
