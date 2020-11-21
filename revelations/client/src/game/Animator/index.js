@@ -17,9 +17,10 @@ const Container = styled.div`
     width: ${(props) => props.width}px;
     left: ${({position}) => position.x}px; 
     bottom: ${({position}) => position.y}px;
-    transition: offset transform 100ms;
     transform-origin: center;
-    transform: rotate(${({rotation}) => rotation}deg);
+    transform: rotate(${(props) => {
+        return props.rotation;
+    }}deg);
 `;
 
 /** 
