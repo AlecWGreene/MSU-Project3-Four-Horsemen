@@ -122,7 +122,7 @@ export default class GameManager {
     }
 
     placeTower(archtype, tile){
-        spawnTower(this,30000 + Object.keys(this.gameState.towerDirectory).length, archtype, tile);
+        return spawnTower(this,30000 + Object.keys(this.gameState.towerDirectory).length, archtype, tile);
     }
 
     convertWorldPointToTile(x, y){

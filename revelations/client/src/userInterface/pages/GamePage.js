@@ -87,12 +87,13 @@ function GamePage() {
         };
       case "addWall":
         tile = convertScreenPointToMapTile(action.payload, state.frameSize, state.scaleRatio, state.gameState);
-        if(!tile){
-          return state;
-        }
+        if(tile === false) return state;
         success = manager.current.placeWall(tile);
+        if(success === false) return state;
+        
         s = manager.current.getGameState();
-        return success ? state : {
+        manager.current.updateCallback();
+        return {
           frameSize: state.frameSize,
           scaleRatio: state.scaleRatio,
           origin: state.origin,
@@ -104,7 +105,10 @@ function GamePage() {
         tile = convertScreenPointToMapTile(action.payload, state.frameSize, state.scaleRatio, state.gameState);
         if(tile === false) return state;
         success = manager.current.placeBase(tile);
+        if(success === false) return state;
+        
         s = manager.current.getGameState();
+        manager.current.updateCallback();
         return {
           frameSize: state.frameSize,
           scaleRatio: state.scaleRatio,
@@ -117,7 +121,10 @@ function GamePage() {
         tile = convertScreenPointToMapTile(action.payload, state.frameSize, state.scaleRatio, state.gameState);
         if(tile === false) return state;
         success = manager.current.placeTower("test_tower1",tile);
+        if(success === false) return state;
+
         s = manager.current.getGameState();
+        manager.current.updateCallback();
         return {
           frameSize: state.frameSize,
           scaleRatio: state.scaleRatio,
