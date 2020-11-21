@@ -17,9 +17,10 @@ const Container = styled.div`
     width: ${(props) => props.width}px;
     left: ${({position}) => position.x}px; 
     bottom: ${({position}) => position.y}px;
-    transition: offset transform 100ms;
     transform-origin: center;
-    transform: rotate(${({rotation}) => rotation}deg);
+    transform: rotate(${(props) => {
+        return props.rotation;
+    }}deg);
 `;
 
 /** 
@@ -28,8 +29,6 @@ const Container = styled.div`
  * 
  * @example
  * <Animator imgData={SPRITE_ENUMS["spaceship_red"]} scale={0.2} key={20095} />
- * 
- * @param {{imgData: {src: string, height: number, width: number, numFrames: number, scale: number}, position: {x: number, y: number}, scale: number, key: number }} props
  */
 function Animator(props){
     // Setup component states
@@ -82,6 +81,9 @@ function Animator(props){
          scale={props.scale * props.imgData.scale}
          imgScale={props.width  / (props.imgData.width / props.imgData.numFrames)}
          parentSize={props.width * props.scale}
+         bottomOffsetRatio={props.bottomOffsetRatio}
+         leftOffsetRatio={props.leftOffsetRatio}
+         clickHandler={props.clickHandler}
          offset={offset}
         />
     </Container>

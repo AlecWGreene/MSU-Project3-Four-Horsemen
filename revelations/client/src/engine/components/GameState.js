@@ -31,6 +31,7 @@ class GameState {
     constructor(stateData){
         if(stateData){
             this.creepDirectory = stateData.creepDirectory || {};
+            this.projectileDirectory = stateData.projectileDirectory || {};
             this.towerDirectory = stateData.towerDirectory || {};
             this.wallGrid = stateData.wallGrid || [];
             this.playerLives = stateData.playerLives || Enums.GAME_CONFIG.startLives;
@@ -45,6 +46,7 @@ class GameState {
         }
         else{
             this.creepDirectory = {};
+            this.projectileDirectory = {};
             this.towerDirectory = {};
             this.wallGrid = [];
             this.playerLives = Enums.GAME_CONFIG.startLives;

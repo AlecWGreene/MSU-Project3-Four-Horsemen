@@ -50,7 +50,6 @@ function processTick(manager) {
 
     manager.runtimeState.waveTime += GameEnums.GAME_CONFIG.tickLength;
     requestAnimationFrame(manager.updateCallback);
-    const x = 0;
 }
 
 export default processTick;

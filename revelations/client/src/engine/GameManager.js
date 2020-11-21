@@ -47,6 +47,7 @@ export default class GameManager {
         this.animationState = {
             towers: []
         }
+        this.numberWaves = Object.keys(GameEnums.WAVE_CONFIG).length;
     }
 
     init(grid, sourceArray, target){
@@ -67,21 +68,26 @@ export default class GameManager {
      * 
      */
     sendWave(waveConfig){
-        if(this.runtimeState.isPaused){
+        if(this.runtimeState.isPaused || !this.runtimeState.isWaveRunning){
             if(!this.runtimeState.isWaveRunning){
                 // Set up to next 
                 this.gameState.waveIndex++;
                 this.runtimeState.isWaveRunning = true;
                 this.runtimeState.isPaused = false;
 
-                this.gameState.pathDirectory = findPaths(this.gameState.sourceArray, this.gameState.target, this.gameState.wallGrid, this.gameState.mapGrid, getEuclideanDistance, undefined, undefined, this.gameState?.pathData);
+                // If there are no waves left, end game
+                if(this.gameState.waveIndex > this.numberWaves){
+                    this.runtimeState.isWaveRunning = false;
+                    this.runtimeState.isGameOver = true;
+                    clearInterval(this.tickInterval);
+                }
 
+                this.gameState.pathDirectory = findPaths(this.gameState.sourceArray, this.gameState.target, this.gameState.wallGrid, this.gameState.mapGrid, getEuclideanDistance, undefined, undefined, this.gameState?.pathData);
+                this.runtimeState.totalWaveTime = GameEnums.WAVE_CONFIG[this.gameState.waveIndex].reduce((aggregate, current) => aggregate + current.delay, 0);
             }
 
             this.tickInterval=setInterval(processTick.bind(arguments[0]), GameEnums.GAME_CONFIG.tickLength, this);
         }
-
-        
     }
 
     getGameState(){
