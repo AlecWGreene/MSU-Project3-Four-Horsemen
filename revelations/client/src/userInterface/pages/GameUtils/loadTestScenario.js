@@ -22,5 +22,5 @@ export default function loadTestScenario(manager){
         x: tower.transform.position.x + tower.data.barrels[0].x * manager.gameState.mapGrid.cellsize,
         y: tower.transform.position.y + tower.data.barrels[0].y * manager.gameState.mapGrid.cellsize
     }
-    spawnProjectile(tower.data.id, pos, manager);
+    //spawnProjectile(tower.data.id, pos, manager);
 }

@@ -171,6 +171,30 @@ function removeStartAnimationFlag(tower, manager){
 }
 
 /**
+ * @function calculateAngleDifference
+ * @memberof module:Systems.controlTowers
+ * 
+ * @description Calculate the shortest angle between two angles preserving direction
+ * 
+ * @param {number} start Beginning angle in radians
+ * @param {number} end Destination angle in radians
+ * 
+ * @returns {number}
+ */
+function calculateAngleDifference(start, end){
+    let diff = end - start;
+    
+    if(Math.abs(diff) > Math.PI){
+        if(diff < 0){
+            return diff + 2 * Math.PI;
+        }
+        return 2 * Math.PI - diff;
+    }   
+    else{
+        return diff;
+    }
+}
+/**
  * @function controlTowers
  * @memberof module:Systems.controlTowers
  * 
@@ -220,10 +244,7 @@ function controlTowers(manager){
 
                 // Adjust tower rotation to lead towers and rotate in the shortest direction
                 const angle = Math.atan2((creep.transform.position.y + creepDirection.y * 0.1) - tower.transform.position.y, (creep.transform.position.x + creepDirection.x * 0.1) - tower.transform.position.x);
-                const positiveAngle = angle > 0 ? angle : (2 * Math.PI - angle);
-                const angleDiff = positiveAngle - tower.transform.rotation;
-                const angleToRotate = (angleDiff > 0 ? angleDiff : (2 * Math.PI - angleDiff)) % (2 * Math.PI);
-                console.log(angleToRotate);
+                const angleToRotate = calculateAngleDifference(tower.transform.rotation, angle);
 
                 // If tower can rotate to lead it
                 if(Math.abs(angleToRotate) <= tower.stats.rotateSpeed){
