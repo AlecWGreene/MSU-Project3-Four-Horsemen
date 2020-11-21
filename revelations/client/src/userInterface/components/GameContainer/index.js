@@ -37,28 +37,6 @@ export default function GameContainer(props) {
               auth.logout(() => { history.push("/") })
             })
     };
-
-    const dispatchHandler = useRef(null);
-
-    useEffect(() => {
-        dispatchHandler.current = (event,ui,type)=>{
-            event.stopPropagation();
-            event.cancelBubbles = true;
-            dispatch({
-                type: type, 
-                payload: { 
-                    x: event.screenX,
-                    y: event.screenY,
-                    data: {
-                        event: event,
-                        instance: this,
-                        ui: ui,
-                        args: arguments
-                    }
-                }
-            })
-        }
-    }, []);
     
     return <Container fluid className="h-100">
         <div className="row h-100">

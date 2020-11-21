@@ -23,6 +23,98 @@ import ProjectileLayer from "../../game/ProjectileLayer/index.js";
 // Testing imports
 import loadTestScenario from "./GameUtils/loadTestScenario.js"
 
+function gameStateReducer(state, action){
+  let tile, success, s;
+  const manager = action.manager;
+  switch(action.type){
+    case "initialize":
+      return action.payload;
+    case "updateGameState":
+      return {
+        frameSize: state.frameSize,
+        scaleRatio: state.scaleRatio,
+        origin: state.origin,
+        gameState: action.payload.gameState,
+        runtimeState: action.payload.runtimeState,
+        animationState: action.payload.animationState
+      };
+    case "updateFrameSize":
+      return {
+        frameSize: action.payload.frameSize,
+        scaleRatio: action.payload.scaleRatio,
+        origin: action.payload.origin,
+        gameState: state.gameState,
+        runtimeState: state.runtimeState,
+        animationState: state.animationState
+      };
+    case "addWall":
+      console.log("Dispatched");
+      tile = convertScreenPointToMapTile(action.payload, state.frameSize, state.scaleRatio, state.gameState);
+      if(tile === false) return state;
+      success = manager.current.placeWall(tile);
+      if(success === false) return state;
+      
+      s = manager.current.getGameState();
+      return {
+        frameSize: state.frameSize,
+        scaleRatio: state.scaleRatio,
+        origin: state.origin,
+        gameState: s.gameState,
+        runtimeState: s.runtimeState,
+        animationState: s.animationState
+      };
+    case "addTowerBase":
+      tile = convertScreenPointToMapTile(action.payload, state.frameSize, state.scaleRatio, state.gameState);
+      if(tile === false) return state;
+      success = manager.current.placeBase(tile);
+      if(success === false) return state;
+      
+      s = manager.current.getGameState();
+      return {
+        frameSize: state.frameSize,
+        scaleRatio: state.scaleRatio,
+        origin: state.origin,
+        gameState: s.gameState,
+        runtimeState: s.runtimeState,
+        animationState: s.animationState
+      };
+    case "addTowerBarrel":
+      tile = convertScreenPointToMapTile(action.payload, state.frameSize, state.scaleRatio, state.gameState);
+      if(tile === false) return state;
+      success = manager.current.placeTower("test_tower1",tile);
+      if(success === false) return state;
+
+      s = manager.current.getGameState();
+      return {
+        frameSize: state.frameSize,
+        scaleRatio: state.scaleRatio,
+        origin: state.origin,
+        gameState: s.gameState,
+        runtimeState: s.runtimeState,
+        animationState: s.animationState
+      };
+    case "addTowerLaser":
+      tile = convertScreenPointToMapTile(action.payload, state.frameSize, state.scaleRatio, state.gameState);
+      if(tile === false) return state;
+      success = manager.current.placeTower("test_tower2",tile);
+      if(success === false) return state;
+
+      s = manager.current.getGameState();
+      return {
+        frameSize: state.frameSize,
+        scaleRatio: state.scaleRatio,
+        origin: state.origin,
+        gameState: s.gameState,
+        runtimeState: s.runtimeState,
+        animationState: s.animationState
+      };
+    case "selectTower":
+      console.log("Performed " + action.type);
+      return state;
+    default: throw new Error(`Action type (${action.type}) for GameState dispatch is not valid`);
+  }
+}
+
 function convertScreenPointToMapTile(point, frame, ratio, gameState){
   const cellsize = gameState.mapGrid.cellsize;
   // Return false if we are not inside of the gameFrame
@@ -62,98 +154,7 @@ function GamePage() {
    * @type {[{gameState: GameState, runtimeState: RuntimeState}, (action, state)=>{gameState: GameState, runtimeState: RuntimeState}]}
    */
   const [state, dispatch] = useReducer(gameStateReducer, gameManager);
-  function gameStateReducer(state, action){
-    let tile, success, s;
-    switch(action.type){
-      case "initialize":
-        return action.payload;
-      case "updateGameState":
-        return {
-          frameSize: state.frameSize,
-          scaleRatio: state.scaleRatio,
-          origin: state.origin,
-          gameState: action.payload.gameState,
-          runtimeState: action.payload.runtimeState,
-          animationState: action.payload.animationState
-        };
-      case "updateFrameSize":
-        return {
-          frameSize: action.payload.frameSize,
-          scaleRatio: action.payload.scaleRatio,
-          origin: action.payload.origin,
-          gameState: state.gameState,
-          runtimeState: state.runtimeState,
-          animationState: state.animationState
-        };
-      case "addWall":
-        console.log("Dispatched");
-        tile = convertScreenPointToMapTile(action.payload, state.frameSize, state.scaleRatio, state.gameState);
-        if(tile === false) return state;
-        success = manager.current.placeWall(tile);
-        if(success === false) return state;
-        
-        s = manager.current.getGameState();
-        return {
-          frameSize: state.frameSize,
-          scaleRatio: state.scaleRatio,
-          origin: state.origin,
-          gameState: s.gameState,
-          runtimeState: s.runtimeState,
-          animationState: s.animationState
-        };
-      case "addTowerBase":
-        tile = convertScreenPointToMapTile(action.payload, state.frameSize, state.scaleRatio, state.gameState);
-        if(tile === false) return state;
-        success = manager.current.placeBase(tile);
-        if(success === false) return state;
-        
-        s = manager.current.getGameState();
-        return {
-          frameSize: state.frameSize,
-          scaleRatio: state.scaleRatio,
-          origin: state.origin,
-          gameState: s.gameState,
-          runtimeState: s.runtimeState,
-          animationState: s.animationState
-        };
-      case "addTowerBarrel":
-        tile = convertScreenPointToMapTile(action.payload, state.frameSize, state.scaleRatio, state.gameState);
-        if(tile === false) return state;
-        success = manager.current.placeTower("test_tower1",tile);
-        if(success === false) return state;
-
-        s = manager.current.getGameState();
-        requestAnimationFrame(manager.current.updateCallback);
-        return {
-          frameSize: state.frameSize,
-          scaleRatio: state.scaleRatio,
-          origin: state.origin,
-          gameState: s.gameState,
-          runtimeState: s.runtimeState,
-          animationState: s.animationState
-        };
-      case "addTowerLaser":
-        tile = convertScreenPointToMapTile(action.payload, state.frameSize, state.scaleRatio, state.gameState);
-        if(tile === false) return state;
-        success = manager.current.placeTower("test_tower2",tile);
-        if(success === false) return state;
-
-        s = manager.current.getGameState();
-        manager.current.updateCallback();
-        return {
-          frameSize: state.frameSize,
-          scaleRatio: state.scaleRatio,
-          origin: state.origin,
-          gameState: s.gameState,
-          runtimeState: s.runtimeState,
-          animationState: s.animationState
-        };
-      case "selectTower":
-        console.log("Performed " + action.type);
-        return state;
-      default: throw new Error(`Action type (${action.type}) for GameState dispatch is not valid`);
-    }
-  }
+  
   
 
   function initializeGameSize(){
@@ -161,6 +162,7 @@ function GamePage() {
       const grid = gameManager.gameState.mapGrid;
       dispatch({
           type: "updateFrameSize",
+          manager: manager,
           payload: {
               frameSize: {
                   height: divBox.height,
@@ -187,6 +189,7 @@ function GamePage() {
     const grid = gameManager.gameState.mapGrid; 
     dispatch({
       type: "initialize",
+      manager: manager,
       payload: { 
         frameSize: {
           height: divBox.height,
@@ -208,6 +211,16 @@ function GamePage() {
 
     initializeGameSize();
     setTimeout(() => gameManager.sendWave(), 3000);
+    setTimeout(() => {
+      dispatch({
+        type: "addWall",
+        manager: manager,
+        payload: {
+          x: 200,
+          y: 200
+        }
+      });
+    },1200)
   },[]);
 
   // Called on every render
