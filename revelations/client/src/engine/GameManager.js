@@ -54,6 +54,11 @@ export default class GameManager {
         this.gameState.mapGrid = grid;
         this.gameState.sourceArray = sourceArray;
         this.gameState.target = target;
+        this.counters = {
+            creeps: 0,
+            towers: 0,
+            projectiles: 0
+        }
     }
 
     /**
@@ -136,7 +141,7 @@ export default class GameManager {
     }
 
     placeTower(archtype, tile){
-        const id = 30000 + Object.keys(this.gameState.towerDirectory).length;
+        const id = 30000 + ++this.counters.towers;
         const success = spawnTower(this, id, archtype, tile);
         if(success){
             this.gameState.towerGrid.push(tile);

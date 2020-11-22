@@ -21,15 +21,14 @@ import GameManager from "../GameManager.js";
   */
 function rotateCreep(creep, angle){
     creep.transform.rotation += angle;
-    const {x: x0, y: y0} = creep.collider.center;
-    for(let i = 0; i < creep.collider.vertices.length; i++){
-        const {x: x, y: y} = creep.collider.vertices[i];
-        creep.collider.vertices[i] = {
-            x: x0 + (x - x0) * Math.cos(angle) - (y - y0) * Math.sin(angle),
-            y: y0 + (x - x0) * Math.sin(angle) + (y - y0) * Math.cos(angle)
-        }
-        creep.collider.setAxes();
-    }
+    // const {x: x0, y: y0} = creep.collider.center;
+    // for(let i = 0; i < creep.collider.vertices.length; i++){
+    //     const {x: x, y: y} = creep.collider.vertices[i];
+    //     creep.collider.vertices[i] = {
+    //         x: x0 + (x - x0) * Math.cos(angle) - (y - y0) * Math.sin(angle),
+    //         y: y0 + (x - x0) * Math.sin(angle) + (y - y0) * Math.cos(angle)
+    //     }
+    // }
 }
 
 /**
@@ -99,7 +98,7 @@ function moveCreeps(manager){
                 if(targetAngle !== 0){
                     let angleToRotate = Math.sign(targetAngle) * Math.min(Math.abs(targetAngle), Math.abs(creep.stats.turnSpeed)); 
                     rotateCreep(creep, angleToRotate);
-                    distRemaining -= Math.abs(angleToRotate) * (Math.PI / 180) * creep.collider.circumference;
+                    distRemaining -= Math.abs(angleToRotate) * (1/(2 * Math.PI)) * 4 * manager.gameState.mapGrid.cellsize;
                 }
                 
                 // If creep is pointing to target, move towards new target

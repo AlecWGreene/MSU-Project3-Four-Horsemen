@@ -69,7 +69,7 @@ export default {
         "Laser_Bolt_Yellow": {
             name: "Laser_Bolt_Yellow",
             data: new ProjectileData(0, "Laser_Bolt_Yellow", "Projectile_Laser_Yellow", 0, 0, 0),
-            stats: new ProjectileStats({x:-1,y:-1}, 175, 1, 120, true, tickLength),
+            stats: new ProjectileStats({x:-1,y:-1}, 175, 1, 150, true, tickLength),
             collider: new Collider([{x:-5,y:-3.5},
                                     {x:-5,y:3.5},
                                     {x:0,y:6},

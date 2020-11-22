@@ -41,7 +41,7 @@ function processTick(manager) {
         if(Math.abs(manager.runtimeState.waveTime - totalTime) < 10){
             for(let sourceIndex = 0; sourceIndex < waveData[i].creeps.length; sourceIndex++){
                 if(waveData[i].creeps[sourceIndex] !== undefined){
-                    const newId = 10000 + Object.keys(manager.gameState.creepDirectory).length;
+                    const newId = 10000 + ++manager.counters.creeps;
                     spawnCreep(manager, newId, waveData[i].creeps[sourceIndex], manager.gameState.sourceArray[sourceIndex], manager.gameState.pathDirectory[sourceIndex]);
                 }
             }

@@ -27,8 +27,8 @@ function spawnProjectile(towerId, barrelIndex, manager){
     const archtype = GameEnums.PROJECTILE_PREFABS[tower.data.projectileArchtype];
 
     // Construct component data
-    const newId = 40000 + Object.keys(manager.gameState.projectileDirectory).length;
-    const newData = archtype.data;
+    const newId = 40000 + ++manager.counters.projectiles;
+    const newData = {...archtype.data};
     newData.id = newId;
     newData.launcherId = towerId;
     const angle = tower.transform.rotation;
@@ -37,7 +37,7 @@ function spawnProjectile(towerId, barrelIndex, manager){
                                     angle);
     
     // Instantiate prefab
-    manager.gameState.projectileDirectory[newId] = new ProjectileEntity(newData, archtype.stats, tower.damageData, transform, archtype.collider);
+    manager.gameState.projectileDirectory[newId] = new ProjectileEntity(newData, archtype.stats, tower.damageData, transform, undefined);
 }
 
 export default spawnProjectile;
