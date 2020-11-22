@@ -18,7 +18,7 @@ return (
   <>
 
   <div id="welcome-position" className="container">
-      <div className="row justify-content-center">
+      <div className="row justify-content-center d-flex">
           <div className="welcome-container col-md-6 neon">
               <div className="welcome-content">
                   <button className="custom-btn aldrich-font">

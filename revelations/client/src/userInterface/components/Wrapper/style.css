@@ -1,10 +1,36 @@
+/* iPhone 5 + 6/7/8 (Plus) PORTRAIT MODE*/
+@media (min-width: 320px) {
+  .wrapper {
+  height: 100vh;
+  border-color: black;
+  border-style: solid;
+  border-width: 20px;
+  background-image: url("../../assets/stars.gif");
+  background-repeat: repeat;
+  }
 
-/* iPhone 5 not supported */
+  .welcome-container {
+    margin-top: 50px;
+    height: 60vh!important;
+    border-width: 50px 25px!important;
+    background-color: #16080C;
+  }
 
-/* iPhone 6/7/8 (Plus) LANDSCAPE MODE */
+  .welcome-content {
+    padding: 10px!important;
+    background-color: #16080C;
+  }
+
+  .homepage-btns {
+    margin: 5px!important;
+    padding-top: 10px;
+  }
+}
+
+/* iPhone 5 LANDSCAPE MODE */
 @media (orientation:landscape)
-and (min-device-width: 666px) 
-and (max-device-width: 736px)
+and (min-width: 568px) 
+and (max-width: 666px)
  {
   body {
     height: auto;
@@ -16,16 +42,73 @@ and (max-device-width: 736px)
     }
 
   .welcome-container {
-    height:75vh!important;
+    height:87vh!important;
     width:30vw;
     border-style: solid;
-    border-width: 35px 75px!important;
+    border-width: 25px 50px!important;
     -moz-border-image: url("../../assets/Lore.png") 100  100  stretch stretch;
     -webkit-border-image: url("../../assets/Lore.png") 100  100  stretch stretch;
     -o-border-image: url("../../assets/Lore.png") 100  100  stretch stretch;
     border-image: url("../../assets/Lore.png") 100  100  stretch stretch;
-    padding: 0px!important;
-    margin-top: 50px;
+    position: relative;
+    top: 10px!important;
+    margin-top: 0px!important;
+    
+  }
+
+  .welcome-content {
+    background-color: #16080C;
+    color: whitesmoke;
+    height:45vh!important;
+    } 
+
+  .custom-btn {
+    background-color:transparent!important;
+    border: none;
+    outline:none!important;
+    background-image: none!important;
+    width: 100%!important;
+    height: 13vh!important;
+    background-repeat: no-repeat; 
+ 
+  } 
+
+  .homepage-btns {
+    margin: 0px!important;
+    height: 100vh;
+    font-family: 'perfect_dark_brkregular';
+    font-size: 25px;
+    color: #74797c;
+    text-shadow: 2px 2px 1px #174116ce, 0 0 10px rgba(224, 37, 37, 0.8), 0 0 5px darkblue;
+  }
+}
+
+/* iPhone 6/7/8 (Plus) LANDSCAPE MODE */
+@media (orientation:landscape)
+and (min-width: 667px) 
+and (max-width: 736px)
+ {
+  body {
+    height: auto;
+  }
+  .wrapper {
+    height: 100vh;
+    background-image: url("../../assets/stars.gif");
+    background-repeat: repeat;
+    }
+
+  .welcome-container {
+    height:85vh!important;
+    width:30vw;
+    border-style: solid;
+    border-width: 50px 75px!important;
+    -moz-border-image: url("../../assets/Lore.png") 100  100  stretch stretch;
+    -webkit-border-image: url("../../assets/Lore.png") 100  100  stretch stretch;
+    -o-border-image: url("../../assets/Lore.png") 100  100  stretch stretch;
+    border-image: url("../../assets/Lore.png") 100  100  stretch stretch;
+    position: relative;
+    top: 10px!important;
+    margin-top: 0px!important;
     
   }
 
@@ -53,75 +136,16 @@ and (max-device-width: 736px)
     font-size: 25px;
     color: #74797c;
     text-shadow: 2px 2px 1px #174116ce, 0 0 10px rgba(224, 37, 37, 0.8), 0 0 5px darkblue;
-  }
-  
+  } 
 }
 
-
-/* iPhone 6/7/8 (Plus) PORTRAIT MODE*/
-@media (min-width: 426px) {
-  .wrapper {
-  height: 100vh;
-  border-color: black;
-  border-style: solid;
-  border-width: 20px;
-  background-image: url("../../assets/stars.gif");
-  background-repeat: repeat;
-  }
-
-  .welcome-container {
-    margin-top: 150px;
-    height: 50vh!important;
-  }
-
-  .homepage-btns {
-    margin: 0px!important;
-  }
-}
-
-/* iPhone X PORTRAIT MODE NOT SUPPORTED*/
-
-/* @media (min-width: 426px) and (max-width:766) {
-  .wrapper {
-  height: 100vh;
-  border-style: solid;
-  border-width: 20px;
-  background-image: url("../../assets/stars.gif");
-  background-repeat: no-repeat;
-  background-size: cover;
-  overflow: hidden;
-  }
-}
-
-@media (min-width: 767px) {
-  .wrapper {
-    height: 100vh;
-    border-color: black;
-    border-style: solid;
-    border-width: 10px;
-    background-image: url("../../assets/stars.gif");
-    background-repeat: repeat;
-    display: block!important;
-    cursor:default; 
-  }
-
-  .wrapper:hover {
-    height: 100vh;
-    border-color: black;
-    border-style: solid;
-    border-width: 10px;
-    background-image: url("../../assets/stars.gif");
-    background-repeat: repeat;
-    visibility:visible;
-    }
- 
-} */
+/* iPHONE X LANDSCAPE NOT */
 
 /* Tablet Mode */
 @media (min-width: 768px) and (max-width:1023px) {
   .hud-border {
       border-style: solid;
-      border-width: 100px 75px 50px;
+      border-width: 100px 75px!important;
       -moz-border-image: url("../../assets/f22hud-blue.png") 100 600 50 600 stretch stretch;
       -webkit-border-image: url("../../assets/f22hud-blue.png") 100 50 100 600 stretch stretch;
       -o-border-image: url("../../assets/f22hud-blue.png") 100 600 50 600 stretch stretch;
@@ -135,9 +159,13 @@ and (max-device-width: 736px)
     margin-top: 0px!important;
   }
 
+  .welcome-content {
+    background-color: #16080C;
+  }
+
   .homepage-btns {
     margin: 0px!important;
-    padding-top: 1px;
+    padding-top: 10px;
     padding-left: 2px;
     padding-bottom: 15px;
     font-size: small;
@@ -148,15 +176,14 @@ and (max-device-width: 736px)
     width: 100%!important;
     background-size: contain!important;
   }
-   
 }
 
-/* Laptop Screen */
+/* Laptop Screen SM */
 
 @media (min-width: 1024px) and (max-width:1439px) {
   .hud-border {
       border-style: solid;
-      border-width: 75px 200px 50px;
+      border-width: 75px 100px;
       -moz-border-image: url("../../assets/f22hud-blue.png") 100 600 50 600 stretch stretch;
       -webkit-border-image: url("../../assets/f22hud-blue.png") 100 50 100 600 stretch stretch;
       -o-border-image: url("../../assets/f22hud-blue.png") 100 600 50 600 stretch stretch;
@@ -165,69 +192,91 @@ and (max-device-width: 736px)
     }
 
     .welcome-container {
-      height: 48vh!important;
+      height: 50vh!important;
       border-width: 35px 25px 35px 25px!important;
       margin-top: 0px!important;
     }
-  
-    .homepage-btns {
-      margin: 0px!important;
-      padding-top: 10px;
-      padding-left: 2px;
-    }
-}
 
-@media (min-width: 1440px) {
-  .hud-border {
-      border-style: solid;
-      border-width: 50px 400px;
-      -moz-border-image: url("../../assets/f22hud-blue.png") 100 600 50 600 stretch stretch;
-      -webkit-border-image: url("../../assets/f22hud-blue.png") 100 50 100 600 stretch stretch;
-      -o-border-image: url("../../assets/f22hud-blue.png") 100 600 50 600 stretch stretch;
-      border-image: url("../../assets/f22hud-blue.png") 100 600 50 600 stretch stretch;
-      height: 100%  
-    }
-
-    .welcome-container {
-      height: 48vh!important;
-      border-width: 35px 25px 35px 25px!important;
-      margin-top: 0px!important;
-    }
-  
-    .homepage-btns {
-      margin: 0px!important;
-      padding-top: 10px;
-      padding-left: 2px;
-    }
-}
-
-/* Larger Laptop Screen */
-
-@media (min-width: 1680px) {
-  .hud-border {
-      border-style: solid;
-      border-width: 50px 400px;
-      -moz-border-image: url("../../assets/f22hud-blue.png") 100 600 50 600 stretch stretch;
-      -webkit-border-image: url("../../assets/f22hud-blue.png") 100 50 100 600 stretch stretch;
-      -o-border-image: url("../../assets/f22hud-blue.png") 100 600 50 600 stretch stretch;
-      border-image: url("../../assets/f22hud-blue.png") 100 600 50 600 stretch stretch;
-      height: 100%  
-    }
-
-    .welcome-container {
-      height: 48vh!important;
+    .welcome-content {
+      background-color: #16080C;
     }
   
     .homepage-btns {
       margin: 0px!important;
       padding-top: 20px;
-      padding-left: 2px;    }
+      padding-left: 2px;
+    }
+}
+
+/* Laptop Screen MD */
+
+@media (min-width: 1440px) {
+  .hud-border {
+      border-style: solid;
+      border-width: 50px 200px;
+      -moz-border-image: url("../../assets/f22hud-blue.png") 100 600 50 600 stretch stretch;
+      -webkit-border-image: url("../../assets/f22hud-blue.png") 100 50 100 600 stretch stretch;
+      -o-border-image: url("../../assets/f22hud-blue.png") 100 600 50 600 stretch stretch;
+      border-image: url("../../assets/f22hud-blue.png") 100 600 50 600 stretch stretch;
+      height: 100%  
+    }
+
+    .welcome-container {
+      height: 60vh!important;
+      border-width: 35px 25px!important;
+      margin-top: 0px!important;
+    }
+
+    .welcome-content {
+      background-color: #16080C;
+      height: 50vh!important;
+    }
+  
+    .homepage-btns {
+      margin: 0px!important;
+      padding-top: 30px;
+      font-size: medium;
+    }
 
     .custom-btn {
-      width: 75%!important;
-      height: 9vh!important;
-      margin-bottom: 10px!important;
-      margin-left: 55px!important;
+      margin: 0px!important;
+      height: 12vh!important;
+    }
+}
+
+/* Laptop Screen LG */
+
+@media (min-width: 1680px) {
+  .hud-border {
+      border-style: solid;
+      border-width: 50px 475px;
+      -moz-border-image: url("../../assets/f22hud-blue.png") 100 600 50 600 stretch stretch;
+      -webkit-border-image: url("../../assets/f22hud-blue.png") 100 50 100 600 stretch stretch;
+      -o-border-image: url("../../assets/f22hud-blue.png") 100 600 50 600 stretch stretch;
+      border-image: url("../../assets/f22hud-blue.png") 100 600 50 600 stretch stretch;
+      height: 100%  
+    }
+
+    .welcome-container {
+      height: 53vh!important;
+      padding: 0%!important;
+    }
+
+    .welcome-content {
+      background-color: #16080C;
+      height: 48vh!important;
+      padding: 0%!important;
+    }
+  
+    .homepage-btns {
+      margin: 0px!important;
+      padding-top: 10px;
+      font-size: larger;
+    }
+
+    .custom-btn {
+      height: 12vh!important;
+      width: 21vw!important;
     }
 }
 
