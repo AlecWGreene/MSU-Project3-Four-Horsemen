@@ -24,8 +24,9 @@ import Transform from "../components/Transform";
   */
  function spawnTower(manager, id, archtype, tile){
      
-     // Return false if no base is on the tile
-    if(manager.gameState.baseGrid.filter(t => t.isEqualTo(tile)).length === 0){
+     // Return false if no base is on the tile or if there is already a tower in place
+    if(manager.gameState.baseGrid.filter(t => t.isEqualTo(tile)).length === 0
+    || manager.gameState.towerGrid.filter(t => t.isEqualTo(tile)).length > 0){
         return false;
     }
 
@@ -33,15 +34,16 @@ import Transform from "../components/Transform";
     archtype = GameEnums.TOWER_PREFABS[archtype];
 
     // Instantiate component data
-    const newData = archtype.data;
+    const newData = {...archtype.data};
     newData.id = id;
-    const newStats = archtype.stats;
-    const newDamageData = archtype.damageData;
-    const newUpgradeTree = archtype.upgradeTree;
+    const newStats = { ...archtype.stats};
+    const newDamageData = { ...archtype.damageData};
+    const newUpgradeTree = { ...archtype.upgradeTree};
     const transform = new Transform(tile.position.x, tile.position.y, Math.PI / 2);
     
     // Instantiate new entity
     manager.gameState.towerDirectory[id] = new TowerEntity(newData, newStats, newDamageData, transform, newUpgradeTree); 
+    manager.gameState.towerGrid.push(tile);
     return true;
  }
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useLayoutEffect } from "react";
+import React, { useReducer, useLayoutEffect, useRef, useEffect, useCallback } from "react";
 
 // Engine imports
 import GameState from "../../engine/components/GameState.js";
@@ -23,71 +23,70 @@ import ProjectileLayer from "../../game/ProjectileLayer/index.js";
 // Testing imports
 import loadTestScenario from "./GameUtils/loadTestScenario.js"
 
+
 /**
  * @type {React.Context} Context containing the last passed version of the game state
  */
 export const GameStateContext = React.createContext({});
-function gameStateReducer(state, action){
-  switch(action.type){
-    case "initialize":
-      return action.payload;
-    case "updateGameState":
-      return {
-        frameSize: state.frameSize,
-        scaleRatio: state.scaleRatio,
-        origin: state.origin,
-        gameState: action.payload.gameState,
-        runtimeState: action.payload.runtimeState,
-        animationState: action.payload.animationState
-      };
-    case "updateFrameSize":
-      return {
-        frameSize: action.payload.frameSize,
-        scaleRatio: action.payload.scaleRatio,
-        origin: action.payload.origin,
-        gameState: state.gameState,
-        runtimeState: state.runtimeState,
-        animationState: state.animationState
-      };
-    case "addWall":
-      console.log("Performed " + action.type);
-      console.log(action.payload);
-      return state;
-    case "addTowerBase":
-      console.log("Performed " + action.type);
-      console.log(action.payload);
-      return state;
-    case "addTower":
-      console.log("Performed " + action.type);
-      console.log(action.payload);
-      return state;
-    case "selectTower":
-      console.log("Performed " + action.type);
-      return state;
-    default: throw new Error(`Action type (${action.type}) for GameState dispatch is not valid`);
-  }
-}
 
+/**
+ * @function convertScreenPointToMapTile
+ */
+export function convertScreenPointToMapTile(point, frame, ratio, gameState){
+  const cellsize = gameState.mapGrid.cellsize;
+  // Return false if we are not inside of the gameFrame
+  if((point.x < frame.bottomLeft.x || point.x > frame.bottomLeft.x + frame.width )  || (point.y < frame.bottomLeft.y || point.y > frame.bottomLeft.y + frame.height)){
+    return false;
+  }
+
+  // Adjust position for framesize
+  point.x = (point.x - frame.bottomLeft.x) / ratio;
+  point.y = (point.y - frame.bottomLeft.y) / ratio;
+
+  // Calculate the closest grid point to out mouse
+  const row = GameEnums.GAME_CONFIG.mapSize.rows - Math.floor(point.y / cellsize);
+  const col = Math.floor(point.x / cellsize);
+
+  // Check if a grid point is close
+  const indices = [
+    { row: row, col: col}
+  ];
+  let lowestDistance, lowestIndex;
+  for(const index of indices){
+    try{
+      const p = gameState.mapGrid.tiles[index.row][index.col];
+      if(!lowestDistance || Math.hypot(p.position.x - point.x, p.position.y - point.y) < lowestDistance){
+        lowestIndex = index;
+      }
+    }
+    catch{
+      continue;
+    }
+  }
+
+  return lowestIndex ? gameState.mapGrid.tiles[lowestIndex.row][lowestIndex.col] : false;
+}
 
 function GamePage() {
 
   // Game manager setup
   let gameManager = new GameManager();
+  const manager = useRef(gameManager);
 
-  /**
-   * @type {[{gameState: GameState, runtimeState: RuntimeState}, (action, state)=>{gameState: GameState, runtimeState: RuntimeState}]}
-   */
-  const [state, dispatch] = useReducer(gameStateReducer, gameManager);
-
-  function initializeGameSize(){
+  const initializeGameSize = () => {
       const divBox = document.getElementById("gameFrame").getClientRects()[0];
       const grid = gameManager.gameState.mapGrid;
       dispatch({
           type: "updateFrameSize",
+          manager: manager.current,
           payload: {
               frameSize: {
                   height: divBox.height,
-                  width: divBox.width
+                  width: divBox.width,
+                  bottomLeft: {
+                    x: divBox.x,
+                    y: divBox.y
+                  }
               },
               scaleRatio: Math.min(divBox.height / (grid.cellsize * grid.tiles.length), divBox.width / (grid.cellsize * grid.tiles[0].length)),
               origin: {x: 0, y: 0}
@@ -95,11 +94,56 @@ function GamePage() {
       });
   }
 
+  const gameStateReducer = (state, action) => {
+    let gameState;
+    switch(action.type){
+      case "initialize":
+        return action.payload;
+      case "updateGameState":
+        return {
+          manager: manager.current,
+          frameSize: state.frameSize,
+          scaleRatio: state.scaleRatio,
+          origin: state.origin,
+          gameState: action.payload.gameState,
+          runtimeState: action.payload.runtimeState,
+          animationState: action.payload.animationState
+        };
+      case "updateFrameSize":
+        return {
+          manager: manager.current,
+          frameSize: action.payload.frameSize,
+          scaleRatio: action.payload.scaleRatio,
+          origin: action.payload.origin,
+          gameState: state.gameState,
+          runtimeState: state.runtimeState,
+          animationState: state.animationState
+        };
+      case "addWall":
+      case "addBase":
+      case "addTowerBarrel":
+      case "addTowerLaser":
+          return {
+            gameState: manager.current.gameState,
+            ...state
+          };
+      default: throw new Error(`Action type (${action.type}) for GameState dispatch is not valid`);
+    }
+  }
+
+  /**
+   * @type {[{gameState: GameState, runtimeState: RuntimeState}, (action, state)=>{gameState: GameState, runtimeState: RuntimeState}]}
+   */
+  const [state, dispatch] = useReducer(gameStateReducer, gameManager);
+
   // Called on initial render
   useLayoutEffect(()=>{
-    gameManager.updateCallback = () => dispatch({ type: "updateGameState", payload: { gameState: gameManager.gameState, runtimeState: gameManager.runtimeState, animationState: gameManager.animationState }});
+    gameManager.updateCallback = () => { 
+      const data = manager.current.getGameState();
+      dispatch({ type: "updateGameState", payload: { gameState: data.gameState, runtimeState: data.runtimeState, animationState: data.animationState }})
+    };
     setupGame(gameManager, GameEnums.GAME_CONFIG);
-    loadTestScenario(gameManager);
+    //loadTestScenario(gameManager);
     gameManager.updateCallback();
 
     const divBox = document.getElementById("gameFrame").getBoundingClientRect();
@@ -109,7 +153,11 @@ function GamePage() {
       payload: { 
         frameSize: {
           height: divBox.height,
-          width: divBox.width
+          width: divBox.width,
+          bottomLeft: {
+            x: divBox.x,
+            y: divBox.y
+          }
         }, 
         scaleRatio: Math.min(divBox.height / (grid.cellsize * grid.tiles.length), divBox.width / (grid.cellsize * grid.tiles[0].length)),
         origin: {x: 0, y: 0},
@@ -122,14 +170,7 @@ function GamePage() {
     });
 
     initializeGameSize();
-    //setTimeout(() => gameManager.sendWave(), 3000)
-    
   },[]);
-
-  // Called on every render
-  useEffect(() => {
-
-  });
 
   return (
     <GameStateContext.Provider value={[state, dispatch]}>

@@ -21,9 +21,19 @@
 }
 
 .side-bar {
-    padding: 15px;
+    
+    /* background-image: url("../../assets/playpause-btn.png"); */
+    border-style: solid;
+    border-width: 30px 25px;
+    -moz-border-image: url("../../assets/playpause-btn.png") 15 50 15 50 stretch stretch;
+    -webkit-border-image: url("../../assets/playpause-btn.png") 15 50 15 50 stretch stretch;
+    -o-border-image: url("../../assets/playpause-btn.png") 15 50 15 50 stretch stretch;
+    border-image: url("../../assets/playpause-btn.png") 15 50 15 50 stretch stretch;
 }
 
+.side-bar-container {
+    background-color: rgba(37, 37, 37, 0.8);
+}
 
 /* Play/Pause TESt */
 
@@ -47,5 +57,19 @@
       width: 100px;
       height: auto;
   }
+
+  .settings-gear {
+    color: #8E979C;
+     -webkit-transition: -webkit-transform .3s ease-in-out;
+     transition:         transform .1s ease-in-out;
+     -webkit-filter: drop-shadow( 3px 3px 2px rgba(128, 126, 126, 0.7));
+    filter: drop-shadow( 3px 3px 2px rgba(109, 107, 107, 0.7));
+  }
+
+  .settings-gear:hover {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+ 
 
 
