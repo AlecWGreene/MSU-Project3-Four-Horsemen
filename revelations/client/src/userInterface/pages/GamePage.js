@@ -170,6 +170,7 @@ function GamePage() {
     });
 
     initializeGameSize();
+    loadTestScenario(manager.current);
   },[]);
 
   return (
