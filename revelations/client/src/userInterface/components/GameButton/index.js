@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { DraggableCore } from "react-draggable";
 import styled from "styled-components";
 
@@ -16,9 +16,9 @@ function GameButton(props){
 
     // Setup internal states
     const [isDragging, toggleDragging] = useState(false);
-    const [handlerData, setHandlerData] = useState(null);
     const [deltaPosition, setDeltaPosition] = useState({x:0,y:0});
 
+    // Drag handlers
     const handleDragStart = (event, data) => {
         if(!isDragging){
             toggleDragging(true);
@@ -31,26 +31,13 @@ function GameButton(props){
         });
     }
     const handleDragStop = (event, data) => {
+        props.callback(event,data)
         toggleDragging(false);
-        if(handlerData === null){
-            setHandlerData({
-                event: event,
-                data: data
-            });
-        }
-        else{
-            setHandlerData(null);
-        }
         setDeltaPosition({
             x: 0,
             y: 0
         });
-    }
-
-    // Calls every time handlerData is updated
-    useEffect(() => {
-        
-    }, [handlerData]);
+    };
 
     return <DraggableCore
                 onStart={handleDragStart}

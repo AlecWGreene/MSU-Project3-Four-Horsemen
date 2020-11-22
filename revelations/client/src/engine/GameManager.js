@@ -86,7 +86,12 @@ export default class GameManager {
                 this.runtimeState.totalWaveTime = GameEnums.WAVE_CONFIG[this.gameState.waveIndex].reduce((aggregate, current) => aggregate + current.delay, 0);
             }
 
+            if(this.gameState.pathDirectory.filter(path => path === undefined).length > 0){
+                console.log("ERROR: GameManager.sendWave() found no paths");
+                return false;
+            }
             this.tickInterval=setInterval(processTick.bind(arguments[0]), GameEnums.GAME_CONFIG.tickLength, this);
+            return true;
         }
     }
 
@@ -101,6 +106,11 @@ export default class GameManager {
     }
 
     placeWall(tile){
+        // Return is wave is running
+        if(this.runtimeState.isWaveRunning){
+            return false;
+        }
+
         if(this.gameState.wallGrid.filter(t => tile.isEqualTo(t)).length === 0){
             this.gameState.wallGrid.push(tile);
             return true;
@@ -108,17 +118,21 @@ export default class GameManager {
         else{
             return false;
         }
+
+        this.updateCallback();
     }
 
     placeBase(tile){
         if(this.gameState.wallGrid.filter(t => tile.isEqualTo(t)).length > 0
         && this.gameState.baseGrid.filter(t => tile.isEqualTo(t)).length === 0){
             this.gameState.baseGrid.push(tile);
+            if(!this.runtimeState.isPause || !this.runtimeState.isWaveRunning) this.updateCallback();
             return true;
         }
         else{
             return false;
         }
+
     }
 
     placeTower(archtype, tile){
@@ -126,6 +140,7 @@ export default class GameManager {
         const success = spawnTower(this, id, archtype, tile);
         if(success){
             this.gameState.towerGrid.push(tile);
+            if(!this.runtimeState.isPause || !this.runtimeState.isWaveRunning) this.updateCallback();
             return true;
         }
         else{
