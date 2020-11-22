@@ -132,7 +132,7 @@ function GamePage() {
       dispatch({ type: "updateGameState", payload: { gameState: data.gameState, runtimeState: data.runtimeState, animationState: data.animationState }})
     };
     setupGame(gameManager, GameEnums.GAME_CONFIG);
-    loadTestScenario(gameManager);
+    //loadTestScenario(gameManager);
     gameManager.updateCallback();
 
     const divBox = document.getElementById("gameFrame").getBoundingClientRect();

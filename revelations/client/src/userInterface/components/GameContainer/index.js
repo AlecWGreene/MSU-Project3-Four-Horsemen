@@ -37,6 +37,10 @@ export default function GameContainer(props) {
               auth.logout(() => { history.push("/") })
             })
     };
+
+    const redButtonHandler = () => {
+        state.manager.sendWave();
+    }
     
     return <Container fluid className="h-100">
         <div className="row h-100">
@@ -70,7 +74,7 @@ export default function GameContainer(props) {
 
                 {/* Play|Pause buttons */}
                 <div className="row justify-content-center">
-                    <button>
+                    <button onClickCapture={redButtonHandler}>
                         <img className="bg-red-btn" src={redButton} />
                     </button>
                 </div>
