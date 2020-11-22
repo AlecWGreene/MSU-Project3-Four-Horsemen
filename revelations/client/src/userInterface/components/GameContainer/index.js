@@ -1,6 +1,7 @@
 // Game container holds the game screen and buttons/ features for user control.
 import React, { useContext, useEffect, useState, useRef } from 'react';
 import { useAuth } from "../../components/UserAuth";
+import { useSfx } from "../../components/SoundSuite/index";
 import API from "../../../utils/API"
 import history from "../../../utils/history";
 import Container from 'react-bootstrap/Container';
@@ -17,28 +18,15 @@ import "./style.css";
 
 export default function GameContainer(props) {
 
-    let auth = useAuth()
+    const sfx = useSfx();
+    let auth = useAuth();
     const [state, dispatch] = useContext(GameStateContext); 
 
     const username = auth.user.data === null ? auth.user.auth : auth.user.data.username;
-    const isGuest = auth.user.data === null ? true : false;
-    
-    const userLogout = (event) => {
-        event.preventDefault();
-        auth.logout(() => { history.push("/") })
-    };
-
-    const handleDelete = (event) => {
-        event.preventDefault();
-        const id = auth.user.data._id;
-        API.deleteUser(id)
-            .then((res) => {
-              console.log(res.data)
-              auth.logout(() => { history.push("/") })
-            })
-    };
 
     const redButtonHandler = () => {
+        sfx.sfxSound('Sound_pop_0');
+        sfx.ambientSound('Sound_background_1');
         state.manager.sendWave();
     }
     

@@ -1015,6 +1015,61 @@ const SPRITE_ENUM = {
         width: 95,
         numFrames: 1,
         scale: laserBoltScale
+    },
+    /* #endregion */
+
+    /* #endregion */
+
+
+    // ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+    // ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+    //
+    //                                                                       GAME AUDIO SPRITES (Sound_(type)_(enum))
+    //
+    // ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+    // ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+    /* #region  */
+    
+    // ====================================================================================================================================================================================
+    // LASER BOLTS
+    // ====================================================================================================================================================================================
+    /* #region */
+
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/372182__supersound23__pop_short.mp3"
+     */
+    "Sound_pop_0": {
+        src: "./Assets/sounds/372182__supersound23__pop_short.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/416417__superphat__automatic-assault-rifle_shot_1.mp3"
+     */
+    "Sound_shot_0": {
+        src: "./Assets/sounds/416417__superphat__automatic-assault-rifle_shot_1.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/522706__fran-ky__075-fm-ellberge-part-2.mp3"
+     */
+    "Sound_background_0": {
+        src: "./Assets/sounds/522706__fran-ky__075-fm-ellberge-part-2.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/395487__frankum__tecno-pop-base-and-guitar-2.mp3"
+     */
+    "Sound_background_1": {
+        src: "./Assets/sounds/395487__frankum__tecno-pop-base-and-guitar-2.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/404452__furbyguy__synthwave-loop.mp3"
+     */
+    "Sound_background_2": {
+        src: "./Assets/sounds/404452__furbyguy__synthwave-loop.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/403899__leehayeskerr__moderate-pop.mp3"
+     */
+    "Sound_background_3": {
+        src: "./Assets/sounds/403899__leehayeskerr__moderate-pop.mp3",
     }
     /* #endregion */
 

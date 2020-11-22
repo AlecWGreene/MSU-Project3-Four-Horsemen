@@ -25,10 +25,10 @@ return (
                     <Rules />
                   </button>
                   <button className="custom-btn aldrich-font">
-                      <LogInModal />
+                    <LogInModal />
                   </button>
                   <button className="custom-btn aldrich-font">
-                      <SignUpModal />
+                    <SignUpModal />
                   </button>
                   <button
                    className="custom-btn aldrich-font" 

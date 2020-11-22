@@ -15,59 +15,62 @@ import ContentWrapper from "./userInterface/components/Wrapper/ContentWrapper";
 import GameContainer from "./userInterface/components/GameContainer/index"
 import HomePage from "./userInterface/pages/HomePage";
 import LoadingPage from "./userInterface/pages/LoadingPage"
+import SoundSuite from "./userInterface/components/SoundSuite/index"
 
 
 function App() {
 
   return (
     <UserAuth>
+      <SoundSuite>
 
-      <Router history={history}>
+        <Router history={history}>
 
-        <div>
-          <Wrapper>
+          <div>
+            <Wrapper>
 
-            <Switch>
+              <Switch>
 
-            <PreventReverse path="/" exact>
-                <ContentWrapper>
-                  <HomePage />
-                </ContentWrapper>
-              </PreventReverse>
+              <PreventReverse path="/" exact>
+                  <ContentWrapper>
+                    <HomePage />
+                  </ContentWrapper>
+                </PreventReverse>
 
-              <PreventReverse path="/rules">
-                <ContentWrapper>
-                  <Rules />
-                </ContentWrapper>
-              </PreventReverse>
+                <PreventReverse path="/rules">
+                  <ContentWrapper>
+                    <Rules />
+                  </ContentWrapper>
+                </PreventReverse>
 
-              <PreventReverse path="/login">
-                <ContentWrapper>
-                  <LogIn /> 
-                </ContentWrapper>
-              </PreventReverse>
+                <PreventReverse path="/login">
+                  <ContentWrapper>
+                    <LogIn /> 
+                  </ContentWrapper>
+                </PreventReverse>
 
-              <PreventReverse path="/signup">
-                <ContentWrapper>
-                  <SignUp />
-                </ContentWrapper>
-              </PreventReverse>
+                <PreventReverse path="/signup">
+                  <ContentWrapper>
+                    <SignUp />
+                  </ContentWrapper>
+                </PreventReverse>
 
-              <PrivateRoute path="/game">
-                <GamePage />
-              </PrivateRoute>
+                <PrivateRoute path="/game">
+                  <GamePage />
+                </PrivateRoute>
 
-              <PreventReverse path="/loading">
-                <LoadingPage />
-              </PreventReverse>
+                <PreventReverse path="/loading">
+                  <LoadingPage />
+                </PreventReverse>
 
-            </Switch>
+              </Switch>
 
-          </Wrapper>
-        </div>
+            </Wrapper>
+          </div>
 
-      </Router>
-       
+        </Router>
+
+      </SoundSuite> 
     </UserAuth>
   );
 }
