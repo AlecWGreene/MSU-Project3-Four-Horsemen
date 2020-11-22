@@ -86,7 +86,7 @@ export default class GameManager {
                 this.runtimeState.totalWaveTime = GameEnums.WAVE_CONFIG[this.gameState.waveIndex].reduce((aggregate, current) => aggregate + current.delay, 0);
             }
 
-            if(Object.values(this.gameState.pathDirectory).filter(path => path === undefined).length === 0){
+            if(this.gameState.pathDirectory.filter(path => path === undefined).length > 0){
                 console.log("ERROR: GameManager.sendWave() found no paths");
                 return false;
             }
