@@ -44,7 +44,7 @@ function ProjectileLayer(props){
                             imgData={imgData}
                             position={convertWorldPointToScreenPoint(entry[1].transform.position, state.scaleRatio, origin)}
                             scale={state.scaleRatio * (cellsize / imgData.height)}
-                            />
+                            rotation={ 180/Math.PI * entry[1].transform.rotation} />
                 }) 
             }
         </div>

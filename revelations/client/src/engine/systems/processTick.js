@@ -2,6 +2,7 @@ import GameEnums from "../GameEnums.js";
 import GameManager from "../GameManager.js";
 import controlTowers from "./controlTowers.js";
 import moveCreeps from "./moveCreeps.js";
+import moveProjectiles from "./moveProjectiles.js";
 import spawnCreep from "./spawnCreep.js";
 
 /**
@@ -24,6 +25,9 @@ import spawnCreep from "./spawnCreep.js";
   * @returns {Void}
   */
 function processTick(manager) {
+    // Move projectiles
+    moveProjectiles(manager);
+
     // Move creeps
     moveCreeps(manager)
 

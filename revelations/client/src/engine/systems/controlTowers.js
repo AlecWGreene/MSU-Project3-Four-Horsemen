@@ -2,6 +2,7 @@ import CreepEntity from "../entities/CreepEntity.js";
 import TowerEntity from "../entities/TowerEntity.js";
 import GameManager from "../GameManager.js";
 import GameEnums from "../GameEnums.js";
+import spawnProjectile from "./spawnProjectile.js";
 
 /**
  * @namespace controlTowers
@@ -243,7 +244,7 @@ function controlTowers(manager){
                 }
 
                 // Adjust tower rotation to lead towers and rotate in the shortest direction
-                const angle = Math.atan2((creep.transform.position.y + creepDirection.y * 0.1) - tower.transform.position.y, (creep.transform.position.x + creepDirection.x * 0.1) - tower.transform.position.x);
+                const angle = Math.atan2((creep.transform.position.y + creepDirection.y * 0.2) - tower.transform.position.y, (creep.transform.position.x + creepDirection.x * 0.2) - tower.transform.position.x);
                 const angleToRotate = calculateAngleDifference(tower.transform.rotation, angle);
 
                 // If tower can rotate to lead it
@@ -257,6 +258,9 @@ function controlTowers(manager){
                     if(tower.data.cooldown <= 0){
                         tower.data.cooldown = 1000 / tower.stats.attackSpeed;
                         manager.animationState.towers.push(tower.data.id);
+                        for(let index = 0; index < tower.data.barrels.length; index++){
+                            spawnProjectile(tower.data.id, index, manager);
+                        }
                     }
                 }
                 else{

@@ -69,20 +69,20 @@ export default {
         "Laser_Bolt_Yellow": {
             name: "Laser_Bolt_Yellow",
             data: new ProjectileData(0, "Laser_Bolt_Yellow", "Projectile_Laser_Yellow", 0, 0, 0),
-            stats: new ProjectileStats({x:-1,y:-1}, 175, 1, 10, tickLength),
-            collider: new Collider([{x:-10,y:-7},
-                                    {x:-10,y:7},
-                                    {x:0,y:12},
-                                    {x:10,y:7},
-                                    {x:10,y:-7},
-                                    {x:0,y:-9}],{ x:0, y:0}),
+            stats: new ProjectileStats({x:-1,y:-1}, 175, 1, 120, true, tickLength),
+            collider: new Collider([{x:-5,y:-3.5},
+                                    {x:-5,y:3.5},
+                                    {x:0,y:6},
+                                    {x:5,y:3.5},
+                                    {x:5,y:-3.5},
+                                    {x:0,y:-6}],{ x:0, y:0}),
         }
     },
     CREEP_PREFABS: {
         "test_creep": {
             data: new CreepData(0,"test_creep", "Creep_1_CYAN", []),
             stats: new CreepStats(100,60,270,true,50,tickLength),
-            collider: new Collider([{x: -30, y: -30}, {x: -30, y: 30}, {x: 30, y: 30}, {x: 30, y: -30}], {x: 0, y: 0})
+            collider: new Collider([{x: -10, y: -10}, {x: -10, y: 10}, {x: 10, y: 10}, {x: 10, y: -10}], {x: 0, y: 0})
         }
     }
 };
