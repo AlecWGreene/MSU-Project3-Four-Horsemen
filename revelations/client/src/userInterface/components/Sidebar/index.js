@@ -1,8 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
 
-// Componetn imports
+// Component imports
 import GameButton from "../GameButton";
 import { GameStateContext } from "../../pages/GamePage.js";
+
+// Utility method imports
+import { convertScreenPointToMapTile } from "../../pages/GamePage.js";
+import GameEnums from "../../../engine/GameEnums.js";
 
 // Image imports
 import Tower_Base from '../../assets/Tower_Base.png';
@@ -16,15 +20,35 @@ function Sidebar(props){
 
     const dispatchHandler = (actionType) => {
         return (event, data) => {
+            const tile = convertScreenPointToMapTile({ 
+                         x: event.screenX, 
+                         y: event.screenY
+                        }, state.frameSize, state.scaleRatio, state.gameState);
+            if(tile === false) return;
+            let success = false;
+            switch(actionType){
+                case "addWall":
+                    success = state.manager.placeWall(tile);
+                    break;
+                case "addBase":
+                    success = state.manager.placeBase(tile);
+                    break;
+                case "addTowerBarrel":
+                    success = state.manager.placeTower("test_tower1", tile);
+                    break;
+                case "addTowerLaser":
+                    success = state.manager.placeTower("test_tower2", tile);
+                    break;
+            }
+            if(success === false) return;
             dispatch({ 
                 type: actionType, 
-                payload: { 
-                    x: event.screenX, 
-                    y: event.screenY}
+                payload: tile
             });
         }
     }
 
+    // Delays the rendering of the sidebar to match game updates
     useEffect(() => {
         requestAnimationFrame(() => setView(props.view));
     }, [props.view]);
