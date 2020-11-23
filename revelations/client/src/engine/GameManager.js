@@ -2,22 +2,24 @@
 import GameState from "./components/GameState.js";
 import RuntimeState from "./components/RuntimeState.js";
 import GameEnums from "./GameEnums.js"; 
-
 // Import Game Managment systems
 import processTick from "./systems/processTick.js"; 
 import findPaths, {getEuclideanDistance} from "./systems/findPaths";
 import spawnTower from "./systems/spawnTower.js";
 import convertGameToJSON from "./systems/convertGameToJSON.js";
-
+import Tile from "./Tile.js";
+import CreepEntity from "./entities/CreepEntity.js";
+// Import Enums
+import SpriteEnums from "../game/SpriteEnums.js";
+import TowerEntity from "./entities/TowerEntity.js";
+import ProjectileEntity from "./entities/ProjectileEntity.js";
 /**
  * @module GameManager
  */
-
 /**
  * @callback updateCallback
  * @returns {void}  
  */
-
 /**
  * @class
  * 
@@ -43,14 +45,13 @@ export default class GameManager {
             this.runtimeState = new RuntimeState();
             this.tickInterval = undefined;
         }
-
+        this.endWaveCallback = undefined;
         this.updateCallback = undefined;
         this.animationState = {
             towers: []
         }
         this.numberWaves = Object.keys(GameEnums.WAVE_CONFIG).length;
     }
-
     init(grid, sourceArray, target){
         this.gameState.mapGrid = grid;
         this.gameState.sourceArray = sourceArray;
@@ -61,11 +62,58 @@ export default class GameManager {
             projectiles: 0
         }
     }
-
-    loadSave(saveString){
+    instantiateTile(string){
+        const { 1:x, 2:y, 3:row, 4:col } = string.match(/Tile\(([\-\w\.]+),([\-\w\.]+),([\-\w\.]+),([\-\w\.]+)\)/);
+        return new Tile(x, y, row, col);
+    }
+    loadSave(saveData){
         try{
-            const data = JSON.parse(saveString);
-            
+            // Load saved data
+            this.gameState = new GameState(saveData.gameState);
+            this.runtimeState = new RuntimeState(saveData.runtimeState);
+            console.log(this);
+            // Convert tile placeholders
+            this.gameState.baseGrid = this.gameState.baseGrid.map(str => this.instantiateTile(str));
+            this.gameState.towerGrid = this.gameState.towerGrid.map(str => this.instantiateTile(str));
+            this.gameState.wallGrid = this.gameState.wallGrid.map(str => this.instantiateTile(str));
+
+            // Convert Creep entity placeholders
+            for(const entry of Object.entries(this.gameState.creepDirectory)){
+                const creepEnumData = GameEnums.CREEP_PREFABS[entry[1].data.archtype];
+                // Instantiate data component
+                const newData = {...creepEnumData.data};
+                newData.id = entry[1].data.id;
+                newData.path = entry[1].data.path;
+                newData.targetIndex = entry[1].data.targetIndex;
+                newData.target = entry[1].data.path[newData.targetIndex];
+                this.gameState.creepDirectory[entry[0]] = new CreepEntity(newData, entry[1].transform, creepEnumData.stats,undefined);
+            }
+
+            // Instantiate Tower entity placeholders
+            for(const entry of Object.entries(this.gameState.towerDirectory)){
+                const towerEnumData = GameEnums.TOWER_PREFABS[entry[1].data.archtype];
+                // Instantiate data component
+                const newData = {...towerEnumData.data};
+                newData.id = entry[1].data.id;
+                newData.kills = entry[1].data.kills;
+                newData.priority = entry[1].data.priority;
+                newData.target = this.gameState.creepDirectory[entry[1].data.target];
+                newData.cooldown = entry[1].data.cooldown;
+                this.gameState.towerDirectory[entry[0]] = new TowerEntity(newData, towerEnumData.stats, towerEnumData.damageData, entry[1].transform,towerEnumData.upgradeTree);
+            }
+
+            // Instantiate Projectile entity placeholders
+            for(const entry of Object.entries(this.gameState.projectileDirectory)){
+                const projectileEnumData = GameEnums.PROJECTILE_PREFABS[entry[1].data.archtype];
+                // Instantiate data component
+                const newData = {...projectileEnumData.data};
+                newData.id = entry[1].data.id;
+                newData.launcherId = entry[1].data.launcherId;
+                newData.targetsHit = entry[1].data.priority;
+                newData.distanceTraveled = this.gameState.creepDirectory[entry[1].data.target];
+                this.gameState.projectileDirectory[entry[0]] = new ProjectileEntity(newData, projectileEnumData.stats, GameEnums.TOWER_PREFABS[newData.launcherId].damageData, entry[1].transform,undefined);
+            }
+            console.log(this); 
             return true;
         }
         catch(error){
@@ -73,7 +121,6 @@ export default class GameManager {
             return false
         }
     }
-
     /**
      * Stores a method to call upon the completion of each tick, returning the new game state
      * @param {updateCallback} callback
@@ -81,7 +128,6 @@ export default class GameManager {
     assignUdateCallback(callback){
         this.updateCallback = callback;
     }
-
     /**
      * 
      */
@@ -92,18 +138,15 @@ export default class GameManager {
                 this.gameState.waveIndex++;
                 this.runtimeState.isWaveRunning = true;
                 this.runtimeState.isPaused = false;
-
                 // If there are no waves left, end game
                 if(this.gameState.waveIndex > this.numberWaves){
                     this.runtimeState.isWaveRunning = false;
                     this.runtimeState.isGameOver = true;
                     clearInterval(this.tickInterval);
                 }
-
                 this.gameState.pathDirectory = findPaths(this.gameState.sourceArray, this.gameState.target, this.gameState.wallGrid, this.gameState.mapGrid, getEuclideanDistance, undefined, undefined, this.gameState?.pathData);
                 this.runtimeState.totalWaveTime = GameEnums.WAVE_CONFIG[this.gameState.waveIndex].reduce((aggregate, current) => aggregate + current.delay, 0);
             }
-
             if(this.gameState.pathDirectory.filter(path => path === undefined).length > 0){
                 console.log("ERROR: GameManager.sendWave() found no paths");
                 return false;
@@ -112,7 +155,6 @@ export default class GameManager {
             return true;
         }
     }
-
     getGameState(){
         return {
             /** @type {GameState} */
@@ -122,13 +164,11 @@ export default class GameManager {
             animationState: this.animationState
         }
     }
-
     placeWall(tile){
         // Return is wave is running
         if(this.runtimeState.isWaveRunning){
             return false;
         }
-
         if(this.gameState.wallGrid.filter(t => tile.isEqualTo(t)).length === 0){
             this.gameState.wallGrid.push(tile);
             return true;
@@ -136,10 +176,8 @@ export default class GameManager {
         else{
             return false;
         }
-
         this.updateCallback();
     }
-
     placeBase(tile){
         if(this.gameState.wallGrid.filter(t => tile.isEqualTo(t)).length > 0
         && this.gameState.baseGrid.filter(t => tile.isEqualTo(t)).length === 0){
@@ -150,9 +188,7 @@ export default class GameManager {
         else{
             return false;
         }
-
     }
-
     placeTower(archtype, tile){
         const id = 30000 + ++this.counters.towers;
         const success = spawnTower(this, id, archtype, tile);
@@ -165,11 +201,9 @@ export default class GameManager {
             return false;
         }
     }
-
     convertWorldPointToTile(x, y){
         const row = Math.floor(x / this.gameState.mapGrid.cellsize);
         const col = Math.floor(y / this.gameState.mapGrid.cellsize);
-
         if(row < 0 || row >= this.gameState.mapGrid.tiles.length){
             throw new Error(`GameManager.convertWorldPointToTile: ${row} is not a valid row value`);
         }
@@ -180,8 +214,10 @@ export default class GameManager {
             return this.gameState.mapGrid.tiles[row][col];
         }
     }
-
     endWave(){
         this.runtimeState.isWaveRunning = false;
+        if(this.endWaveCallback){
+            this.endWaveCallback();
+        }
     }
 }
