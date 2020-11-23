@@ -142,9 +142,17 @@ function GamePage() {
       const data = manager.current.getGameState();
       dispatch({ type: "updateGameState", payload: { gameState: data.gameState, runtimeState: data.runtimeState, animationState: data.animationState }})
     };
+    gameManager.endWaveCallback = () => {
+      saveGame(gameManager);
+    };
+    
     setupGame(gameManager, GameEnums.GAME_CONFIG);
-    //loadTestScenario(gameManager);
-    gameManager.updateCallback();
+
+    const userState = auth.user.data?.gameState?.replace(/^\"|\"$|\\/g,"");
+    if(userState){
+      const saveData = JSON.parse(userState); 
+      gameManager.loadSave(saveData);
+    }
 
     const divBox = document.getElementById("gameFrame").getBoundingClientRect();
     const grid = gameManager.gameState.mapGrid; 
