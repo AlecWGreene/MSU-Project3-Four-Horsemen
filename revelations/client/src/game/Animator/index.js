@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Sprite from "./Sprite.js";
 import styled from "styled-components";
+import { useSfx } from "../../userInterface/components/SoundSuite/"
 
 /**
  * @example
@@ -34,6 +35,7 @@ function Animator(props){
     // Setup component states
     const [ isAnimating, toggleAnimation ] = useState(false);
     const [ frame, setFrame ] = useState(0);
+    const { sfxSound } = useSfx();
 
     // When object is rendered, update Sprite offset
     let offset = frame * props.imgData.width / props.imgData.numFrames;
@@ -51,7 +53,13 @@ function Animator(props){
             requestAnimationFrame(() =>setFrame(0));
         }
         else{
-            requestAnimationFrame(() => setFrame(1));
+            requestAnimationFrame(() => {
+                setFrame(1);
+                if(props.sfx){
+                    console.log("Trying to play " + props.sfx);
+                    sfxSound(props.sfx);
+                }
+            });
         }
     }, [isAnimating]);
 

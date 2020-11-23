@@ -21,7 +21,7 @@ export default function CreepLayer(props){
         {
             Object.entries(props.creep).map(creep => <Animator height={state.gameState.mapGrid.cellsize} 
                 width={state.gameState.mapGrid.cellsize} 
-                imgData={SPRITE_ENUM["Creep_1_RED"]} 
+                imgData={SPRITE_ENUM[creep[1].data.spriteSheet]} 
                 position={convertWorldPointToScreenPoint(creep[1].transform.position,state.scaleRatio,state.origin)} 
                 rotation={90 - creep[1].transform.rotation * 180 / Math.PI} 
                 scale={state.scaleRatio} 

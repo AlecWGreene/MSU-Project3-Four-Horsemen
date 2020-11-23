@@ -55,14 +55,16 @@ export default {
             data: new TowerData(0, "test_tower1", "Tower_1Barrel", "Laser_Bolt_Yellow", [{x: 0.7, y: 0}], 0),
             stats: new TowerStats(150, 30, 180 * (Math.PI / 180), 2, false, tickLength),
             damageData: new DamageData(1, 0, []),
-            upgradeTree: new UpgradeTree()
+            upgradeTree: new UpgradeTree(),
+            sfx: "Sound_pop_0"
         },
         "test_tower2": {
             name: "test_tower2",
-            data: new TowerData(0, "test_tower2", "Tower_Laser1", "Laser_Bolt_Yellow", [{x: 0, y: 1}], 0),
+            data: new TowerData(0, "test_tower2", "Tower_Laser1", "Laser_Bolt_Blue", [{x: 0, y: 1}], 0),
             stats: new TowerStats(150, 30, 90 * (Math.PI / 180), 2, false, tickLength),
             damageData: new DamageData(1, 0, []),
-            upgradeTree: new UpgradeTree()
+            upgradeTree: new UpgradeTree(),
+            sfx: "Sound_pop_0"
         }
     },
     PROJECTILE_PREFABS: {
@@ -76,12 +78,34 @@ export default {
                                     {x:5,y:3.5},
                                     {x:5,y:-3.5},
                                     {x:0,y:-6}],{ x:0, y:0}),
+        },
+        "Laser_Bolt_Orange": {
+            name: "Laser_Bolt_Orange",
+            data: new ProjectileData(0, "Laser_Bolt_Orange", "Projectile_Laser_Orange", 0, 0, 0),
+            stats: new ProjectileStats({x:-1,y:-1}, 175, 1, 150, true, tickLength),
+            collider: new Collider([{x:-5,y:-3.5},
+                                    {x:-5,y:3.5},
+                                    {x:0,y:6},
+                                    {x:5,y:3.5},
+                                    {x:5,y:-3.5},
+                                    {x:0,y:-6}],{ x:0, y:0}),
+        },
+        "Laser_Bolt_Blue": {
+            name: "Laser_Bolt_Blue",
+            data: new ProjectileData(0, "Laser_Bolt_Blue", "Projectile_Laser_Blue", 0, 0, 0),
+            stats: new ProjectileStats({x:-1,y:-1}, 175, 1, 150, true, tickLength),
+            collider: new Collider([{x:-5,y:-3.5},
+                                    {x:-5,y:3.5},
+                                    {x:0,y:6},
+                                    {x:5,y:3.5},
+                                    {x:5,y:-3.5},
+                                    {x:0,y:-6}],{ x:0, y:0}),
         }
     },
     CREEP_PREFABS: {
         "test_creep": {
             name: "test_creep",
-            data: new CreepData(0,"test_creep", "Creep_1_CYAN", []),
+            data: new CreepData(0,"test_creep", "Creep_1_BLUE", []),
             stats: new CreepStats(100,60,270,true,50,tickLength),
             collider: new Collider([{x: -10, y: -10}, {x: -10, y: 10}, {x: 10, y: 10}, {x: 10, y: -10}], {x: 0, y: 0})
         }

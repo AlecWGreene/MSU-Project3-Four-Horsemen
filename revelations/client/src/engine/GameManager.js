@@ -62,6 +62,18 @@ export default class GameManager {
         }
     }
 
+    loadSave(saveString){
+        try{
+            const data = JSON.parse(saveString);
+            
+            return true;
+        }
+        catch(error){
+            console.log(error);
+            return false
+        }
+    }
+
     /**
      * Stores a method to call upon the completion of each tick, returning the new game state
      * @param {updateCallback} callback
