@@ -1016,6 +1016,16 @@ const SPRITE_ENUM = {
         numFrames: 1,
         scale: laserBoltScale
     },
+    /**
+     * @description HOVER ME => "../../public/Assets/Projectiles/Laser_Blue.png"
+     */
+    "Projectile_Laser_Blue": {
+        src: "./Assets/Projectiles/Laser_Blue.png",
+        height: 68,
+        width: 95,
+        numFrames: 1,
+        scale: laserBoltScale
+    },
     /* #endregion */
 
     /* #endregion */

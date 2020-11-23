@@ -39,7 +39,7 @@ export default function GameContainer(props) {
             <div className="col-lg-2 h-100 glow">
 
                  {/* User Info */}
-                <div className="container">
+                {/* <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-sm-12 text-center">
                             <div className="game-title">
@@ -50,7 +50,11 @@ export default function GameContainer(props) {
                             </div>
                         </div>
                     </div>
-                </div>                
+                </div>                 */}
+
+                <div className="status-bar">
+                    <StatusBar />
+                </div>
 
                 <div className="side-bar">
                     <Sidebar view={"Standard"}/>
@@ -78,10 +82,6 @@ export default function GameContainer(props) {
                     type="button">
                         <GameSettingsModal />
                     </button>
-                </div>
-
-                <div className="status-bar">
-                    <StatusBar />
                 </div>
             </div>             
         </div> 

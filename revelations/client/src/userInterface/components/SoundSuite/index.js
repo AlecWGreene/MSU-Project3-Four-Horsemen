@@ -13,9 +13,9 @@ function SoundSuite({ children }) {
   const toggle = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    if(event.target.id==='play'){
+    if(sfx.soundEnabled){
       sfx.mute(true);
-    }else if(event.target.id==='mute'){
+    }else{
       sfx.mute(false);
     }
   };
@@ -139,8 +139,10 @@ function useProvideSfx() {
 
   // force ambient sound to play new file
   const ambientSound = (file) => {
+    if(!soundEnabled){
+        return;
+    }
     
-    // if file is different than current sfxfile, pause current sound
     if(ambientFile!==file) {
       setAuto(true);
       setAmbientFile(file);
@@ -155,6 +157,10 @@ function useProvideSfx() {
 
   // force sfx to paly new sound
   const sfxSound = (file) => {
+    if(!soundEnabled){
+      return;
+    }
+
     setSFXAuto(true); // keeps buttons from triggering upon first click while muted when set to false
     setAuto(true);
     
