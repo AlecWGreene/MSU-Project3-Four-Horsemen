@@ -1144,6 +1144,12 @@ const SPRITE_ENUM = {
         src: "./Assets/sounds/529239__mozfoo__mortar.mp3",
     },
     /**
+    * @description HOVER ME => "../../public/Assets/sounds/Single_and_Multi_Explosion_short_w_fade.mp3"
+    */
+   "Sound_cannon_3": {
+        src: "./Assets/sounds/Single_and_Multi_Explosion_short_w_fade.mp3",
+    },
+    /**
      * @description HOVER ME => "../../public/Assets/sounds/253408__tfodor__space-laser-space-sound-tower-placement-1.mp3"
      */
     "Sound_explosion_0": {

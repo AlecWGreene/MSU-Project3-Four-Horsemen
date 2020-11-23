@@ -73,7 +73,7 @@ function useProvideSfx() {
   const [auto, setAuto] = useState(false);
   const [sfxAuto, setSFXAuto] = useState(false);
 
-  const [play, { pause, isPlaying } ] = useSound(
+  const [play, { pause, stop, isPlaying } ] = useSound(
     soundEnums[ambientFile].src,
     { 
       autoplay: auto,
@@ -85,7 +85,7 @@ function useProvideSfx() {
     }, 
   );
 
-  const [playSfx, { stop, sound }] = useSound(
+  const [playSfx, { sound }] = useSound(
     soundEnums[sfxFile].src,
     { 
       autoplay: sfxAuto,
@@ -131,10 +131,18 @@ function useProvideSfx() {
 
   // force ambient sound to play new file
   const ambientSound = (file) => {
-    // setSFXAuto(false);
-    setAuto(true);
-    setAmbientFile(file);
-    pause();
+    
+    // if file is different than current sfxfile, pause current sound
+    if(ambientFile!==file) {
+      setAuto(true);
+      setAmbientFile(file);
+      pause();
+    }else{
+      setAuto(true);
+      setAmbientFile(file);
+      stop();
+      play();
+    }
   };
 
   // force sfx to paly new sound
