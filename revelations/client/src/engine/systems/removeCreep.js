@@ -17,6 +17,7 @@ import GameManager from "../GameManager";
  * @returns {Void}
  */
 function removeCreep(manager, id){
+    console.log("Creep " + id + "reached the end");
     delete manager.gameState.creepDirectory[id];
     manager.gameState.playerLives--;
 

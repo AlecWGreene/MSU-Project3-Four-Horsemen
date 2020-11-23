@@ -3,9 +3,12 @@ import Collider from "../components/Collider.js";
 /**
  * @namespace checkCollision
  * @memberof module:Systems
+ * 
  * @description Iterate through collections and track which colliders overlap with which colliders
+ * 
  * @param {Object.<number, Collider>} collectionA directory of objects with a collider property
  * @param {Object.<number, Collider>} collectionB directory of objects with a collider property
+ * 
  * @returns {Object.<number, number[]>}
  */
 function checkCollision(collectionA, collectionB){
@@ -31,9 +34,9 @@ function checkCollision(collectionA, collectionB){
             const boxB = { xBox: xBoundsB.find(array => array[0] === idB), yBox: yBoundsB.find(array => array[0] === idB) }
 
             // If bounding boxes overlap, then compare colliders
-            if((boxA.xBox[2] < boxB.xBox[1] || boxA.xBox[1] > boxB.xBox[2]) 
-              && (boxA.yBox[2] < boxB.yBox[1] || boxA.yBox[1] > boxB.yBox[2])){
-                if(!collidersAreDisjoint(collectionA[idA], collectionB[idB])){
+            if((boxA.xBox[2] < boxB.xBox[1] && boxA.yBox[2] < boxB.yBox[1])
+            || (boxA.xBox[1] > boxB.xBox[2] && boxA.yBox[1] > boxB.yBox[2])){
+                if(!collidersAreDisjoint(collectionA[idA].collider, collectionB[idB].collider)){
                     matches[idA].push(idB);
                 }
             }

@@ -2,6 +2,7 @@ import GameEnums from "../GameEnums.js";
 import GameManager from "../GameManager.js";
 import controlTowers from "./controlTowers.js";
 import moveCreeps from "./moveCreeps.js";
+import moveProjectiles from "./moveProjectiles.js";
 import spawnCreep from "./spawnCreep.js";
 
 /**
@@ -24,6 +25,9 @@ import spawnCreep from "./spawnCreep.js";
   * @returns {Void}
   */
 function processTick(manager) {
+    // Move projectiles
+    moveProjectiles(manager);
+
     // Move creeps
     moveCreeps(manager)
 
@@ -37,7 +41,7 @@ function processTick(manager) {
         if(Math.abs(manager.runtimeState.waveTime - totalTime) < 10){
             for(let sourceIndex = 0; sourceIndex < waveData[i].creeps.length; sourceIndex++){
                 if(waveData[i].creeps[sourceIndex] !== undefined){
-                    const newId = 10000 + Object.keys(manager.gameState.creepDirectory).length;
+                    const newId = 10000 + ++manager.counters.creeps;
                     spawnCreep(manager, newId, waveData[i].creeps[sourceIndex], manager.gameState.sourceArray[sourceIndex], manager.gameState.pathDirectory[sourceIndex]);
                 }
             }
