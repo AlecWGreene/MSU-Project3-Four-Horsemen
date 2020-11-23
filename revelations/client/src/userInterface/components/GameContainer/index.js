@@ -22,10 +22,20 @@ export default function GameContainer(props) {
     const { saveGame } = useIndexedDb();
     const sfx = useSfx();
     const [state, dispatch] = useContext(GameStateContext); 
+    // Red button handler
     const redButtonHandler = () => {
         sfx.sfxSound('Sound_pop_0');
         sfx.ambientSound('Sound_background_1');
         state.manager.sendWave();
+    }
+    // Pause handler
+    const handlePause = () => {
+        if(state.runtimeState.isPaused){
+            state.manager.sendWave();
+        }
+        else{  
+            state.manager.pause();
+        }
     }
     
     return <Container fluid className="h-100">
@@ -65,6 +75,7 @@ export default function GameContainer(props) {
                     <button 
                     className="playpause-btn aldrich-font"
                     type="button"
+                    onClickCapture={handlePause}
                     >
                         PAUSE
                     </button>

@@ -209,7 +209,10 @@ function controlTowers(manager){
     // Iterate over each tower
     const towerDirectory = manager.gameState.towerDirectory;
     for(const id of Object.keys(towerDirectory)){
+        // Retrieve tower and flush its animation flag
         const tower = towerDirectory[id];
+        removeStartAnimationFlag(tower, manager);
+
         // If tower has no target or target is destroyed
         if(tower.data.target === undefined || !Object.keys(manager.gameState.creepDirectory).includes(tower.data.target.data.id.toString())){
             const c = getCreepsInRange(tower, manager);
@@ -252,8 +255,6 @@ function controlTowers(manager){
                     rotateTower(tower, angleToRotate);
                     tower.data.cooldown -= GameEnums.GAME_CONFIG.tickLength;
 
-                    removeStartAnimationFlag(tower, manager);
-
                     // If tower has no cooldown left then fire
                     if(tower.data.cooldown <= 0){
                         tower.data.cooldown = 1000 / tower.stats.attackSpeed;
@@ -266,8 +267,6 @@ function controlTowers(manager){
                 else{
                     // Rotate towards creep
                     rotateTower(tower, tower.stats.rotateSpeed * Math.sign(angleToRotate));
-
-                    removeStartAnimationFlag(tower, manager);
                 }
             }
         }

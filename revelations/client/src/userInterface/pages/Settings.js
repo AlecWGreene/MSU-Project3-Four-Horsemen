@@ -1,4 +1,4 @@
-import React, { useContext} from 'react';
+import React, { useContext, useEffect, useState} from 'react';
 import { useAuth } from "../components/UserAuth";
 import { GameStateContext } from './GamePage.js';
 import API from "../../utils/API"
@@ -14,6 +14,7 @@ export default function Settings(props) {
     const { loadGame } = useIndexedDb();
     let auth = useAuth();
     const [state, dispatch] = useContext(GameStateContext); 
+    const [gamePaused, setGamePaused] = useState(null);
     const username = auth.user.data === null ? auth.user.auth : auth.user.data.username;
     const isGuest = auth.user.data === null ? true : false;
 

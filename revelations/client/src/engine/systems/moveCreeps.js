@@ -80,7 +80,8 @@ function moveCreeps(manager){
             }
 
             // Return out if creep is at the target
-            if(creep.data.targetIndex === creep.data.path.length - 1){  
+            if(creep.data.targetIndex === creep.data.path.length - 1){
+                manager.gameState.playerLives--;
                 removeCreep(manager, id);
                 return;
             }

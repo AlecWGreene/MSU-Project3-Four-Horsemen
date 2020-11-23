@@ -89,6 +89,7 @@ export default class GameManager {
                 newData.path = entry[1].data.path;
                 newData.targetIndex = entry[1].data.targetIndex;
                 newData.target = entry[1].data.path[newData.targetIndex];
+                newData.hitPoints = entry[1].data.hitPoints;
                 this.gameState.creepDirectory[entry[0]] = new CreepEntity(newData, entry[1].transform, creepEnumData.stats,undefined);
             }
 
@@ -137,10 +138,10 @@ export default class GameManager {
     sendWave(waveConfig){
         if(this.runtimeState.isPaused || !this.runtimeState.isWaveRunning){
             if(!this.runtimeState.isWaveRunning){
-                // Set up to next 
+                // Set up next wave
                 this.gameState.waveIndex++;
                 this.runtimeState.isWaveRunning = true;
-                this.runtimeState.isPaused = false;
+
                 // If there are no waves left, end game
                 if(this.gameState.waveIndex > this.numberWaves){
                     this.runtimeState.isWaveRunning = false;
@@ -150,10 +151,15 @@ export default class GameManager {
                 this.gameState.pathDirectory = findPaths(this.gameState.sourceArray, this.gameState.target, this.gameState.wallGrid, this.gameState.mapGrid, getEuclideanDistance, undefined, undefined, this.gameState?.pathData);
                 this.runtimeState.totalWaveTime = GameEnums.WAVE_CONFIG[this.gameState.waveIndex].reduce((aggregate, current) => aggregate + current.delay, 0);
             }
+
+            // Throw error in console if no paths found
             if(this.gameState.pathDirectory.filter(path => path === undefined).length > 0){
                 console.log("ERROR: GameManager.sendWave() found no paths");
                 return false;
             }
+
+            // Resume game
+            this.runtimeState.isPaused = false;
             this.tickInterval=setInterval(processTick.bind(arguments[0]), GameEnums.GAME_CONFIG.tickLength, this);
             return true;
         }
@@ -173,6 +179,13 @@ export default class GameManager {
             return false;
         }
         if(this.gameState.wallGrid.filter(t => tile.isEqualTo(t)).length === 0){
+            // Ensure player has sufficient funds
+            if(this.gameState.playerMoney < GameEnums.GAME_CONFIG.wallCost){
+                return false;
+            }
+            this.gameState.playerMoney -= GameEnums.GAME_CONFIG.wallCost;
+
+            // Add wall
             this.gameState.wallGrid.push(tile);
             return true;
         }
@@ -184,6 +197,13 @@ export default class GameManager {
     placeBase(tile){
         if(this.gameState.wallGrid.filter(t => tile.isEqualTo(t)).length > 0
         && this.gameState.baseGrid.filter(t => tile.isEqualTo(t)).length === 0){
+            // Ensure player has sufficient funds
+            if(this.gameState.playerMoney < GameEnums.GAME_CONFIG.baseCost){
+                return false;
+            }
+            this.gameState.playerMoney -= GameEnums.GAME_CONFIG.baseCost;
+
+            // Add base
             this.gameState.baseGrid.push(tile);
             if(!this.runtimeState.isPause || !this.runtimeState.isWaveRunning) this.updateCallback();
             return true;
@@ -217,8 +237,13 @@ export default class GameManager {
             return this.gameState.mapGrid.tiles[row][col];
         }
     }
+    pause(){
+        this.runtimeState.isPaused = true;
+        clearInterval(this.tickInterval);
+    }
     endWave(){
         this.runtimeState.isWaveRunning = false;
+        this.gameState.playerMoney += GameEnums.GAME_CONFIG.waveReward;
         if(this.endWaveCallback){
             this.endWaveCallback();
         }

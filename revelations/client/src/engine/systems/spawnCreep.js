@@ -34,6 +34,7 @@ function spawnCreep(manager, id, archtype, source, path){
     // Instatiante component data
     const newData = new CreepData(id, archtype.name, archtype.data.spriteSheet, path);
     const newStats = archtype.stats;
+    newData.hitPoints = newStats.health;
     // const newCollider = archtype.collider;
 
     // Calculate the starting rotation
