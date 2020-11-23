@@ -1,7 +1,7 @@
 html, body {
-  background-color: black;
+  background-color: black!important;
   height: 100vh;
-  overflow-y:hidden;
+  overflow-y:auto;
 }
 
 body {
@@ -11,6 +11,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: black;
 }
 
 code {

@@ -4,6 +4,8 @@ import API from "../../utils/API";
 import history from "../../utils/history";
 import Modal from "react-bootstrap/esm/Modal";
 
+import SfxButton from "../components/SfxButton"
+
 function SignUp(props) {
   let auth = useAuth();
   const [formState, setFormState] = useState({
@@ -80,15 +82,19 @@ function SignUp(props) {
             <label id="customFont" htmlFor="password">PASSWORD</label>
             <input type="password" className="form-control text-center" value={formState.password} onChange={handleInputChange} id="password" />
           </div>
-          <button 
+          <div className="row justify-content-center">
+            <button 
             type="submit" 
             className="custom-modal-btn aldrich-font" 
             onClick={handleSubmit}
             >
               REGISTER
-          </button>
+            </button>
+          </div>
+          
         </div>
       </Modal.Body>
+      <SfxButton />
     </Modal>
     
     

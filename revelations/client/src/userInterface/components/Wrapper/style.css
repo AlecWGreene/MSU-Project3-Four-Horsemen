@@ -23,7 +23,7 @@
 
   .homepage-btns {
     margin: 5px!important;
-    padding-top: 10px;
+    padding-top: 7px;
   }
 }
 
@@ -42,16 +42,14 @@ and (max-width: 666px)
     }
 
   .welcome-container {
-    height:87vh!important;
+    height:80vh!important;
     width:30vw;
     border-style: solid;
-    border-width: 25px 50px!important;
+    border-width: 0px 50px!important;
     -moz-border-image: url("../../assets/Lore.png") 100  100  stretch stretch;
     -webkit-border-image: url("../../assets/Lore.png") 100  100  stretch stretch;
     -o-border-image: url("../../assets/Lore.png") 100  100  stretch stretch;
     border-image: url("../../assets/Lore.png") 100  100  stretch stretch;
-    position: relative;
-    top: 10px!important;
     margin-top: 0px!important;
     
   }
@@ -59,7 +57,7 @@ and (max-width: 666px)
   .welcome-content {
     background-color: #16080C;
     color: whitesmoke;
-    height:45vh!important;
+    height:40vh!important;
     } 
 
   .custom-btn {
@@ -98,16 +96,14 @@ and (max-width: 736px)
     }
 
   .welcome-container {
-    height:85vh!important;
+    height:80vh!important;
     width:30vw;
     border-style: solid;
-    border-width: 50px 75px!important;
+    border-width: 25px 50px!important;
     -moz-border-image: url("../../assets/Lore.png") 100  100  stretch stretch;
     -webkit-border-image: url("../../assets/Lore.png") 100  100  stretch stretch;
     -o-border-image: url("../../assets/Lore.png") 100  100  stretch stretch;
     border-image: url("../../assets/Lore.png") 100  100  stretch stretch;
-    position: relative;
-    top: 10px!important;
     margin-top: 0px!important;
     
   }
@@ -126,16 +122,16 @@ and (max-width: 736px)
     width: 100%!important;
     height: 13vh!important;
     background-repeat: no-repeat; 
- 
   } 
 
   .homepage-btns {
     margin: 0px!important;
-    height: 100vh;
+    height: 50vh;
     font-family: 'perfect_dark_brkregular';
     font-size: 25px;
     color: #74797c;
     text-shadow: 2px 2px 1px #174116ce, 0 0 10px rgba(224, 37, 37, 0.8), 0 0 5px darkblue;
+    padding-right: 5px;
   } 
 }
 
@@ -165,9 +161,8 @@ and (max-width: 736px)
 
   .homepage-btns {
     margin: 0px!important;
-    padding-top: 10px;
     padding-left: 2px;
-    padding-bottom: 15px;
+    padding-bottom: 25px;
     font-size: small;
     font-weight: bold;
   }
@@ -203,7 +198,6 @@ and (max-width: 736px)
   
     .homepage-btns {
       margin: 0px!important;
-      padding-top: 20px;
       padding-left: 2px;
     }
 }
@@ -234,8 +228,8 @@ and (max-width: 736px)
   
     .homepage-btns {
       margin: 0px!important;
-      padding-top: 30px;
       font-size: medium;
+      border: none!important;
     }
 
     .custom-btn {
@@ -270,13 +264,13 @@ and (max-width: 736px)
   
     .homepage-btns {
       margin: 0px!important;
-      padding-top: 10px;
+      /* padding-top: 0px; */
       font-size: larger;
     }
 
     .custom-btn {
       height: 12vh!important;
-      width: 21vw!important;
+      width: 100%!important;
     }
 }
 

@@ -9,10 +9,16 @@
 }
 
 #customFont {
-    font-family: 'perfect_dark_brkregular';
+    /* font-family: 'perfect_dark_brkregular';
     font-size: 30px;
     color: #8E979C;
-    text-shadow: 2px 2px #262f31;
+    text-shadow: 2px 2px #262f31; */
+
+    background:linear-gradient(#262626,#eaeaea,#262626);
+    -webkit-background-clip: text;
+    color:transparent;
+    font-size: 40px;
+    font-family: 'perfect_dark_brkregular';
 }
 
 
@@ -22,6 +28,7 @@
     font-size: 15px;
     font-weight: lighter;
 }
+
 
 .test-borderOne {
     border-style: solid;
@@ -55,13 +62,12 @@
     outline:none!important;
     background-image: url("../assets/blueButton.png");
     background-size: cover;
-    width: 100%;
+    width: 75%;
     height: 10vh;
     background-repeat: no-repeat;
     align-items: center;
     margin: 0px;
-    padding: 45px;
-    
+    padding: 50px;
 }
 
 .custom-options-btn {
@@ -77,10 +83,11 @@
     margin: 0px!important;
 }
 
-button {
+button, button:active, button:visited {
     background-color: transparent;
     color: whitesmoke;
-    border: none;
+    border: none!important;
+    outline: none!important;
 }
 
 /* Homepage welcome board */
