@@ -1016,6 +1016,16 @@ const SPRITE_ENUM = {
         numFrames: 1,
         scale: laserBoltScale
     },
+    /**
+     * @description HOVER ME => "../../public/Assets/Projectiles/Laser_Blue.png"
+     */
+    "Projectile_Laser_Blue": {
+        src: "./Assets/Projectiles/Laser_Blue.png",
+        height: 68,
+        width: 95,
+        numFrames: 1,
+        scale: laserBoltScale
+    },
     /* #endregion */
 
     /* #endregion */
@@ -1142,6 +1152,12 @@ const SPRITE_ENUM = {
     */
     "Sound_cannon_2": {
         src: "./Assets/sounds/529239__mozfoo__mortar.mp3",
+    },
+    /**
+    * @description HOVER ME => "../../public/Assets/sounds/Single_and_Multi_Explosion_short_w_fade.mp3"
+    */
+   "Sound_cannon_3": {
+        src: "./Assets/sounds/Single_and_Multi_Explosion_short_w_fade.mp3",
     },
     /**
      * @description HOVER ME => "../../public/Assets/sounds/253408__tfodor__space-laser-space-sound-tower-placement-1.mp3"

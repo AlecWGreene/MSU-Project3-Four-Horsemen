@@ -13,9 +13,9 @@ function SoundSuite({ children }) {
   const toggle = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    if(event.target.id==='play'){
+    if(sfx.soundEnabled){
       sfx.mute(true);
-    }else if(event.target.id==='mute'){
+    }else{
       sfx.mute(false);
     }
   };
@@ -81,7 +81,7 @@ function useProvideSfx() {
   const [auto, setAuto] = useState(false);
   const [sfxAuto, setSFXAuto] = useState(false);
 
-  const [play, { pause, isPlaying } ] = useSound(
+  const [play, { pause, stop, isPlaying } ] = useSound(
     soundEnums[ambientFile].src,
     { 
       autoplay: auto,
@@ -93,7 +93,7 @@ function useProvideSfx() {
     }, 
   );
 
-  const [playSfx, { stop, sound }] = useSound(
+  const [playSfx, { sound }] = useSound(
     soundEnums[sfxFile].src,
     { 
       autoplay: sfxAuto,
@@ -139,14 +139,28 @@ function useProvideSfx() {
 
   // force ambient sound to play new file
   const ambientSound = (file) => {
-    // setSFXAuto(false);
-    setAuto(true);
-    setAmbientFile(file);
-    pause();
+    if(!soundEnabled){
+        return;
+    }
+    
+    if(ambientFile!==file) {
+      setAuto(true);
+      setAmbientFile(file);
+      pause();
+    }else{
+      setAuto(true);
+      setAmbientFile(file);
+      stop();
+      play();
+    }
   };
 
   // force sfx to paly new sound
   const sfxSound = (file) => {
+    if(!soundEnabled){
+      return;
+    }
+
     setSFXAuto(true); // keeps buttons from triggering upon first click while muted when set to false
     setAuto(true);
     

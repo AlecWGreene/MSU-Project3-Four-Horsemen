@@ -62,6 +62,18 @@ export default class GameManager {
         }
     }
 
+    loadSave(saveString){
+        try{
+            const data = JSON.parse(saveString);
+            
+            return true;
+        }
+        catch(error){
+            console.log(error);
+            return false
+        }
+    }
+
     /**
      * Stores a method to call upon the completion of each tick, returning the new game state
      * @param {updateCallback} callback
@@ -144,10 +156,6 @@ export default class GameManager {
     placeTower(archtype, tile){
         const id = 30000 + ++this.counters.towers;
         const success = spawnTower(this, id, archtype, tile);
-        const string = convertGameToJSON(this);
-        console.log(string);
-        const o = JSON.parse(string);
-        console.log(o);
         if(success){
             this.gameState.towerGrid.push(tile);
             if(!this.runtimeState.isPause || !this.runtimeState.isWaveRunning) this.updateCallback();
@@ -175,9 +183,5 @@ export default class GameManager {
 
     endWave(){
         this.runtimeState.isWaveRunning = false;
-        const string = convertGameToJSON(this);
-        console.log(string);
-        const o = JSON.parse(string);
-        console.log(o);
     }
 }
