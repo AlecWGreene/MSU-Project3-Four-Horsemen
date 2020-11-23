@@ -142,7 +142,7 @@ function useProvideSfx() {
     if(!soundEnabled){
         return;
     }
-
+    
     if(ambientFile!==file) {
       setAuto(true);
       setAmbientFile(file);

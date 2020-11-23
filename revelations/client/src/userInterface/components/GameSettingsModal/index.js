@@ -11,7 +11,9 @@ export default function Modal() {
       <div
       style={{marginBottom:'7px'}}
       onClick={() => setModalShow(true)}>
+
         <img className="settings-gear" src={Gear} />
+
       </div>
       <Settings
         show={modalShow}
