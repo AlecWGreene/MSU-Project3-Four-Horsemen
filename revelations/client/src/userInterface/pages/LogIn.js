@@ -3,6 +3,7 @@ import { useAuth } from "../components/UserAuth";
 import API from "../../utils/API";
 import history from "../../utils/history";
 import Modal from 'react-bootstrap/Modal';
+import SfxButton from "../components/SfxButton";
 import "../styles/logIn.css";
 
 function LogIn(props) {
@@ -66,15 +67,18 @@ function LogIn(props) {
             <label id="customFont" htmlFor="password">Password</label>
             <input type="password" className="form-control text-center" id="password" value={formState.password} onChange={handleInputChange} />
           </div>
-          <button 
-            type="submit" 
-            className="custom-modal-btn aldrich-font" 
-            onClick={handleSubmit}
-            >
-              LOGIN
-          </button>
+          <div className="row justify-content-center">
+            <button 
+              type="submit" 
+              className="custom-modal-btn aldrich-font" 
+              onClick={handleSubmit}
+              >
+                LOGIN
+            </button>
+          </div>
         </div>
       </Modal.Body>
+      <SfxButton />
     </Modal>
     
   );

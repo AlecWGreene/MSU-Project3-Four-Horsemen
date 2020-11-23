@@ -4,6 +4,9 @@ import soundEnums from '../../../game/SpriteEnums.js';
 import SfxOptions from '../SfxOptions/index';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
+import './style.css'
+import SfxButton from '../SfxButton/index.js';
+
 function SoundSuite({ children }) {
   const sfx = useProvideSfx();
   
@@ -21,26 +24,31 @@ function SoundSuite({ children }) {
     <>
       <sfxContext.Provider value={sfx}>
         {/* this need to be converted to a component and styled to not push down the app page */}
-        <div>
+        {/* <div className="sound-bar">
           {
             !sfx.soundEnabled 
           ?
             (
               <button id='play' onClick={toggle}>
-                🔊
+                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-soundwave sound-icon" fill="white" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M8.5 2a.5.5 0 0 1 .5.5v11a.5.5 0 0 1-1 0v-11a.5.5 0 0 1 .5-.5zm-2 2a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zm-6 1.5A.5.5 0 0 1 5 6v4a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm8 0a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm-10 1A.5.5 0 0 1 3 7v2a.5.5 0 0 1-1 0V7a.5.5 0 0 1 .5-.5zm12 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0V7a.5.5 0 0 1 .5-.5z"/>
+                </svg>
               </button>
             )
           : 
             (
               <ButtonGroup className="mr-2" aria-label="First group">  
                 <button id='mute' onClick={toggle}> 
-                  🔈
+                  <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-soundwave sound-icon" fill="white" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M8.5 2a.5.5 0 0 1 .5.5v11a.5.5 0 0 1-1 0v-11a.5.5 0 0 1 .5-.5zm-2 2a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zm-6 1.5A.5.5 0 0 1 5 6v4a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm8 0a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm-10 1A.5.5 0 0 1 3 7v2a.5.5 0 0 1-1 0V7a.5.5 0 0 1 .5-.5zm12 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0V7a.5.5 0 0 1 .5-.5z"/>
+                  </svg>
                 </button>
                 <SfxOptions />
               </ButtonGroup>
             )
           }
-        </div>
+        </div> */}
+        <SfxButton />
 
         {children}
 

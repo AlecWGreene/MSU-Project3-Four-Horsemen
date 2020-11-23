@@ -20,7 +20,7 @@ color: whitesmoke;
 font-family: 'Coda', cursive;
 }
 
-.button{
+/* .button{
     border-color: #384042;
     border-radius: 7px;
     border-style: solid;
@@ -28,16 +28,16 @@ font-family: 'Coda', cursive;
     background-color: #53BDE3;
     font-weight: bold;
     font-family: 'Coda', cursive;
-}
+} */
 
 .button-lg {
     margin: 5px;
     padding: 5px;
 }
 
-#codaFont {
+/* #codaFont {
     font-family: 'Coda', cursive;
     color: black;
     font-size: 12px;
     font-weight: bold;
-}
+} */

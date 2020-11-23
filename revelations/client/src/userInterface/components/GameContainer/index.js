@@ -10,6 +10,7 @@ import GameSettingsModal from '../GameSettingsModal/index';
 import LogInModal from '../LogInModal/index'
 import GameButton from "../GameButton";
 import Sidebar from "../Sidebar";
+import StatusBar from "../StatusBar";
 
 // Button images
 import redButton from "../../assets/red-btn.png"
@@ -19,10 +20,7 @@ import "./style.css";
 export default function GameContainer(props) {
 
     const sfx = useSfx();
-    let auth = useAuth();
     const [state, dispatch] = useContext(GameStateContext); 
-
-    const username = auth.user.data === null ? auth.user.auth : auth.user.data.username;
 
     const redButtonHandler = () => {
         sfx.sfxSound('Sound_pop_0');
@@ -33,27 +31,26 @@ export default function GameContainer(props) {
     return <Container fluid className="h-100">
         <div className="row h-100">
             {/* Game Frame */}
-            <div className="col-sm-10 h-100 game-dispay">
+            <div className="col-lg-10 h-100 game-dispay">
                 {props.children}
             </div>
 
             {/* UI Frame */}
-            <div className="col-sm-2 glow">
+            <div className="col-lg-2 h-100 glow">
 
                  {/* User Info */}
-                 <div className="container">
-                   <div className="row">
-                    <div id="customFont" className="col-sm-12 username text-center">
-                        { username }
+                <div className="container">
+                    <div className="row justify-content-center">
+                        <div className="col-sm-12 text-center">
+                            <div className="game-title">
+                                A s h e N   
+                            </div>
+                            <div className="game-title">
+                                Void
+                            </div>
+                        </div>
                     </div>
-                    <div id="customFont" className="col-sm-12 username text-center">
-                        {/* { lives } */}
-                    </div>
-                    <div id="customFont" className="col-sm-12 username text-center">
-                        {/* { money } */}
-                    </div>
-                </div> 
-                </div>
+                </div>                
 
                 <div className="side-bar">
                     <Sidebar view={"Standard"}/>
@@ -77,12 +74,14 @@ export default function GameContainer(props) {
 
                 <div className="row justify-content-center">
                     <button 
-                    // className="custom-options-btn aldrich-font"
-                    type="button"
                     style={{width: '15vw'}}
                     type="button">
                         <GameSettingsModal />
                     </button>
+                </div>
+
+                <div className="status-bar">
+                    <StatusBar />
                 </div>
             </div>             
         </div> 
