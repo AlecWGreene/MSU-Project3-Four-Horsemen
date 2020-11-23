@@ -3,6 +3,9 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { useSfx } from "../SoundSuite/index";
 
+import './style.css'
+
+
 function SfxOptions() {
     const sfx = useSfx();
 
@@ -53,43 +56,47 @@ function SfxOptions() {
         ⚙️
         </button>
   
-        <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-                <Modal.Title>Sound Settings</Modal.Title>
-            </Modal.Header>
+        <Modal 
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        show={show} 
+        onHide={handleClose}>
             <Modal.Body>
-                <Form>
-                    <Form.Group>
+            <Modal.Title id="customFont sound-setting-title">Sound Settings</Modal.Title>
+                <Form className="aldrich-font sound-form">
+                    <Form.Group className="aldrich-font sound-form">
                         <Form.Label> Master: { sfx.masterVol === 0 ? 'muted' : (Math.round(sfx.masterVol*100)+'%') } </Form.Label>
                         <Form.Control type="range" id='master' min="0" max="1" step="0.01" onChange={handleVolume} value={sfx.masterVol} />
                     </Form.Group>
-                    <Form.Group>
+                    <Form.Group className="aldrich-font sound-form">
                         <Form.Label> Ambient: { sfx.ambientVol === 0 ? 'muted' : (Math.round(sfx.ambientVol*100)+'%') } </Form.Label>
                         <Form.Control type="range" id='ambient' min="0" max="1" step="0.01" onChange={handleVolume} value={sfx.ambientVol} disabled={ sfx.masterVol === 0 ? true : false } />
                     </Form.Group>
-                    <Form.Group>
+                    <Form.Group className="aldrich-font sound-form">
                         <Form.Label>SFX: { sfx.sfxVol === 0 ? 'muted' : (Math.round(sfx.sfxVol*100)+'%') } </Form.Label>
                         <Form.Control type="range" id='sfx'  min="0" max="1" step="0.01" onChange={handleVolume} value={sfx.sfxVol} disabled={ sfx.masterVol === 0 ? true : false } />
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Select Ambient *Dev Only*</Form.Label>
                         <Form.Control as="select" onInput={SoundOption}>
-                            <option>Sound_background_0</option>
-                            <option>Sound_background_1</option>
-                            <option>Sound_background_2</option>
-                            <option>Sound_background_3</option>
+                            <option id="sound-options" >Sound_background_0</option>
+                            <option id="sound-options">Sound_background_1</option>
+                            <option id="sound-options">Sound_background_2</option>
+                            <option id="sound-options">Sound_background_3</option>
                         </Form.Control>
                     </Form.Group>
                 </Form>
+                <div className="row justify-content-center d-flex">
+                    <button className="sound-modal-btn aldrich-font" variant="secondary" onClick={setDefault}>
+                        Default
+                    </button>
+                    <button className="sound-modal-btn aldrich-font" variant="primary" onClick={muteAll}>
+                        Mute All
+                    </button>
+                </div>
+               
             </Modal.Body>
-            <Modal.Footer>
-                <button variant="secondary" onClick={setDefault}>
-                    Default
-                </button>
-                <button variant="primary" onClick={muteAll}>
-                    Mute All
-                </button>
-            </Modal.Footer>
         </Modal>
       </>
     );

@@ -7,7 +7,6 @@
         background-size: 100% 100%;
         background-repeat: no-repeat;
         color: white;
-        padding: 50px;
     }
 }
 
@@ -23,9 +22,9 @@
 color:whitesmoke;
 }
 
-.custom-padding {
+/* .custom-padding {
     padding: 15vh;
-}
+} */
 
 .form-group {
     padding-bottom: 25px;

@@ -1,9 +1,8 @@
 import React from "react";
 import { useAuth } from "../components/UserAuth";
 import history from "../../utils/history";
-// import "../styles/logIn.css"
 
-function Rules() {
+function Rules(props) {
 
   let auth = useAuth()
 

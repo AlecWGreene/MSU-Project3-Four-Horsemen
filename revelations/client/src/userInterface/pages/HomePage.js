@@ -36,7 +36,7 @@ return (
                    onClick={userAuthState}
                   >
                     <div className="homepage-btns">
-                      PLAY AS GUEST
+                      GUEST
                     </div>
                     
                   </button>
