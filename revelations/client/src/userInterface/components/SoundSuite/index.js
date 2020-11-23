@@ -9,45 +9,11 @@ import SfxButton from '../SfxButton/index.js';
 
 function SoundSuite({ children }) {
   const sfx = useProvideSfx();
-  
-  const toggle = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    if(sfx.soundEnabled){
-      sfx.mute(true);
-    }else{
-      sfx.mute(false);
-    }
-  };
     
   return (
     <>
       <sfxContext.Provider value={sfx}>
-        {/* this need to be converted to a component and styled to not push down the app page */}
-        {/* <div className="sound-bar">
-          {
-            !sfx.soundEnabled 
-          ?
-            (
-              <button id='play' onClick={toggle}>
-                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-soundwave sound-icon" fill="white" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M8.5 2a.5.5 0 0 1 .5.5v11a.5.5 0 0 1-1 0v-11a.5.5 0 0 1 .5-.5zm-2 2a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zm-6 1.5A.5.5 0 0 1 5 6v4a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm8 0a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm-10 1A.5.5 0 0 1 3 7v2a.5.5 0 0 1-1 0V7a.5.5 0 0 1 .5-.5zm12 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0V7a.5.5 0 0 1 .5-.5z"/>
-                </svg>
-              </button>
-            )
-          : 
-            (
-              <ButtonGroup className="mr-2" aria-label="First group">  
-                <button id='mute' onClick={toggle}> 
-                  <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-soundwave sound-icon" fill="white" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M8.5 2a.5.5 0 0 1 .5.5v11a.5.5 0 0 1-1 0v-11a.5.5 0 0 1 .5-.5zm-2 2a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zm-6 1.5A.5.5 0 0 1 5 6v4a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm8 0a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm-10 1A.5.5 0 0 1 3 7v2a.5.5 0 0 1-1 0V7a.5.5 0 0 1 .5-.5zm12 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0V7a.5.5 0 0 1 .5-.5z"/>
-                  </svg>
-                </button>
-                <SfxOptions />
-              </ButtonGroup>
-            )
-          }
-        </div> */}
+        
         <SfxButton />
 
         {children}
@@ -110,7 +76,7 @@ function useProvideSfx() {
       setSFXAuto(false);
       setAuto(true);
       setSoundEnabled(true);
-      play();
+      play(ambientFile);
     }else{
       setAuto(false);
       setSFXAuto(false);
@@ -139,15 +105,18 @@ function useProvideSfx() {
 
   // force ambient sound to play new file
   const ambientSound = (file) => {
-    if(!soundEnabled){
-        return;
-    }
     
     if(ambientFile!==file) {
-      setAuto(true);
       setAmbientFile(file);
+      if(!soundEnabled){
+        return;
+      }
+      setAuto(true);
       pause();
     }else{
+      if(!soundEnabled){
+        return;
+      }
       setAuto(true);
       setAmbientFile(file);
       stop();
