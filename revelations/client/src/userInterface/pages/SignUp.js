@@ -3,16 +3,17 @@ import { useAuth } from "../components/UserAuth";
 import API from "../../utils/API";
 import history from "../../utils/history";
 import Modal from "react-bootstrap/esm/Modal";
-
-import SfxButton from "../components/SfxButton"
+import SfxButton from "../components/SfxButton";
 
 function SignUp(props) {
+
   let auth = useAuth();
   const [formState, setFormState] = useState({
     username: "",
     password: ""
   });
 
+  // Input change handler
   const handleInputChange = event => {
     event.preventDefault();
     const id = event.currentTarget.id;
@@ -22,19 +23,14 @@ function SignUp(props) {
     });
   };
 
-  // const handleKeyDown = event => {
-  //   event.preventDefault();
-  //   if (event.key === 'Enter') {
-  //     handleSubmit(event);
-  //   };
-  // };
-
+  // Submit handler
   const handleSubmit = event => {
     event.preventDefault();
     if (formState.username !== "" && formState.password !== "") {
       API.userSignUp({
         username: formState.username,
-        password: formState.password
+        password: formState.password,
+        gameState: ""
       })
         .then(res => {
           console.log(`Created User: "${res.data.username}"`)
@@ -53,6 +49,7 @@ function SignUp(props) {
     }
   };
 
+  // Login handler
   const loginUser = (data) => {
     API.userLogIn({
       username: data.username,
@@ -64,7 +61,7 @@ function SignUp(props) {
         auth.login(() => { history.push("/game") }, res.data)
       })
   };
-
+  
   return (
     <Modal
         {...props}
@@ -91,16 +88,11 @@ function SignUp(props) {
               REGISTER
             </button>
           </div>
-          
         </div>
       </Modal.Body>
       <SfxButton />
     </Modal>
-    
-    
   );
-
 }
 
 export default SignUp;
-// export default withRouter(SignUp);

@@ -11,17 +11,17 @@ import LogInModal from '../LogInModal/index'
 import GameButton from "../GameButton";
 import Sidebar from "../Sidebar";
 import StatusBar from "../StatusBar";
+import useIndexedDb from "../../../utils/hooks/useIndexedDB";
 
 // Button images
 import redButton from "../../assets/red-btn.png"
-
 import "./style.css";
 
 export default function GameContainer(props) {
-
+    //Load hooks
+    const { saveGame } = useIndexedDb();
     const sfx = useSfx();
     const [state, dispatch] = useContext(GameStateContext); 
-
     const redButtonHandler = () => {
         sfx.sfxSound('Sound_pop_0');
         sfx.ambientSound('Sound_background_1');
@@ -31,13 +31,11 @@ export default function GameContainer(props) {
     return <Container fluid className="h-100">
         <div className="row h-100">
             {/* Game Frame */}
-            <div className="col-sm-10 h-100 game-dispay">
+            <div className="col-lg-10 h-100 game-dispay">
                 {props.children}
             </div>
-
             {/* UI Frame */}
-            <div className="col-sm-2 h-100 glow game-side-display">
-
+            <div className="col-lg-2 h-100 glow">
                  {/* User Info */}
                 {/* <div className="container">
                     <div className="row justify-content-center">
@@ -51,16 +49,12 @@ export default function GameContainer(props) {
                         </div>
                     </div>
                 </div>                 */}
-
                 <div className="status-bar">
                     <StatusBar />
                 </div>
-
                 <div className="side-bar">
                     <Sidebar view={"Standard"}/>
                 </div>
-               
-
                 {/* Play|Pause buttons */}
                 <div className="row justify-content-center">
                     <button onClickCapture={redButtonHandler}>
@@ -75,17 +69,14 @@ export default function GameContainer(props) {
                         PAUSE
                     </button>
                 </div>
-
                 <div className="row justify-content-center">
                     <button 
                     style={{width: '15vw'}}
-                    type="button">
+                    type="button"
+                    onClick={() => saveGame(state.manager)}
+                    >
                         <GameSettingsModal />
                     </button>
-                </div>
-
-                <div className="status-bar status-br-mobile">
-                    <StatusBar />
                 </div>
             </div>             
         </div> 

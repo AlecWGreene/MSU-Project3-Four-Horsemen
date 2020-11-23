@@ -11,7 +11,7 @@ const API =  {
   },
   // Saves a post to the database - not tested
   saveData: function(id, userData) {
-    return axios.post("/api/" + id, userData);
+    return axios.put("/api/" + id, {$set: { gameState: userData}});
   },
   // deletes user account
   deleteUser: function(id) {

@@ -1,5 +1,4 @@
 import React, { useReducer, useLayoutEffect, useRef, useEffect, useCallback } from "react";
-
 // Engine imports
 import GameState from "../../engine/components/GameState.js";
 import RuntimeState from "../../engine/components/RuntimeState.js";
@@ -7,7 +6,6 @@ import Grid from "../../engine/Grid.js";
 import GameEnums from "../../engine/GameEnums.js";
 import GameManager from "../../engine/GameManager.js";
 import testGame from "../../engine/GameTest.js";
-
 // React component imports
 import Game from "../../game"
 import GameContainer from "../components/GameContainer/index.js";
@@ -19,16 +17,14 @@ import Planet from "../../game/Planet";
 import BaseLayer from "../../game/BaseLayer";
 import TowerLayer from "../../game/TowerLayer";
 import ProjectileLayer from "../../game/ProjectileLayer/index.js";
-
+import { useAuth } from "../components/UserAuth";
 // Testing imports
 import loadTestScenario from "./GameUtils/loadTestScenario.js"
-
-
+import useIndexedDB from "../../utils/hooks/useIndexedDB.js";
 /**
  * @type {React.Context} Context containing the last passed version of the game state
  */
 export const GameStateContext = React.createContext({});
-
 /**
  * @function convertScreenPointToMapTile
  */
@@ -38,15 +34,12 @@ export function convertScreenPointToMapTile(point, frame, ratio, gameState){
   if((point.x < frame.bottomLeft.x || point.x > frame.bottomLeft.x + frame.width )  || (point.y < frame.bottomLeft.y || point.y > frame.bottomLeft.y + frame.height)){
     return false;
   }
-
   // Adjust position for framesize
   point.x = (point.x - frame.bottomLeft.x) / ratio;
   point.y = (point.y - frame.bottomLeft.y) / ratio;
-
   // Calculate the closest grid point to out mouse
   const row = GameEnums.GAME_CONFIG.mapSize.rows - Math.floor(point.y / cellsize);
   const col = Math.floor(point.x / cellsize);
-
   // Check if a grid point is close
   const indices = [
     { row: row, col: col}
@@ -63,16 +56,18 @@ export function convertScreenPointToMapTile(point, frame, ratio, gameState){
       continue;
     }
   }
-
   return lowestIndex ? gameState.mapGrid.tiles[lowestIndex.row][lowestIndex.col] : false;
 }
-
 function GamePage() {
+  const auth = useAuth();
+
+  const { saveGame } = useIndexedDB();
 
   // Game manager setup
   let gameManager = new GameManager();
   const manager = useRef(gameManager);
 
+  // Dispatches window size to gameStateReducer
   const initializeGameSize = () => {
       const divBox = document.getElementById("gameFrame").getClientRects()[0];
       const grid = gameManager.gameState.mapGrid;
@@ -94,6 +89,7 @@ function GamePage() {
       });
   }
 
+  // Reducer for the GameStateContext value
   const gameStateReducer = (state, action) => {
     let gameState;
     switch(action.type){
@@ -130,14 +126,13 @@ function GamePage() {
       default: throw new Error(`Action type (${action.type}) for GameState dispatch is not valid`);
     }
   }
-
   /**
    * @type {[{gameState: GameState, runtimeState: RuntimeState}, (action, state)=>{gameState: GameState, runtimeState: RuntimeState}]}
    */
   const [state, dispatch] = useReducer(gameStateReducer, gameManager);
-
   // Called on initial render
   useLayoutEffect(()=>{
+    // Initialize the GameManager instance
     gameManager.updateCallback = () => { 
       const data = manager.current.getGameState();
       dispatch({ type: "updateGameState", payload: { gameState: data.gameState, runtimeState: data.runtimeState, animationState: data.animationState }})
@@ -154,6 +149,7 @@ function GamePage() {
       gameManager.loadSave(saveData);
     }
 
+    // Setup the frame size
     const divBox = document.getElementById("gameFrame").getBoundingClientRect();
     const grid = gameManager.gameState.mapGrid; 
     dispatch({
@@ -176,11 +172,9 @@ function GamePage() {
         }
       }
     });
-
     initializeGameSize();
     //loadTestScenario(manager.current);
   },[]);
-
   return (
     <GameStateContext.Provider value={[state, dispatch]}>
       <GameContainer>
@@ -198,5 +192,4 @@ function GamePage() {
     </GameStateContext.Provider>
   );
 }
-
 export default GamePage;
