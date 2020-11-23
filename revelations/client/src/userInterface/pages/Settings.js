@@ -7,6 +7,8 @@ import Modal from 'react-bootstrap/Modal';
 import SfxButton from "../components/SfxButton";
 import StatusBar from "../components/StatusBar";
 
+import "../components/GameSettingsModal/style.css"
+
 
 export default function Settings(props) {
 
@@ -48,7 +50,7 @@ export default function Settings(props) {
                </div>
            
                 <div className="row justify-content-center">
-                    <div className="col-lg-6">
+                    <div className="col-sm-6 modal-int-spacing">
                         <button
                         className="custom-options-btn aldrich-font"
                         type="button"
@@ -61,7 +63,7 @@ export default function Settings(props) {
                 </div>
 
                 <div className="row justify-content-center">
-                    <div className="col-lg-6">
+                    <div className="col-sm-6 modal-int-spacing">
                         <button
                         className="custom-options-btn aldrich-font"
                         type="button"
@@ -74,7 +76,7 @@ export default function Settings(props) {
                 </div>
                 
                 <div className="row justify-content-center">
-                    <div className="col-lg-6">
+                    <div className="col-sm-6 modal-int-spacing">
                         <button
                         className="custom-options-btn aldrich-font"
                         type="button"
@@ -88,19 +90,22 @@ export default function Settings(props) {
                 </div>
 
                 <div className="row justify-content-center">
-                    <div className="col-lg-2">
+                    <div className="col-sm-2">
                         
                     </div>
-                    <div className="col-lg-4">
+                    <div className="col-sm-4">
                         
                     </div>
                 </div>
             </div> 
         </Modal.Body> 
+
         <SfxButton />
+        
         <div className="status-bar">
-                    <StatusBar />
+            <StatusBar />
         </div>
+
        </Modal>   
         
     )

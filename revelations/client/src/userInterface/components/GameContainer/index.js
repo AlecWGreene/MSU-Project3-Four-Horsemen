@@ -31,12 +31,12 @@ export default function GameContainer(props) {
     return <Container fluid className="h-100">
         <div className="row h-100">
             {/* Game Frame */}
-            <div className="col-lg-10 h-100 game-dispay">
+            <div className="col-sm-10 h-100 game-dispay">
                 {props.children}
             </div>
 
             {/* UI Frame */}
-            <div className="col-lg-2 h-100 glow">
+            <div className="col-sm-2 h-100 glow game-side-display">
 
                  {/* User Info */}
                 {/* <div className="container">
@@ -82,6 +82,10 @@ export default function GameContainer(props) {
                     type="button">
                         <GameSettingsModal />
                     </button>
+                </div>
+
+                <div className="status-bar status-br-mobile">
+                    <StatusBar />
                 </div>
             </div>             
         </div> 

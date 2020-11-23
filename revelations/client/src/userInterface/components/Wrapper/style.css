@@ -14,6 +14,7 @@
     height: 60vh!important;
     border-width: 50px 25px!important;
     background-color: #16080C;
+
   }
 
   .welcome-content {
@@ -45,13 +46,14 @@ and (max-width: 666px)
     height:80vh!important;
     width:30vw;
     border-style: solid;
-    border-width: 0px 50px!important;
+    border-width: 10px 50px!important;
     -moz-border-image: url("../../assets/Lore.png") 100  100  stretch stretch;
     -webkit-border-image: url("../../assets/Lore.png") 100  100  stretch stretch;
     -o-border-image: url("../../assets/Lore.png") 100  100  stretch stretch;
     border-image: url("../../assets/Lore.png") 100  100  stretch stretch;
     margin-top: 0px!important;
-    
+    position: relative;
+    top: 10px;
   }
 
   .welcome-content {
@@ -105,7 +107,8 @@ and (max-width: 736px)
     -o-border-image: url("../../assets/Lore.png") 100  100  stretch stretch;
     border-image: url("../../assets/Lore.png") 100  100  stretch stretch;
     margin-top: 0px!important;
-    
+    position: relative;
+    top: 15px;
   }
 
   .welcome-content {
