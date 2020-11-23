@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './style.css'
 
 // USER STATUS images
 import life from "../../assets/life.png"
 import money from "../../assets/money.png"
+import { GameStateContext } from '../../pages/GamePage';
 
-export default function StatusBar() {
+function StatusBar() {
+
+    const [state, dispatch] = useContext(GameStateContext);
+
     return (
         <div className="status-bar-container">
             {/* Health */}
@@ -14,7 +18,7 @@ export default function StatusBar() {
                     <img id="user-status-icons" src={life} />
                 </div>
                 <div className="col-sm-6 status-font text-center">
-                    {/* { health } */} HEALTH REMAINING: 3
+                    {/* { health } */} HEALTH REMAINING: {state.gameState.playerLives}
                 </div>
             </div>
             
@@ -24,9 +28,11 @@ export default function StatusBar() {
                     <img id="user-status-icons" src={money} />
                 </div>
                 <div className="col-sm-6 status-font text-center">
-                    {/* { wealth } */} WEALTH EARNED: $500
+                    {/* { wealth } */} WEALTH EARNED: ${state.gameState.playerMoney}
                 </div>
             </div>  
         </div>
     )
 }
+
+export default React.memo(StatusBar)

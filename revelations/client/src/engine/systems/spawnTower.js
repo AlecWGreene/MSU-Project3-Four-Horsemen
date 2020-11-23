@@ -33,6 +33,12 @@ import Transform from "../components/Transform";
     // Get tower archtype
     archtype = GameEnums.TOWER_PREFABS[archtype];
 
+    // Check if the player has sufficient money
+    if(manager.gameState.playerMoney < archtype.stats.cost){
+        return false;
+    }
+    manager.gameState.playerMoney -= archtype.stats.cost;
+
     // Instantiate component data
     const newData = {...archtype.data};
     newData.id = id;

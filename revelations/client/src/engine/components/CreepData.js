@@ -17,6 +17,7 @@
  * @property {Array.<Tile>} path waypoints in world space for the creep to travel to
  * @property {number} targetIndex integer representing the path index of the current target tile
  * @property {Tile} target current target tile for movement
+ * @property {number} hitPoints How much damage the creep can take before being destroyed
  */
 class CreepData{
     /**
@@ -32,6 +33,7 @@ class CreepData{
         this.path = Array.from(path);
         this.targetIndex = 0;
         this.target = this.path[0];
+        this.hitPoints = 0;
     }
 }
 
