@@ -1,4 +1,4 @@
-// const cors = require("cors");
+const cors = require("cors");
 const express = require("express");
 const session = require("express-session");
 const passport = require("./config/passport");
@@ -19,8 +19,8 @@ const sessionMiddleware = session({
 });
 
 // Setup express app with configurations
-// app.use(cors());
-// app.options("*", cors());
+app.use(cors());
+app.options("*", cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
