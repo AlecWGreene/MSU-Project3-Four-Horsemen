@@ -78,6 +78,15 @@ function SfxOptions() {
                             <option>Sound_background_1</option>
                             <option>Sound_background_2</option>
                             <option>Sound_background_3</option>
+                            <option>Sound_background_4</option>
+                            <option>Sound_background_5</option>
+                            <option>Sound_background_6</option>
+                            <option>Sound_background_7</option>
+                            <option>Sound_background_8</option>
+                            <option>Sound_background_9</option>
+                            <option>Sound_background_10</option>
+                            <option>Sound_background_11</option>
+                            <option>Sound_background_12</option>
                         </Form.Control>
                     </Form.Group>
                 </Form>
