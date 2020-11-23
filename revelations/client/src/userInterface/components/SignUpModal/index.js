@@ -1,6 +1,7 @@
 import React, {render} from "react";
 import SignUp from "../../pages/SignUp";
 import { useSfx } from "../../components/SoundSuite/index";
+
 import './style.css';
 
 function Modal() {

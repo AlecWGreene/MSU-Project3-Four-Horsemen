@@ -1,0 +1,53 @@
+.sound-modal-btn {
+    color: white;
+    background-color:transparent!important;
+    border: none;
+    outline:none!important;
+    background-image: url("../../assets/blueButton.png");
+    background-size: cover;
+    width: 70%;
+    height: 11.5vh;
+    background-repeat: no-repeat;
+    margin: 0px;
+    padding: 0px;
+}
+
+.sound-form {
+    padding: 0px!important;
+    margin: 5px!important;
+}
+
+.modal-content {
+    padding: 100px!important;
+}
+
+#range-bar {
+    color: greenyellow;
+    background-color: rgb(201, 20, 186);
+}
+
+.modal-title {
+    margin-bottom: 5px!important;
+    font-family: 'perfect_dark_brkregular';
+    font-size: 30px!important;
+    color: #8E979C;
+    text-shadow: 2px 2px #262f31;
+}
+
+#sound-options {
+    background: #384042;
+    font-family: 'Aldrich', sans-serif;
+    color: rgb(255, 255, 255)!important;
+    font-size: 15px;
+    font-weight: lighter;  
+}
+
+
+#sound-options:focus {
+   background-color: #384042;
+    
+}
+
+.form-control {
+    background: red;
+}
