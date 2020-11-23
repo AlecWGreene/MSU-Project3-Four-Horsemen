@@ -1041,7 +1041,7 @@ const SPRITE_ENUM = {
     /* #region  */
     
     // ====================================================================================================================================================================================
-    // LASER BOLTS
+    // Sound Effects
     // ====================================================================================================================================================================================
     /* #region */
 
@@ -1057,6 +1057,156 @@ const SPRITE_ENUM = {
     "Sound_shot_0": {
         src: "./Assets/sounds/416417__superphat__automatic-assault-rifle_shot_1.mp3",
     },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/194312__soundmatch24__laser-gun-cannon-shot-short-w-fade.mp3"
+     */
+    "Sound_lazer_0": {
+        src: "./Assets/sounds/194312__soundmatch24__laser-gun-cannon-shot-short-w-fade.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/194312__soundmatch24__laser-gun-cannon-shot-short-w-fade-1.mp3"
+     */
+    "Sound_lazer_1": {
+        src: "./Assets/sounds/194312__soundmatch24__laser-gun-cannon-shot-short-w-fade-1.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/194312__soundmatch24__laser-gun-cannon-shot-short-w-fade-2.mp3"
+     */
+    "Sound_lazer_2": {
+        src: "./Assets/sounds/194312__soundmatch24__laser-gun-cannon-shot-short-w-fade-2.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/232817__lezaarth__lasergun-short.mp3"
+     */
+    "Sound_lazer_3": {
+        src: "./Assets/sounds/232817__lezaarth__lasergun-short.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/334240__liamg-sfx__laser-shot-1-short.mp3"
+     */
+    "Sound_lazer_4": {
+        src: "./Assets/sounds/334240__liamg-sfx__laser-shot-1-short.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/404795__owlstorm__retro-video-game-sfx-laser-2.mp3"
+     */
+    "Sound_lazer_5": {
+        src: "./Assets/sounds/404795__owlstorm__retro-video-game-sfx-laser-2.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/440147__dpren__scifi-gun-mega-charge-cannon-fast-burst.mp3"
+     */
+    "Sound_lazer_6": {
+        src: "./Assets/sounds/440147__dpren__scifi-gun-mega-charge-cannon-fast-burst.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/440147__dpren__scifi-gun-mega-charge-cannon-fast-w-fade.mp3"
+     */
+    "Sound_lazer_8": {
+        src: "./Assets/sounds/440147__dpren__scifi-gun-mega-charge-cannon-fast-w-fade.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/470933__julien-matthey__jm-noiz-laser-06-short-w-fade-out.mp3"
+     */
+    "Sound_lazer_9": {
+        src: "./Assets/sounds/470933__julien-matthey__jm-noiz-laser-06-short-w-fade-out.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/495054__tannersound__scifi-laser-gun-firing-fast-triple.mp3"
+     */
+    "Sound_lazer_10": {
+        src: "./Assets/sounds/495054__tannersound__scifi-laser-gun-firing-fast-triple.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/495054__tannersound__scifi-laser-gun-firing-fast-w-fade.mp3"
+     */
+    "Sound_lazer_11": {
+        src: "./Assets/sounds/495054__tannersound__scifi-laser-gun-firing-fast-w-fade.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/495054__tannersound__scifi-laser-gun-firing-fast-w-fade-1.mp3"
+     */
+    "Sound_lazer_12": {
+        src: "./Assets/sounds/495054__tannersound__scifi-laser-gun-firing-fast-w-fade-1.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/495054__tannersound__scifi-laser-gun-firing-fast-w-fade-2.mp3"
+     */
+    "Sound_lazer_13": {
+        src: "./Assets/sounds/495054__tannersound__scifi-laser-gun-firing-fast-w-fade-2.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/423351__lowpolygon__charge-up-and-explode-short.mp3"
+     */
+    "Sound_cannon_0": {
+        src: "./Assets/sounds/423351__lowpolygon__charge-up-and-explode-short.mp3",
+    },
+    /**
+    * @description HOVER ME => "../../public/Assets/sounds/440147__dpren__scifi-gun-mega-charge-cannon-short-w-fade.mp3"
+    */
+    "Sound_cannon_1": {
+        src: "./Assets/sounds/440147__dpren__scifi-gun-mega-charge-cannon-short-w-fade.mp3",
+    },
+    /**
+    * @description HOVER ME => "../../public/Assets/sounds/529239__mozfoo__mortar.mp3"
+    */
+    "Sound_cannon_2": {
+        src: "./Assets/sounds/529239__mozfoo__mortar.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/253408__tfodor__space-laser-space-sound-tower-placement-1.mp3"
+     */
+    "Sound_explosion_0": {
+        src: "./Assets/sounds/253408__tfodor__space-laser-space-sound-tower-placement-1.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/253408__tfodor__space-laser-space-sound-tower-placement.mp3
+     */
+    "Sound_space_0": {
+        src: "./Assets/sounds/253408__tfodor__space-laser-space-sound-tower-placement.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/253408__tfodor__space-laser-space-sound-tower-placement-1.mp3"
+     */
+    "Sound_space_1": {
+        src: "./Assets/sounds/253408__tfodor__space-laser-space-sound-tower-placement-1.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/253408__tfodor__space-laser-you-lose-sound.mp3",
+     */
+    "Sound_space_2": {
+        src: "./Assets/sounds/253408__tfodor__space-laser-you-lose-sound.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/321217__hybrid-v__sci-fi-large-machine-power-up.mp3"
+     */
+    "Sound_space_3": {
+        src: "./Assets/sounds/321217__hybrid-v__sci-fi-large-machine-power-up.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/495054__tannersound__scifi-laser-gun-firing-info-click-load-sound.mp3"
+     */
+    "Sound_space_4": {
+        src: "./Assets/sounds/495054__tannersound__scifi-laser-gun-firing-info-click-load-sound.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/514082__tim-verberne__sci-fi-weapon-charging-short-w-fade.mp3"
+     */
+    "Sound_space_5": {
+        src: "./Assets/sounds/514082__tim-verberne__sci-fi-weapon-charging-short-w-fade.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/440147__dpren__scifi-gun-mega-charge-cannon-info-click-load-sound.mp3"
+     */
+    "Sound_space_6": {
+        src: "./Assets/sounds/440147__dpren__scifi-gun-mega-charge-cannon-info-click-load-sound.mp3",
+    },
+
+    // ====================================================================================================================================================================================
+    // Ambient Music Loops
+    // ====================================================================================================================================================================================
+    /* #region */
+
     /**
      * @description HOVER ME => "../../public/Assets/sounds/522706__fran-ky__075-fm-ellberge-part-2.mp3"
      */
@@ -1080,7 +1230,64 @@ const SPRITE_ENUM = {
      */
     "Sound_background_3": {
         src: "./Assets/sounds/403899__leehayeskerr__moderate-pop.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/525290__disquantic__cyberpunk-beat.mp3"
+     */
+    "Sound_background_4": {
+        src: "./Assets/sounds/525290__disquantic__cyberpunk-beat.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/457886__doctor-dreamchip__2018-08-03-loop.mp3"
+     */
+    "Sound_background_5": {
+        src: "./Assets/sounds/457886__doctor-dreamchip__2018-08-03-loop.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/485054__xhale303__synthwave2-loop.mp3"
+     */
+    "Sound_background_6": {
+        src: "./Assets/sounds/485054__xhale303__synthwave2-loop.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/514960__deleted-user-11009121__synthwave-loop-100bpm-loop.mp3"
+     */
+    "Sound_background_7": {
+        src: "./Assets/sounds/514960__deleted-user-11009121__synthwave-loop-100bpm-loop.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/489042__michael-db__synthontherun-loop.mp3"
+     */
+    "Sound_background_8": {
+        src: "./Assets/sounds/489042__michael-db__synthontherun-loop.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/529624__drakensson__good-morning-heaven-loop.mp3"
+     */
+    "Sound_background_9": {
+        src: "./Assets/sounds/529624__drakensson__good-morning-heaven-loop.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/202077__djgriffin__beet-loop.mp3"
+     */
+    "Sound_background_10": {
+        src: "./Assets/sounds/202077__djgriffin__beet-loop.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/349179__sirkoto51__rpg-town-loop.mp3"
+     */
+    "Sound_background_11": {
+        src: "./Assets/sounds/349179__sirkoto51__rpg-town-loop.mp3",
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/sounds/404458__andrewkn__parallel-universe-loop.mp3"
+     */
+    "Sound_background_12": {
+        src: "./Assets/sounds/404458__andrewkn__parallel-universe-loop.mp3",
     }
+
+    /* #endregion */
+
     /* #endregion */
 
     /* #endregion */

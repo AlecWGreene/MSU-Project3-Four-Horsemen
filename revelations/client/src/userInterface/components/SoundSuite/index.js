@@ -139,7 +139,7 @@ function useProvideSfx() {
 
   // force sfx to paly new sound
   const sfxSound = (file) => {
-    setSFXAuto(true); // keeps buttons from triggering upon first click while muted
+    setSFXAuto(true); // keeps buttons from triggering upon first click while muted when set to false
     setAuto(true);
     
     // if file is different than current sfxfile, unmount current sound

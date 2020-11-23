@@ -1,6 +1,4 @@
 import React, { useContext, createContext, useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch, Link, Redirect, useHistory, useLocation} from "react-router-dom";
-import history from "../../../utils/history";
 
 // create new context instance of authContext to keep track of user login status
 const authContext = createContext();
@@ -9,7 +7,7 @@ const fakeAuth = {
     isAuthenticated: false,
     login(cb) {
       fakeAuth.isAuthenticated = true;
-      setTimeout(cb, 100); // fake async
+      setTimeout(cb, 100); // fake async helps ensure robustness of setting state while api calls fire
     },
     logout(cb) {
       fakeAuth.isAuthenticated = false;
@@ -44,7 +42,6 @@ function useProvideAuth() {
         data: data
       };
       localStorage.setItem('user', JSON.stringify(state));
-      // setUser("user");
       setUserState(state);
       cb();
     });
@@ -58,7 +55,6 @@ function useProvideAuth() {
         data: null
       };
       localStorage.removeItem('user');
-      // setUser(null);
       setUserState(state);
       cb();
     });
@@ -71,9 +67,7 @@ function useProvideAuth() {
         auth: "guest",
         data: null
       };
-      // localStorage.setItem('auth', 'guest');
       localStorage.setItem('user', JSON.stringify(state));
-      // setUser("guest");
       setUserState(state);
       cb();
     });
