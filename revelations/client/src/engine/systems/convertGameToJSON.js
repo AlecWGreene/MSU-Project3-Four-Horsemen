@@ -27,7 +27,7 @@ function gameStateReplacer(value){
                     // Add the key to the object
                     cdir += `\"${parseInt(entry[0])}\":{`
                     // Stringify the data
-                    cdir += `\"data\":{\"id\":${parseInt(entry[0])},\"archtype\":\"${entry[1].data.archtype}\",\"path\":[${entry[1].data.path.map(tile => replaceTile(tile)).join(",")}],\"targetIndex\":${entry[1].data.targetIndex}},`
+                    cdir += `\"data\":{\"id\":${parseInt(entry[0])},\"archtype\":\"${entry[1].data.archtype}\",\"path\":[${entry[1].data.path.map(tile => replaceTile(tile)).join(",")}],\"targetIndex\":${entry[1].data.targetIndex}},\"hitPoints\":${entry[1].data.hitPoints}`
                     // Stringify the transform
                     cdir += `\"transform\":{\"position\":{\"x\":${entry[1].transform.position.x},\"y\":${entry[1].transform.position.y}},\"rotation\":${entry[1].transform.rotation}}`
                     cdir += "},"

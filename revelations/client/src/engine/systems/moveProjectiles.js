@@ -1,6 +1,7 @@
 import GameManager from "../GameManager.js";
 import checkCapsuleCollision from "./checkCapsuleCollision.js";
 import registerHit from "./registerHit.js";
+import removeCreep from "./removeCreep.js";
 
 /**
  * @namespace moveProjectile
@@ -43,9 +44,16 @@ function moveProjectiles(manager){
         // Check if the projectile is colliding with anything
         const hits = checkCapsuleCollision(projectile, creepDirectory, 0.5 * cellsize);
         if(hits.length > 0){
-            //registerHit(projectile, creepDirectory[parseInt(hits[0][0])], manager);
-            delete manager.gameState.projectileDirectory[parseInt(id)];
-            delete manager.gameState.creepDirectory[parseInt(hits[0][0])];
+            const fatalHit = registerHit(projectile, hits[0][1]);
+
+            // Projectile destroys creep
+            if(fatalHit){
+                manager.gameState.playerMoney += creepDirectory[parseInt(hits[0][0])].stats.reward;
+                removeCreep(manager, parseInt(hits[0][0]));
+            }
+
+            // Projecitle has hit its last target
+            if(projectile.data.targetsHit >= projectile.stats.maxTargets) delete manager.gameState.projectileDirectory[id];
         }
 
         // Destroy the projectile if it has passed its max distance

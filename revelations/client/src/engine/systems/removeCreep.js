@@ -18,7 +18,6 @@ import GameManager from "../GameManager";
  */
 function removeCreep(manager, id){
     delete manager.gameState.creepDirectory[id];
-    manager.gameState.playerLives--;
 
     // Check if wave is over
     if(manager.gameState.playerLives <= 0){
