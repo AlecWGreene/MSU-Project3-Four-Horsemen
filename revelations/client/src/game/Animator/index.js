@@ -56,7 +56,6 @@ function Animator(props){
             requestAnimationFrame(() => {
                 setFrame(1);
                 if(props.sfx){
-                    console.log("Trying to play " + props.sfx);
                     sfxSound(props.sfx);
                 }
             });

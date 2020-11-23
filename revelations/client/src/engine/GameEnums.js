@@ -40,13 +40,11 @@ export default {
             { creeps: ["test_creep","test_creep"], delay: 1000},
             { creeps: ["test_creep","test_creep"], delay: 1300},
             { creeps: ["test_creep","test_creep"], delay: 500},
-            { creeps: ["test_creep","test_creep"], delay: 100},
-            { creeps: ["test_creep","test_creep"], delay: 100},
-            { creeps: ["test_creep","test_creep"], delay: 100},
-            { creeps: ["test_creep","test_creep"], delay: 100},
-            { creeps: ["test_creep","test_creep"], delay: 100},
-            { creeps: ["test_creep","test_creep"], delay: 100},
-            { creeps: ["test_creep","test_creep"], delay: 100}
+            { creeps: ["test_creep","test_creep"], delay: 500},
+            { creeps: ["test_creep","test_creep"], delay: 500},
+            { creeps: ["test_creep","test_creep"], delay: 500},
+            { creeps: ["test_creep","test_creep"], delay: 400},
+            { creeps: ["test_creep","test_creep"], delay: 400}
            ] 
     },
     TOWER_PREFABS: {
@@ -56,7 +54,7 @@ export default {
             stats: new TowerStats(150, 30, 180 * (Math.PI / 180), 2, false, tickLength),
             damageData: new DamageData(1, 0, []),
             upgradeTree: new UpgradeTree(),
-            sfx: "Sound_pop_0"
+            sfx: "Sound_cannon_2"
         },
         "test_tower2": {
             name: "test_tower2",
@@ -64,14 +62,14 @@ export default {
             stats: new TowerStats(150, 30, 90 * (Math.PI / 180), 2, false, tickLength),
             damageData: new DamageData(1, 0, []),
             upgradeTree: new UpgradeTree(),
-            sfx: "Sound_pop_0"
+            sfx: "Sound_cannon_1"
         }
     },
     PROJECTILE_PREFABS: {
         "Laser_Bolt_Yellow": {
             name: "Laser_Bolt_Yellow",
             data: new ProjectileData(0, "Laser_Bolt_Yellow", "Projectile_Laser_Yellow", 0, 0, 0),
-            stats: new ProjectileStats({x:-1,y:-1}, 175, 1, 150, true, tickLength),
+            stats: new ProjectileStats({x:-1,y:-1}, 175, 1, 300, true, tickLength),
             collider: new Collider([{x:-5,y:-3.5},
                                     {x:-5,y:3.5},
                                     {x:0,y:6},
@@ -82,7 +80,7 @@ export default {
         "Laser_Bolt_Orange": {
             name: "Laser_Bolt_Orange",
             data: new ProjectileData(0, "Laser_Bolt_Orange", "Projectile_Laser_Orange", 0, 0, 0),
-            stats: new ProjectileStats({x:-1,y:-1}, 175, 1, 150, true, tickLength),
+            stats: new ProjectileStats({x:-1,y:-1}, 175, 1, 300, true, tickLength),
             collider: new Collider([{x:-5,y:-3.5},
                                     {x:-5,y:3.5},
                                     {x:0,y:6},
@@ -93,7 +91,7 @@ export default {
         "Laser_Bolt_Blue": {
             name: "Laser_Bolt_Blue",
             data: new ProjectileData(0, "Laser_Bolt_Blue", "Projectile_Laser_Blue", 0, 0, 0),
-            stats: new ProjectileStats({x:-1,y:-1}, 175, 1, 150, true, tickLength),
+            stats: new ProjectileStats({x:-1,y:-1}, 175, 1, 300, true, tickLength),
             collider: new Collider([{x:-5,y:-3.5},
                                     {x:-5,y:3.5},
                                     {x:0,y:6},
@@ -106,7 +104,7 @@ export default {
         "test_creep": {
             name: "test_creep",
             data: new CreepData(0,"test_creep", "Creep_1_BLUE", []),
-            stats: new CreepStats(100,60,270,true,50,tickLength),
+            stats: new CreepStats(100,80,270,true,50,tickLength),
             collider: new Collider([{x: -10, y: -10}, {x: -10, y: 10}, {x: 10, y: 10}, {x: 10, y: -10}], {x: 0, y: 0})
         }
     }
