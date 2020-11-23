@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { GameStateContext } from "../../userInterface/pages/GamePage.js";
 import convertWorldPointToScreenPoint from "../../userInterface/pages/GameUtils/convertWorldPointToScreenPoint.js";
 import Animator from "../Animator/index.js";
+import Sprite from "../Animator/Sprite.js";
+import Projectile from "../Projectile/index.js";
 import SPRITE_ENUM from "../SpriteEnums.js";
 
 const styles = {
@@ -19,21 +21,30 @@ function ProjectileLayer(props){
             {
                 !props.directory ? undefined : Object.entries(props.directory).map(entry => {
                     const imgData = SPRITE_ENUM[entry[1].data.spriteSheet];
+                    const cellsize = state.gameState.mapGrid.cellsize;
                     const origin = {
-                        x: state.origin.x,
-                        y: state.origin.y
+                        x: state.origin.x + cellsize / 2,
+                        y: state.origin.y + cellsize / 2
                     }
-                    return <Animator 
-                            height={state.gameState.mapGrid.cellsize}
-                            width={state.gameState.mapGrid.cellsize}
+                    const scale = cellsize / imgData.height;
+                    // return <Animator 
+                    //         height={cellsize}
+                    //         width={cellsize}
+                    //         imgData={imgData}
+                    //         position={convertWorldPointToScreenPoint(entry[1].transform.position, state.scaleRatio, origin)}
+                    //         rotation={-180 / Math.PI  * entry[1].transform.rotation}
+                    //         leftOffsetRatio={0}
+                    //         bottomOffsetRatio={0}    
+                    //         scale={state.scaleRatio * imgData.scale}
+                    //         key={entry[0]}
+                    //         />
+                    return <Projectile 
+                            height={cellsize}
+                            width={cellsize}
                             imgData={imgData}
                             position={convertWorldPointToScreenPoint(entry[1].transform.position, state.scaleRatio, origin)}
-                            rotation={180 / Math.PI  * entry[1].transform.rotation}
-                            leftOffsetRatio={-0.5}
-                            bottomOffsetRatio={0}    
-                            scale={state.scaleRatio}
-                            key={entry[0]}
-                            />
+                            scale={state.scaleRatio * (cellsize / imgData.height)}
+                            rotation={ 180/Math.PI * entry[1].transform.rotation} />
                 }) 
             }
         </div>

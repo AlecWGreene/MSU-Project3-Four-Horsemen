@@ -9,8 +9,8 @@ const Frame = styled.div`
     transform-origin: center; 
     position: absolute;
     overflow: hidden;
-    bottom: -${props => (props.bottomOffsetRatio || 0.5) * Math.abs(props.width - props.parentSize)}px;
-    left: -${props => (props.leftOffsetRatio || 0.5) * Math.abs(props.width - props.parentSize)}px;
+    bottom: ${props => -0.5 * Math.abs(props.width - props.parentSize)}px;
+    left: ${props => -0.5 * Math.abs(props.width - props.parentSize)}px;
     height: ${({height}) => height}px;
     width: ${({width}) => width}px;
     transform: scale(${({scale, imgScale})=>`${scale * imgScale}, ${scale * imgScale}`});

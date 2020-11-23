@@ -34,13 +34,13 @@ function spawnCreep(manager, id, archtype, source, path){
     // Instatiante component data
     const newData = new CreepData(id, archtype.name, archtype.data.spriteSheet, path);
     const newStats = archtype.stats;
-    const newCollider = archtype.collider;
+    // const newCollider = archtype.collider;
 
     // Calculate the starting rotation
     const startAngle = Math.atan2(path[0].position.y - source.position.y, path[0].position.x - source.position.x);
     const newTransform = new Transform(source.position.x, source.position.y, startAngle);
 
-    manager.gameState.creepDirectory[id] = new CreepEntity(newData, newTransform, newStats, newCollider);
+    manager.gameState.creepDirectory[id] = new CreepEntity(newData, newTransform, newStats, undefined);
 }
 
 export default spawnCreep;
