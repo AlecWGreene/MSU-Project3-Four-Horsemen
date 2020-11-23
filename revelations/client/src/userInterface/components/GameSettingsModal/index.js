@@ -20,8 +20,8 @@ export default function Modal() {
       }
       // Called when component is removed from the DOM
       else{
-          // If the game isn't paused using the button, resume the game
-          if(!wasPaused){
+          // If the game isn't paused using the button, resume the game if the user is mid-wave
+          if(!wasPaused && state.runtimeState.isWaveRunning){
               state.manager.sendWave();
           }
       }

@@ -242,6 +242,7 @@ export default class GameManager {
         clearInterval(this.tickInterval);
     }
     endWave(){
+        this.gameState.projectileDirectory = {};
         this.runtimeState.isWaveRunning = false;
         this.gameState.playerMoney += GameEnums.GAME_CONFIG.waveReward;
         if(this.endWaveCallback){
