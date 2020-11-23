@@ -60,7 +60,8 @@ function BaseLayer(props){
                 }
 
                 // Retrieve sprite
-                const imgData = SpriteEnums[connections === "" ? "Tower_Base_" : `Tower_Base_Connection_${connections}`];
+                console.log(connections);
+                const imgData = SpriteEnums[connections === "" ? "Tower_Base_" : `Tower_Base_${connections}`];
                 return <Animator 
                           height={state.gameState.mapGrid.cellsize} 
                           width={state.gameState.mapGrid.cellsize} 
