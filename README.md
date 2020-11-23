@@ -16,14 +16,14 @@ If you are interested in contributing or making a mod/spin off, please create an
 ## Credits
 
 ### Development Team
-**Project Lead** -------------------------------- Alec Greene
-**Front End** ----------------------------------- Maria Jimena Alvarez
-**Back End/Sound Suite** ------------------------ Sebasatian Arrazola
-**Input Handler** ------------------------------- Ron Pitts
-**Game Engine/Renderer** ------------------------ Alec Greene
+**Project Lead** -------------------------------- Alec Greene  
+**Front End** ----------------------------------- Maria Jimena Alvarez  
+**Back End/Sound Suite** ------------------------ Sebasatian Arrazola  
+**Input Handler** ------------------------------- Ron Pitts  
+**Game Engine/Renderer** ------------------------ Alec Greene  
 
 ### Asset Credits
-**Tower, Base, and Wall Sprites** --------------- Zintoki, https://zintoki.itch.io/ground-shaker
-**Spaceship Sprites** --------------------------- Gisha, https://gisha.itch.io/spaceships-asset-pack
+**Tower, Base, and Wall Sprites** --------------- Zintoki, https://zintoki.itch.io/ground-shaker  
+**Spaceship Sprites** --------------------------- Gisha, https://gisha.itch.io/spaceships-asset-pack  
 
 ## Special Thanks
