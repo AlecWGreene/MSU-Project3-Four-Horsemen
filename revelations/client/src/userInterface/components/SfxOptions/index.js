@@ -88,11 +88,6 @@ function SfxOptions() {
                             <option id="sound-options">Sound_background_5</option>
                             <option id="sound-options">Sound_background_6</option>
                             <option id="sound-options">Sound_background_7</option>
-                            <option id="sound-options">Sound_background_8</option>
-                            <option id="sound-options">Sound_background_9</option>
-                            <option id="sound-options">Sound_background_10</option>
-                            <option id="sound-options">Sound_background_11</option>
-                            <option id="sound-options">Sound_background_12</option>
                         </Form.Control>
                     </Form.Group>
                 </Form>
