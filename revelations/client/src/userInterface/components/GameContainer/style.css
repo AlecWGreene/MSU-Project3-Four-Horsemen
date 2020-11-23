@@ -108,3 +108,295 @@
 
 
 
+
+
+
+
+/*/ **RESPONSIVE DESIGN** /*/
+
+
+/* iPhone 5 LANDSCAPE MODE */
+@media (orientation:landscape)
+and (min-width: 568px) 
+and (max-width: 666px) {
+  /* TBD */
+
+  .game-side-display {
+    overflow: hidden;
+    display: none;
+  }
+
+}
+
+
+/* iPhone 6/7/8 LANDSCAPE MODE */
+@media (orientation:landscape)
+and (min-width: 667px) 
+and (max-width: 735px) {
+
+  .game-side-display {
+    overflow: hidden;
+  }
+
+  .side-bar {
+    border: none!important;
+  }
+
+  .side-bar-container {
+    margin-top:5px;
+    background-color:transparent;
+}
+
+  .eLJxGP {
+    height: 35px!important;
+    width: 35px!important;
+    -webkit-transform: translate(0px,0px);
+    -ms-transform: translate(0px,0px);
+    transform: translate(0px,0px);
+    -webkit-transition: all 100ms;
+    transition: all 100ms;
+  }
+
+  .game-title {
+    display: none;
+  }
+
+  .settings-gear {
+    height: 30px;
+    width: auto;
+  }
+
+  .bg-red-btn {
+    width: 50px;
+    height: auto;
+    display: block;
+    transition: 0.7s;
+  }
+
+  .status-bar {
+    /* display: none; */
+    border: none!important;
+  }
+
+  .status-bar-container {
+    background-color:transparent;
+    height:2vh;
+}
+
+  #user-status-icons {
+    width: 2vw;
+    height: 3vh;
+    padding: 0px!important;
+}
+
+  .status-font {
+    font-family: 'Aldrich', sans-serif;
+    color: rgb(255, 255, 255)!important;
+    font-size: 7px;
+    font-weight: lighter;
+    padding: 2px!important;
+  }
+
+  #customFont {
+    padding: 0px!important;
+  }
+
+  .aldrich-font, ::placeholder {
+    font-family: 'Aldrich', sans-serif;
+    color: rgb(255, 255, 255)!important;
+    font-size: 8px!important;
+    font-weight: lighter;
+  }
+
+}
+
+/* iPhone 6/7/8 Plus LANDSCAPE MODE */
+@media (orientation:landscape)
+and (min-width: 736px) 
+and (max-width: 812px) {
+
+  .side-bar {
+    border: none!important;
+  }
+
+  .side-bar-container {
+    margin-top:5px;
+    background-color:transparent;
+}
+
+  .eLJxGP {
+    height: 35px!important;
+    width: 35px!important;
+    -webkit-transform: translate(0px,0px);
+    -ms-transform: translate(0px,0px);
+    transform: translate(0px,0px);
+    -webkit-transition: all 100ms;
+    transition: all 100ms;
+  }
+
+  .game-title {
+    display: none;
+  }
+
+  .settings-gear {
+    height: 30px;
+    width: auto;
+  }
+
+  .bg-red-btn {
+    width: 40px;
+    height: auto;
+    display: block;
+    transition: 0.7s;
+  }
+
+  .status-bar {
+    /* display: none; */
+    border: none!important;
+  }
+
+  .status-bar-container {
+    background-color:transparent;
+    height:2vh;
+}
+
+  #user-status-icons {
+    width: 2vw;
+    height: 3vh;
+    padding: 0px!important;
+}
+
+  .status-font {
+    font-family: 'Aldrich', sans-serif;
+    color: rgb(255, 255, 255)!important;
+    font-size: 7px;
+    font-weight: lighter;
+    padding: 2px!important;
+  }
+
+  #customFont {
+    padding: 0px!important;
+  }
+
+  .aldrich-font, ::placeholder {
+    font-family: 'Aldrich', sans-serif;
+    color: rgb(255, 255, 255)!important;
+    font-size: 8px!important;
+    font-weight: lighter;
+}
+
+  .status-br-mobile {
+    /* padding: 100px 50px!important; */
+  }
+}
+
+
+/* Tablet Mode */
+@media (min-width: 768px) and (max-width:1023px) {
+  .game-title {
+    background: linear-gradient(#262626,#eaeaea,#262626);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-size: 15px;
+    font-family: 'perfect_dark_brkregular';
+  }
+
+  .settings-gear {
+    height: 75px;
+    width: auto;
+  }
+
+  .bg-red-btn {
+    width: 75px;
+    height: auto;
+    display: block;
+    transition: 0.7s;
+  }
+
+  #user-status-icons {
+    width: 2vw;
+    height: 3vh;
+    padding: 0px!important;
+}
+
+  .status-font {
+    font-family: 'Aldrich', sans-serif;
+    color: rgb(255, 255, 255)!important;
+    font-size: 8px;
+    font-weight: lighter;
+    padding: 2px!important;
+  }
+
+  #customFont {
+    padding: 0px!important;
+  }
+}
+
+
+/* Laptop Screen SM */
+
+@media (min-width: 1024px) and (max-width:1439px) {
+  .game-title {
+    background: linear-gradient(#262626,#eaeaea,#262626);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-size: 20px;
+    font-family: 'perfect_dark_brkregular';
+  }
+
+  .settings-gear {
+    height: 75px;
+    width: auto;
+  }
+
+  .bg-red-btn {
+    width: 75px;
+    height: auto;
+    display: block;
+    transition: 0.7s;
+  }
+
+  #user-status-icons {
+    width: 2vw;
+    height: 3vh;
+    padding: 0px!important;
+}
+
+  .status-font {
+    font-family: 'Aldrich', sans-serif;
+    color: rgb(255, 255, 255)!important;
+    font-size: 10px;
+    font-weight: lighter;
+    padding: 2px!important;
+  }
+
+  #customFont {
+    padding: 0px!important;
+  }
+}
+
+/* Laptop Screen MD */
+
+@media (min-width: 1440px) and (max-width:1679px) {
+  .game-title {
+    background: linear-gradient(#262626,#eaeaea,#262626);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-size: 30px;
+    font-family: 'perfect_dark_brkregular';
+  }
+
+  .settings-gear {
+    height: 50px;
+    width: auto;
+  }
+
+  .bg-red-btn {
+    width: 75px;
+    height: auto;
+    display: block;
+    transition: 0.7s;
+  }
+}
+
+

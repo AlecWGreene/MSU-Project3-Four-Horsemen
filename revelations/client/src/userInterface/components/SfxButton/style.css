@@ -1,0 +1,26 @@
+@media (orientation:landscape)
+and (min-width: 667px) 
+and (max-width: 736px) {
+    .game-title-phone {
+    background: linear-gradient(#262626,#eaeaea,#262626);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-size: 10px;
+    font-family: 'perfect_dark_brkregular';
+    padding-left: 20px!important;
+    }
+
+    .soundwave {
+        padding: 5px!important;
+    }
+
+    .phone-row {
+        margin: 0px!important;
+    }
+}
+
+@media (min-width: 768px) {
+    .game-title-phone {
+        display: none;
+    }
+}
