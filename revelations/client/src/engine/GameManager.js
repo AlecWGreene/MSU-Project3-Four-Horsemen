@@ -64,12 +64,15 @@ export default class GameManager {
     }
     instantiateTile(string){
         const { 1:x, 2:y, 3:row, 4:col } = string.match(/Tile\(([\-\w\.]+),([\-\w\.]+),([\-\w\.]+),([\-\w\.]+)\)/);
-        return new Tile(x, y, row, col);
+        return this.gameState.mapGrid.tiles[row][col];
     }
     loadSave(saveData){
         try{
             // Load saved data
-            this.gameState = new GameState(saveData.gameState);
+            this.gameState = new GameState({
+                mapGrid: this.gameState.mapGrid,
+                ...saveData.gameState
+            });
             this.runtimeState = new RuntimeState(saveData.runtimeState);
             console.log(this);
             // Convert tile placeholders

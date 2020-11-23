@@ -140,12 +140,14 @@ function GamePage() {
     gameManager.endWaveCallback = () => {
       saveGame(gameManager);
     };
+    
+    setupGame(gameManager, GameEnums.GAME_CONFIG);
+
     const userState = auth.user.data?.gameState?.replace(/^\"|\"$|\\/g,"");
     if(userState){
       const saveData = JSON.parse(userState); 
       gameManager.loadSave(saveData);
     }
-    setupGame(gameManager, GameEnums.GAME_CONFIG);
 
     // Setup the frame size
     const divBox = document.getElementById("gameFrame").getBoundingClientRect();
