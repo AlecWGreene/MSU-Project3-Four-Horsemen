@@ -30,6 +30,7 @@ function removeCreep(manager, id){
         clearInterval(manager.tickInterval);
         manager.runtimeState.isWaveRunning = false;
         manager.runtimeState.waveTime = 0;
+        manager.endWave();
     }
 }
 
