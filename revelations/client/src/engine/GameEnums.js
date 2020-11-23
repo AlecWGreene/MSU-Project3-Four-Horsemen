@@ -80,6 +80,7 @@ export default {
     },
     CREEP_PREFABS: {
         "test_creep": {
+            name: "test_creep",
             data: new CreepData(0,"test_creep", "Creep_1_CYAN", []),
             stats: new CreepStats(100,60,270,true,50,tickLength),
             collider: new Collider([{x: -10, y: -10}, {x: -10, y: 10}, {x: 10, y: 10}, {x: 10, y: -10}], {x: 0, y: 0})

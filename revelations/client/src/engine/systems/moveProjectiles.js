@@ -46,7 +46,6 @@ function moveProjectiles(manager){
             //registerHit(projectile, creepDirectory[parseInt(hits[0][0])], manager);
             delete manager.gameState.projectileDirectory[parseInt(id)];
             delete manager.gameState.creepDirectory[parseInt(hits[0][0])];
-            console.log("Creep " + hits[0][0] + "destroyed by projectile " + id);
         }
 
         // Destroy the projectile if it has passed its max distance

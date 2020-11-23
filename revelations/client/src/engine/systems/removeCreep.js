@@ -17,7 +17,6 @@ import GameManager from "../GameManager";
  * @returns {Void}
  */
 function removeCreep(manager, id){
-    console.log("Creep " + id + "reached the end");
     delete manager.gameState.creepDirectory[id];
     manager.gameState.playerLives--;
 
@@ -31,6 +30,7 @@ function removeCreep(manager, id){
         clearInterval(manager.tickInterval);
         manager.runtimeState.isWaveRunning = false;
         manager.runtimeState.waveTime = 0;
+        manager.endWave();
     }
 }
 

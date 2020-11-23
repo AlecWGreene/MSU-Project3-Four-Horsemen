@@ -7,6 +7,7 @@ import GameEnums from "./GameEnums.js";
 import processTick from "./systems/processTick.js"; 
 import findPaths, {getEuclideanDistance} from "./systems/findPaths";
 import spawnTower from "./systems/spawnTower.js";
+import convertGameToJSON from "./systems/convertGameToJSON.js";
 
 /**
  * @module GameManager
@@ -143,6 +144,10 @@ export default class GameManager {
     placeTower(archtype, tile){
         const id = 30000 + ++this.counters.towers;
         const success = spawnTower(this, id, archtype, tile);
+        const string = convertGameToJSON(this);
+        console.log(string);
+        const o = JSON.parse(string);
+        console.log(o);
         if(success){
             this.gameState.towerGrid.push(tile);
             if(!this.runtimeState.isPause || !this.runtimeState.isWaveRunning) this.updateCallback();
@@ -166,5 +171,13 @@ export default class GameManager {
         else{
             return this.gameState.mapGrid.tiles[row][col];
         }
+    }
+
+    endWave(){
+        this.runtimeState.isWaveRunning = false;
+        const string = convertGameToJSON(this);
+        console.log(string);
+        const o = JSON.parse(string);
+        console.log(o);
     }
 }
