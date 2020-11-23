@@ -22,6 +22,9 @@ export default function GameContainer(props) {
     const { saveGame } = useIndexedDb();
     const sfx = useSfx();
     const [state, dispatch] = useContext(GameStateContext); 
+    
+    // const [sound, setSound] = useState();
+    
     const redButtonHandler = () => {
         sfx.sfxSound('Sound_pop_0');
         sfx.ambientSound('Sound_background_1');
