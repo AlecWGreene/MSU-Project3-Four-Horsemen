@@ -56,8 +56,15 @@
     align-items: center;
     margin-left: 45px;
     margin-right: 45px;
+    transition: 0.7s;
 }
- 
+
+  .playpause-btn:hover  {
+  transform: scale(1.2);
+  color: rgba(245, 245, 245, 0.7)!important;
+  }
+
+  
 /* red button */
 
 .bg-red-btn {
