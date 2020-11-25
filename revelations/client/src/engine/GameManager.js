@@ -133,9 +133,14 @@ export default class GameManager {
         this.updateCallback = callback;
     }
     /**
-     * 
+     * Sends the next available wave
      */
     sendWave(waveConfig){
+        // Return out if game is over
+        if(this.runtimeState.isGameOver){
+            return;
+        }
+
         if(this.runtimeState.isPaused || !this.runtimeState.isWaveRunning){
             if(!this.runtimeState.isWaveRunning){
                 // Set up next wave
@@ -143,7 +148,7 @@ export default class GameManager {
                 this.runtimeState.isWaveRunning = true;
 
                 // If there are no waves left, end game
-                if(this.gameState.waveIndex > this.numberWaves){
+                if(this.gameState.waveIndex >= this.numberWaves){
                     this.runtimeState.isWaveRunning = false;
                     this.runtimeState.isGameOver = true;
                     clearInterval(this.tickInterval);
