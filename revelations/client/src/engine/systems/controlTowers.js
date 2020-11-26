@@ -204,7 +204,7 @@ function calculateAngleDifference(start, end){
         return 2 * Math.PI - diff;
     }   
     else{    
-        return diff
+        return diff;
     }
 }
 /**

@@ -54,7 +54,8 @@ function moveCreeps(manager){
         }
 
         // If creep starts by not pointing to target, rotate towards target
-        let targetAngle = Math.atan2(dir.y, dir.x) - creep.transform.rotation;
+        let atan = Math.atan2(dir.y, dir.x) 
+        let targetAngle = atan - creep.transform.rotation;
         if(targetAngle !== 0){
             let angleToRotate = Math.sign(targetAngle) * Math.min(Math.abs(targetAngle), Math.abs(creep.stats.turnSpeed)); 
             targetAngle -= angleToRotate;
