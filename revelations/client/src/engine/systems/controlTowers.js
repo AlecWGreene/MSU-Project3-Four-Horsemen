@@ -194,18 +194,13 @@ function removeStartAnimationFlag(tower, manager){
  * 
  * @returns {number}
  */
-function calculateAngleDifference(start, end){
-    let diff = end - start;
-    
-    if(Math.abs(diff) > Math.PI){
-        if(diff < 0){
-            return diff + 2 * Math.PI;
-        }
-        return 2 * Math.PI - diff;
-    }   
-    else{    
-        return diff;
-    }
+export function calculateAngleDifference(start, end){
+    // Adjust angles to be between 0 and 2*PI
+    const newStart = start < 0 ? (start + 2*Math.PI) : start;
+    const newEnd = end < 0 ? (end + 2*Math.PI) : end; 
+    const diff = newEnd - newStart;
+
+    return diff > Math.PI ? (diff - 2 * Math.PI) : diff;
 }
 /**
  * @function controlTowers
