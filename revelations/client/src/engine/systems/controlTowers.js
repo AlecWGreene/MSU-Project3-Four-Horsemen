@@ -88,8 +88,7 @@ const priorityHeuristics = {
                 return creepA;
             }
         }
-    },
-    
+    }    
 }
 
 /** 
@@ -122,12 +121,25 @@ function getCreepsInRange(tower, manager){
     // For each creep
     const targets = [];
     const creepDirectory = manager.gameState.creepDirectory;
+    const range = tower.stats.attackRange;
+
+    // Check against every creep
     for(const id of Object.keys(creepDirectory)){
         const creep = creepDirectory[id];
-        const dist = Math.sqrt((creep.transform.position.x - tower.transform.position.x)**2 + (creep.transform.position.y - tower.transform.position.y)**2);
+        const dir = {
+            x: creep.transform.position.x - tower.transform.position.x,
+            y: creep.transform.position.y - tower.transform.position.y
+        }
+
+        // Return out if they are not in the bounding box
+        if(Math.abs(dir.x) > range || Math.abs(dir.y) > range){
+            continue;
+        }
+
+        const dist = Math.sqrt((dir.x)**2 + (dir.y)**2);
 
         // If creep is in range
-        if(dist < tower.stats.attackRange){
+        if(dist < range){
             targets.push(creep);
         }
     }
@@ -191,8 +203,8 @@ function calculateAngleDifference(start, end){
         }
         return 2 * Math.PI - diff;
     }   
-    else{
-        return diff;
+    else{    
+        return diff
     }
 }
 /**
@@ -214,7 +226,7 @@ function controlTowers(manager){
         removeStartAnimationFlag(tower, manager);
 
         // If tower has no target or target is destroyed
-        if(tower.data.target === undefined || !Object.keys(manager.gameState.creepDirectory).includes(tower.data.target.data.id.toString())){
+        if(tower.data.target === undefined || tower.data.target.data.hitPoints <= 0){
             const c = getCreepsInRange(tower, manager);
             if(c.length > 0){
                 selectNewTarget(tower, c, manager);

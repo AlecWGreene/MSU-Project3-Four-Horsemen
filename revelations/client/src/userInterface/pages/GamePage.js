@@ -84,7 +84,7 @@ function GamePage() {
                   }
               },
               scaleRatio: Math.min(divBox.height / (grid.cellsize * grid.tiles.length), divBox.width / (grid.cellsize * grid.tiles[0].length)),
-              origin: {x: 0, y: 0}
+              origin: {x: divBox.x, y: divBox.y}
           }
       });
   }
@@ -140,7 +140,6 @@ function GamePage() {
     gameManager.endWaveCallback = () => {
       saveGame(gameManager);
     };
-    
     setupGame(gameManager, GameEnums.GAME_CONFIG);
 
     const userState = auth.user.data?.gameState?.replace(/^\"|\"$|\\/g,"");
@@ -173,7 +172,7 @@ function GamePage() {
       }
     });
     initializeGameSize();
-    //loadTestScenario(manager.current);
+    loadTestScenario(manager.current);
   },[]);
   return (
     <GameStateContext.Provider value={[state, dispatch]}>

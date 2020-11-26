@@ -16,5 +16,5 @@ export default function loadTestScenario(manager){
         manager.gameState.mapGrid.tiles[8][9]
     ];
 
-    manager.placeTower("test_tower1", manager.gameState.mapGrid.tiles[8][9]);
+    manager.placeTower("Tower_Cannon1", manager.gameState.mapGrid.tiles[8][9]);
 }
