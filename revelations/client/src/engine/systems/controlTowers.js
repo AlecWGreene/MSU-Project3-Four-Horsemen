@@ -218,6 +218,8 @@ function controlTowers(manager){
     for(const id of Object.keys(towerDirectory)){
         // Retrieve tower and flush its animation flag
         const tower = towerDirectory[id];
+        if(tower.data.cooldown <= 0) tower.data.cooldown = 0;
+        else tower.data.cooldown -= GameEnums.GAME_CONFIG.tickLength;
         removeStartAnimationFlag(tower, manager);
 
         // If tower has no target or target is destroyed
@@ -254,13 +256,12 @@ function controlTowers(manager){
                 }
 
                 // Adjust tower rotation to lead towers and rotate in the shortest direction
-                const angle = Math.atan2((creep.transform.position.y + creepDirection.y * 0.15) - tower.transform.position.y, (creep.transform.position.x + creepDirection.x * 0.2) - tower.transform.position.x);
+                const angle = Math.atan2((creep.transform.position.y + creepDirection.y * 0.25) - tower.transform.position.y, (creep.transform.position.x + creepDirection.x * 0.25) - tower.transform.position.x);
                 const angleToRotate = calculateAngleDifference(tower.transform.rotation, angle);
 
                 // If tower can rotate to lead it
                 if(Math.abs(angleToRotate) <= tower.stats.rotateSpeed){
-                    rotateTower(tower, angleToRotate);
-                    tower.data.cooldown -= GameEnums.GAME_CONFIG.tickLength;
+                    tower.transform.rotation = angle;
 
                     // If tower has no cooldown left then fire
                     if(tower.data.cooldown <= 0){

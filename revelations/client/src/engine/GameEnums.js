@@ -14,7 +14,7 @@ import SpriteEnums from "../game/SpriteEnums.js";
 import ProjectileData from "./components/ProjectileData.js";
 import ProjectileStats from "./components/ProjectileStats.js";
 
-const tickLength = 50;
+const tickLength = 20;
 
 /**
  * @module GameEnums
@@ -51,7 +51,7 @@ export default {
         // Wave 1
         1: [
             { creeps: ["Creep_Standard", undefined, undefined, "Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 500},
-            { creeps: [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "Creep_Standard", undefined], delay: 650},
+            { creeps: [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "Creep_Standard", undefined], delay: 660},
             { creeps: [undefined, undefined, undefined, undefined, undefined, undefined, "Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 300},
             { creeps: [undefined, undefined, undefined, "Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 1200}
         ],
@@ -64,7 +64,7 @@ export default {
         // Wave 3
         3: [
             { creeps: ["Creep_Standard", "Creep_Standard", "Creep_Standard", "Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, "Creep_Standard", undefined, undefined, undefined], delay: 500},
-            { creeps: ["Creep_Standard", undefined, undefined, undefined, undefined, "Creep_Standard", "Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 450}
+            { creeps: ["Creep_Standard", undefined, undefined, undefined, undefined, "Creep_Standard", "Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 460}
            ],
         // Wave 4
         4: [
@@ -201,7 +201,7 @@ export default {
         "Creep_Standard": {
             name: "Creep_Standard",
             data: new CreepData(0,"Creep_Standard", "Creep_1_BLUE", []),
-            stats: new CreepStats(1500,160,120,true,50, 15,tickLength),
+            stats: new CreepStats(150,100,120,true,50, 15,tickLength),
             collider: new Collider([{x: -10, y: -10}, {x: -10, y: 10}, {x: 10, y: 10}, {x: 10, y: -10}], {x: 0, y: 0})
         },
         "Creep_Tough": {
