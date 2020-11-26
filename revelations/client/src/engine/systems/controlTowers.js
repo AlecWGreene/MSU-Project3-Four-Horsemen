@@ -200,7 +200,7 @@ export function calculateAngleDifference(start, end){
     const newEnd = end < 0 ? (end + 2*Math.PI) : end; 
     const diff = newEnd - newStart;
 
-    return diff > Math.PI ? (diff - 2 * Math.PI) : diff;
+    return (diff >= Math.PI ? (diff - 2 * Math.PI) : (diff <= -Math.PI ? (diff + 2 * Math.PI) : diff));
 }
 /**
  * @function controlTowers

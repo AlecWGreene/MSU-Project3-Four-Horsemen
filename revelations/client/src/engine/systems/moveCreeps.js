@@ -21,6 +21,14 @@ import { calculateAngleDifference } from "./controlTowers.js";
   * @returns {Void}
   */
 function rotateCreep(creep, angle){
+    // Force the creep to rotate correctly when the angle is negative and would cross the positive x-axis
+    // if( creep.transform.rotation < 0 && creep.transform.rotation > -Math.PI / 2 && creep.transform.rotation + angle > 0){
+    //     creep.transform.rotation += angle - 2 * Math.PI;
+    //     console.log(creep.transform.rotation);
+    //     console.log(angle);
+    //     return;
+    // }
+
     creep.transform.rotation += angle;
     // const {x: x0, y: y0} = creep.collider.center;
     // for(let i = 0; i < creep.collider.vertices.length; i++){
@@ -85,7 +93,7 @@ function moveCreeps(manager){
             if(creep.data.targetIndex === creep.data.path.length - 1){
                 manager.gameState.playerLives--;
                 removeCreep(manager, id);
-                return;
+                continue;
             }
 
             // Update creep target
