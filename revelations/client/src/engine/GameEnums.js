@@ -22,7 +22,7 @@ const tickLength = 30;
 export default {
     GAME_CONFIG: {
         startLives: 100,
-        startMoney: 2000,
+        startMoney: 20000,
         tickLength: tickLength,
         mapSize: {
             rows: 13,
@@ -46,105 +46,16 @@ export default {
         //template: { creeps: [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 500}                
         // Wave 0
         0: [
-            { creeps: ["Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 510}
-           ],
-        // Wave 1
-        1: [
-            { creeps: ["Creep_Standard", undefined, undefined, "Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 510},
-            { creeps: ["Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, "Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined], delay: 1500}
-
-        ],
-        // Wave 2
-        2: [
+            { creeps: ["Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 510},
+            { creeps: ["Creep_Standard", "Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 510},
             { creeps: ["Creep_Standard", undefined, "Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 510},
-            { creeps: [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "Creep_Standard", undefined, "Creep_Standard", undefined, undefined], delay: 3000},
-            { creeps: [undefined, undefined, undefined, undefined, undefined, "Creep_Standard", undefined, "Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined], delay: 5100}
-        ],
-        // Wave 3
-        3: [
-            { creeps: [undefined, undefined, "Creep_Agile", undefined, undefined, undefined, undefined, undefined, undefined, "Creep_Standard", "Creep_Standard", "Creep_Standard", undefined, undefined], delay: 510},
-            { creeps: ["Creep_Standard", undefined, undefined, undefined, undefined, undefined, "Creep_Agile", undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 1020},
-            { creeps: ["Creep_Agile", undefined, undefined, undefined, undefined, undefined, undefined, "Creep_Standard", undefined, undefined, "Creep_Standard", undefined, undefined, undefined], delay: 2010}
-
+            { creeps: ["Creep_Standard", "Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 510},
+            { creeps: ["Creep_Standard", undefined, "Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 510}
            ],
-        // Wave 4
-        4: [
-            { creeps: ["Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "Creep_Standard", "Creep_Standard", "Creep_Standard", undefined, undefined], delay: 510},
-            { creeps: [undefined, "Creep_Standard", undefined, undefined, undefined, "Creep_Tough", undefined, undefined, undefined, undefined, undefined, "Creep_Agile", undefined, undefined], delay: 2000},
-            { creeps: [undefined, undefined, undefined, "Creep_Agile", undefined, undefined, undefined, undefined, "Creep_Agile", undefined, undefined, "Creep_Agile", undefined, undefined], delay: 2000}
+        1: [
+            { creeps: ["Creep_Standard", "Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 510},
+            { creeps: ["Creep_Standard", undefined, "Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 1500}
            ],
-        // Wave 5
-        5: [
-            { creeps: ["Creep_Standard", undefined, undefined, undefined, "Creep_Standard", undefined, undefined, undefined, undefined, "Creep_Standard", undefined, undefined, undefined, undefined], delay: 510},
-            { creeps: [undefined, undefined, undefined, undefined, undefined, undefined, undefined, "Creep_Tough", undefined, undefined, undefined, undefined, undefined, undefined], delay: 4110},
-            { creeps: [undefined, undefined, undefined, "Creep_Tough", undefined, "Creep_Standard", undefined, undefined, undefined, "Creep_Standard", undefined, undefined, undefined, undefined], delay: 720},
-            { creeps: [undefined, undefined, "Creep_Standard", undefined, undefined, "Creep_Agile", undefined, "Creep_Standard", undefined, undefined, "Creep_Agile", undefined, "Creep_Agile", "Creep_Agile"], delay: 3000}
-           ],
-        // Wave 0
-        6: [
-            { creeps: ["Creep_Standard", undefined, "Creep_Standard", undefined, "Creep_Standard", undefined, "Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 500},
-            { creeps: [undefined, undefined, undefined, undefined, undefined, "Creep_Standard", undefined, "Creep_Tough", undefined, undefined, undefined, undefined, "Creep_Standard", undefined], delay: 1400},
-            { creeps: [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "Creep_Standard", undefined, "Creep_Tough", undefined, undefined], delay: 2100},
-            { creeps: [undefined, undefined, undefined, "Creep_Standard", "Creep_Standard", "Creep_Standard", "Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 1200}
-           ],
-        // Wave 7
-        7: [
-            { creeps: ["Creep_Standard", undefined, undefined, "Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 510},
-            { creeps: ["Creep_Standard", undefined, undefined, undefined, "Creep_Standard", undefined, undefined, undefined, undefined, "Creep_Standard", undefined, undefined, undefined, undefined], delay: 510},
-            { creeps: [undefined, undefined, undefined, undefined, undefined, undefined, undefined, "Creep_Tough", undefined, undefined, undefined, undefined, undefined, undefined], delay: 2100},
-            { creeps: [undefined, undefined, undefined, "Creep_Standard", undefined, "Creep_Standard", undefined, undefined, undefined, "Creep_Standard", undefined, undefined, undefined, undefined], delay: 720},
-            { creeps: ["Creep_Standard", undefined, undefined, undefined, "Creep_Standard", undefined, undefined, undefined, undefined, "Creep_Standard", undefined, undefined, undefined, undefined], delay: 2400},
-            { creeps: [undefined, undefined, undefined, undefined, undefined, undefined, undefined, "Creep_Tough", undefined, undefined, undefined, undefined, undefined, undefined], delay: 1200},
-            { creeps: [undefined, undefined, undefined, "Creep_Standard", undefined, "Creep_Standard", undefined, undefined, undefined, "Creep_Standard", undefined, undefined, undefined, undefined], delay: 900}
-           ],
-        // Wave 8
-        8: [
-            { creeps: ["Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 500}
-        ],
-        // Wave 9
-        9: [
-            { creeps: ["Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 500}
-        ],
-        // Wave 10
-        10: [
-            { creeps: ["Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 500}
-        ],
-        // Wave 7
-        11: [
-            { creeps: ["Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 500}
-        ],
-        // Wave 7
-        12: [
-            { creeps: ["Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 500}
-        ],
-        // Wave 8
-        13: [
-            { creeps: ["Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 500}
-            ],
-        // Wave 9
-        14: [
-            { creeps: ["Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 500}
-        ]   ,
-        // Wave 10
-        15: [
-            { creeps: ["Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 500}
-            ],
-        // Wave 7
-        16: [
-            { creeps: ["Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 500}
-            ],
-        // Wave 7
-        17: [
-            { creeps: ["Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 500}
-            ],
-        // Wave 8
-        18: [
-            { creeps: ["Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 500}
-        ],
-        // Wave 9
-        19: [
-            { creeps: ["Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 500}
-        ],
         // Wave 10
         20: [
             { creeps: ["Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 500}
@@ -210,31 +121,31 @@ export default {
         "Creep_Standard": {
             name: "Creep_Standard",
             data: new CreepData(0,"Creep_Standard", "Creep_1_BLUE", []),
-            stats: new CreepStats(150,100,120,true,50, 15,tickLength),
+            stats: new CreepStats(150,100,120,true,50, 50,tickLength),
             collider: new Collider([{x: -10, y: -10}, {x: -10, y: 10}, {x: 10, y: 10}, {x: 10, y: -10}], {x: 0, y: 0})
         },
         "Creep_Tough": {
             name: "Creep_Tough",
             data: new CreepData(0,"Creep_Tough", "Creep_2_BLUE", []),
-            stats: new CreepStats(500,100,90,true,50, 50,tickLength),
+            stats: new CreepStats(500,100,90,true,50, 250,tickLength),
             collider: new Collider([{x: -10, y: -10}, {x: -10, y: 10}, {x: 10, y: 10}, {x: 10, y: -10}], {x: 0, y: 0})
         },
         "Creep_Fast_Standard": {
             name: "Creep_Fast_Standard",
             data: new CreepData(0,"Creep_Fast_Standard", "Creep_1_GREEN", []),
-            stats: new CreepStats(150,240,120,true,50, 75,tickLength),
+            stats: new CreepStats(150,240,120,true,50, 100,tickLength),
             collider: new Collider([{x: -10, y: -10}, {x: -10, y: 10}, {x: 10, y: 10}, {x: 10, y: -10}], {x: 0, y: 0})
         },
         "Creep_Fast_Agile": {
             name: "Creep_Fast_Agile",
             data: new CreepData(0,"Creep_Fast_Agile", "Creep_6_GREEN", []),
-            stats: new CreepStats(150,240,180,true,150, 100,tickLength),
+            stats: new CreepStats(150,240,180,true,150, 150,tickLength),
             collider: new Collider([{x: -10, y: -10}, {x: -10, y: 10}, {x: 10, y: 10}, {x: 10, y: -10}], {x: 0, y: 0})
         },
         "Creep_Agile": {
             name: "Creep_Agile",
             data: new CreepData(0,"Creep_Agile", "Creep_1_GREEN", []),
-            stats: new CreepStats(150,160,180,true,50, 100,tickLength),
+            stats: new CreepStats(150,160,180,true,50, 150,tickLength),
             collider: new Collider([{x: -10, y: -10}, {x: -10, y: 10}, {x: 10, y: 10}, {x: 10, y: -10}], {x: 0, y: 0})
         }
     }

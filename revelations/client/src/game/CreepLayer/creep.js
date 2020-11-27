@@ -13,7 +13,7 @@ const styles = {
     }
 }
 
-export default function CreepLayer(props){
+function CreepLayer(props){
     const [state, dispatch] = useContext(GameStateContext)
 
     return (
@@ -33,8 +33,7 @@ export default function CreepLayer(props){
 
 }
 
-
-
+export default React.memo(CreepLayer, () => true);
 
 
 

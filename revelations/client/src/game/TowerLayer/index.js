@@ -18,7 +18,7 @@ const styles = {
 function TowerLayer(props){
     const [state, dispatch] = useContext(GameStateContext);
     function handleClickTower(event,dispatch,towerId){
-        console.log(event.target.id)
+        console.log(event.target)
         console.log("tower click")
     }
     return (

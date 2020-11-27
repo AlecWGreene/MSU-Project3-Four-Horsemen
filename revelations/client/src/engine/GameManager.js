@@ -48,9 +48,11 @@ export default class GameManager {
         this.endWaveCallback = undefined;
         this.updateCallback = undefined;
         this.animationState = {
-            towers: []
+            towers: [],
+            vfx: []
         }
         this.numberWaves = Object.keys(GameEnums.WAVE_CONFIG).length;
+        this.needsNewDijkstraMap = true;
     }
     init(grid, sourceArray, target){
         this.gameState.mapGrid = grid;
@@ -154,7 +156,12 @@ export default class GameManager {
                     clearInterval(this.tickInterval);
                     return;
                 }
-                this.gameState.pathDirectory = findPaths(this.gameState.sourceArray, this.gameState.target, this.gameState.wallGrid, this.gameState.mapGrid, getEuclideanDistance, undefined, undefined, this.gameState?.pathData);
+                const unwalkable = this.gameState.wallGrid.concat(this.gameState.baseGrid);
+                if(this.needsNewDijkstraMap){
+                    this.gameState.pathData = {};
+                    this.needsNewDijkstraMap = false;
+                }
+                this.gameState.pathDirectory = findPaths(this.gameState.sourceArray, this.gameState.target, unwalkable, this.gameState.mapGrid, getEuclideanDistance, undefined, undefined, this.gameState?.pathData);
                 this.runtimeState.totalWaveTime = GameEnums.WAVE_CONFIG[this.gameState.waveIndex].reduce((aggregate, current) => aggregate + current.delay, 0);
             }
 
@@ -193,6 +200,7 @@ export default class GameManager {
 
             // Add wall
             this.gameState.wallGrid.push(tile);
+            this.needsNewDijkstraMap = true;
             return true;
         }
         else{
@@ -209,6 +217,7 @@ export default class GameManager {
         const len = this.gameState.wallGrid.length;
         this.gameState.wallGrid = this.gameState.wallGrid.filter(t => !tile.isEqualTo(t));
         if(len !== this.gameState.wallGrid.length) this.gameState.playerMoney += GameEnums.GAME_CONFIG.wallCost / 2;
+        this.needsNewDijkstraMap = true;
     }
     placeBase(tile){
         if(this.gameState.wallGrid.filter(t => tile.isEqualTo(t)).length === 0
@@ -221,6 +230,7 @@ export default class GameManager {
 
             // Add base
             this.gameState.baseGrid.push(tile);
+            this.needsNewDijkstraMap = true;
             if(!this.runtimeState.isPause || !this.runtimeState.isWaveRunning) this.updateCallback();
             return true;
         }
@@ -237,6 +247,7 @@ export default class GameManager {
         const len = this.gameState.baseGrid.length;
         this.gameState.baseGrid = this.gameState.baseGrid.filter(t => !tile.isEqualTo(t));
         if(len !== this.gameState.wallGrid.length) this.gameState.playerMoney += GameEnums.GAME_CONFIG.baseCost / 2;
+        this.needsNewDijkstraMap = true;
     }
     placeTower(archtype, tile){
         const id = 30000 + ++this.counters.towers;
@@ -281,6 +292,7 @@ export default class GameManager {
     }
     endWave(){
         this.gameState.projectileDirectory = {};
+        this.animationState.vfx = [];
         this.runtimeState.isWaveRunning = false;
         this.gameState.playerMoney += GameEnums.GAME_CONFIG.waveReward;
         if(this.endWaveCallback){

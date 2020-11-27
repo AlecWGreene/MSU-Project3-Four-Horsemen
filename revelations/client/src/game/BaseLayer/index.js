@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import { GameStateContext } from "../../userInterface/pages/GamePage";
 import Animator from "../Animator";
 import SpriteEnums from "../SpriteEnums.js";
@@ -15,6 +15,7 @@ const styles = {
 
 function BaseLayer(props){
     const [state, dispatch] = useContext(GameStateContext);
+
     return (
         <div style={styles.container}>
         {

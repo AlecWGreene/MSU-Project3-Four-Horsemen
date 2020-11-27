@@ -18,6 +18,11 @@ import GameManager from "../GameManager";
  */
 function removeCreep(manager, id){
     manager.gameState.creepDirectory[id].data.hitPoints = 0;
+    manager.animationState.vfx.push({
+        id: id,
+        sprite: "VFX_Explosion",
+        position: { ...manager.gameState.creepDirectory[id].transform.position }
+    });
     delete manager.gameState.creepDirectory[id];
 
     // Check if wave is over
