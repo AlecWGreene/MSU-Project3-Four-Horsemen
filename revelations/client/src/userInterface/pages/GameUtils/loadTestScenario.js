@@ -3,7 +3,7 @@ import spawnProjectile from "../../../engine/systems/spawnProjectile";
 export default function loadTestScenario(manager){
     
     manager.gameState.wallGrid = [
-        manager.gameState.mapGrid.tiles[8][9], manager.gameState.mapGrid.tiles[8][10], manager.gameState.mapGrid.tiles[8][11],
+        /*manager.gameState.mapGrid.tiles[8][9],*/ manager.gameState.mapGrid.tiles[8][10], manager.gameState.mapGrid.tiles[8][11],
         manager.gameState.mapGrid.tiles[7][9], manager.gameState.mapGrid.tiles[6][9],
         manager.gameState.mapGrid.tiles[6][10], manager.gameState.mapGrid.tiles[6][11], manager.gameState.mapGrid.tiles[6][12], manager.gameState.mapGrid.tiles[6][13],
         manager.gameState.mapGrid.tiles[7][13], manager.gameState.mapGrid.tiles[8][13], manager.gameState.mapGrid.tiles[9][13], manager.gameState.mapGrid.tiles[10][13],

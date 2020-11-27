@@ -196,12 +196,22 @@ export default class GameManager {
             return true;
         }
         else{
+            if(this.gameState.baseGrid.filter(t => tile.isEqualTo(t)).length === 0
+            && this.gameState.towerGrid.filter(t => tile.isEqualTo(t)).length === 0){
+                this.removeWall(tile);
+                return true;
+            }
+
             return false;
         }
-        this.updateCallback();
+    }
+    removeWall(tile){
+        const len = this.gameState.wallGrid.length;
+        this.gameState.wallGrid = this.gameState.wallGrid.filter(t => !tile.isEqualTo(t));
+        if(len !== this.gameState.wallGrid.length) this.gameState.playerMoney += GameEnums.GAME_CONFIG.wallCost / 2;
     }
     placeBase(tile){
-        if(this.gameState.wallGrid.filter(t => tile.isEqualTo(t)).length > 0
+        if(this.gameState.wallGrid.filter(t => tile.isEqualTo(t)).length === 0
         && this.gameState.baseGrid.filter(t => tile.isEqualTo(t)).length === 0){
             // Ensure player has sufficient funds
             if(this.gameState.playerMoney < GameEnums.GAME_CONFIG.baseCost){
@@ -215,8 +225,18 @@ export default class GameManager {
             return true;
         }
         else{
+            if(this.gameState.baseGrid.filter(t => tile.isEqualTo(t)).length > 0){
+                this.removeBase(tile);
+                return true;
+            }
+
             return false;
         }
+    }
+    removeBase(tile){
+        const len = this.gameState.baseGrid.length;
+        this.gameState.baseGrid = this.gameState.baseGrid.filter(t => !tile.isEqualTo(t));
+        if(len !== this.gameState.wallGrid.length) this.gameState.playerMoney += GameEnums.GAME_CONFIG.baseCost / 2;
     }
     placeTower(archtype, tile){
         const id = 30000 + ++this.counters.towers;
@@ -227,8 +247,20 @@ export default class GameManager {
             return true;
         }
         else{
+            const match = Object.values(this.gameState.towerDirectory).filter(tower => tower.transform.position.x === tile.position.x && tower.transform.position.y === tile.position.y);
+            if(match.length > 0){
+                this.removeTower(tile, match[0].data.id);
+                return true;
+            }
+
             return false;
         }
+    }
+    removeTower(tile, id){
+        const cost = this.gameState.towerDirectory[id].stats.cost;
+        delete this.gameState.towerDirectory[id];
+        this.gameState.playerMoney += cost / 2;
+        this.gameState.towerGrid = this.gameState.towerGrid.filter(t => !t.isEqualTo(tile));
     }
     convertWorldPointToTile(x, y){
         const row = Math.floor(x / this.gameState.mapGrid.cellsize);
