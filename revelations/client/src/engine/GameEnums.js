@@ -47,10 +47,6 @@ export default {
         // Wave 0
         0: [
             { creeps: ["Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 510},
-            { creeps: ["Creep_Standard", "Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 510},
-            { creeps: ["Creep_Standard", undefined, "Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 510},
-            { creeps: ["Creep_Standard", "Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 510},
-            { creeps: ["Creep_Standard", undefined, "Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 510}
            ],
         1: [
             { creeps: ["Creep_Standard", "Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 510},
@@ -58,7 +54,9 @@ export default {
            ],
         // Wave 10
         20: [
-            { creeps: ["Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 500}
+            { creeps: ["Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 510},
+            { creeps: ["Creep_Standard", undefined, undefined, undefined, undefined, "Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 2310},
+            { creeps: ["Creep_Standard", undefined, "Creep_Standard", undefined, "Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 3210}
             ],
     },
     TOWER_PREFABS: {

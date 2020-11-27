@@ -292,7 +292,6 @@ export default class GameManager {
     }
     endWave(){
         this.gameState.projectileDirectory = {};
-        this.animationState.vfx = [];
         this.runtimeState.isWaveRunning = false;
         this.gameState.playerMoney += GameEnums.GAME_CONFIG.waveReward;
         if(this.endWaveCallback){
