@@ -329,6 +329,26 @@ const SPRITE_ENUM = {
         numFrames: 1,
         scale: towerBaseScale
     },
+    /**
+     * @description HOVER ME => "../../public/Assets/Buildings/Tower_Base/Tower_Base_Connection_NS.png"
+     */
+    "Tower_Base_NS": {
+        src: "./Assets/Buildings/Tower_Base/Tower_Base_Connection_NS.png",
+        height: 128,
+        width: 128,
+        numFrames: 1,
+        scale: towerBaseScale
+    },
+    /**
+     * @description HOVER ME => "../../public/Assets/Buildings/Tower_Base/Tower_Base_Connection_EW.png"
+     */
+    "Tower_Base_EW": {
+        src: "./Assets/Buildings/Tower_Base/Tower_Base_Connection_EW.png",
+        height: 128,
+        width: 128,
+        numFrames: 1,
+        scale: towerBaseScale
+    },
     /* #endregion */
 
     // ====================================================================================================================================================================================
