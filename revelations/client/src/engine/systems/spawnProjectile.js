@@ -32,8 +32,10 @@ function spawnProjectile(towerId, barrelIndex, manager){
     newData.id = newId;
     newData.launcherId = towerId;
     const angle = tower.transform.rotation;
-    const transform = new Transform(tower.transform.position.x + tower.data.barrels[barrelIndex].x * Math.cos(angle) * manager.gameState.mapGrid.cellsize, 
-                                    tower.transform.position.y + tower.data.barrels[barrelIndex].x * Math.sin(angle) * manager.gameState.mapGrid.cellsize, 
+    const cellsize = manager.gameState.mapGrid.cellsize;
+    const {x, y} = tower.data.barrels[barrelIndex];
+    const transform = new Transform(tower.transform.position.x + x * Math.cos(angle) * cellsize - cellsize * y * Math.sin(angle), 
+                                    tower.transform.position.y + x * Math.sin(angle) * cellsize + cellsize * y * Math.cos(angle), 
                                     angle);
     
     // Instantiate prefab

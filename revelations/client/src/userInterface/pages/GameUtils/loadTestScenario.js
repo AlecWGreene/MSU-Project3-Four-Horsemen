@@ -17,4 +17,5 @@ export default function loadTestScenario(manager){
     ];
 
     manager.placeTower("Tower_Cannon1", manager.gameState.mapGrid.tiles[8][9]);
+    manager.gameState.waveIndex = 5;
 }

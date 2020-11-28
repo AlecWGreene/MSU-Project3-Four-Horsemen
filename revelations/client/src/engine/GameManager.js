@@ -63,6 +63,16 @@ export default class GameManager {
             towers: 0,
             projectiles: 0
         }
+
+        // Assemble forbidden squares
+        this.forbidden = [target, ...this.gameState.sourceArray];
+        for(const row of this.gameState.mapGrid.tiles){
+            for(const tile of row){
+                if(tile.index.row === 0 || tile.index.row === this.gameState.mapGrid.tiles.length - 1 || tile.index.col === 0 || tile.index.col === row.length - 1){
+                    this.forbidden.push(tile);
+                }
+            }
+        }
     }
     instantiateTile(string){
         const { 1:x, 2:y, 3:row, 4:col } = string.match(/Tile\(([\-\w\.]+),([\-\w\.]+),([\-\w\.]+),([\-\w\.]+)\)/);
@@ -154,6 +164,7 @@ export default class GameManager {
                     this.runtimeState.isWaveRunning = false;
                     this.runtimeState.isGameOver = true;
                     clearInterval(this.tickInterval);
+                    alert("You win!")
                     return;
                 }
                 const unwalkable = this.gameState.wallGrid.concat(this.gameState.baseGrid);
@@ -192,6 +203,11 @@ export default class GameManager {
             return false;
         }
         if(this.gameState.wallGrid.filter(t => tile.isEqualTo(t)).length === 0){
+            // Prevent building on forbidden squares
+            if(this.forbidden.filter(t => tile.isEqualTo(t)).length > 0){
+                return false;
+            }
+
             // Ensure player has sufficient funds
             if(this.gameState.playerMoney < GameEnums.GAME_CONFIG.wallCost){
                 return false;
@@ -222,6 +238,11 @@ export default class GameManager {
     placeBase(tile){
         if(this.gameState.wallGrid.filter(t => tile.isEqualTo(t)).length === 0
         && this.gameState.baseGrid.filter(t => tile.isEqualTo(t)).length === 0){
+            // Prevent building on forbidden squares
+            if(this.forbidden.filter(t => tile.isEqualTo(t)).length > 0){
+                return false;
+            }
+
             // Ensure player has sufficient funds
             if(this.gameState.playerMoney < GameEnums.GAME_CONFIG.baseCost){
                 return false;
