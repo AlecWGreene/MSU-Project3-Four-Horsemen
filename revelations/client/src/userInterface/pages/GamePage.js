@@ -30,6 +30,13 @@ export const GameStateContext = React.createContext({});
  */
 export function convertScreenPointToMapTile(point, frame, ratio, gameState){
   const cellsize = gameState.mapGrid.cellsize;
+  const point ={
+    x: num, 
+    y: num
+  } ; 
+  const frame = state.frameSize; 
+  const ratio = state.scaleRatio; 
+  
   // Return false if we are not inside of the gameFrame
   if((point.x < frame.bottomLeft.x || point.x > frame.bottomLeft.x + frame.width )  || (point.y < frame.bottomLeft.y || point.y > frame.bottomLeft.y + frame.height)){
     return false;

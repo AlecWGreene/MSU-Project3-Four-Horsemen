@@ -41,7 +41,8 @@ function GameButton(props){
 
     return <DraggableCore
                 onStart={handleDragStart}
-                onDrag={handleDrag}
+                onDrag={setDeltaPosition}
+                // onDrag={handleDrag}
                 onStop={handleDragStop}
             >
         <Image delta={deltaPosition} height={props.height} width={props.width} style={props.styles} src={props.src} draggable="false" />
