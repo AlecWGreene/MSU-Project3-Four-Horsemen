@@ -24,7 +24,7 @@ function WallLayer(props){
 
                 // Check which walls the wall must connect to
                 for(const neighbour of wallTile.getNeighbours()){
-                    if(props.wallGrid.filter(t => t.isEqualTo(neighbour)).length > 0){
+                    if(props.wallGrid.filter(t => t.isEqualTo(neighbour)).length > 0 || state.gameState.baseGrid.filter(t => t.isEqualTo(neighbour)).length > 0){
                         const diff = {
                             row: neighbour.index.row - wallTile.index.row,
                             col: neighbour.index.col - wallTile.index.col

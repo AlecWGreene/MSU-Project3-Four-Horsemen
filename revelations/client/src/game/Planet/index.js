@@ -18,7 +18,7 @@ export default function Planet(props){
                 imgData={SpriteEnums["Planet_Sprite"]} /** @todo replace with planet sprite */
                 height={state.gameState.mapGrid.cellsize}
                 width={state.gameState.mapGrid.cellsize}
-                position={convertWorldPointToScreenPoint(state.gameState.mapGrid.tiles[GameEnums.GAME_CONFIG.target[0]][GameEnums.GAME_CONFIG.target[1]].position, state.scaleRatio, {x:0,y:0})}
+                position={convertWorldPointToScreenPoint(state.gameState.mapGrid.tiles[GameEnums.GAME_CONFIG.target[0]][GameEnums.GAME_CONFIG.target[1]].position, state.scaleRatio, state.origin)}
                 rotation={0}
                 scale={state.scaleRatio}
             />

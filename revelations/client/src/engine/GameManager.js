@@ -48,9 +48,11 @@ export default class GameManager {
         this.endWaveCallback = undefined;
         this.updateCallback = undefined;
         this.animationState = {
-            towers: []
+            towers: [],
+            vfx: []
         }
         this.numberWaves = Object.keys(GameEnums.WAVE_CONFIG).length;
+        this.needsNewDijkstraMap = true;
     }
     init(grid, sourceArray, target){
         this.gameState.mapGrid = grid;
@@ -60,6 +62,16 @@ export default class GameManager {
             creeps: 0,
             towers: 0,
             projectiles: 0
+        }
+
+        // Assemble forbidden squares
+        this.forbidden = [target, ...this.gameState.sourceArray];
+        for(const row of this.gameState.mapGrid.tiles){
+            for(const tile of row){
+                if(tile.index.row === 0 || tile.index.row === this.gameState.mapGrid.tiles.length - 1 || tile.index.col === 0 || tile.index.col === row.length - 1){
+                    this.forbidden.push(tile);
+                }
+            }
         }
     }
     instantiateTile(string){
@@ -133,9 +145,14 @@ export default class GameManager {
         this.updateCallback = callback;
     }
     /**
-     * 
+     * Sends the next available wave
      */
     sendWave(waveConfig){
+        // Return out if game is over
+        if(this.runtimeState.isGameOver){
+            return;
+        }
+
         if(this.runtimeState.isPaused || !this.runtimeState.isWaveRunning){
             if(!this.runtimeState.isWaveRunning){
                 // Set up next wave
@@ -143,12 +160,19 @@ export default class GameManager {
                 this.runtimeState.isWaveRunning = true;
 
                 // If there are no waves left, end game
-                if(this.gameState.waveIndex > this.numberWaves){
+                if(this.gameState.waveIndex >= this.numberWaves){
                     this.runtimeState.isWaveRunning = false;
                     this.runtimeState.isGameOver = true;
                     clearInterval(this.tickInterval);
+                    alert("You win!")
+                    return;
                 }
-                this.gameState.pathDirectory = findPaths(this.gameState.sourceArray, this.gameState.target, this.gameState.wallGrid, this.gameState.mapGrid, getEuclideanDistance, undefined, undefined, this.gameState?.pathData);
+                const unwalkable = this.gameState.wallGrid.concat(this.gameState.baseGrid);
+                if(this.needsNewDijkstraMap){
+                    this.gameState.pathData = {};
+                    this.needsNewDijkstraMap = false;
+                }
+                this.gameState.pathDirectory = findPaths(this.gameState.sourceArray, this.gameState.target, unwalkable, this.gameState.mapGrid, getEuclideanDistance, undefined, undefined, this.gameState?.pathData);
                 this.runtimeState.totalWaveTime = GameEnums.WAVE_CONFIG[this.gameState.waveIndex].reduce((aggregate, current) => aggregate + current.delay, 0);
             }
 
@@ -179,6 +203,11 @@ export default class GameManager {
             return false;
         }
         if(this.gameState.wallGrid.filter(t => tile.isEqualTo(t)).length === 0){
+            // Prevent building on forbidden squares
+            if(this.forbidden.filter(t => tile.isEqualTo(t)).length > 0){
+                return false;
+            }
+
             // Ensure player has sufficient funds
             if(this.gameState.playerMoney < GameEnums.GAME_CONFIG.wallCost){
                 return false;
@@ -187,16 +216,33 @@ export default class GameManager {
 
             // Add wall
             this.gameState.wallGrid.push(tile);
+            this.needsNewDijkstraMap = true;
             return true;
         }
         else{
+            if(this.gameState.baseGrid.filter(t => tile.isEqualTo(t)).length === 0
+            && this.gameState.towerGrid.filter(t => tile.isEqualTo(t)).length === 0){
+                this.removeWall(tile);
+                return true;
+            }
+
             return false;
         }
-        this.updateCallback();
+    }
+    removeWall(tile){
+        const len = this.gameState.wallGrid.length;
+        this.gameState.wallGrid = this.gameState.wallGrid.filter(t => !tile.isEqualTo(t));
+        if(len !== this.gameState.wallGrid.length) this.gameState.playerMoney += GameEnums.GAME_CONFIG.wallCost / 2;
+        this.needsNewDijkstraMap = true;
     }
     placeBase(tile){
-        if(this.gameState.wallGrid.filter(t => tile.isEqualTo(t)).length > 0
+        if(this.gameState.wallGrid.filter(t => tile.isEqualTo(t)).length === 0
         && this.gameState.baseGrid.filter(t => tile.isEqualTo(t)).length === 0){
+            // Prevent building on forbidden squares
+            if(this.forbidden.filter(t => tile.isEqualTo(t)).length > 0){
+                return false;
+            }
+
             // Ensure player has sufficient funds
             if(this.gameState.playerMoney < GameEnums.GAME_CONFIG.baseCost){
                 return false;
@@ -205,12 +251,24 @@ export default class GameManager {
 
             // Add base
             this.gameState.baseGrid.push(tile);
+            this.needsNewDijkstraMap = true;
             if(!this.runtimeState.isPause || !this.runtimeState.isWaveRunning) this.updateCallback();
             return true;
         }
         else{
+            if(this.gameState.baseGrid.filter(t => tile.isEqualTo(t)).length > 0){
+                this.removeBase(tile);
+                return true;
+            }
+
             return false;
         }
+    }
+    removeBase(tile){
+        const len = this.gameState.baseGrid.length;
+        this.gameState.baseGrid = this.gameState.baseGrid.filter(t => !tile.isEqualTo(t));
+        if(len !== this.gameState.wallGrid.length) this.gameState.playerMoney += GameEnums.GAME_CONFIG.baseCost / 2;
+        this.needsNewDijkstraMap = true;
     }
     placeTower(archtype, tile){
         const id = 30000 + ++this.counters.towers;
@@ -221,8 +279,20 @@ export default class GameManager {
             return true;
         }
         else{
+            const match = Object.values(this.gameState.towerDirectory).filter(tower => tower.transform.position.x === tile.position.x && tower.transform.position.y === tile.position.y);
+            if(match.length > 0){
+                this.removeTower(tile, match[0].data.id);
+                return true;
+            }
+
             return false;
         }
+    }
+    removeTower(tile, id){
+        const cost = this.gameState.towerDirectory[id].stats.cost;
+        delete this.gameState.towerDirectory[id];
+        this.gameState.playerMoney += cost / 2;
+        this.gameState.towerGrid = this.gameState.towerGrid.filter(t => !t.isEqualTo(tile));
     }
     convertWorldPointToTile(x, y){
         const row = Math.floor(x / this.gameState.mapGrid.cellsize);

@@ -34,10 +34,10 @@ function Sidebar(props){
                     success = state.manager.placeBase(tile);
                     break;
                 case "addTowerBarrel":
-                    success = state.manager.placeTower("test_tower1", tile);
+                    success = state.manager.placeTower("Tower_Cannon1", tile);
                     break;
                 case "addTowerLaser":
-                    success = state.manager.placeTower("test_tower2", tile);
+                    success = state.manager.placeTower("Tower_Laser1", tile);
                     break;
             }
             if(success === false) return;
