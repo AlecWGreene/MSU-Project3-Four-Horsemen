@@ -1259,6 +1259,7 @@ const SPRITE_ENUM = {
      */
     "VFX_Explosion": {
         src: "./Assets/VFX/Ship_Explosion.png",
+        // sfx: "Sound_pop_0",
         height: 128,
         width: 2688,
         numFrames: 21,

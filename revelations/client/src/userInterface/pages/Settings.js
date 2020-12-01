@@ -8,6 +8,8 @@ import SfxButton from "../components/SfxButton";
 import StatusBar from "../components/StatusBar";
 import useIndexedDb from "../../utils/hooks/useIndexedDB";
 import convertGameToJSON from '../../engine/systems/convertGameToJSON';
+import Credits from "../components/Credits/index"
+
 
 export default function Settings(props) {
     // Component data setup
@@ -95,10 +97,8 @@ export default function Settings(props) {
                 </div>
             </div>
            
-           {/* User Stats */}
-            <div className="status-bar">
-                <StatusBar />
-            </div>
+           {/* Credits Modal */}
+            <Credits />
 
         </Modal.Body> 
 

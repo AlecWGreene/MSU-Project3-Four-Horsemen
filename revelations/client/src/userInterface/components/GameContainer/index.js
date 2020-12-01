@@ -21,12 +21,14 @@ export default function GameContainer(props) {
     //Load hooks
     const { saveGame } = useIndexedDb();
     const sfx = useSfx();
-    const [state, dispatch] = useContext(GameStateContext); 
+    const [state, dispatch] = useContext(GameStateContext);
+    const [currentSoundTrack, setCurrentSoundTrack] = useState(1);
 
     // Red button handler
     const redButtonHandler = () => {
+        setCurrentSoundTrack(((currentSoundTrack)%7) + 1);
         sfx.sfxSound('Sound_pop_0');
-        sfx.ambientSound('Sound_background_1');
+        sfx.ambientSound(`Sound_background_${currentSoundTrack}`);
         state.manager.sendWave();
     }
     // Pause handler

@@ -179,7 +179,7 @@ function selectNewTarget(tower, creepArray, manager){
  * 
  * @returns {Void}
 */
-function removeStartAnimationFlag(tower, manager){
+export function removeStartAnimationFlag(tower, manager){
     manager.animationState.towers = manager.animationState.towers.filter(t => t !== tower.data.id);
 }
 
@@ -221,7 +221,6 @@ function controlTowers(manager){
         if(tower.data.cooldown <= 0) tower.data.cooldown = 0;
         else tower.data.cooldown -= GameEnums.GAME_CONFIG.tickLength;
         removeStartAnimationFlag(tower, manager);
-
         // If tower has no target or target is destroyed
         if(tower.data.target === undefined || tower.data.target.data.hitPoints <= 0){
             const c = getCreepsInRange(tower, manager);
@@ -266,7 +265,7 @@ function controlTowers(manager){
                     // If tower has no cooldown left then fire
                     if(tower.data.cooldown <= 0){
                         tower.data.cooldown = 1000 / tower.stats.attackSpeed;
-                        manager.animationState.towers.push(tower.data.id);
+                        if(!manager.animationState.towers.includes(tower.data.id)) manager.animationState.towers.push(tower.data.id);
                         for(let index = 0; index < tower.data.barrels.length; index++){
                             spawnProjectile(tower.data.id, index, manager);
                         }
