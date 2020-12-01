@@ -81,7 +81,7 @@
 
 .settings-gear {
     -webkit-transition: -webkit-transform .3s ease-in-out;
-    transition:         transform .1s ease-in-out;
+    transition:         transform .3s ease-in-out;
     -webkit-filter: drop-shadow( 3px 3px 2px rgba(128, 126, 126, 0.7));
   filter: drop-shadow( 3px 3px 2px rgba(109, 107, 107, 0.7));
 }
@@ -399,11 +399,23 @@ and (max-width: 812px) {
   }
 
   .bg-red-btn {
-    width: 75px;
+    width: 60px;
     height: auto;
     display: block;
     transition: 0.7s;
   }
+
+  .playpause-btn {
+    width: 75%;
+    height: 9vh;
+    background-repeat: no-repeat;
+    align-items: center;
+    margin-left: 45px;
+    margin-right: 45px;
+  }
+
+  .eLJxGP {
+    height: 25%!important;
+    width: 25%!important;
+  }   
 }
-
-

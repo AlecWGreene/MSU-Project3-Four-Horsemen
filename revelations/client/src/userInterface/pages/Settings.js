@@ -54,63 +54,57 @@ export default function Settings(props) {
         aria-labelledby="contained-modal-title-vcenter"
         centered
         >
-        <Modal.Body>
-           <div>
+        <Modal.Body> 
+           <div className="container">
                <div className="row justify-content-center">
-                    <div id="customFont" className="col-sm-12 username text-center">
+                    <div id="customFont" className="col-lg-12 username text-center">
                         { username }
                     </div>
                </div>
                 <div className="row justify-content-center">
-                    <div className="col-lg-6">
-                        <button
-                        className="custom-options-btn aldrich-font"
-                        type="button"
-                        style={{width: '15vw'}}
-                        onClick={userLogout}
-                        >
-                            {auth.user.auth === "user" ? "Quit" : "Abdandon Game" }
-                        </button>
-                    </div>
+                    <button
+                    className="custom-options-btn aldrich-font"
+                    type="button"
+                    style={{width: '15vw'}}
+                    onClick={userLogout}
+                    >
+                        {auth.user.auth === "user" ? "Quit" : "Abdandon Game" }
+                    </button>
                 </div>
                 <div className="row justify-content-center">
-                    <div className="col-lg-6">
-                        <button
-                        className="custom-options-btn aldrich-font"
-                        type="button"
-                        style={{width: '15vw'}}
-                        type="button"
-                        onClick={handleSave}
-                        >
-                            Save
-                        </button> 
-                    </div>
+                    <button
+                    className="custom-options-btn aldrich-font"
+                    type="button"
+                    style={{width: '15vw'}}
+                    type="button"
+                    onClick={handleSave}
+                    >
+                        Save
+                    </button> 
                 </div>
                 <div className="row justify-content-center">
-                    <div className="col-lg-6">
-                        <button
-                        className="custom-options-btn aldrich-font"
-                        type="button"
-                        style={{width: '15vw'}}
-                        onClick={handleDelete}
-                        disabled={isGuest}
-                        >
-                            Delete Account
-                        </button>
-                    </div>
+                    <button
+                    className="custom-options-btn aldrich-font text-center"
+                    type="button"
+                    style={{width: '15vw'}}
+                    onClick={handleDelete}
+                    disabled={isGuest}
+                    >
+                        Delete Account
+                    </button>
                 </div>
-                <div className="row justify-content-center">
-                    <div className="col-lg-2">
-                    </div>
-                    <div className="col-lg-4">
-                    </div>
-                </div>
-            </div> 
+            </div>
+           
+           {/* User Stats */}
+            <div className="status-bar">
+                <StatusBar />
+            </div>
+
         </Modal.Body> 
+
+        {/* Sound Settings */}
         <SfxButton />
-        <div className="status-bar">
-            <StatusBar />
-        </div>
+
        </Modal>   
     )
 }

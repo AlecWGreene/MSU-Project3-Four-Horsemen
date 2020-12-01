@@ -5,11 +5,15 @@
     outline:none!important;
     background-image: url("../../assets/blueButton.png");
     background-size: cover;
-    width: 70%;
-    height: 11.5vh;
+    /* width: 60%;
+    height: 11.5vh; */
+    /* width: 65%;
+    height: auto; */
     background-repeat: no-repeat;
     margin: 0px;
-    padding: 0px;
+    /* padding: 50px; */
+    width: 50%!important;
+    height: 10vh;
 }
 
 .sound-form {
@@ -18,7 +22,7 @@
 }
 
 .modal-content {
-    padding: 100px!important;
+    padding: 5vh!important;
 }
 
 #range-bar {
@@ -50,4 +54,10 @@
 
 .form-control {
     background: red;
+}
+
+.modal-padding-sfx {
+    padding-left: 5vw!important;
+    padding-right: 5vw!important;
+    padding-top: 1vw!important;
 }

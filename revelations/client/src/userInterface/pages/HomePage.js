@@ -20,16 +20,22 @@ return (
   <div id="welcome-position" className="container">
       <div className="row justify-content-center d-flex">
           <div className="welcome-container col-md-6 neon">
-              <div className="welcome-content">
+              <div className="row justify-content-center d-flex">
                   <button className="custom-btn aldrich-font">
                     <Rules />
                   </button>
+              </div>
+              <div className="row justify-content-center d-flex">
                   <button className="custom-btn aldrich-font">
                     <LogInModal />
                   </button>
+              </div>
+              <div className="row justify-content-center d-flex">
                   <button className="custom-btn aldrich-font">
                     <SignUpModal />
                   </button>
+              </div>
+              <div className="row justify-content-center d-flex">
                   <button
                    className="custom-btn aldrich-font" 
                    type="button"
@@ -38,7 +44,6 @@ return (
                     <div className="homepage-btns">
                       GUEST
                     </div>
-                    
                   </button>
               </div>
           </div>

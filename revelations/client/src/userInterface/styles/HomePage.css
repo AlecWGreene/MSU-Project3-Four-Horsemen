@@ -48,7 +48,7 @@
     outline:none!important;
     background-image: url("../assets/blueButton.png");
     background-size: cover;
-    width: 100%;
+    width: 75%;
     height: 9vh;
     background-repeat: no-repeat;
     align-items: center;
@@ -62,8 +62,8 @@
     outline:none!important;
     background-image: url("../assets/blueButton.png");
     background-size: cover;
-    width: 75%;
-    height: 10vh;
+    width: 60%;
+    height: auto;
     background-repeat: no-repeat;
     align-items: center;
     margin: 0px;
@@ -139,7 +139,7 @@ button, button:active, button:visited {
     }
   }
   
-
-
-
+  .modal-body {
+      padding: 50px!important;
+  }
 

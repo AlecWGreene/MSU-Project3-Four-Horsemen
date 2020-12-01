@@ -62,8 +62,8 @@ function SfxOptions() {
         centered
         show={show} 
         onHide={handleClose}>
-            <Modal.Body>
-            <Modal.Title id="customFont sound-setting-title">Sound Settings</Modal.Title>
+            <Modal.Body className="modal-padding-sfx">
+            <Modal.Title id="customFont sound-setting-title" className="text-center">Sound Settings</Modal.Title>
                 <Form className="aldrich-font sound-form">
                     <Form.Group className="aldrich-font sound-form">
                         <Form.Label> Master: { sfx.masterVol === 0 ? 'muted' : (Math.round(sfx.masterVol*100)+'%') } </Form.Label>
@@ -91,17 +91,28 @@ function SfxOptions() {
                         </Form.Control>
                     </Form.Group>
                 </Form>
-                <div className="row justify-content-center d-flex">
-                    <button className="sound-modal-btn aldrich-font" variant="secondary" onClick={setDefault}>
-                        Default
-                    </button>
-                    <button className="sound-modal-btn aldrich-font" variant="primary" onClick={muteAll}>
-                        Mute All
-                    </button>
+                <div className="container">
+                    <div className="row justify-content-center">
+                        <button 
+                        className="sound-modal-btn aldrich-font" 
+                        variant="secondary" 
+                        onClick={setDefault}
+                        style={{width: '15vw'}}
+                        >
+                            Default
+                        </button>
+                    </div>
+                    <div className="row justify-content-center">
+                        <button className="sound-modal-btn aldrich-font" 
+                        variant="primary" 
+                        style={{width: '15vw'}}
+                        onClick={muteAll}>
+                            Mute All
+                        </button>
+                    </div>
                 </div>
-               
             </Modal.Body>
-        </Modal>
+        </Modal>  
       </>
     );
 }
