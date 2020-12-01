@@ -419,3 +419,8 @@ and (max-width: 812px) {
     width: 25%!important;
   }   
 }
+
+/* Game Button Tooltip */
+.Button-Tooltip{
+  background-color: rgba(204, 30, 30, 0.4)!important;
+}

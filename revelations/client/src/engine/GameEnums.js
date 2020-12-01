@@ -22,7 +22,7 @@ const tickLength = 30;
 export default {
     GAME_CONFIG: {
         startLives: 100,
-        startMoney: 2000000,
+        startMoney: 4000,
         tickLength: tickLength,
         mapSize: {
             rows: 13,
@@ -30,7 +30,7 @@ export default {
             height: 450,
             width: 800 
         },
-        waveReward: 150,
+        waveReward: 500,
         wallCost: 100,
         baseCost: 250,
         sourceArray: [
@@ -99,22 +99,22 @@ export default {
         "Tower_Cannon2": {
             name: "Tower_Cannon2",
             data: new TowerData(0, "Tower_Cannon2", "Tower_2Barrel", "Laser_Bolt_Yellow", [{x: 0.7, y: 0.1},{x: 0.7, y: -0.1}], 0),
-            stats: new TowerStats(150, 30, 180 * (Math.PI / 180), 2, 1000, false, tickLength),
+            stats: new TowerStats(200, 30, 120 * (Math.PI / 180), 2, 1200, false, tickLength),
             damageData: new DamageData(200, 0, []),
             sfx: "Sound_cannon_2"
         },
         "Tower_Cannon3": {
             name: "Tower_Cannon3",
             data: new TowerData(0, "Tower_Cannon3", "Tower_2Barrel2", "Laser_Bolt_Orange", [{x: 0.7, y: 0.1},{x: 0.7, y: -0.1}], 0),
-            stats: new TowerStats(150, 30, 180 * (Math.PI / 180), 2, 1000, false, tickLength),
-            damageData: new DamageData(200, 0, []),
+            stats: new TowerStats(250, 30, 120 * (Math.PI / 180), 2, 1500, false, tickLength),
+            damageData: new DamageData(500, 0, []),
             sfx: "Sound_cannon_2"
         },
         "Tower_Cannon4": {
             name: "Tower_Cannon4",
             data: new TowerData(0, "Tower_Cannon4", "Tower_3Barrel", "Laser_Bolt_Orange", [{x: 0.7, y: 0.15}, {x: 0.7, y: 0.0},{x: 0.7, y: -0.15}], 0),
-            stats: new TowerStats(150, 30, 180 * (Math.PI / 180), 2, 1000, false, tickLength),
-            damageData: new DamageData(200, 0, []),
+            stats: new TowerStats(350, 30, 100 * (Math.PI / 180), 2, 2000, false, tickLength),
+            damageData: new DamageData(600, 0, []),
             sfx: "Sound_cannon_2"
         },
         "Tower_Laser1": {
@@ -128,21 +128,21 @@ export default {
         "Tower_Laser2": {
             name: "Tower_Laser2",
             data: new TowerData(0, "Tower_Laser2", "Tower_Laser2", "Laser_Bolt_Blue", [{x: 0.7, y: 0}], 0),
-            stats: new TowerStats(150, 30, 90 * (Math.PI / 180), 2, 1500, false, tickLength),
+            stats: new TowerStats(150, 30, 90 * (Math.PI / 180), 2, 3000, false, tickLength),
             damageData: new DamageData(200, 0, []),
             sfx: "Sound_cannon_1"
         }, 
         "Tower_Laser3": {
             name: "Tower_Laser3",
-            data: new TowerData(0, "Tower_Laser3", "Tower_Laser3", "Laser_Bolt_Blue", [{x: 0.7, y: 0}], 0),
-            stats: new TowerStats(150, 30, 90 * (Math.PI / 180), 2, 1500, false, tickLength),
+            data: new TowerData(0, "Tower_Laser3", "Tower_Laser3", "Laser_Bolt_Red", [{x: 0.7, y: 0}], 0),
+            stats: new TowerStats(150, 30, 90 * (Math.PI / 180), 2, 6000, false, tickLength),
             damageData: new DamageData(200, 0, []),
             sfx: "Sound_cannon_1"
         },
         "Tower_Laser4": {
             name: "Tower_Laser4",
-            data: new TowerData(0, "Tower_Laser4", "Tower_Laser4", "Laser_Bolt_Blue", [{x: 0.7, y: 0}], 0),
-            stats: new TowerStats(150, 30, 90 * (Math.PI / 180), 2, 1500, false, tickLength),
+            data: new TowerData(0, "Tower_Laser4", "Tower_Laser4", "Laser_Bolt_Red_Ultra", [{x: 0.7, y: 0}], 0),
+            stats: new TowerStats(150, 30, 90 * (Math.PI / 180), 2, 12000, false, tickLength),
             damageData: new DamageData(200, 0, []),
             sfx: "Sound_cannon_1"
         }
@@ -163,7 +163,7 @@ export default {
         "Laser_Bolt_Orange": {
             name: "Laser_Bolt_Orange",
             data: new ProjectileData(0, "Laser_Bolt_Orange", "Projectile_Laser_Orange", 0, 0, 0),
-            stats: new ProjectileStats({x:-1,y:-1}, 150, 1, 450, true, tickLength),
+            stats: new ProjectileStats({x:-1,y:-1}, 250, 1, 350, true, tickLength),
             // collider: new Collider([{x:-5,y:-3.5},
             //                         {x:-5,y:3.5},
             //                         {x:0,y:6},
@@ -175,7 +175,31 @@ export default {
         "Laser_Bolt_Blue": {
             name: "Laser_Bolt_Blue",
             data: new ProjectileData(0, "Laser_Bolt_Blue", "Projectile_Laser_Blue", 0, 0, 0),
-            stats: new ProjectileStats({x:-1,y:-1}, 150, 5, 450, true, tickLength),
+            stats: new ProjectileStats({x:-1,y:-1}, 150, 3, 350, true, tickLength),
+            // collider: new Collider([{x:-5,y:-3.5},
+            //                         {x:-5,y:3.5},
+            //                         {x:0,y:6},
+            //                         {x:5,y:3.5},
+            //                         {x:5,y:-3.5},
+            //                         {x:0,y:-6}],{ x:0, y:0}),
+            collider: undefined
+        },
+        "Laser_Bolt_Red": {
+            name: "Laser_Bolt_Red",
+            data: new ProjectileData(0, "Laser_Bolt_Red", "Projectile_Laser_Red", 0, 0, 0),
+            stats: new ProjectileStats({x:-1,y:-1}, 250, 7, 450, true, tickLength),
+            // collider: new Collider([{x:-5,y:-3.5},
+            //                         {x:-5,y:3.5},
+            //                         {x:0,y:6},
+            //                         {x:5,y:3.5},
+            //                         {x:5,y:-3.5},
+            //                         {x:0,y:-6}],{ x:0, y:0}),
+            collider: undefined
+        },
+        "Laser_Bolt_Red_Ultra": {
+            name: "Laser_Bolt_Red_Ultra",
+            data: new ProjectileData(0, "Laser_Bolt_Red_Ultra", "Projectile_Laser_Red", 0, 0, 0),
+            stats: new ProjectileStats({x:-1,y:-1}, 450, 999, 450, true, tickLength),
             // collider: new Collider([{x:-5,y:-3.5},
             //                         {x:-5,y:3.5},
             //                         {x:0,y:6},

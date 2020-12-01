@@ -219,11 +219,11 @@ function GamePage() {
       }
     });
     initializeGameSize();
-    loadTestScenario(manager.current);
     dispatch({
       type: "toastUser",
       payload: "Welcome to Ashen Void! Click the red button to send waves."
     })
+    //loadTestScenario(manager.current);
   },[]);
   return (
     <>

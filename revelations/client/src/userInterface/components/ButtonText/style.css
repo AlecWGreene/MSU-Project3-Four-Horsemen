@@ -1,0 +1,22 @@
+.ButtonText{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: auto;
+    color: white;
+}
+
+.ButtonText-Name{
+    flex: 1;
+    width: 100%;
+}
+
+.ButtonText-Cost{
+    flex: 1;
+    width: 100%;
+}
+
+.ButtonText-Description{
+    flex: 2;
+    width: 100%;
+}
