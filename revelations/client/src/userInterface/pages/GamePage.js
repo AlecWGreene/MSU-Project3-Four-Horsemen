@@ -19,7 +19,7 @@ import TowerLayer from "../../game/TowerLayer";
 import ProjectileLayer from "../../game/ProjectileLayer/index.js";
 import VFXLayer from "../../game/VFXLayer";
 import { useAuth } from "../components/UserAuth";
-import { useSfx } from "../../components/SoundSuite/index";
+import { useSfx } from "../components/SoundSuite/index";
 // Testing imports
 import loadTestScenario from "./GameUtils/loadTestScenario.js"
 import useIndexedDB from "../../utils/hooks/useIndexedDB.js";
