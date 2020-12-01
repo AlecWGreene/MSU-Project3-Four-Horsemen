@@ -17,7 +17,6 @@ import HomePage from "./userInterface/pages/HomePage";
 import LoadingPage from "./userInterface/pages/LoadingPage"
 import SoundSuite from "./userInterface/components/SoundSuite/index"
 
-
 function App() {
 
   return (

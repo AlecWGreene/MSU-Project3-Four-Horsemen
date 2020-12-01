@@ -201,16 +201,19 @@ export default class GameManager {
     placeWall(tile){
         // Return is wave is running
         if(this.runtimeState.isWaveRunning){
+            this.errorCallback("Can't place walls when wave is running");
             return false;
         }
         if(this.gameState.wallGrid.filter(t => tile.isEqualTo(t)).length === 0){
             // Prevent building on forbidden squares
             if(this.forbidden.filter(t => tile.isEqualTo(t)).length > 0){
+                this.errorCallback("That space is unavailable for building");
                 return false;
             }
 
             // Ensure player has sufficient funds
             if(this.gameState.playerMoney < GameEnums.GAME_CONFIG.wallCost){
+                this.errorCallback("Insufficient funds");
                 return false;
             }
             this.gameState.playerMoney -= GameEnums.GAME_CONFIG.wallCost;
@@ -227,6 +230,7 @@ export default class GameManager {
                 return true;
             }
 
+            this.errorCallback("This tile is not available for building");
             return false;
         }
     }
@@ -239,6 +243,7 @@ export default class GameManager {
     placeBase(tile){
         // Prevent user from placing bases during wave
         if(this.runtimeState.isWaveRunning){
+            this.errorCallback("Can't place bases while a wave is running");
             return false;
         }
 
@@ -246,11 +251,13 @@ export default class GameManager {
         && this.gameState.baseGrid.filter(t => tile.isEqualTo(t)).length === 0){
             // Prevent building on forbidden squares
             if(this.forbidden.filter(t => tile.isEqualTo(t)).length > 0){
+                this.errorCallback("This space is unavailable for building");
                 return false;
             }
 
             // Ensure player has sufficient funds
             if(this.gameState.playerMoney < GameEnums.GAME_CONFIG.baseCost){
+                this.errorCallback("Insufficient funding");
                 return false;
             }
             this.gameState.playerMoney -= GameEnums.GAME_CONFIG.baseCost;
@@ -267,6 +274,7 @@ export default class GameManager {
                 return true;
             }
 
+            this.errorCallback("Invalid Tile for a base");
             return false;
         }
     }
@@ -290,7 +298,6 @@ export default class GameManager {
                 this.removeTower(tile, match[0].data.id);
                 return true;
             }
-
             return false;
         }
     }
@@ -305,6 +312,7 @@ export default class GameManager {
         const prefabs = GameEnums.TOWER_PREFABS;
         // If the tower doesn't have the upgrade in its tree, return out
         if(!tower.upgrades.upgrades.includes(archtype)){
+            this.errorCallback("Not a valid upgrade");
             return false;
         }
         else{
@@ -317,6 +325,7 @@ export default class GameManager {
 
             // Check the player can afford the upgrade
             if(cost > this.gameState.playerMoney || index <= tower.upgrades.currentUpgrade){
+                this.errorCallback("Upgrade could not be performed");
                 return false;
             }
             

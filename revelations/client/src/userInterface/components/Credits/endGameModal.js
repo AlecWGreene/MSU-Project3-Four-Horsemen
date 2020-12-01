@@ -32,7 +32,7 @@ function EndGameModal(props) {
           <div className="row align-items-center d-flex">
             <div className="row justify-content-center">
               <ul className="aldrich-font">
-                <p>Development Team </p>
+                <p>Development Team</p>
                 <p>Project Lead -------------------------------- Alec Greene</p>
                 <p>Front End ----------------------------------- Maria Jimena Alvarez</p>
                 <p>Back End/Sound Suite ------------------------ Sebasatian Arrazola</p>
@@ -41,8 +41,7 @@ function EndGameModal(props) {
               </ul>
             </div>
           </div>
-      </div>
-
+        </div>
       </div>
       </Modal.Body>
     </Modal>

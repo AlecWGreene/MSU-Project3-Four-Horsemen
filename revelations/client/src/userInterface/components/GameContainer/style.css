@@ -424,3 +424,26 @@ and (max-width: 812px) {
 .Button-Tooltip{
   background-color: rgba(204, 30, 30, 0.4)!important;
 }
+
+@media (min-width: 1700px) {
+  .settings-gear {
+    height: 65px;
+    width: auto;
+  }
+
+  .playpause-btn {
+    width: 60%;
+    height: 9vh;
+    background-repeat: no-repeat;
+    align-items: center;
+    margin-left: 45px;
+    margin-right: 45px;
+  }
+
+  .bg-red-btn {
+    width: 75px;
+    height: auto;
+    display: block;
+    transition: 0.7s;
+  }
+}

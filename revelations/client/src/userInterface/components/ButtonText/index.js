@@ -3,9 +3,9 @@ import "./style.css";
 
 function ButtonText(props){
     return (
-        <div className="ButtonText col-8">
-            <p className={"ButtonText-Name"}> {props.name} </p>
-            <p className={"ButtonText-Cost"}> ${props.cost} </p>
+        <div className="ButtonText aldrich-font col-6">
+            <p className={"ButtonText-Name aldrich-font"}> {props.name} </p>
+            <p className={"ButtonText-Cost aldrich-font"}> ${props.cost} </p>
             {/* <p className={"ButtonText-Description"}>{props.description}</p> */}
         </div>
     );

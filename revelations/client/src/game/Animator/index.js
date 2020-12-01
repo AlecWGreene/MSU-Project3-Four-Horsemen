@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Sprite from "./Sprite.js";
 import styled from "styled-components";
-import { useSfx } from "../../userInterface/components/SoundSuite/"
+import { useSfx } from "../../userInterface/components/SoundSuite/";
+// import { GameStateContext } from "../../userInterface/pages/GamePage"; 
 
 /**
  * @example
@@ -34,6 +35,7 @@ const Container = styled.div`
 function Animator(props){
     // Setup component states
     const [ isAnimating, toggleAnimation ] = useState(false);
+    // const [state, dispatch] = useContext(GameStateContext);
     const [ frame, setFrame ] = useState(0);
     const { sfxSound } = useSfx();
 
@@ -74,7 +76,7 @@ function Animator(props){
                 }
                 toggleAnimation(false);
             }
-            else {
+            else{
                 requestAnimationFrame( () => {
                     setFrame(frame+1)
                 });
