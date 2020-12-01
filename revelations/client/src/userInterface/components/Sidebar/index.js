@@ -44,7 +44,7 @@ function Sidebar(props){
                     break;
                 case "addTowerBarrel":
                     success = state.manager.placeTower("Tower_Cannon1", tile);
-                    break;
+                    break; 
                 case "addTowerLaser":
                     success = state.manager.placeTower("Tower_Laser1", tile);
                     break;
@@ -57,7 +57,7 @@ function Sidebar(props){
         }
     }
 
-    // Upgrade the selected tower
+    // Upgrade the selected tower0
     const upgradeHandler = (archtype) => {
         return () => {
             state.manager.upgradeTower(state.uiState.selection, archtype);
@@ -70,19 +70,19 @@ function Sidebar(props){
             // Standard View
             (
                 <>
-                    <div className="row justify-content-center">
+                    <div className="row justify-content-center game-sprite">
                         <GameButton src={Wall_Connection} height={75} width={75} callback={dispatchHandler("addWall")}/>
                     </div>
 
-                    <div className="row justify-content-center">
+                    <div className="row justify-content-center game-sprite">
                         <GameButton src={Tower_Base} height={75} width={75} callback={dispatchHandler("addBase")}/>
                     </div>
 
-                    <div className="row justify-content-center">
+                    <div className="row justify-content-center game-sprite">
                         <GameButton src={Tower_Barrel} height={100} width={100} callback={dispatchHandler("addTowerBarrel")}/>
                     </div>
 
-                    <div className="row justify-content-center">
+                    <div className="row justify-content-center game-sprite">
                         <GameButton src={Tower_Laser} height={100} width={100} callback={dispatchHandler("addTowerLaser")}/>
                     </div>
                 </>
