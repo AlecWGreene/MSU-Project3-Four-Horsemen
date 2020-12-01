@@ -106,27 +106,27 @@ function GamePage() {
         return action.payload;
       case "updateGameState":
         return {
+          ...state,
           manager: manager.current,
           gameState: action.payload.gameState,
           runtimeState: action.payload.runtimeState,
           animationState: action.payload.animationState,
-          ...state
         };
       case "updateFrameSize":
         return {
+          ...state,
           manager: manager.current,
           frameSize: action.payload.frameSize,
           scaleRatio: action.payload.scaleRatio,
           origin: action.payload.origin,
-          ...state
         };
       case "addWall":
       case "addBase":
       case "addTowerBarrel":
       case "addTowerLaser":
           return {
+            ...state,
             gameState: manager.current.gameState,
-            ...state
           };
       case "towerClick":
         return {
@@ -176,6 +176,7 @@ function GamePage() {
         frameSize: {
           height: divBox.height,
           width: divBox.width,
+          rect: divBox,
           bottomLeft: {
             x: divBox.x,
             y: divBox.y
