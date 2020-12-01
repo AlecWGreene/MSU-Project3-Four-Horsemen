@@ -17,6 +17,7 @@ import Planet from "../../game/Planet";
 import BaseLayer from "../../game/BaseLayer";
 import TowerLayer from "../../game/TowerLayer";
 import ProjectileLayer from "../../game/ProjectileLayer/index.js";
+import VFXLayer from "../../game/VFXLayer";
 import { useAuth } from "../components/UserAuth";
 // Testing imports
 import loadTestScenario from "./GameUtils/loadTestScenario.js"
@@ -42,7 +43,10 @@ export function convertScreenPointToMapTile(point, frame, ratio, gameState){
   const col = Math.floor(point.x / cellsize);
   // Check if a grid point is close
   const indices = [
-    { row: row, col: col}
+    { row: row, col: col},
+    { row: row + 1, col: col + 1},
+    { row: row + 1, col: col},
+    { row: row, col: col + 1}
   ];
   let lowestDistance, lowestIndex;
   for(const index of indices){
@@ -56,6 +60,7 @@ export function convertScreenPointToMapTile(point, frame, ratio, gameState){
       continue;
     }
   }
+  
   return lowestIndex ? gameState.mapGrid.tiles[lowestIndex.row][lowestIndex.col] : false;
 }
 function GamePage() {
@@ -84,7 +89,7 @@ function GamePage() {
                   }
               },
               scaleRatio: Math.min(divBox.height / (grid.cellsize * grid.tiles.length), divBox.width / (grid.cellsize * grid.tiles[0].length)),
-              origin: {x: 0, y: 0}
+              origin: {x: divBox.x, y: divBox.y}
           }
       });
   }
@@ -140,7 +145,6 @@ function GamePage() {
     gameManager.endWaveCallback = () => {
       saveGame(gameManager);
     };
-    
     setupGame(gameManager, GameEnums.GAME_CONFIG);
 
     const userState = auth.user.data?.gameState?.replace(/^\"|\"$|\\/g,"");
@@ -186,6 +190,7 @@ function GamePage() {
                 <CreepLayer creep={state.gameState.creepDirectory} />
                 <ProjectileLayer directory={state?.gameState ? state.gameState.projectileDirectory : {}}/>
                 <TowerLayer directory={state?.gameState ? state.gameState.towerDirectory : {}} />
+                <VFXLayer array={state?.animationState.vfx} />
             </GameFrame>
         </div>
       </GameContainer>

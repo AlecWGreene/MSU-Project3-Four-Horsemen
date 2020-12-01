@@ -17,6 +17,12 @@ import GameManager from "../GameManager";
  * @returns {Void}
  */
 function removeCreep(manager, id){
+    manager.gameState.creepDirectory[id].data.hitPoints = 0;
+    manager.animationState.vfx.push({
+        id: id,
+        sprite: "VFX_Explosion",
+        position: { ...manager.gameState.creepDirectory[id].transform.position }
+    });
     delete manager.gameState.creepDirectory[id];
 
     // Check if wave is over
@@ -24,6 +30,7 @@ function removeCreep(manager, id){
         clearInterval(manager.tickInterval = undefined);
         manager.runtimeState.waveTime = 0;
         manager.runtimeState.isGameOver = true;
+        alert("You ran out of lives!")
     }
     else if(manager.runtimeState.waveTime > manager.runtimeState.totalWaveTime && Object.keys(manager.gameState.creepDirectory).length === 0){
         clearInterval(manager.tickInterval);

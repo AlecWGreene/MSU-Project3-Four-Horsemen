@@ -69,6 +69,9 @@ function Animator(props){
                 requestAnimationFrame(() => { 
                     setFrame(0)
                 });
+                if(props.finishHandler){
+                    props.finishHandler();
+                }
                 toggleAnimation(false);
             }
             else {

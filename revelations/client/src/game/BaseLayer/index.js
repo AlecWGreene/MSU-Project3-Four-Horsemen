@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import { GameStateContext } from "../../userInterface/pages/GamePage";
 import Animator from "../Animator";
 import SpriteEnums from "../SpriteEnums.js";
@@ -15,6 +15,7 @@ const styles = {
 
 function BaseLayer(props){
     const [state, dispatch] = useContext(GameStateContext);
+
     return (
         <div style={styles.container}>
         {
@@ -23,7 +24,7 @@ function BaseLayer(props){
 
                 // Check which walls the wall must connect to
                 for(const neighbour of baseTile.getNeighbours()){
-                    if(props.baseGrid.filter(t => t.isEqualTo(neighbour)).length > 0){
+                    if(props.baseGrid.filter(t => t.isEqualTo(neighbour)).length > 0 || state.gameState.wallGrid.filter(t => t.isEqualTo(neighbour)).length > 0){
                         const diff = {
                             row: neighbour.index.row - baseTile.index.row,
                             col: neighbour.index.col - baseTile.index.col

@@ -88,8 +88,7 @@ const priorityHeuristics = {
                 return creepA;
             }
         }
-    },
-    
+    }    
 }
 
 /** 
@@ -122,12 +121,25 @@ function getCreepsInRange(tower, manager){
     // For each creep
     const targets = [];
     const creepDirectory = manager.gameState.creepDirectory;
+    const range = tower.stats.attackRange;
+
+    // Check against every creep
     for(const id of Object.keys(creepDirectory)){
         const creep = creepDirectory[id];
-        const dist = Math.sqrt((creep.transform.position.x - tower.transform.position.x)**2 + (creep.transform.position.y - tower.transform.position.y)**2);
+        const dir = {
+            x: creep.transform.position.x - tower.transform.position.x,
+            y: creep.transform.position.y - tower.transform.position.y
+        }
+
+        // Return out if they are not in the bounding box
+        if(Math.abs(dir.x) > range || Math.abs(dir.y) > range){
+            continue;
+        }
+
+        const dist = Math.sqrt((dir.x)**2 + (dir.y)**2);
 
         // If creep is in range
-        if(dist < tower.stats.attackRange){
+        if(dist < range){
             targets.push(creep);
         }
     }
@@ -182,18 +194,13 @@ function removeStartAnimationFlag(tower, manager){
  * 
  * @returns {number}
  */
-function calculateAngleDifference(start, end){
-    let diff = end - start;
-    
-    if(Math.abs(diff) > Math.PI){
-        if(diff < 0){
-            return diff + 2 * Math.PI;
-        }
-        return 2 * Math.PI - diff;
-    }   
-    else{
-        return diff;
-    }
+export function calculateAngleDifference(start, end){
+    // Adjust angles to be between 0 and 2*PI
+    const newStart = start < 0 ? (start + 2*Math.PI) : start;
+    const newEnd = end < 0 ? (end + 2*Math.PI) : end; 
+    const diff = newEnd - newStart;
+
+    return (diff >= Math.PI ? (diff - 2 * Math.PI) : (diff <= -Math.PI ? (diff + 2 * Math.PI) : diff));
 }
 /**
  * @function controlTowers
@@ -211,10 +218,12 @@ function controlTowers(manager){
     for(const id of Object.keys(towerDirectory)){
         // Retrieve tower and flush its animation flag
         const tower = towerDirectory[id];
+        if(tower.data.cooldown <= 0) tower.data.cooldown = 0;
+        else tower.data.cooldown -= GameEnums.GAME_CONFIG.tickLength;
         removeStartAnimationFlag(tower, manager);
 
         // If tower has no target or target is destroyed
-        if(tower.data.target === undefined || !Object.keys(manager.gameState.creepDirectory).includes(tower.data.target.data.id.toString())){
+        if(tower.data.target === undefined || tower.data.target.data.hitPoints <= 0){
             const c = getCreepsInRange(tower, manager);
             if(c.length > 0){
                 selectNewTarget(tower, c, manager);
@@ -247,13 +256,12 @@ function controlTowers(manager){
                 }
 
                 // Adjust tower rotation to lead towers and rotate in the shortest direction
-                const angle = Math.atan2((creep.transform.position.y + creepDirection.y * 0.15) - tower.transform.position.y, (creep.transform.position.x + creepDirection.x * 0.2) - tower.transform.position.x);
+                const angle = Math.atan2((creep.transform.position.y + creepDirection.y * 0.25) - tower.transform.position.y, (creep.transform.position.x + creepDirection.x * 0.25) - tower.transform.position.x);
                 const angleToRotate = calculateAngleDifference(tower.transform.rotation, angle);
 
                 // If tower can rotate to lead it
                 if(Math.abs(angleToRotate) <= tower.stats.rotateSpeed){
-                    rotateTower(tower, angleToRotate);
-                    tower.data.cooldown -= GameEnums.GAME_CONFIG.tickLength;
+                    tower.transform.rotation = angle;
 
                     // If tower has no cooldown left then fire
                     if(tower.data.cooldown <= 0){
