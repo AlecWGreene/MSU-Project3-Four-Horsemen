@@ -34,9 +34,11 @@ export default function GameContainer(props) {
     // Pause handler
     const handlePause = () => {
         if(state.runtimeState.isPaused){
+            sfx.masterVolume(sfx.masterVol*4);
             state.manager.sendWave();
         }
-        else{  
+        else{ 
+            sfx.masterVolume(sfx.masterVol/4);
             state.manager.pause();
         }
     }

@@ -23,6 +23,7 @@ import VFXLayer from "../../game/VFXLayer";
 import { useAuth } from "../components/UserAuth";
 import { useSfx } from "../components/SoundSuite/index";
 import GameOverModal from "../components/GameOverModal";
+import ToastUser from "../components/ToastUser"
 // Testing imports
 import loadTestScenario from "./GameUtils/loadTestScenario.js";
 import useIndexedDB from "../../utils/hooks/useIndexedDB.js";
@@ -139,7 +140,12 @@ function GamePage() {
             sidebarView: action.payload.archtype,
             selection: action.payload.id
           }
-        }
+        };
+      case "toastUser":
+        return {
+          ...state,
+          toastState: action.payload
+        };
       default: throw new Error(`Action type (${action.type}) for GameState dispatch is not valid`);
     }
   }
@@ -168,6 +174,12 @@ function GamePage() {
     gameManager.endWaveCallback = () => {
       saveGame(gameManager);
     };
+    gameManager.errorCallback = (message) => {
+      dispatch({
+        type: "toastUser",
+        payload: message
+      });
+    };
     setupGame(gameManager, GameEnums.GAME_CONFIG);
 
     const userState = auth.user.data?.gameState?.replace(/^\"|\"$|\\/g,"");
@@ -187,6 +199,7 @@ function GamePage() {
           sidebarView: "Standard",
           selection: undefined
         },
+        toastState: "",
         frameSize: {
           height: divBox.height,
           width: divBox.width,
@@ -207,11 +220,16 @@ function GamePage() {
     });
     initializeGameSize();
     loadTestScenario(manager.current);
+    dispatch({
+      type: "toastUser",
+      payload: "Welcome to Ashen Void! Click the red button to send waves."
+    })
   },[]);
   return (
     <>
       <GameStateContext.Provider value={[state, dispatch]}>
         <GameContainer>
+        <ToastUser message={state.toastState}/>
         <div style={{ height: "100%", width: "100%"}}>
               <GameFrame>
                 <Planet />
