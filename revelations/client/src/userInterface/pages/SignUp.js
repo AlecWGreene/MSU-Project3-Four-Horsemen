@@ -70,19 +70,24 @@ function SignUp(props) {
         centered
       >
       <Modal.Body>
-        <div className="custom-padding">
-          <div id="codaFont" className="form-group text-center">
-            <label id="customFont" htmlFor="username">USERNAME</label>
-            <input type="username" className="form-control text-center" id="username" value={formState.username} onChange={handleInputChange} placeholder="user123" />
+        <div className="container">
+          <div className="row align-items-center d-flex">
+            <div id="codaFont" className="form-group text-center col-sm-12">
+              <label id="customFont" htmlFor="username">USERNAME</label>
+              <input type="username" className="form-control text-center" id="username" value={formState.username} onChange={handleInputChange} placeholder="user123" />
+            </div>
           </div>
-          <div className="form-group text-center">
-            <label id="customFont" htmlFor="password">PASSWORD</label>
-            <input type="password" className="form-control text-center" value={formState.password} onChange={handleInputChange} id="password" />
+          <div className="row align-items-center d-flex">
+            <div className="form-group text-center col-sm-12">
+              <label id="customFont" htmlFor="password">PASSWORD</label>
+              <input type="password" className="form-control text-center" value={formState.password} onChange={handleInputChange} id="password" />
+            </div>
           </div>
-          <div className="row justify-content-center">
+          <div className="row justify-content-center d-flex">
             <button 
-            type="submit" 
-            className="custom-modal-btn aldrich-font" 
+            className="custom-options-btn aldrich-font"
+            type="button"
+            style={{width: '20vw', height:'12.5vh'}}
             onClick={handleSubmit}
             >
               REGISTER

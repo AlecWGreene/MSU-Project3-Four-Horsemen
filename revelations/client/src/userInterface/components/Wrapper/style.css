@@ -67,7 +67,7 @@ and (max-width: 666px)
     border: none;
     outline:none!important;
     background-image: none!important;
-    width: 100%!important;
+    width: 75%!important;
     height: 13vh!important;
     background-repeat: no-repeat; 
  
@@ -122,7 +122,7 @@ and (max-width: 736px)
     border: none;
     outline:none!important;
     background-image: none!important;
-    width: 100%!important;
+    width: 75%!important;
     height: 13vh!important;
     background-repeat: no-repeat; 
   } 
@@ -203,6 +203,11 @@ and (max-width: 736px)
       margin: 0px!important;
       padding-left: 2px;
     }
+
+    /* .custom-btn {
+      height: 10vh!important;
+      width: 100%!important;
+    } */
 }
 
 /* Laptop Screen MD */
@@ -238,6 +243,7 @@ and (max-width: 736px)
     .custom-btn {
       margin: 0px!important;
       height: 12vh!important;
+      width: 75%!important;
     }
 }
 
