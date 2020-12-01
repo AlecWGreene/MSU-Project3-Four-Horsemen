@@ -19,6 +19,7 @@ import TowerLayer from "../../game/TowerLayer";
 import ProjectileLayer from "../../game/ProjectileLayer/index.js";
 import VFXLayer from "../../game/VFXLayer";
 import { useAuth } from "../components/UserAuth";
+import { useSfx } from "../../components/SoundSuite/index";
 // Testing imports
 import loadTestScenario from "./GameUtils/loadTestScenario.js"
 import useIndexedDB from "../../utils/hooks/useIndexedDB.js";
@@ -67,6 +68,7 @@ export function convertScreenPointToMapTile(point, frame, ratio, gameState){
 }
 function GamePage() {
   const auth = useAuth();
+  const sfx = useSfx();
 
   const { saveGame } = useIndexedDB();
 
@@ -149,6 +151,7 @@ function GamePage() {
       dispatch({ type: "updateGameState", payload: { gameState: data.gameState, runtimeState: data.runtimeState, animationState: data.animationState }})
     };
     gameManager.endWaveCallback = () => {
+      sfx.ambientSound('Sound_background_1');
       saveGame(gameManager);
     };
     setupGame(gameManager, GameEnums.GAME_CONFIG);
