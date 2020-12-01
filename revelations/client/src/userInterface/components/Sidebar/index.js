@@ -57,8 +57,11 @@ function Sidebar(props){
         }
     }
 
+    // Upgrade the selected tower
     const upgradeHandler = (archtype) => {
-        return () => console.log(archtype);;
+        return () => {
+            state.manager.upgradeTower(state.uiState.selection, archtype);
+        };
     }
 
     return <div className="side-bar-container">
@@ -76,11 +79,11 @@ function Sidebar(props){
                     </div>
 
                     <div className="row justify-content-center">
-                        <GameButton src={Tower_Barrel} height={75} width={75} callback={dispatchHandler("addTowerBarrel")}/>
+                        <GameButton src={Tower_Barrel} height={100} width={100} callback={dispatchHandler("addTowerBarrel")}/>
                     </div>
 
                     <div className="row justify-content-center">
-                        <GameButton src={Tower_Laser} height={75} width={75} callback={dispatchHandler("addTowerLaser")}/>
+                        <GameButton src={Tower_Laser} height={100} width={100} callback={dispatchHandler("addTowerLaser")}/>
                     </div>
                 </>
             ) : (
@@ -89,31 +92,30 @@ function Sidebar(props){
                 (
                     <>
                         <div className="row justify-content-center">
-                            <UpgradeButton src={Tower_2Barrel} height={75} width={75} callback={upgradeHandler("2Barrel")}/>
+                            <UpgradeButton src={Tower_2Barrel} height={100} width={100} callback={upgradeHandler("Tower_Cannon2")}/>
                         </div>
 
                         <div className="row justify-content-center">
-                            <UpgradeButton src={Tower2_Barre2} height={75} width={75} callback={upgradeHandler("2Barrel2")}/>
+                            <UpgradeButton src={Tower2_Barre2} height={100} width={100} callback={upgradeHandler("Tower_Cannon3")}/>
                         </div>
 
                         <div className="row justify-content-center">
-                            <UpgradeButton src={Tower_3Barrel} height={75} width={75} callback={upgradeHandler("3Barrel")}/>
+                            <UpgradeButton src={Tower_3Barrel} height={100} width={100} callback={upgradeHandler("Tower_Cannon4")}/>
                         </div>
                     </>
                 ) : (
                     props.view === "TowerLaser" ? (
                         <>
-
                             <div className="row justify-content-center">
-                                <UpgradeButton src={Tower_Laser2} height={75} width={75} callback={upgradeHandler("Laser2")}/>
+                                <UpgradeButton src={Tower_Laser2} height={100} width={100} callback={upgradeHandler("Tower_Laser2")}/>
                             </div>
 
                             <div className="row justify-content-center">
-                                <UpgradeButton src={Tower_Laser3} height={75} width={75} callback={upgradeHandler("Laser3")}/>
+                                <UpgradeButton src={Tower_Laser3} height={100} width={100} callback={upgradeHandler("Tower_Laser3")}/>
                             </div>
 
                             <div className="row justify-content-center">
-                                <UpgradeButton src={Tower_Laser4} height={75} width={75} callback={upgradeHandler("Laser3")}/>
+                                <UpgradeButton src={Tower_Laser4} height={100} width={100} callback={upgradeHandler("Tower_Laser4")}/>
                             </div>
                         </>
                     ) : ( 
