@@ -38,8 +38,6 @@ export default function GameContainer(props) {
             state.manager.pause();
         }
     }
-
-    console.log(state.uiState);
     
     return <Container fluid className="h-100">
         <div className="row h-100">
