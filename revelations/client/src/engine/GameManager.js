@@ -237,6 +237,11 @@ export default class GameManager {
         this.needsNewDijkstraMap = true;
     }
     placeBase(tile){
+        // Prevent user from placing bases during wave
+        if(this.runtimeState.isWaveRunning){
+            return false;
+        }
+
         if(this.gameState.wallGrid.filter(t => tile.isEqualTo(t)).length === 0
         && this.gameState.baseGrid.filter(t => tile.isEqualTo(t)).length === 0){
             // Prevent building on forbidden squares
@@ -316,7 +321,8 @@ export default class GameManager {
             }
             
             // Upgrade the tower
-            upgradeTower(towerId, archtype, this);
+            upgradeTower(towerId, archtype, index, this);
+            this.gameState.playerMoney -= cost;
             return true;
         }
     }

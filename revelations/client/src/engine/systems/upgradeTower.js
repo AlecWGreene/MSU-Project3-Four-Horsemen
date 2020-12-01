@@ -1,8 +1,8 @@
 import GameEnums from "../GameEnums.js";
 
-function upgradeTower(towerId, prefab, manager){
+function upgradeTower(towerId, prefab, index, manager){
     const towerPrefab = GameEnums.TOWER_PREFABS[prefab];
-    manager.gameState.towerDirectory[towerId].upgrades.currentUpgrade++;
+    manager.gameState.towerDirectory[towerId].upgrades.currentUpgrade = index;
     manager.gameState.towerDirectory[towerId].stats = towerPrefab.stats;
     manager.gameState.towerDirectory[towerId].damageData = towerPrefab.damageData;
     manager.gameState.towerDirectory[towerId].data = {
