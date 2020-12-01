@@ -33,7 +33,7 @@ function Sidebar(props){
                         y: event.screenY - state.frameSize.rect.top
                     }, state.frameSize, state.scaleRatio, state.gameState);
             if(tile === false) return;
-            console.log(tile.index.row+","+tile.index.col);
+
             let success = false;
             switch(actionType){
                 case "addWall":
@@ -58,8 +58,7 @@ function Sidebar(props){
     }
 
     const upgradeHandler = (archtype) => {
-        console.log(archtype);
-        return archtype;
+        return () => console.log(archtype);;
     }
 
     return <div className="side-bar-container">

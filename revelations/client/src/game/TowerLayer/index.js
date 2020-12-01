@@ -17,7 +17,9 @@ const styles = {
 
 function TowerLayer(props){
     const [state, dispatch] = useContext(GameStateContext);
-    function handleClickTower(event,dispatch,towerId,archtype){
+    const handleClickTower = (event,dispatch,towerId,archtype) => {
+        event.preventDefault();
+        event.stopPropagation();
         const type = ["Tower_Cannon1", "Tower_Cannon2", "Tower_Cannon3"].includes(archtype) ? "TowerCannon" : "TowerLaser";
         dispatch({
             type: "towerClick",
@@ -27,8 +29,17 @@ function TowerLayer(props){
             }
         });
     }
+    const handleContainerClick = () => {
+        dispatch({
+            type: "towerClick",
+            payload: {
+                id: undefined,
+                archtype: "Standard"
+            }
+        });
+    }
     return (
-        <div style={styles.container}>
+        <div style={styles.container} onClickCapture={handleContainerClick}>
         {
             (!props.directory) ? undefined : Object.entries(props.directory).map(entry => {
                 // Retrieve sprite
