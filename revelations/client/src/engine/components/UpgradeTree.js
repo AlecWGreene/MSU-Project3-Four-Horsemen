@@ -1,7 +1,6 @@
 class UpgradeTree{
-    constructor(prefabArray, costArray, currentUpgrade){
+    constructor(prefabArray, currentUpgrade){
         this.upgrades = prefabArray;
-        this.costs = costArray;
         this.currentUpgrade = currentUpgrade;
     }
 }

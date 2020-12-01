@@ -13,6 +13,7 @@ import CreepEntity from "./entities/CreepEntity.js";
 import SpriteEnums from "../game/SpriteEnums.js";
 import TowerEntity from "./entities/TowerEntity.js";
 import ProjectileEntity from "./entities/ProjectileEntity.js";
+import upgradeTower from "./systems/upgradeTower.js";
 /**
  * @module GameManager
  */
@@ -236,6 +237,11 @@ export default class GameManager {
         this.needsNewDijkstraMap = true;
     }
     placeBase(tile){
+        // Prevent user from placing bases during wave
+        if(this.runtimeState.isWaveRunning){
+            return false;
+        }
+
         if(this.gameState.wallGrid.filter(t => tile.isEqualTo(t)).length === 0
         && this.gameState.baseGrid.filter(t => tile.isEqualTo(t)).length === 0){
             // Prevent building on forbidden squares
@@ -293,6 +299,32 @@ export default class GameManager {
         delete this.gameState.towerDirectory[id];
         this.gameState.playerMoney += cost / 2;
         this.gameState.towerGrid = this.gameState.towerGrid.filter(t => !t.isEqualTo(tile));
+    }
+    upgradeTower(towerId, archtype){
+        const tower = this.gameState.towerDirectory[towerId];
+        const prefabs = GameEnums.TOWER_PREFABS;
+        // If the tower doesn't have the upgrade in its tree, return out
+        if(!tower.upgrades.upgrades.includes(archtype)){
+            return false;
+        }
+        else{
+            // Calculate the cost required
+            const index = tower.upgrades.upgrades.findIndex(name => archtype === name);
+            let cost = 0;
+            for(let i = index; i > tower.upgrades.currentUpgrade; i--){
+                cost += prefabs[archtype].stats.cost;
+            }
+
+            // Check the player can afford the upgrade
+            if(cost > this.gameState.playerMoney || index <= tower.upgrades.currentUpgrade){
+                return false;
+            }
+            
+            // Upgrade the tower
+            upgradeTower(towerId, archtype, index, this);
+            this.gameState.playerMoney -= cost;
+            return true;
+        }
     }
     convertWorldPointToTile(x, y){
         const row = Math.floor(x / this.gameState.mapGrid.cellsize);

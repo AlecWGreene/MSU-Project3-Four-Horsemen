@@ -22,7 +22,7 @@ const tickLength = 30;
 export default {
     GAME_CONFIG: {
         startLives: 100,
-        startMoney: 2000,
+        startMoney: 2000000,
         tickLength: tickLength,
         mapSize: {
             rows: 13,
@@ -93,15 +93,28 @@ export default {
             data: new TowerData(0, "Tower_Cannon1", "Tower_1Barrel", "Laser_Bolt_Yellow", [{x: 0.7, y: 0}], 0),
             stats: new TowerStats(150, 30, 180 * (Math.PI / 180), 2, 1000, false, tickLength),
             damageData: new DamageData(200, 0, []),
-            upgradeTree: new UpgradeTree(),
+            upgradeTree: new UpgradeTree(["Tower_Cannon2", "Tower_Cannon3", "Tower_Cannon4"], -1),
             sfx: "Sound_cannon_2"
         },
         "Tower_Cannon2": {
-            name: "Tower_Cannon1",
-            data: new TowerData(0, "Tower_Cannon1", "Tower_2Barrel", "Laser_Bolt_Yellow", [{x: 0.7, y: 0.1},{x: 0.7, y: -0.1}], 0),
+            name: "Tower_Cannon2",
+            data: new TowerData(0, "Tower_Cannon2", "Tower_2Barrel", "Laser_Bolt_Yellow", [{x: 0.7, y: 0.1},{x: 0.7, y: -0.1}], 0),
             stats: new TowerStats(150, 30, 180 * (Math.PI / 180), 2, 1000, false, tickLength),
             damageData: new DamageData(200, 0, []),
-            upgradeTree: new UpgradeTree(),
+            sfx: "Sound_cannon_2"
+        },
+        "Tower_Cannon3": {
+            name: "Tower_Cannon3",
+            data: new TowerData(0, "Tower_Cannon3", "Tower_2Barrel2", "Laser_Bolt_Orange", [{x: 0.7, y: 0.1},{x: 0.7, y: -0.1}], 0),
+            stats: new TowerStats(150, 30, 180 * (Math.PI / 180), 2, 1000, false, tickLength),
+            damageData: new DamageData(200, 0, []),
+            sfx: "Sound_cannon_2"
+        },
+        "Tower_Cannon4": {
+            name: "Tower_Cannon4",
+            data: new TowerData(0, "Tower_Cannon4", "Tower_3Barrel", "Laser_Bolt_Orange", [{x: 0.7, y: 0.15}, {x: 0.7, y: 0.0},{x: 0.7, y: -0.15}], 0),
+            stats: new TowerStats(150, 30, 180 * (Math.PI / 180), 2, 1000, false, tickLength),
+            damageData: new DamageData(200, 0, []),
             sfx: "Sound_cannon_2"
         },
         "Tower_Laser1": {
@@ -109,7 +122,28 @@ export default {
             data: new TowerData(0, "Tower_Laser1", "Tower_Laser1", "Laser_Bolt_Blue", [{x: 0.7, y: 0}], 0),
             stats: new TowerStats(150, 30, 90 * (Math.PI / 180), 2, 1500, false, tickLength),
             damageData: new DamageData(200, 0, []),
-            upgradeTree: new UpgradeTree(),
+            upgradeTree: new UpgradeTree(["Tower_Laser2", "Tower_Laser3", "Tower_Laser4"], -1),
+            sfx: "Sound_cannon_1"
+        },
+        "Tower_Laser2": {
+            name: "Tower_Laser2",
+            data: new TowerData(0, "Tower_Laser2", "Tower_Laser2", "Laser_Bolt_Blue", [{x: 0.7, y: 0}], 0),
+            stats: new TowerStats(150, 30, 90 * (Math.PI / 180), 2, 1500, false, tickLength),
+            damageData: new DamageData(200, 0, []),
+            sfx: "Sound_cannon_1"
+        }, 
+        "Tower_Laser3": {
+            name: "Tower_Laser3",
+            data: new TowerData(0, "Tower_Laser3", "Tower_Laser3", "Laser_Bolt_Blue", [{x: 0.7, y: 0}], 0),
+            stats: new TowerStats(150, 30, 90 * (Math.PI / 180), 2, 1500, false, tickLength),
+            damageData: new DamageData(200, 0, []),
+            sfx: "Sound_cannon_1"
+        },
+        "Tower_Laser4": {
+            name: "Tower_Laser4",
+            data: new TowerData(0, "Tower_Laser4", "Tower_Laser4", "Laser_Bolt_Blue", [{x: 0.7, y: 0}], 0),
+            stats: new TowerStats(150, 30, 90 * (Math.PI / 180), 2, 1500, false, tickLength),
+            damageData: new DamageData(200, 0, []),
             sfx: "Sound_cannon_1"
         }
     },
