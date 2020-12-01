@@ -34,7 +34,7 @@ function SfxOptions() {
         event.stopPropagation();
         sfx.ambientVolume(0.5);
         sfx.sfxVolume(0.5);
-        sfx.masterVolume(1);
+        sfx.masterVolume(0.5);
     };
 
     const muteAll = (event) => {

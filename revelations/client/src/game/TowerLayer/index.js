@@ -5,6 +5,7 @@ import SpriteEnums from "../SpriteEnums.js";
 import convertWorldPointToScreenPoint from "../../userInterface/pages/GameUtils/convertWorldPointToScreenPoint.js";
 import SPRITE_ENUM from "../SpriteEnums.js"
 import GameEnums from "../../engine/GameEnums";
+import { removeStartAnimationFlag } from "../../engine/systems/controlTowers.js";
 
 
 const styles = {
@@ -46,6 +47,7 @@ function TowerLayer(props){
                 const imgData = SpriteEnums[entry[1].data.spriteSheet];
                 const sfx = GameEnums.TOWER_PREFABS[entry[1].data.archtype].sfx;
                 const animFlag = state.animationState.towers.includes(parseInt(entry[0]));
+                if (animFlag) console.log(state.animationState);
                 return <Animator 
                           height={state.gameState.mapGrid.cellsize} 
                           width={state.gameState.mapGrid.cellsize} 
@@ -57,6 +59,7 @@ function TowerLayer(props){
                           startAnimation={animFlag}
                           clickHandler={(event)=>{handleClickTower(event,dispatch,entry[0], entry[1].data.archtype)}}
                           sfx={sfx}
+                          finishHandler={() => removeStartAnimationFlag(entry[1], state.manager)}
                           />
             })
         }

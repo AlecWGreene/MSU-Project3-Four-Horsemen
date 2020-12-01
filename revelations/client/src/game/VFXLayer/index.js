@@ -39,7 +39,7 @@ function VFXLayer(props){
                             key={effect.id}
                             startAnimation={true}
                             finishHandler={removeAnimation(effect.id, state.manager)}
-                            /*sfx={sfx}*/
+                            // sfx={imgData.sfx}
                             />
                 })
             }

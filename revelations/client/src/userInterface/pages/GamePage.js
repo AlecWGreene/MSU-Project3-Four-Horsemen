@@ -1,4 +1,6 @@
-import React, { useReducer, useLayoutEffect, useRef, useEffect, useCallback } from "react";
+import React, { useReducer, useLayoutEffect, useRef, useEffect, useState, useCallback } from "react";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 // Engine imports
 import GameState from "../../engine/components/GameState.js";
 import RuntimeState from "../../engine/components/RuntimeState.js";
@@ -20,9 +22,11 @@ import ProjectileLayer from "../../game/ProjectileLayer/index.js";
 import VFXLayer from "../../game/VFXLayer";
 import { useAuth } from "../components/UserAuth";
 import { useSfx } from "../components/SoundSuite/index";
+import GameOverModal from "../components/GameOverModal";
 // Testing imports
-import loadTestScenario from "./GameUtils/loadTestScenario.js"
+import loadTestScenario from "./GameUtils/loadTestScenario.js";
 import useIndexedDB from "../../utils/hooks/useIndexedDB.js";
+// import Credits from "../components/Credits/index"
 /**
  * @type {React.Context} Context containing the last passed version of the game state
  */
@@ -69,7 +73,7 @@ export function convertScreenPointToMapTile(point, frame, ratio, gameState){
 function GamePage() {
   const auth = useAuth();
   const sfx = useSfx();
-
+    
   const { saveGame } = useIndexedDB();
 
   // Game manager setup
@@ -143,6 +147,17 @@ function GamePage() {
    * @type {[{gameState: GameState, runtimeState: RuntimeState}, (action, state)=>{gameState: GameState, runtimeState: RuntimeState}]}
    */
   const [state, dispatch] = useReducer(gameStateReducer, gameManager);
+
+  useEffect(() => {
+    if(!state.runtimeState.isWaveRunning) {
+      sfx.ambientSound('Sound_background_0');
+    };
+  }, [state.runtimeState.isWaveRunning])
+
+  useEffect(() => {
+    console.log("State changed");
+  }, [state.runtimeState.isGameOver]);
+
   // Called on initial render
   useLayoutEffect(()=>{
     // Initialize the GameManager instance
@@ -151,8 +166,6 @@ function GamePage() {
       dispatch({ type: "updateGameState", payload: { gameState: data.gameState, runtimeState: data.runtimeState, animationState: data.animationState }})
     };
     gameManager.endWaveCallback = () => {
-      sfx.ambientSound('Sound_background_0');
-      sfx.sfxSound('Sound_pop_0');
       saveGame(gameManager);
     };
     setupGame(gameManager, GameEnums.GAME_CONFIG);
@@ -196,21 +209,26 @@ function GamePage() {
     loadTestScenario(manager.current);
   },[]);
   return (
-    <GameStateContext.Provider value={[state, dispatch]}>
-      <GameContainer>
-      <div style={{ height: "100%", width: "100%"}}>
-            <GameFrame>
-               <Planet />
-                <WallLayer wallGrid={state.gameState ? state.gameState.wallGrid : []} />
-                <BaseLayer baseGrid={state.gameState ? state.gameState.baseGrid : []}/>
-                <CreepLayer creep={state.gameState.creepDirectory} />
-                <ProjectileLayer directory={state?.gameState ? state.gameState.projectileDirectory : {}}/>
-                <TowerLayer directory={state?.gameState ? state.gameState.towerDirectory : {}} />
-                <VFXLayer array={state?.animationState.vfx} />
-            </GameFrame>
-        </div>
-      </GameContainer>
-    </GameStateContext.Provider>
+    <>
+     
+
+      <GameStateContext.Provider value={[state, dispatch]}>
+        <GameContainer>
+        <div style={{ height: "100%", width: "100%"}}>
+              <GameFrame>
+                <Planet />
+                  <WallLayer wallGrid={state.gameState ? state.gameState.wallGrid : []} />
+                  <BaseLayer baseGrid={state.gameState ? state.gameState.baseGrid : []}/>
+                  <CreepLayer creep={state.gameState.creepDirectory} />
+                  <ProjectileLayer directory={state?.gameState ? state.gameState.projectileDirectory : {}}/>
+                  <TowerLayer directory={state?.gameState ? state.gameState.towerDirectory : {}} />
+                  <VFXLayer array={state?.animationState.vfx} />
+              </GameFrame>
+          </div>
+        </GameContainer>
+        <GameOverModal show={state.runtimeState.isGameOver}/>
+      </GameStateContext.Provider>
+    </>
   );
 }
 export default GamePage;

@@ -164,7 +164,7 @@ export default class GameManager {
                     this.runtimeState.isWaveRunning = false;
                     this.runtimeState.isGameOver = true;
                     clearInterval(this.tickInterval);
-                    alert("You win!")
+                    // alert("You win!")
                     return;
                 }
                 const unwalkable = this.gameState.wallGrid.concat(this.gameState.baseGrid);

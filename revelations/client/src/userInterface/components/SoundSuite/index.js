@@ -38,7 +38,7 @@ function useProvideSfx() {
 
   const [soundEnabled, setSoundEnabled] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1);
-  const [masterVol, setMasterVol] = useState(1.0);
+  const [masterVol, setMasterVol] = useState(0.5);
   const [nextFile, setNextFile] = useState('');
   const [ambientFile, setAmbientFile] = useState('Sound_background_0');
   const [sfxFile, setSfxFile] = useState('Sound_pop_0');
