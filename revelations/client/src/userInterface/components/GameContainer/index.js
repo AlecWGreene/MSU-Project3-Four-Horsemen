@@ -22,6 +22,7 @@ export default function GameContainer(props) {
     const { saveGame } = useIndexedDb();
     const sfx = useSfx();
     const [state, dispatch] = useContext(GameStateContext); 
+
     // Red button handler
     const redButtonHandler = () => {
         sfx.sfxSound('Sound_pop_0');
@@ -37,6 +38,8 @@ export default function GameContainer(props) {
             state.manager.pause();
         }
     }
+
+    console.log(state.uiState);
     
     return <Container fluid className="h-100">
         <div className="row h-100">
@@ -63,7 +66,7 @@ export default function GameContainer(props) {
                     <StatusBar />
                 </div>
                 <div className="side-bar">
-                    <Sidebar view={"Standard"}/>
+                    <Sidebar view={state.uiState?.sidebarView || "Standard"}/>
                 </div>
                 {/* Play|Pause buttons */}
                 <div className="row justify-content-center">

@@ -39,7 +39,7 @@ function StatusBar() {
                     <img id="user-status-icons" src={waves} />
                 </div>
                 <div className="col-sm-5 status-font text-center">
-                     WAVES COUNTER: #
+                     WAVE: #{state.gameState.waveIndex + 1}
                 </div>
             </div> 
         </div>
