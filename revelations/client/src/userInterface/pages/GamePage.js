@@ -210,8 +210,6 @@ function GamePage() {
   },[]);
   return (
     <>
-     
-
       <GameStateContext.Provider value={[state, dispatch]}>
         <GameContainer>
         <div style={{ height: "100%", width: "100%"}}>
