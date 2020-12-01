@@ -17,9 +17,15 @@ const styles = {
 
 function TowerLayer(props){
     const [state, dispatch] = useContext(GameStateContext);
-    function handleClickTower(event,dispatch,towerId){
-        console.log(event.target)
-        console.log("tower click")
+    function handleClickTower(event,dispatch,towerId,archtype){
+        const type = ["Tower_Cannon1", "Tower_Cannon2", "Tower_Cannon3"].includes(archtype) ? "TowerCannon" : "TowerLaser";
+        dispatch({
+            type: "towerClick",
+            payload: {
+                id: towerId,
+                archtype: type
+            }
+        });
     }
     return (
         <div style={styles.container}>
@@ -38,7 +44,7 @@ function TowerLayer(props){
                           scale={state.scaleRatio} 
                           key={entry[0]}
                           startAnimation={animFlag}
-                          clickHandler={(event)=>{handleClickTower(event,dispatch,entry[0])}}
+                          clickHandler={(event)=>{handleClickTower(event,dispatch,entry[0], entry[1].data.archtype)}}
                           sfx={sfx}
                           />
             })

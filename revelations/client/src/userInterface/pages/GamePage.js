@@ -52,8 +52,10 @@ export function convertScreenPointToMapTile(point, frame, ratio, gameState){
   for(const index of indices){
     try{
       const p = gameState.mapGrid.tiles[index.row][index.col];
-      if(!lowestDistance || Math.hypot(p.position.x - point.x, p.position.y - point.y) < lowestDistance){
+      const dist = Math.hypot(p.position.x - point.x, p.position.y - point.y);
+      if(!lowestDistance || dist  < lowestDistance){
         lowestIndex = index;
+        lowestDistance = dist;
       }
     }
     catch{
@@ -83,32 +85,30 @@ function GamePage() {
               frameSize: {
                   height: divBox.height,
                   width: divBox.width,
+                  rect: divBox,
                   bottomLeft: {
                     x: divBox.x,
                     y: divBox.y
                   }
               },
               scaleRatio: Math.min(divBox.height / (grid.cellsize * grid.tiles.length), divBox.width / (grid.cellsize * grid.tiles[0].length)),
-              origin: {x: divBox.x, y: divBox.y}
+              origin: {x: 0, y: 0}
           }
       });
   }
 
   // Reducer for the GameStateContext value
   const gameStateReducer = (state, action) => {
-    let gameState;
     switch(action.type){
       case "initialize":
         return action.payload;
       case "updateGameState":
         return {
           manager: manager.current,
-          frameSize: state.frameSize,
-          scaleRatio: state.scaleRatio,
-          origin: state.origin,
           gameState: action.payload.gameState,
           runtimeState: action.payload.runtimeState,
-          animationState: action.payload.animationState
+          animationState: action.payload.animationState,
+          ...state
         };
       case "updateFrameSize":
         return {
@@ -116,9 +116,7 @@ function GamePage() {
           frameSize: action.payload.frameSize,
           scaleRatio: action.payload.scaleRatio,
           origin: action.payload.origin,
-          gameState: state.gameState,
-          runtimeState: state.runtimeState,
-          animationState: state.animationState
+          ...state
         };
       case "addWall":
       case "addBase":
@@ -128,6 +126,14 @@ function GamePage() {
             gameState: manager.current.gameState,
             ...state
           };
+      case "towerClick":
+        return {
+          ...state,
+          uiState: {
+            sidebarView: action.payload.archtype,
+            selection: action.payload.id
+          }
+        }
       default: throw new Error(`Action type (${action.type}) for GameState dispatch is not valid`);
     }
   }
@@ -159,6 +165,11 @@ function GamePage() {
     dispatch({
       type: "initialize",
       payload: { 
+        manager: manager,
+        uiState: {
+          sidebarView: "Standard",
+          selection: undefined
+        },
         frameSize: {
           height: divBox.height,
           width: divBox.width,
@@ -177,7 +188,7 @@ function GamePage() {
       }
     });
     initializeGameSize();
-    //loadTestScenario(manager.current);
+    loadTestScenario(manager.current);
   },[]);
   return (
     <GameStateContext.Provider value={[state, dispatch]}>
