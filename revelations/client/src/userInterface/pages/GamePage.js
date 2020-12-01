@@ -151,7 +151,8 @@ function GamePage() {
       dispatch({ type: "updateGameState", payload: { gameState: data.gameState, runtimeState: data.runtimeState, animationState: data.animationState }})
     };
     gameManager.endWaveCallback = () => {
-      sfx.ambientSound('Sound_background_1');
+      sfx.ambientSound('Sound_background_0');
+      sfx.sfxSound('Sound_pop_0');
       saveGame(gameManager);
     };
     setupGame(gameManager, GameEnums.GAME_CONFIG);
