@@ -192,7 +192,7 @@ function GamePage() {
       }
     });
     initializeGameSize();
-    loadTestScenario(manager.current);
+    //loadTestScenario(manager.current);
   },[]);
   return (
     <GameStateContext.Provider value={[state, dispatch]}>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import ReactTooltip from "react-tooltip";
 
 // Component imports
 import GameButton from "../GameButton";
@@ -20,6 +21,7 @@ import Tower_Laser from '../../assets/Tower_Laser1.png';
 import Tower_Laser2 from '../../assets/Tower_Laser2.png';
 import Tower_Laser3 from '../../assets/Tower_Laser3.png';
 import Tower_Laser4 from '../../assets/Tower_Laser4.png';
+import ButtonText from "../ButtonText";
 
 
 function Sidebar(props){
@@ -70,20 +72,56 @@ function Sidebar(props){
             // Standard View
             (
                 <>
-                    <div className="row justify-content-center game-sprite">
+                    <div 
+                    className="row align-items-center justify-content-center game-sprite"
+                    data-for="buttonDescription"
+                    data-tip="Place these in between waves <br /> to redirect the enemy ships"
+                    data-delay-show={"500"}
+                    data-iscapture="true">
                         <GameButton src={Wall_Connection} height={75} width={75} callback={dispatchHandler("addWall")}/>
+                        <ButtonText 
+                            name={"Fortified Wall"}
+                            cost={GameEnums.GAME_CONFIG.wallCost}
+                        />
                     </div>
 
-                    <div className="row justify-content-center game-sprite">
+                    <div 
+                    className="row align-items-center justify-content-center game-sprite"
+                    data-for="buttonDescription"
+                    data-tip="Place these in between waves to redirect <br /> the enemy ships and mount towers"
+                    data-delay-show={"500"}
+                    data-iscapture="true">
                         <GameButton src={Tower_Base} height={75} width={75} callback={dispatchHandler("addBase")}/>
+                        <ButtonText 
+                            name={"Tower Battlement"}
+                            cost={GameEnums.GAME_CONFIG.baseCost}
+                        />
                     </div>
 
-                    <div className="row justify-content-center game-sprite">
+                    <div 
+                    className="row align-items-center justify-content-center game-sprite"
+                    data-for="buttonDescription"
+                    data-tip="Fires high temperature tracer rounds"
+                    data-delay-show={"500"}
+                    data-iscapture="true">
                         <GameButton src={Tower_Barrel} height={100} width={100} callback={dispatchHandler("addTowerBarrel")}/>
+                        <ButtonText 
+                            name={"Gauss Cannon"}
+                            cost={GameEnums.TOWER_PREFABS["Tower_Cannon1"].stats.cost}
+                        />
                     </div>
 
-                    <div className="row justify-content-center game-sprite">
+                    <div 
+                    className="row align-items-center justify-content-center game-sprite"
+                    data-for="buttonDescription"
+                    data-tip="Fires energized plasama which can <br /> pierce through multiple ships"
+                    data-delay-show={"500"}
+                    data-iscapture="true">
                         <GameButton src={Tower_Laser} height={100} width={100} callback={dispatchHandler("addTowerLaser")}/>
+                        <ButtonText 
+                            name={"Plasma Cannon"}
+                            cost={GameEnums.TOWER_PREFABS["Tower_Laser1"].stats.cost}
+                        />
                     </div>
                 </>
             ) : (
@@ -91,31 +129,85 @@ function Sidebar(props){
                 //
                 (
                     <>
-                        <div className="row justify-content-center">
+                        <div 
+                            className="row align-items-center justify-content-center game-sprite"
+                            data-for="buttonDescription"
+                            data-tip="Adds another barrel for twice the damage"
+                            data-delay-show={"500"}
+                            data-iscapture="true">
                             <UpgradeButton src={Tower_2Barrel} height={100} width={100} callback={upgradeHandler("Tower_Cannon2")}/>
+                            <ButtonText 
+                                name={"Double Barrel"}
+                                cost={GameEnums.TOWER_PREFABS["Tower_Cannon2"].stats.cost}
+                            />
                         </div>
 
-                        <div className="row justify-content-center">
+                        <div 
+                            className="row align-items-center justify-content-center game-sprite"
+                            data-for="buttonDescription"
+                            data-tip="Uses a strontium coating on its shells to <br /> wreak havoc on its targets"
+                            data-delay-show={"500"}
+                            data-iscapture="true">
                             <UpgradeButton src={Tower2_Barre2} height={100} width={100} callback={upgradeHandler("Tower_Cannon3")}/>
+                            <ButtonText 
+                                name={"Infernal Cannon"}
+                                cost={GameEnums.TOWER_PREFABS["Tower_Cannon3"].stats.cost}
+                            />
                         </div>
 
-                        <div className="row justify-content-center">
+                        <div 
+                            className="row align-items-center justify-content-center game-sprite"
+                            data-for="buttonDescription"
+                            data-tip="Using a modified turret from a galactic battlecruiser <br /> a third barrel will help take down the toughest foes"
+                            data-delay-show={"500"}
+                            data-iscapture="true">
                             <UpgradeButton src={Tower_3Barrel} height={100} width={100} callback={upgradeHandler("Tower_Cannon4")}/>
+                            <ButtonText 
+                                name={"Cruiser Artileery"}
+                                cost={GameEnums.TOWER_PREFABS["Tower_Cannon4"].stats.cost}
+                            />
                         </div>
                     </>
                 ) : (
                     props.view === "TowerLaser" ? (
                         <>
-                            <div className="row justify-content-center">
+                            <div 
+                                className="row align-items-center justify-content-center game-sprite"
+                                data-for="buttonDescription"
+                                data-tip="Extra bracing allows the cannon to charge stronger blasts"
+                                data-delay-show={"500"}
+                                data-iscapture="true">
                                 <UpgradeButton src={Tower_Laser2} height={100} width={100} callback={upgradeHandler("Tower_Laser2")}/>
+                                <ButtonText 
+                                    name={"HE Laser Turret"}
+                                    cost={GameEnums.TOWER_PREFABS["Tower_Laser2"].stats.cost}
+                                />
                             </div>
 
-                            <div className="row justify-content-center">
+                            <div 
+                                className="row align-items-center justify-content-center game-sprite"
+                                data-for="buttonDescription"
+                                data-tip="Liquid nitrogen cooled super conductors allows the tower <br /> to punch through more ships with one blast"
+                                data-delay-show={"500"}
+                                data-iscapture="true">
                                 <UpgradeButton src={Tower_Laser3} height={100} width={100} callback={upgradeHandler("Tower_Laser3")}/>
+                                <ButtonText 
+                                    name={"SuperCooled Laser"}
+                                    cost={GameEnums.TOWER_PREFABS["Tower_Laser3"].stats.cost}
+                                />
                             </div>
 
-                            <div className="row justify-content-center">
+                            <div 
+                                className="row align-items-center justify-content-center game-sprite"
+                                data-for="buttonDescription"
+                                data-tip="A highly modified mining laser, this turret can <br /> punch through even the highest grade military armor"
+                                data-delay-show={"500"}
+                                data-iscapture="true">
                                 <UpgradeButton src={Tower_Laser4} height={100} width={100} callback={upgradeHandler("Tower_Laser4")}/>
+                                <ButtonText 
+                                    name={"Industrial Laser Punch"}
+                                    cost={GameEnums.TOWER_PREFABS["Tower_Laser4"].stats.cost}
+                                />
                             </div>
                         </>
                     ) : ( 
@@ -123,8 +215,15 @@ function Sidebar(props){
                     )
                 )
             )  
-
         }
+        <ReactTooltip 
+            id="buttonDescription"
+            className={"Button-Tooltip"}
+            place={"left"}
+            type={"error"}
+            effect={"float"}
+            multiline={"true"}
+        />
     </div>
 }
 
