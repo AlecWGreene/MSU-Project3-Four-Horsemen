@@ -19,7 +19,7 @@ function ToastUser(props) {
 
     return (
                 <Toast style={{ marginLeft: "30%", marginRight: "auto"}} onClose={() => setShow(false)} show={show} delay={3000} autohide>
-                    <Toast.Body className={"toast-div"}>{props.message}</Toast.Body>
+                    <Toast.Body className={"toast-div aldrich-font"}>{props.message}</Toast.Body>
                 </Toast>
     );
 }
