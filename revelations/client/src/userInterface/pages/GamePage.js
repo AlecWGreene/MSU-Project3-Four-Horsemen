@@ -43,7 +43,10 @@ export function convertScreenPointToMapTile(point, frame, ratio, gameState){
   const col = Math.floor(point.x / cellsize);
   // Check if a grid point is close
   const indices = [
-    { row: row, col: col}
+    { row: row, col: col},
+    { row: row + 1, col: col + 1},
+    { row: row + 1, col: col},
+    { row: row, col: col + 1}
   ];
   let lowestDistance, lowestIndex;
   for(const index of indices){
@@ -57,6 +60,7 @@ export function convertScreenPointToMapTile(point, frame, ratio, gameState){
       continue;
     }
   }
+  
   return lowestIndex ? gameState.mapGrid.tiles[lowestIndex.row][lowestIndex.col] : false;
 }
 function GamePage() {

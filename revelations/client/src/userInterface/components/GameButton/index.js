@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { DraggableCore } from "react-draggable";
 import styled from "styled-components";
+import { convertScreenPointToMapTile, GameStateContext } from "../../pages/GamePage.js"; 
+import { useContext } from "react";
+import convertWorldPointToScreenPoint from "../../pages/GameUtils/convertWorldPointToScreenPoint.js";
 
 const Image = styled.img`
     height: ${({height})=>height}px;
@@ -14,21 +17,51 @@ const Image = styled.img`
  */
 function GameButton(props){
 
+    const [state, dispatch] = useContext(GameStateContext)
+
     // Setup internal states
     const [isDragging, toggleDragging] = useState(false);
+    const [initialPosition, setInitialPosition] = useState(null);
     const [deltaPosition, setDeltaPosition] = useState({x:0,y:0});
 
     // Drag handlers
     const handleDragStart = (event, data) => {
-        if(!isDragging){
-            toggleDragging(true);
+        if(!initialPosition){
+            const pos = event.target.getBoundingClientRect();
+            setInitialPosition({
+                x: pos.x + pos.width /2,
+                y: pos.y + pos.height /2 
+            });
         }
     }
     const handleDrag = (event, data) => {
-        setDeltaPosition({
+        // Get mouse position and closest tile
+        const pos = {
+            x: event.screenX,
+            y: event.screenY - state.origin.y
+        };
+        const tile = convertScreenPointToMapTile({
+            x: pos.x - state.origin.x,
+            y: pos.y - state.origin.y
+        }, state.frameSize, state.scaleRatio, state.gameState); 
+
+        // If closest tile is found, snap to tile
+        if (tile){
+            console.log(tile.index.row+","+tile.index.col);
+            const position = convertWorldPointToScreenPoint({
+                x: tile.position.x - state.gameState.mapGrid.cellsize / 4,
+                y: tile.position.y + state.gameState.mapGrid.cellsize / 4
+            }, state.scaleRatio, state.origin); 
+            position.y = state.frameSize.height - position.y;
+            setDeltaPosition({
+                x: position.x - initialPosition.x,
+                y: position.y - initialPosition.y
+            }); 
+        }  else { setDeltaPosition({
             x: deltaPosition.x + data.deltaX,
             y: deltaPosition.y + data.deltaY
-        });
+        });}
+       
     }
     const handleDragStop = (event, data) => {
         props.callback(event,data)

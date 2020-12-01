@@ -21,8 +21,8 @@ function Sidebar(props){
     const dispatchHandler = (actionType) => {
         return (event, data) => {
             const tile = convertScreenPointToMapTile({ 
-                         x: event.screenX, 
-                         y: event.screenY
+                         x: event.screenX - state.origin.x, 
+                         y: event.screenY + state.origin.y
                         }, state.frameSize, state.scaleRatio, state.gameState);
             if(tile === false) return;
             let success = false;
