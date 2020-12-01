@@ -5,7 +5,7 @@ import { convertScreenPointToMapTile, GameStateContext } from "../../pages/GameP
 import { useContext } from "react";
 import convertWorldPointToScreenPoint from "../../pages/GameUtils/convertWorldPointToScreenPoint.js";
 
-const Image = styled.img`
+export const Image = styled.img`
     height: ${({height})=>height}px;
     width: ${({width})=>width}px;
     transform: translate(${({delta})=>`${delta.x}px, ${delta.y}px`});
@@ -20,7 +20,6 @@ function GameButton(props){
     const [state, dispatch] = useContext(GameStateContext)
 
     // Setup internal states
-    const [isDragging, toggleDragging] = useState(false);
     const [initialPosition, setInitialPosition] = useState(null);
     const [deltaPosition, setDeltaPosition] = useState({x:0,y:0});
 
@@ -29,43 +28,35 @@ function GameButton(props){
         if(!initialPosition){
             const pos = event.target.getBoundingClientRect();
             setInitialPosition({
-                x: pos.x + pos.width /2,
-                y: pos.y + pos.height /2 
+                x: pos.x,
+                y: pos.y
             });
         }
     }
     const handleDrag = (event, data) => {
         // Get mouse position and closest tile
-        const pos = {
-            x: event.screenX,
-            y: event.screenY - state.origin.y
-        };
-        const tile = convertScreenPointToMapTile({
-            x: pos.x - state.origin.x,
-            y: pos.y - state.origin.y
-        }, state.frameSize, state.scaleRatio, state.gameState); 
-
+        const tile = convertScreenPointToMapTile({ 
+                        x: event.screenX - state.frameSize.rect.left, 
+                        y: event.screenY - state.frameSize.rect.top
+                    }, state.frameSize, state.scaleRatio, state.gameState);
         // If closest tile is found, snap to tile
         if (tile){
-            console.log(tile.index.row+","+tile.index.col);
-            const position = convertWorldPointToScreenPoint({
-                x: tile.position.x - state.gameState.mapGrid.cellsize / 4,
-                y: tile.position.y + state.gameState.mapGrid.cellsize / 4
-            }, state.scaleRatio, state.origin); 
-            position.y = state.frameSize.height - position.y;
+            const position = convertWorldPointToScreenPoint(tile.position, state.scaleRatio, state.origin);
+            const cellsize = state.gameState.mapGrid.cellsize * state.scaleRatio;
             setDeltaPosition({
-                x: position.x - initialPosition.x,
-                y: position.y - initialPosition.y
-            }); 
-        }  else { setDeltaPosition({
-            x: deltaPosition.x + data.deltaX,
-            y: deltaPosition.y + data.deltaY
-        });}
+                x: position.x - initialPosition.x + cellsize / 4,
+                y: window.innerHeight - position.y - cellsize - state.frameSize.bottomLeft.y - initialPosition.y
+            });
+        }  else { 
+            setDeltaPosition({
+                x: deltaPosition.x + data.deltaX,
+                y: deltaPosition.y + data.deltaY
+            });
+        }
        
     }
     const handleDragStop = (event, data) => {
         props.callback(event,data)
-        toggleDragging(false);
         setDeltaPosition({
             x: 0,
             y: 0
