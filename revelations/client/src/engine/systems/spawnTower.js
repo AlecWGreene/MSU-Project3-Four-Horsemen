@@ -27,7 +27,6 @@ import Transform from "../components/Transform";
      // Return false if no base is on the tile or if there is already a tower in place
     if(manager.gameState.baseGrid.filter(t => t.isEqualTo(tile)).length === 0
     || manager.gameState.towerGrid.filter(t => t.isEqualTo(tile)).length > 0){
-        this.errorCallback("Tower cannot be placed there");
         return false;
     }
 
@@ -36,7 +35,7 @@ import Transform from "../components/Transform";
 
     // Check if the player has sufficient money
     if(manager.gameState.playerMoney < archtype.stats.cost){
-        this.errorCallback("Insufficient funds");
+        manager.errorCallback("Insufficient funds");
         return false;
     }
     manager.gameState.playerMoney -= archtype.stats.cost;
