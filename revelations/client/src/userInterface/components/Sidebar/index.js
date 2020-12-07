@@ -18,15 +18,21 @@ import Tower2_Barre2 from '../../assets/Tower_2Barrel2.png';
 import Tower_3Barrel from '../../assets/Tower_3Barrel.png';
 import Wall_Connection from '../../assets/Wall_Connection.png';
 import Tower_Laser from '../../assets/Tower_Laser1.png';
-import Tower_Laser2 from '../../assets/Tower_Laser2.png';
-import Tower_Laser3 from '../../assets/Tower_Laser3.png';
+import Tower_Laser3 from '../../assets/Tower_Laser2.png';
+import Tower_Laser2 from '../../assets/Tower_Laser3.png';
 import Tower_Laser4 from '../../assets/Tower_Laser4.png';
 import ButtonText from "../ButtonText";
 
 
 function Sidebar(props){
-    const [view, setView] = useState(props.view);
     const [state, dispatch] = useContext(GameStateContext);
+    const [currentUpgrade, setCurrentUpgrade] = useState(-1);
+
+    useEffect(() => {
+        if(state.uiState?.selection){
+            setCurrentUpgrade(state.gameState.towerDirectory[parseInt(state.uiState.selection)].upgrades.currentUpgrade);
+        }
+    }, [props.view]);
 
     const dispatchHandler = (actionType) => {
         return (event, data) => {
@@ -59,10 +65,12 @@ function Sidebar(props){
         }
     }
 
-    // Upgrade the selected tower0
-    const upgradeHandler = (archtype) => {
+    // Upgrade the selected tower
+    const upgradeHandler = (archtype, index) => {
         return () => {
-            state.manager.upgradeTower(state.uiState.selection, archtype);
+            if(state.manager.upgradeTower(state.uiState.selection, archtype)){
+                setCurrentUpgrade(index);
+            }
         };
     }
 
@@ -135,8 +143,14 @@ function Sidebar(props){
                             data-tip="Adds another barrel for twice the damage"
                             data-delay-show={"500"}
                             data-iscapture="true">
-                            <UpgradeButton src={Tower_2Barrel} height={100} width={100} callback={upgradeHandler("Tower_Cannon2")}/>
+                            <UpgradeButton 
+                                active={currentUpgrade >= 0 ? false : true} 
+                                src={Tower_2Barrel} 
+                                height={100} 
+                                width={100} 
+                                callback={upgradeHandler("Tower_Cannon2", 0)}/>
                             <ButtonText 
+                                active={currentUpgrade >= 0 ? false : true}
                                 name={"Double Barrel"}
                                 cost={GameEnums.TOWER_PREFABS["Tower_Cannon2"].stats.cost}
                             />
@@ -148,10 +162,16 @@ function Sidebar(props){
                             data-tip="Uses a strontium coating on its shells to <br /> wreak havoc on its targets"
                             data-delay-show={"500"}
                             data-iscapture="true">
-                            <UpgradeButton src={Tower2_Barre2} height={100} width={100} callback={upgradeHandler("Tower_Cannon3")}/>
+                            <UpgradeButton 
+                                active={currentUpgrade >= 1 ? false : true} 
+                                src={Tower2_Barre2} 
+                                height={100} 
+                                width={100} 
+                                callback={upgradeHandler("Tower_Cannon3", 1)}/>
                             <ButtonText 
+                                active={currentUpgrade >= 1 ? false : true}
                                 name={"Infernal Cannon"}
-                                cost={GameEnums.TOWER_PREFABS["Tower_Cannon3"].stats.cost}
+                                cost={ (currentUpgrade < 0 ? GameEnums.TOWER_PREFABS["Tower_Cannon2"].stats.cost : 0) + GameEnums.TOWER_PREFABS["Tower_Cannon3"].stats.cost}
                             />
                         </div>
 
@@ -161,10 +181,16 @@ function Sidebar(props){
                             data-tip="Using a modified turret from a galactic battlecruiser <br /> a third barrel will help take down the toughest foes"
                             data-delay-show={"500"}
                             data-iscapture="true">
-                            <UpgradeButton src={Tower_3Barrel} height={100} width={100} callback={upgradeHandler("Tower_Cannon4")}/>
+                            <UpgradeButton 
+                                active={currentUpgrade >= 2 ? false : true}
+                                src={Tower_3Barrel} 
+                                height={100} 
+                                width={100} 
+                                callback={upgradeHandler("Tower_Cannon4", 2)}/>
                             <ButtonText 
+                                active={currentUpgrade >= 2 ? false : true}
                                 name={"Cruiser Artileery"}
-                                cost={GameEnums.TOWER_PREFABS["Tower_Cannon4"].stats.cost}
+                                cost={(currentUpgrade < 0 ? GameEnums.TOWER_PREFABS["Tower_Cannon2"].stats.cost : 0) + (currentUpgrade < 1 ? GameEnums.TOWER_PREFABS["Tower_Cannon3"].stats.cost : 0) + GameEnums.TOWER_PREFABS["Tower_Cannon4"].stats.cost}
                             />
                         </div>
                     </>
@@ -177,8 +203,14 @@ function Sidebar(props){
                                 data-tip="Extra bracing allows the cannon to charge stronger blasts"
                                 data-delay-show={"500"}
                                 data-iscapture="true">
-                                <UpgradeButton src={Tower_Laser2} height={100} width={100} callback={upgradeHandler("Tower_Laser2")}/>
+                                <UpgradeButton 
+                                    active={currentUpgrade >= 0 ? false : true}
+                                    src={Tower_Laser2} 
+                                    height={100} 
+                                    width={100} 
+                                    callback={upgradeHandler("Tower_Laser2", 0)}/>
                                 <ButtonText 
+                                    active={currentUpgrade >= 0 ? false : true}
                                     name={"HE Laser Turret"}
                                     cost={GameEnums.TOWER_PREFABS["Tower_Laser2"].stats.cost}
                                 />
@@ -190,10 +222,16 @@ function Sidebar(props){
                                 data-tip="Liquid nitrogen cooled super conductors allows the tower <br /> to punch through more ships with one blast"
                                 data-delay-show={"500"}
                                 data-iscapture="true">
-                                <UpgradeButton src={Tower_Laser3} height={100} width={100} callback={upgradeHandler("Tower_Laser3")}/>
+                                <UpgradeButton 
+                                    active={currentUpgrade >= 1 ? false : true}
+                                    src={Tower_Laser3} 
+                                    height={100} 
+                                    width={100} 
+                                    callback={upgradeHandler("Tower_Laser3", 1)}/>
                                 <ButtonText 
+                                    active={currentUpgrade >= 1 ? false : true}
                                     name={"SuperCooled Laser"}
-                                    cost={GameEnums.TOWER_PREFABS["Tower_Laser3"].stats.cost}
+                                    cost={(currentUpgrade < 0 ? GameEnums.TOWER_PREFABS["Tower_Laser2"].stats.cost : 0) + GameEnums.TOWER_PREFABS["Tower_Laser3"].stats.cost}
                                 />
                             </div>
 
@@ -203,10 +241,16 @@ function Sidebar(props){
                                 data-tip="A highly modified mining laser, this turret can <br /> punch through even the highest grade military armor"
                                 data-delay-show={"500"}
                                 data-iscapture="true">
-                                <UpgradeButton src={Tower_Laser4} height={100} width={100} callback={upgradeHandler("Tower_Laser4")}/>
+                                <UpgradeButton 
+                                    active={currentUpgrade >= 2 ? false : true}
+                                    src={Tower_Laser4} 
+                                    height={100} 
+                                    width={100} 
+                                    callback={upgradeHandler("Tower_Laser4", 2)}/>
                                 <ButtonText 
+                                    active={currentUpgrade >= 2 ? false : true}
                                     name={"Industrial Laser Punch"}
-                                    cost={GameEnums.TOWER_PREFABS["Tower_Laser4"].stats.cost}
+                                    cost={(currentUpgrade < 0 ? GameEnums.TOWER_PREFABS["Tower_Laser2"].stats.cost : 0) + (currentUpgrade < 1 ? GameEnums.TOWER_PREFABS["Tower_Laser3"].stats.cost : 0) + GameEnums.TOWER_PREFABS["Tower_Laser4"].stats.cost}
                                 />
                             </div>
                         </>

@@ -47,7 +47,6 @@ function TowerLayer(props){
                 const imgData = SpriteEnums[entry[1].data.spriteSheet];
                 const sfx = GameEnums.TOWER_PREFABS[entry[1].data.archtype].sfx;
                 const animFlag = state.animationState.towers.includes(parseInt(entry[0]));
-                if (animFlag) console.log(state.animationState);
                 return <Animator 
                           height={state.gameState.mapGrid.cellsize} 
                           width={state.gameState.mapGrid.cellsize} 

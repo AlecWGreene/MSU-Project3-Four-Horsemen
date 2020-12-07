@@ -160,10 +160,6 @@ function GamePage() {
     };
   }, [state.runtimeState.isWaveRunning])
 
-  useEffect(() => {
-    console.log("State changed");
-  }, [state.runtimeState.isGameOver]);
-
   // Called on initial render
   useLayoutEffect(()=>{
     // Initialize the GameManager instance

@@ -6,6 +6,7 @@ import { useContext } from "react";
 import convertWorldPointToScreenPoint from "../../pages/GameUtils/convertWorldPointToScreenPoint.js";
 
 export const Image = styled.img`
+    ${({active}) => active === false ? `filter: brightness(50%);` : ""}
     height: ${({height})=>height}px;
     width: ${({width})=>width}px;
     transform: translate(${({delta})=>`${delta.x}px, ${delta.y}px`});
@@ -68,7 +69,7 @@ function GameButton(props){
                 onDrag={handleDrag}
                 onStop={handleDragStop}
             >
-        <Image delta={deltaPosition} height={props.height} width={props.width} style={props.styles} src={props.src} draggable="false" />
+        <Image active={props.active} delta={deltaPosition} height={props.height} width={props.width} style={props.styles} src={props.src} draggable="false" />
     </DraggableCore>;
 }
 

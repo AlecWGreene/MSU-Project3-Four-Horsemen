@@ -22,7 +22,7 @@ const tickLength = 30;
 export default {
     GAME_CONFIG: {
         startLives: 25,
-        startMoney: 2000,
+        startMoney: 20000,
         tickLength: tickLength,
         mapSize: {
             rows: 13,
