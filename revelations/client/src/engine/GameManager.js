@@ -173,7 +173,14 @@ export default class GameManager {
                     this.gameState.pathData = {};
                     this.needsNewDijkstraMap = false;
                 }
-                this.gameState.pathDirectory = findPaths(this.gameState.sourceArray, this.gameState.target, unwalkable, this.gameState.mapGrid, getEuclideanDistance, undefined, undefined, this.gameState?.pathData);
+                try{
+                    this.gameState.pathDirectory = findPaths(this.gameState.sourceArray, this.gameState.target, unwalkable, this.gameState.mapGrid, getEuclideanDistance, undefined, undefined, this.gameState?.pathData);
+                }
+                catch(error){
+                    console.log(error);
+                    this.errorCallback("Could not find a valid path to the planet. Please remove some walls or bases to provide a path.")
+                    return;
+                }
                 this.runtimeState.totalWaveTime = GameEnums.WAVE_CONFIG[this.gameState.waveIndex].reduce((aggregate, current) => aggregate + current.delay, 0);
             }
 

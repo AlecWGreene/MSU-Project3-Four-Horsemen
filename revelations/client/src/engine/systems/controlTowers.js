@@ -221,6 +221,7 @@ function controlTowers(manager){
         if(tower.data.cooldown <= 0) tower.data.cooldown = 0;
         else tower.data.cooldown -= GameEnums.GAME_CONFIG.tickLength;
         removeStartAnimationFlag(tower, manager);
+
         // If tower has no target or target is destroyed
         if(tower.data.target === undefined || tower.data.target.data.hitPoints <= 0){
             const c = getCreepsInRange(tower, manager);
@@ -249,13 +250,16 @@ function controlTowers(manager){
             }
             // Rotate to lead the target and fire if cooldown is 0
             else{
+                // Compute normal vector for creep's direction
                 const creepDirection = {
                     x: creep.data.target.position.x - creep.transform.position.x,
                     y: creep.data.target.position.y - creep.transform.position.y
                 }
+                creepDirection.x /= Math.hypot(creepDirection.x, creepDirection.y);
+                creepDirection.y /= Math.hypot(creepDirection.x, creepDirection.y);
 
-                // Adjust tower rotation to lead towers and rotate in the shortest direction
-                const angle = Math.atan2((creep.transform.position.y + creepDirection.y * 0.25) - tower.transform.position.y, (creep.transform.position.x + creepDirection.x * 0.25) - tower.transform.position.x);
+                // Adjust tower rotation to lead creeps and rotate in the shortest direction
+                const angle = Math.atan2((creep.transform.position.y + creepDirection.y * creep.stats.speed) - tower.transform.position.y, (creep.transform.position.x + creepDirection.x * creep.stats.speed) - tower.transform.position.x);
                 const angleToRotate = calculateAngleDifference(tower.transform.rotation, angle);
 
                 // If tower can rotate to lead it

@@ -13,10 +13,10 @@ export default function loadTestScenario(manager){
     // ];
     //manager.gameState.wallGrid = manager.gameState.mapGrid.tiles.reduce((arr, row) => arr.concat(row), []);
 
-    manager.gameState.baseGrid = [
-        manager.gameState.mapGrid.tiles[8][9]
-    ];
+    // manager.gameState.baseGrid = [
+    //     manager.gameState.mapGrid.tiles[8][9]
+    // ];
 
-    manager.placeTower("Tower_Cannon1", manager.gameState.mapGrid.tiles[8][9]);
-    manager.gameState.waveIndex = 5;
+    // manager.placeTower("Tower_Cannon1", manager.gameState.mapGrid.tiles[8][9]);
+    manager.gameState.waveIndex = -1;
 }

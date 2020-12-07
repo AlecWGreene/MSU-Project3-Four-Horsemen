@@ -223,7 +223,7 @@ function GamePage() {
       type: "toastUser",
       payload: "Welcome to Ashen Void! Click the red button to send waves."
     })
-    //loadTestScenario(manager.current);
+    loadTestScenario(manager.current);
   },[]);
   return (
     <>
