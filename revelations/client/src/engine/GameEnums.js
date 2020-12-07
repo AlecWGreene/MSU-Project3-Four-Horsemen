@@ -50,7 +50,7 @@ export default {
            ],
         1: [
             { creeps: ["Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 510},
-            { creeps: [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "Creep_Standard", undefined, undefined, undefined, undefined, undefined], delay: 510}
+            { creeps: [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "Creep_Standard", undefined, undefined, undefined, undefined, undefined], delay: 1110}
            ],
         2: [   
                { creeps: [undefined, undefined, undefined, undefined, "Creep_Fast_Standard", undefined, undefined, undefined, "Creep_Fast_Standard", undefined, undefined, undefined, undefined, undefined], delay: 510},
@@ -61,19 +61,19 @@ export default {
             ],
         4: [
             { creeps: [undefined, undefined, undefined, undefined, "Creep_Standard", undefined, undefined, undefined, "Creep_Standard", undefined, undefined, undefined, undefined, undefined], delay: 510},
-            { creeps: ["Creep_Standard", undefined, undefined, undefined, undefined, undefined, "Creep_Standard", undefined, undefined, undefined, undefined, "Creep_Standard", undefined, undefined], delay: 1110},
+            { creeps: ["Creep_Standard", undefined, undefined, undefined, undefined, undefined, "Creep_Standard", undefined, undefined, undefined, undefined, "Creep_Standard", undefined, undefined], delay: 2010},
             { creeps: [undefined, undefined, undefined, "Creep_Standard", undefined, undefined, undefined, undefined, undefined, "Creep_Standard", undefined, undefined, undefined, undefined], delay: 2010}
             ],
         5: [   
             { creeps: [undefined, undefined, "Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 510},
-            { creeps: [undefined, undefined, "Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 210},
-            { creeps: [undefined, undefined, undefined, undefined, undefined, undefined, "Creep_Fast_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 510},
-            { creeps: [undefined, "Creep_Fast_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 510},
+            { creeps: [undefined, undefined, "Creep_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 1110},
+            { creeps: [undefined, undefined, undefined, undefined, undefined, undefined, "Creep_Fast_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 1110},
+            { creeps: [undefined, "Creep_Fast_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 1110},
            ],
         6: [   
             { creeps: [undefined, undefined, "Creep_Fast_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 510},
             { creeps: [undefined, undefined, "Creep_Fast_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 1110},
-            { creeps: [undefined, undefined, undefined, undefined, undefined, undefined, "Creep_Fast_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 1110},
+            { creeps: [undefined, undefined, undefined, undefined, undefined, undefined, "Creep_Fast_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 3000},
             { creeps: [undefined, "Creep_Fast_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 510},
             { creeps: [undefined, "Creep_Fast_Agile", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 2010},
            ]
@@ -154,7 +154,7 @@ export default {
         "Laser_Bolt_Orange": {
             name: "Laser_Bolt_Orange",
             data: new ProjectileData(0, "Laser_Bolt_Orange", "Projectile_Laser_Orange", 0, 0, 0),
-            stats: new ProjectileStats({x:-1,y:-1}, 250, 1, 350, true, tickLength),
+            stats: new ProjectileStats({x:-1,y:-1}, 250, 1, 450, true, tickLength),
             // collider: new Collider([{x:-5,y:-3.5},
             //                         {x:-5,y:3.5},
             //                         {x:0,y:6},
@@ -216,19 +216,19 @@ export default {
         "Creep_Fast_Standard": {
             name: "Creep_Fast_Standard",
             data: new CreepData(0,"Creep_Fast_Standard", "Creep_1_GREEN", []),
-            stats: new CreepStats(150,225,120,true,50, 100,tickLength),
+            stats: new CreepStats(150,225,120,true,50, 50,tickLength),
             collider: new Collider([{x: -10, y: -10}, {x: -10, y: 10}, {x: 10, y: 10}, {x: 10, y: -10}], {x: 0, y: 0})
         },
         "Creep_Fast_Agile": {
             name: "Creep_Fast_Agile",
             data: new CreepData(0,"Creep_Fast_Agile", "Creep_6_GREEN", []),
-            stats: new CreepStats(150,275,180,true,150, 150,tickLength),
+            stats: new CreepStats(150,275,180,true,150, 75,tickLength),
             collider: new Collider([{x: -10, y: -10}, {x: -10, y: 10}, {x: 10, y: 10}, {x: 10, y: -10}], {x: 0, y: 0})
         },
         "Creep_Agile": {
             name: "Creep_Agile",
             data: new CreepData(0,"Creep_Agile", "Creep_1_GREEN", []),
-            stats: new CreepStats(150,160,180,true,50, 150,tickLength),
+            stats: new CreepStats(150,175,180,true,50, 25,tickLength),
             collider: new Collider([{x: -10, y: -10}, {x: -10, y: 10}, {x: 10, y: 10}, {x: 10, y: -10}], {x: 0, y: 0})
         }
     }

@@ -259,7 +259,7 @@ function controlTowers(manager){
                 creepDirection.y /= Math.hypot(creepDirection.x, creepDirection.y);
 
                 // Adjust tower rotation to lead creeps and rotate in the shortest direction
-                const angle = Math.atan2((creep.transform.position.y + creepDirection.y * creep.stats.speed) - tower.transform.position.y, (creep.transform.position.x + creepDirection.x * creep.stats.speed) - tower.transform.position.x);
+                const angle = Math.atan2((creep.transform.position.y + creepDirection.y * creep.stats.speed * distToCreep / 100) - tower.transform.position.y, (creep.transform.position.x + creepDirection.x * creep.stats.speed * distToCreep / 100) - tower.transform.position.x);
                 const angleToRotate = calculateAngleDifference(tower.transform.rotation, angle);
 
                 // If tower can rotate to lead it
