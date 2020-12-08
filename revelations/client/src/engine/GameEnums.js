@@ -22,7 +22,7 @@ const tickLength = 30;
 export default {
     GAME_CONFIG: {
         startLives: 25,
-        startMoney: 20000,
+        startMoney: 2000,
         tickLength: tickLength,
         mapSize: {
             rows: 13,
@@ -76,6 +76,28 @@ export default {
             { creeps: [undefined, undefined, undefined, undefined, undefined, undefined, "Creep_Fast_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 3000},
             { creeps: [undefined, "Creep_Fast_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 510},
             { creeps: [undefined, "Creep_Fast_Agile", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 2010},
+           ],
+        7: [
+            { creeps: ["Creep_Tough", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 510}
+           ],
+        8: [
+            { creeps: ["Creep_Agile", undefined, undefined, undefined, undefined, "Creep_Agile", undefined, undefined, undefined, undefined, "Creep_Agile", undefined, undefined, undefined], delay: 510},
+            { creeps: ["Creep_Agile", undefined, undefined, undefined, undefined, "Creep_Agile", undefined, undefined, undefined, undefined, "Creep_Agile", undefined, undefined, undefined], delay: 510},
+            { creeps: ["Creep_Agile", undefined, undefined, undefined, undefined, "Creep_Agile", undefined, undefined, undefined, undefined, "Creep_Agile", undefined, undefined, undefined], delay: 510}
+           ],
+        9: [
+            { creeps: ["Creep_Fast_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 510},
+            { creeps: [undefined, undefined, undefined, "Creep_Fast_Standard", undefined, undefined, undefined, "Creep_Fast_Standard", undefined, undefined, "Creep_Fast_Standard", undefined, undefined, undefined], delay: 2010},
+            { creeps: ["Creep_Fast_Standard", undefined, undefined, undefined, undefined, undefined, "Creep_Fast_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 2010},
+            { creeps: [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "Creep_Fast_Standard", undefined, "Creep_Fast_Standard", undefined, undefined, undefined], delay: 2010},
+            { creeps: [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "Creep_Fast_Agile", undefined, "Creep_Fast_Agile", undefined, undefined, undefined], delay: 1710}
+           ],
+        10: [
+            { creeps: [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "Creep_Tough", undefined, undefined, undefined], delay: 510},
+            { creeps: [undefined, undefined, undefined, "Creep_Fast_Standard", undefined, undefined, undefined, "Creep_Fast_Standard", undefined, undefined, "Creep_Fast_Standard", undefined, undefined, undefined], delay: 2010},
+            { creeps: ["Creep_Fast_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 2010},
+            { creeps: [undefined, undefined, "Creep_Fast_Standard", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], delay: 2010},
+            { creeps: [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "Creep_Fast_Agile", undefined, "Creep_Tough", undefined, undefined, undefined], delay: 1710}
            ]
     },
     TOWER_PREFABS: {
@@ -210,7 +232,7 @@ export default {
         "Creep_Tough": {
             name: "Creep_Tough",
             data: new CreepData(0,"Creep_Tough", "Creep_2_BLUE", []),
-            stats: new CreepStats(500,100,90,true,50, 250,tickLength),
+            stats: new CreepStats(1000,100,90,true,50, 250,tickLength),
             collider: new Collider([{x: -10, y: -10}, {x: -10, y: 10}, {x: 10, y: 10}, {x: 10, y: -10}], {x: 0, y: 0})
         },
         "Creep_Fast_Standard": {

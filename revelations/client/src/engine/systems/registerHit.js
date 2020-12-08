@@ -2,8 +2,15 @@ import removeCreep from "./removeCreep";
 
 function registerHit(projectile, creep){
     // Mutate entity data components
-    creep.data.hitPoints -= projectile.damageData.damage;
-    projectile.data.targetsHit++;
+    const damageToDeal = projectile.damageData.damage - creep.stats.armor;
+    if(damageToDeal > 0){
+        creep.data.hitPoints -= damageToDeal;
+        projectile.data.targetsHit++;
+    }
+    else{
+         projectile.data.targetsHit = projectile.stats.maxTargets;
+         return false;
+    }
 
     // If creep is destroyed
     if(creep.data.hitPoints <= 0){
