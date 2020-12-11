@@ -252,14 +252,12 @@ function controlTowers(manager){
             else{
                 // Compute normal vector for creep's direction
                 const creepDirection = {
-                    x: creep.transform.position.x + Math.cos(creep.transform.rotation),
-                    y: creep.transform.position.y + Math.sin(creep.transform.rotation)
+                    x: Math.cos(creep.transform.rotation),
+                    y: Math.sin(creep.transform.rotation)
                 }
-                creepDirection.x /= Math.hypot(creepDirection.x, creepDirection.y);
-                creepDirection.y /= Math.hypot(creepDirection.x, creepDirection.y);
 
                 // Adjust tower rotation to lead creeps and rotate in the shortest direction
-                const angle = Math.atan2((creep.transform.position.y + creepDirection.y * creep.stats.speed * (distToCreep / 30)) - tower.transform.position.y, (creep.transform.position.x + creepDirection.x * creep.stats.speed * (distToCreep / 30)) - tower.transform.position.x);
+                const angle = Math.atan2((creep.transform.position.y + creepDirection.y * (distToCreep / 3)) - tower.transform.position.y, (creep.transform.position.x + creepDirection.x * (distToCreep / 3)) - tower.transform.position.x);
                 const angleToRotate = calculateAngleDifference(tower.transform.rotation, angle);
 
                 // If tower can rotate to lead it
