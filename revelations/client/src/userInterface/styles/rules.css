@@ -24,3 +24,7 @@ font-family: 'Coda', cursive;
     font-size: 12px;
     font-weight: bold;
 } */
+
+.github-icon, .bug-icon {
+    color:#FF7A37!important;
+}
