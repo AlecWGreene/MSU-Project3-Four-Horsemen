@@ -77,7 +77,7 @@ function SfxOptions() {
                         <Form.Label>SFX: { sfx.sfxVol === 0 ? 'muted' : (Math.round(sfx.sfxVol*100)+'%') } </Form.Label>
                         <Form.Control type="range" id='sfx'  min="0" max="1" step="0.01" onChange={handleVolume} value={sfx.sfxVol} disabled={ sfx.masterVol === 0 ? true : false } />
                     </Form.Group>
-                    <Form.Group>
+                    {/* <Form.Group>
                         <Form.Label>Select Ambient *Dev Only*</Form.Label>
                         <Form.Control as="select" onInput={SoundOption}>
                             <option id="sound-options">Sound_background_0</option>
@@ -89,7 +89,7 @@ function SfxOptions() {
                             <option id="sound-options">Sound_background_6</option>
                             <option id="sound-options">Sound_background_7</option>
                         </Form.Control>
-                    </Form.Group>
+                    </Form.Group> */}
                 </Form>
                 <div className="container">
                     <div className="row justify-content-center">
