@@ -6,6 +6,7 @@
     left: auto;
     right: auto;
     min-width: 50%;
+    width: max-content;
     color: silver;
     text-align: center;
     font-size: 12pt;
