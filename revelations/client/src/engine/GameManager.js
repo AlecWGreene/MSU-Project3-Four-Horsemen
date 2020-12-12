@@ -151,7 +151,7 @@ export default class GameManager {
     sendWave(waveConfig){
         // Return out if game is over
         if(this.runtimeState.isGameOver){
-            return;
+            return false;
         }
 
         if(this.runtimeState.isPaused || !this.runtimeState.isWaveRunning){
@@ -166,14 +166,23 @@ export default class GameManager {
                     this.runtimeState.isGameOver = true;
                     clearInterval(this.tickInterval);
                     // alert("You win!")
-                    return;
+                    return false;
                 }
                 const unwalkable = this.gameState.wallGrid.concat(this.gameState.baseGrid);
                 if(this.needsNewDijkstraMap){
                     this.gameState.pathData = {};
                     this.needsNewDijkstraMap = false;
                 }
-                this.gameState.pathDirectory = findPaths(this.gameState.sourceArray, this.gameState.target, unwalkable, this.gameState.mapGrid, getEuclideanDistance, undefined, undefined, this.gameState?.pathData);
+                try{
+                    this.gameState.pathDirectory = findPaths(this.gameState.sourceArray, this.gameState.target, unwalkable, this.gameState.mapGrid, getEuclideanDistance, undefined, undefined, this.gameState?.pathData);
+                }
+                catch(error){
+                    console.log(error);
+                    this.errorCallback("Could not find a valid path to the planet. Please remove some walls or bases to provide a path.")
+                    this.gameState.waveIndex--;
+                    this.runtimeState.isWaveRunning = false;
+                    return false;
+                }
                 this.runtimeState.totalWaveTime = GameEnums.WAVE_CONFIG[this.gameState.waveIndex].reduce((aggregate, current) => aggregate + current.delay, 0);
             }
 

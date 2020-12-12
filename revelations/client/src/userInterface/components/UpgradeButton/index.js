@@ -4,7 +4,7 @@ import { DraggableCore } from "react-draggable";
 
 function UpgradeButton(props){
     return <DraggableCore>
-        <Image delta={{x:0, y:0}} height={props.height} width={props.width} style={props.styles} src={props.src} onClickCapture={props.callback} draggable="false" />
+        <Image active={props.active} delta={{x:0, y:0}} height={props.height} width={props.width} style={props.styles} src={props.src} onClickCapture={props.callback} draggable="false" />
     </DraggableCore>
 }
 

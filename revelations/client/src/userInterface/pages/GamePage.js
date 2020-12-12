@@ -160,10 +160,6 @@ function GamePage() {
     };
   }, [state.runtimeState.isWaveRunning])
 
-  useEffect(() => {
-    console.log("State changed");
-  }, [state.runtimeState.isGameOver]);
-
   // Called on initial render
   useLayoutEffect(()=>{
     // Initialize the GameManager instance
@@ -223,7 +219,7 @@ function GamePage() {
       type: "toastUser",
       payload: "Welcome to Ashen Void! Click the red button to send waves."
     })
-    //loadTestScenario(manager.current);
+    loadTestScenario(manager.current);
   },[]);
   return (
     <>

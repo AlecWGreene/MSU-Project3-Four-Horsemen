@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import Sprite from "./Sprite.js";
 import styled from "styled-components";
 import { useSfx } from "../../userInterface/components/SoundSuite/";
@@ -44,44 +44,53 @@ function Animator(props){
 
     // Call when props.fireCount is changed
     useEffect(() => {
+        let animFrame;
         if(props.startAnimation && !isAnimating){
-            requestAnimationFrame(() => toggleAnimation(true));
+            animFrame = requestAnimationFrame(() => toggleAnimation(true));
         }
+
+        return () => cancelAnimationFrame(animFrame)
     });
 
     // Call when isAnimating is changed
     useEffect(() => {
+        let animFrame;
         if(!isAnimating){
-            requestAnimationFrame(() =>setFrame(0));
+            animFrame = requestAnimationFrame(() =>setFrame(0));
         }
         else{
-            requestAnimationFrame(() => {
+            animFrame = requestAnimationFrame(() => {
                 setFrame(1);
                 if(props.sfx){
                     sfxSound(props.sfx);
                 }
             });
         }
+
+        return () => cancelAnimationFrame(animFrame)
     }, [isAnimating]);
 
     // Call when frame is changed
     useEffect(() => {
+        let animFrame;
         if(isAnimating){
             if(frame === props.imgData.numFrames - 1){
-                requestAnimationFrame(() => { 
-                    setFrame(0)
-                });
-                if(props.finishHandler){
-                    props.finishHandler();
-                }
-                toggleAnimation(false);
+                animFrame = requestAnimationFrame(() => { 
+                    setFrame(0);
+                    toggleAnimation(false);
+                    if(props.finishHandler){
+                        props.finishHandler(animFrame.current);
+                    }
+                }); 
             }
             else{
-                requestAnimationFrame( () => {
+                animFrame = requestAnimationFrame( () => {
                     setFrame(frame+1)
                 });
             }
         }
+
+        return () => cancelAnimationFrame(animFrame)
     }, [frame])
 
     return <Container height={props.height * props.scale} width={props.width * props.scale} position={props.position} rotation={props.rotation}>

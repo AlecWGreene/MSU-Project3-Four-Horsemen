@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { GameStateContext } from "../../userInterface/pages/GamePage";
 import Animator from "../Animator";
 import SPRITE_ENUM from "../SpriteEnums";
@@ -17,7 +17,7 @@ function VFXLayer(props){
 
     // Removes the vfx from the animationState
     const removeAnimation = (id, manager)=> {
-        return () => {
+        return (animFrame) => {
             manager.animationState.vfx = manager.animationState.vfx.filter(vfx => vfx.id !== id);
             manager.updateCallback();
         }

@@ -18,7 +18,7 @@ function ToastUser(props) {
     }, [props.message]) // not sure what to use as dependency, my gut says go with empty or something in the dispatch
 
     return (
-                <Toast style={{ marginLeft: "30%", marginRight: "auto", position: "absolute"}} onClose={() => setShow(false)} show={show} delay={3000} autohide>
+                <Toast style={{ marginLeft: "30%", marginRight: "auto", position: "absolute", width: "auto"}} onClose={() => { setShow(false); requestAnimationFrame(() => dispatch({type: "toastUser", payload: ""}));}} show={show} delay={3000} autohide>
                     <Toast.Body className={"toast-div aldrich-font"}>{props.message}</Toast.Body>
                 </Toast>
     );

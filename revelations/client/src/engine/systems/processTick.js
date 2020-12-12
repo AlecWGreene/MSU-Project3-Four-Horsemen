@@ -28,9 +28,6 @@ function processTick(manager) {
     // Move projectiles
     moveProjectiles(manager);
 
-    // Move creeps
-    moveCreeps(manager)
-
     // Spawn wave
     let totalTime = 0;
     const waveData = GameEnums.WAVE_CONFIG[manager.gameState.waveIndex];
@@ -51,6 +48,9 @@ function processTick(manager) {
 
     // Control towers
     controlTowers(manager);
+
+    // Move creeps
+    moveCreeps(manager)
 
     manager.runtimeState.waveTime += GameEnums.GAME_CONFIG.tickLength;
     requestAnimationFrame(manager.updateCallback);
