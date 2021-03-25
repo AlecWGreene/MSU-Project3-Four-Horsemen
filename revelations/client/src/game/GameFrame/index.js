@@ -7,11 +7,6 @@ function GameFrame(props){
 
     const [state, dispatch] = useContext(GameStateContext);
 
-    // Call on first layout Render
-    useLayoutEffect(() => {
-
-    }, [])
-
     return <div id="gameFrame">{props.children}</div>
 }
 
