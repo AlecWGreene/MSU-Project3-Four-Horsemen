@@ -21,7 +21,7 @@ function TowerLayer(props){
     const handleClickTower = (event,dispatch,towerId,archtype) => {
         event.preventDefault();
         event.stopPropagation();
-        const type = ["Tower_Cannon1", "Tower_Cannon2", "Tower_Cannon3"].includes(archtype) ? "TowerCannon" : "TowerLaser";
+        const type = ["Tower_Cannon1", "Tower_Cannon2", "Tower_Cannon3", "Tower_Cannon4"].includes(archtype) ? "TowerCannon" : "TowerLaser";
         dispatch({
             type: "towerClick",
             payload: {
