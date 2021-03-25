@@ -9,7 +9,6 @@ import GameEnums from "../../engine/GameEnums.js";
 import GameManager from "../../engine/GameManager.js";
 import testGame from "../../engine/GameTest.js";
 // React component imports
-import Game from "../../game"
 import GameContainer from "../components/GameContainer/index.js";
 import setupGame from "./GameUtils/setupGame.js";
 import WallLayer from "../../game/WallLayer";
