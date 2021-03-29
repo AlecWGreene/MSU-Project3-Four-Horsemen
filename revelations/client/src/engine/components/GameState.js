@@ -1,4 +1,3 @@
-import Game from "../../game/index.js";
 import Tile from "../Tile.js";
 import Grid from "../Grid.js";
 import Enums from "../GameEnums.js";
