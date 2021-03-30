@@ -30,7 +30,6 @@ function removeCreep(manager, id){
         clearInterval(manager.tickInterval = undefined);
         manager.runtimeState.waveTime = 0;
         manager.runtimeState.isGameOver = true;
-        alert("You ran out of lives!")
     }
     else if(manager.runtimeState.waveTime > manager.runtimeState.totalWaveTime && Object.keys(manager.gameState.creepDirectory).length === 0){
         clearInterval(manager.tickInterval);
